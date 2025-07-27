@@ -89,9 +89,9 @@ export default function Blog() {
                       </div>
                     ))}
                     {post.tags.length > 3 && (
-                      <span className="text-xs text-[#9CA0A8] font-mono">
+                      <div className="inline-flex items-center px-2 py-0.5 text-xs text-[#9CA0A8] font-mono">
                         +{post.tags.length - 3} more
-                      </span>
+                      </div>
                     )}
                   </div>
                 </article>

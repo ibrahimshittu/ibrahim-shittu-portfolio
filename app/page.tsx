@@ -6,7 +6,7 @@ import { Icons } from "@/components/ui/icons";
 import { siteConfig, generatePersonSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Senior Software Engineer - Portfolio & Blog",
+  title: "Ibrahim Shittu - Senior Software Engineer",
   description:
     "Senior Software Engineer with expertise in building scalable web, mobile, and AI-driven solutions for startups and global enterprises across diverse industries.",
   openGraph: {
@@ -152,13 +152,13 @@ export default function Home() {
             Resume
           </Link>
           <div className="flex items-center gap-4">
-          <Link
-            href="/blog"
-            className="font-mono text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Blog
-          </Link>
-          <ThemeToggle />
+            <Link
+              href="/blog"
+              className="font-mono text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Blog
+            </Link>
+            <ThemeToggle />
           </div>
         </div>
       </nav>

@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 import {
   siteConfig,
   generatePersonSchema,
@@ -13,6 +13,10 @@ const inter = Inter({
   variable: "--font-inter",
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  themeColor: "#050914",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -85,7 +89,6 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   manifest: "/manifest.json",
-  themeColor: "#050914",
   other: {
     language: "en",
     "revisit-after": "7 days",

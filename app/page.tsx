@@ -1,4 +1,5 @@
 import { Mail, Github, Linkedin } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   const workExperience = [
@@ -73,8 +74,26 @@ export default function Home() {
 
   return (
     <main className="flex-1 flex flex-col">
+      {/* Navigation */}
+      <nav className="mx-auto w-full max-w-2xl px-4 py-4">
+        <div className="flex justify-between items-center">
+          <Link
+            href="/"
+            className="font-mono text-sm text-[#050914] hover:underline"
+          >
+            Resume
+          </Link>
+          <Link
+            href="/blog"
+            className="font-mono text-sm text-[#9CA0A8] hover:text-[#050914] transition-colors"
+          >
+            Blog
+          </Link>
+        </div>
+      </nav>
+
       <section
-        className="mx-auto w-full max-w-2xl space-y-8 bg-white my-8 px-4"
+        className="mx-auto w-full max-w-2xl space-y-8 bg-white px-4 pb-8"
         aria-label="Resume Content"
       >
         {/* Header */}

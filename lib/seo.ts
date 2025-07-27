@@ -11,6 +11,7 @@ export const siteConfig = {
     email: "ibshittu01@gmail.com",
     linkedin: "https://linkedin.com/in/ibrahimshittu",
     github: "https://github.com/ibrahimshittu",
+    twitter: "https://x.com/ibrahimshittu01",
     image:
       "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18zMFNVYTB5U011aGdYTXBvRHhueFlIZ09qU1gifQ",
   },
@@ -38,7 +39,11 @@ export function generatePersonSchema() {
     email: siteConfig.author.email,
     image: siteConfig.author.image,
     url: siteConfig.url,
-    sameAs: [siteConfig.author.linkedin, siteConfig.author.github],
+    sameAs: [
+      siteConfig.author.linkedin,
+      siteConfig.author.github,
+      siteConfig.author.twitter,
+    ],
     jobTitle: "Senior Software Engineer",
     worksFor: {
       "@type": "Organization",
@@ -156,7 +161,11 @@ export function generateOrganizationSchema() {
       "@type": "Person",
       name: siteConfig.author.name,
     },
-    sameAs: [siteConfig.author.linkedin, siteConfig.author.github],
+    sameAs: [
+      siteConfig.author.linkedin,
+      siteConfig.author.github,
+      siteConfig.author.twitter,
+    ],
   };
 }
 

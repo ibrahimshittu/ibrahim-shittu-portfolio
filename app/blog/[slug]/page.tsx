@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Metadata } from "next";
+import Image from "next/image";
 import { getBlogPost, getAllBlogPosts } from "@/data/blog-posts";
 import React from "react";
 import { formatDate, formatContent } from "@/lib/blog-utils";
@@ -181,7 +182,7 @@ export default function BlogPost({ params }: PageProps) {
         <div className="border-t border-[#eeeff0] pt-8 mt-12">
           <div className="flex items-start gap-4">
             <span className="relative flex shrink-0 overflow-hidden rounded-full size-12">
-              <img
+              <Image
                 className="aspect-square h-full w-full"
                 alt="Ibrahim Shittu's profile picture"
                 src={siteConfig.author.image}

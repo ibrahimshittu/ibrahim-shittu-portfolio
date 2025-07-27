@@ -136,7 +136,7 @@ export default function Blog() {
                   key={post.slug}
                   className="font-mono flex flex-col justify-start items-start gap-3 pb-6 border-b border-muted last:border-b-0"
                 >
-                  <div className="flex flex-wrap justify-between items-baseline self-stretch gap-2">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-2">
                     <div className="flex-1">
                       <Link href={`/blog/${post.slug}`}>
                         <h3 className="text-base font-semibold text-left text-foreground hover:underline transition-all cursor-pointer">

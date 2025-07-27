@@ -123,9 +123,9 @@ export const formatContent = (content: string): React.ReactNode[] => {
       return (
         <div
           key={index}
-          className="bg-[#f8f9fa] border border-[#eeeff0] rounded-md p-4 mt-4 mb-6"
+          className="bg-[#f8f9fa] border border-[#eeeff0] rounded-md p-4 mt-4 mb-6 flex justify-center"
         >
-          <code className="text-sm font-mono text-[#050914] whitespace-pre-wrap">
+          <code className="text-sm font-mono text-[#050914] whitespace-pre-wrap text-center">
             {trimmed.replace(/```/g, "")}
           </code>
         </div>

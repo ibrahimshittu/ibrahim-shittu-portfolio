@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Metadata } from "next";
 import Image from "next/image";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Icons } from "@/components/ui/icons";
 import { siteConfig, generatePersonSchema } from "@/lib/seo";
 
@@ -146,21 +147,24 @@ export default function Home() {
         <div className="flex justify-between items-center">
           <Link
             href="/"
-            className="font-mono text-sm text-[#050914] hover:underline"
+            className="font-mono text-sm text-foreground hover:underline"
           >
             Resume
           </Link>
+          <div className="flex items-center gap-4">
           <Link
             href="/blog"
-            className="font-mono text-sm text-[#9CA0A8] hover:text-[#050914] transition-colors"
+            className="font-mono text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             Blog
           </Link>
+          <ThemeToggle />
+          </div>
         </div>
       </nav>
 
       <section
-        className="mx-auto w-full max-w-2xl space-y-8 bg-white px-4 pb-8"
+        className="mx-auto w-full max-w-2xl space-y-8 bg-card px-4 pb-8"
         aria-label="Resume Content"
       >
         {/* Header */}
@@ -171,7 +175,7 @@ export default function Home() {
             </h1>
             <p className="max-w-md items-center text-pretty font-mono text-xs text-foreground">
               <a
-                className="inline-flex gap-x-1.5 align-baseline leading-none hover:underline text-[#9CA0A8]"
+                className="inline-flex gap-x-1.5 align-baseline leading-none hover:underline text-muted-foreground"
                 href="https://www.google.com/maps/search/Malta"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -244,7 +248,7 @@ export default function Home() {
               About
             </h2>
             <div
-              className="text-pretty font-mono text-sm text-[#6c737f]"
+              className="text-pretty font-mono text-sm text-muted-foreground"
               aria-labelledby="about-section"
             >
               Senior Software Engineer with expertise in web and mobile
@@ -271,36 +275,36 @@ export default function Home() {
                   {/* Current Role */}
                   <div className="flex flex-wrap justify-between items-start self-stretch gap-2">
                     <div className="flex flex-wrap justify-start items-center gap-2">
-                      <p className="text-base font-semibold text-left text-[#050914]">
+                      <p className="text-base font-semibold text-left text-foreground">
                         {job.title}
                       </p>
-                      <div className="flex justify-center items-center relative overflow-hidden gap-2.5 px-[7px] py-0.5 rounded bg-[#eeeff0]">
-                        <p className="text-[12px] font-semibold text-center text-[#54575e]">
+                      <div className="flex justify-center items-center relative overflow-hidden gap-2.5 px-[7px] py-0.5 rounded bg-muted">
+                        <p className="text-xs font-semibold text-center text-muted-foreground">
                           {job.location}
                         </p>
                       </div>
                     </div>
-                    <p className="text-sm text-right text-[#54575e]">
+                    <p className="text-sm text-right text-muted-foreground">
                       {job.period}
                     </p>
                   </div>
                   <div className="flex flex-col justify-start items-start relative gap-1.5">
-                    <p className="self-stretch text-sm font-medium text-left text-[#54575e] font-mono capitalize flex flex-wrap gap-1">
+                    <p className="self-stretch text-sm font-medium text-left text-muted-foreground font-mono capitalize flex flex-wrap gap-1">
                       <span>{job.company}</span>
                       <span>·</span>
                       <span>{job.type}</span>
                     </p>
-                    <p className="self-stretch text-sm font-medium text-left text-[#6c737f]">
+                    <p className="self-stretch text-sm font-medium text-left text-muted-foreground">
                       {job.description}
                     </p>
                   </div>
 
                   {/* Previous Role at Same Company (if exists) */}
                   {job.previousRole && (
-                    <div className="mt-4 pl-4 border-l-2 border-[#eeeff0] space-y-2">
+                    <div className="mt-4 pl-4 border-l-2 border-muted space-y-2">
                       <div className="flex flex-wrap justify-between items-start gap-2">
                         <div className="flex flex-wrap justify-start items-center gap-2">
-                          <p className="text-base font-semibold text-left text-[#050914]">
+                          <p className="text-base font-semibold text-left text-foreground">
                             {job.previousRole.title}
                           </p>
                           <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gradient-to-r from-green-50 to-blue-50 border border-green-200">
@@ -310,7 +314,7 @@ export default function Home() {
                             </span>
                           </div>
                         </div>
-                        <p className="text-sm text-right text-[#54575e]">
+                        <p className="text-sm text-right text-muted-foreground">
                           {job.previousRole.period}
                         </p>
                       </div>
@@ -349,7 +353,7 @@ export default function Home() {
                     </div>
                   </div>
                   <div
-                    className="text-pretty font-mono text-sm mt-2 text-[#6c737f]"
+                    className="text-pretty font-mono text-sm mt-2 text-muted-foreground"
                     aria-labelledby="education-university-of-ilorin"
                   >
                     Bachelor of Engineering, Civil Engineering
@@ -380,7 +384,7 @@ export default function Home() {
                 </li>
               ))}
               <li>
-                <div className="inline-flex items-center px-2 py-0.5 text-xs text-[#9CA0A8] font-mono">
+                <div className="inline-flex items-center px-2 py-0.5 text-xs text-muted-foreground font-mono">
                   + 99 more
                 </div>
               </li>
@@ -391,11 +395,11 @@ export default function Home() {
 
       <div className="text-center mt-8 mb-4">
         <a
-          className="text-[#9CA0A8] font-mono text-sm"
+          className="text-muted-foreground font-mono text-sm"
           href="/?ref=ibrahim-shittu"
         >
           Made with ❤️ by{" "}
-          <span className="text-[#050914] underline underline-offset-2">
+          <span className="text-foreground underline underline-offset-2">
             Ibrahim Shittu
           </span>
         </a>

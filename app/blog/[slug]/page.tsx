@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { getBlogPost } from "@/data/blog-posts";
+import React from "react";
+import { formatDate, formatContent } from "@/lib/blog-utils";
 
 interface PageProps {
   params: {
@@ -15,131 +17,6 @@ export default function BlogPost({ params }: PageProps) {
   if (!post) {
     notFound();
   }
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  };
-
-  const formatContent = (content: string) => {
-    const paragraphs = content.split("\n\n").filter((p) => p.trim());
-
-    return paragraphs.map((paragraph, index) => {
-      const trimmed = paragraph.trim();
-
-      // Handle headers
-      if (trimmed.startsWith("## ")) {
-        return (
-          <h2
-            key={index}
-            className="text-lg font-bold text-[#050914] mt-10 mb-6 leading-tight"
-          >
-            {trimmed.substring(3)}
-          </h2>
-        );
-      } else if (trimmed.startsWith("### ")) {
-        return (
-          <h3
-            key={index}
-            className="text-base font-semibold text-[#050914] mt-8 mb-4 leading-tight"
-          >
-            {trimmed.substring(4)}
-          </h3>
-        );
-      } else if (trimmed.startsWith("#### ")) {
-        return (
-          <h4
-            key={index}
-            className="text-sm font-semibold text-[#050914] mt-6 mb-3 leading-tight"
-          >
-            {trimmed.substring(5)}
-          </h4>
-        );
-      }
-
-      // Handle lists
-      else if (trimmed.includes("\n- ")) {
-        const items = trimmed
-          .split("\n")
-          .filter((line) => line.startsWith("- "));
-        return (
-          <ul key={index} className="space-y-2 mt-4 mb-6 ml-4">
-            {items.map((item, itemIndex) => (
-              <li
-                key={itemIndex}
-                className="text-sm text-[#6c737f] font-mono leading-relaxed flex items-start"
-              >
-                <span className="mr-3 text-[#9CA0A8]">•</span>
-                <span>{formatInlineText(item.substring(2))}</span>
-              </li>
-            ))}
-          </ul>
-        );
-      }
-
-      // Handle code blocks (simple detection)
-      else if (trimmed.includes("```")) {
-        return (
-          <div
-            key={index}
-            className="bg-[#f8f9fa] border border-[#eeeff0] rounded-md p-4 mt-4 mb-6"
-          >
-            <code className="text-sm font-mono text-[#050914] whitespace-pre-wrap">
-              {trimmed.replace(/```/g, "")}
-            </code>
-          </div>
-        );
-      }
-
-      // Handle italic text (questions at end of posts)
-      else if (
-        trimmed.startsWith("*") &&
-        trimmed.endsWith("*") &&
-        !trimmed.includes("**")
-      ) {
-        return (
-          <p
-            key={index}
-            className="text-sm font-mono text-[#6c737f] italic mt-8 mb-6 leading-relaxed border-l-2 border-[#eeeff0] pl-4"
-          >
-            {trimmed.slice(1, -1)}
-          </p>
-        );
-      }
-
-      // Regular paragraphs
-      else {
-        return (
-          <p
-            key={index}
-            className="text-sm text-[#6c737f] font-mono leading-relaxed mt-4 mb-6"
-          >
-            {formatInlineText(trimmed)}
-          </p>
-        );
-      }
-    });
-  };
-
-  const formatInlineText = (text: string) => {
-    // Handle bold text **text**
-    const parts = text.split(/(\*\*[^*]+\*\*)/g);
-
-    return parts.map((part, index) => {
-      if (part.startsWith("**") && part.endsWith("**")) {
-        return (
-          <span key={index} className="font-semibold text-[#050914]">
-            {part.slice(2, -2)}
-          </span>
-        );
-      }
-      return part;
-    });
-  };
 
   return (
     <main className="flex-1 flex flex-col">

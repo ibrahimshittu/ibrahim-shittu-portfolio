@@ -309,7 +309,7 @@ export default function Home() {
               ))}
               <li>
                 <div className="inline-flex items-center px-2 py-0.5 text-xs text-[#9CA0A8] font-mono">
-                  + 100 more
+                  + 99 more
                 </div>
               </li>
             </ul>

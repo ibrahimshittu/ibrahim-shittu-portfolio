@@ -58,7 +58,7 @@ The future of legal tech lies in AI that amplifies human expertise rather than r
       "How we rebuilt Fabrio from the ground up using TypeScript, NextJS, and AWS, growing from startup to serving prestigious institutions worldwide.",
     date: "2024-12-20",
     readTime: "10 min read",
-    tags: ["TypeScript", "NextJS", "AWS", "Education", "Startup"],
+    tags: ["Education Tech", "Startup", "CAD", "Career", "Engineering"],
     content: `As the first engineering hire at Fabrio, I had the unique opportunity to rebuild an entire CAD education platform from the ground up. This is the story of how we transformed a startup idea into a platform serving prestigious institutions worldwide.
 
 ## The Starting Point

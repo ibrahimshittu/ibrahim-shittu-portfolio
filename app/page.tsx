@@ -61,15 +61,13 @@ export default function Home() {
 
   const skills = [
     "AI Agents",
-    "LangGraph",
-    "LangChain",
-    "Python",
+    "LangGraph/LangChain",
     "TypeScript",
-    "NextJS",
+    "NextJS/React",
+    "Python",
     "Node/ExpressJS",
     "GraphQL",
-    "AWS",
-    "CI/CD",
+    "AWS/Azure",
   ];
 
   return (

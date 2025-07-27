@@ -1,63 +1,8 @@
 import Link from "next/link";
-
-interface BlogPost {
-  slug: string;
-  title: string;
-  excerpt: string;
-  date: string;
-  readTime: string;
-  tags: string[];
-}
+import { getAllBlogPosts } from "@/data/blog-posts";
 
 export default function Blog() {
-  const blogPosts: BlogPost[] = [
-    {
-      slug: "building-ai-agents-for-legal-tech",
-      title: "Building AI Agents for Legal Tech: Lessons from Finiti Legal",
-      excerpt:
-        "Exploring the challenges and solutions in developing AI agents that automate SEC filings and integrate with Microsoft Office suite for legal professionals.",
-      date: "2025-01-15",
-      readTime: "8 min read",
-      tags: ["AI", "Legal Tech", "Microsoft Office", "Automation"],
-    },
-    {
-      slug: "scaling-cad-education-platform",
-      title: "Scaling a CAD Education Platform: The Fabrio Journey",
-      excerpt:
-        "How we rebuilt Fabrio from the ground up using TypeScript, NextJS, and AWS, growing from startup to serving prestigious institutions worldwide.",
-      date: "2024-12-20",
-      readTime: "10 min read",
-      tags: ["TypeScript", "NextJS", "AWS", "Education", "Startup"],
-    },
-    {
-      slug: "ar-smart-glasses-accessibility",
-      title: "Making Communication Accessible with AR Smart Glasses",
-      excerpt:
-        "Building real-time subtitle smart glasses for hearing accessibility using Unity, XREAL, and AI-powered speech recognition.",
-      date: "2024-11-10",
-      readTime: "6 min read",
-      tags: ["AR", "Accessibility", "Unity", "AI", "XREAL"],
-    },
-    {
-      slug: "from-civil-engineering-to-software",
-      title:
-        "From Civil Engineering to Software Development: My Career Journey",
-      excerpt:
-        "The story of transitioning from civil engineering to becoming a senior software engineer, and lessons learned along the way.",
-      date: "2024-10-05",
-      readTime: "7 min read",
-      tags: ["Career", "Personal", "Engineering", "Growth"],
-    },
-    {
-      slug: "predictive-analytics-energy-optimization",
-      title: "Using Predictive Analytics for Energy Optimization",
-      excerpt:
-        "How we achieved a 25% reduction in energy waste using AI-driven analytics to monitor and optimize building energy consumption.",
-      date: "2024-09-15",
-      readTime: "9 min read",
-      tags: ["AI/ML", "Energy", "Predictive Analytics", "Sustainability"],
-    },
-  ];
+  const blogPosts = getAllBlogPosts();
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);

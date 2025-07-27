@@ -1,7 +1,7 @@
-import { Mail, Github, Linkedin } from "lucide-react";
 import Link from "next/link";
 import { Metadata } from "next";
 import Image from "next/image";
+import { Icons } from "@/components/ui/icons";
 import {
   siteConfig,
   generatePersonSchema,
@@ -195,7 +195,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground size-8"
               >
-                <Mail className="size-4" />
+                <Icons.mail className="size-4" />
               </a>
               <a
                 href={siteConfig.author.linkedin}
@@ -204,7 +204,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground size-8"
               >
-                <Linkedin className="size-4" />
+                <Icons.linkedin className="size-4" />
               </a>
               <a
                 href={siteConfig.author.github}
@@ -213,7 +213,16 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground size-8"
               >
-                <Github className="size-4" />
+                <Icons.github className="size-4" />
+              </a>
+              <a
+                href={siteConfig.author.twitter}
+                aria-label="X"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground size-8"
+              >
+                <Icons.x className="size-4" />
               </a>
             </div>
           </div>

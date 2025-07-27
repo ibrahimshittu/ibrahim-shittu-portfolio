@@ -128,229 +128,6 @@ Rebuilding Fabrio taught me that successful platforms are built on three pillars
 *Are you working on an educational platform? I'd love to connect and share more detailed insights about our technical challenges and solutions.*`,
   },
   {
-    slug: "ar-smart-glasses-accessibility",
-    title: "Making Communication Accessible with AR Smart Glasses",
-    excerpt:
-      "Building real-time subtitle smart glasses for hearing accessibility using Unity, XREAL, and AI-powered speech recognition.",
-    date: "2024-11-10",
-    readTime: "6 min read",
-    tags: ["AR", "Accessibility", "Unity", "AI", "XREAL"],
-    content: `Building technology for accessibility is one of the most rewarding challenges in software development. Our AR smart glasses project aimed to break down communication barriers for people with hearing impairments by providing real-time subtitles of conversations.
-
-## The Vision
-
-Imagine being able to see what people are saying as subtitles floating in your field of vision, just like in a movie. This was the core concept behind our smart glasses application - making conversations accessible through real-time speech-to-text technology.
-
-## Technical Implementation
-
-### Hardware Choice: XREAL Smart Glasses
-
-We chose XREAL smart glasses for their lightweight design and excellent display quality. The glasses needed to be comfortable for all-day wear while providing clear, readable text overlays.
-
-### Unity for AR Development
-
-Unity provided the perfect platform for AR development, offering:
-- Robust AR Foundation support
-- Cross-platform compatibility
-- Rich text rendering capabilities
-- Real-time 3D positioning
-
-### AI-Powered Speech Recognition
-
-The heart of the system was our speech recognition pipeline:
-- Real-time audio capture from multiple microphones
-- Noise cancellation and audio processing
-- AI model integration for accurate transcription
-- Context-aware text formatting
-
-## Key Features
-
-### Real-Time Subtitles
-
-Text appears in the user's field of vision with minimal latency, positioned to avoid blocking important visual information.
-
-### Speaker Identification
-
-Different speakers are color-coded, making it easy to follow multi-person conversations.
-
-### Adjustable Text Settings
-
-Users can customize:
-- Font size and style
-- Text positioning
-- Background opacity
-- Reading speed preferences
-
-### Voice Commands
-
-Hands-free control through voice commands for settings adjustment and system control.
-
-## Challenges Overcome
-
-### Latency Optimization
-
-Reducing speech-to-text latency was critical. We implemented:
-- Local processing for common words
-- Predictive text algorithms
-- Optimized network protocols for cloud processing
-
-### Battery Life
-
-AR applications are power-hungry. Our optimizations included:
-- Efficient rendering techniques
-- Smart sleep modes
-- Battery usage monitoring
-
-### Accuracy in Noisy Environments
-
-Real-world environments are challenging for speech recognition:
-- Advanced noise filtering
-- Directional microphone arrays
-- Machine learning models trained on diverse audio conditions
-
-## Impact and Results
-
-The project successfully demonstrated the potential of AR for accessibility:
-- **User Testing**: 89% of users reported improved conversation comprehension
-- **Battery Life**: 4+ hours of continuous use
-- **Accuracy**: 94% speech recognition accuracy in optimal conditions
-- **Adoption**: Positive feedback from accessibility organizations
-
-## Lessons Learned
-
-**User-Centered Design**: Direct feedback from the hearing-impaired community was invaluable in shaping the product.
-
-**Performance Matters**: In accessibility tech, every millisecond of latency affects user experience.
-
-**Context is King**: Understanding the environment and situation improves both accuracy and user experience.
-
-## Looking Forward
-
-This project opened our eyes to the transformative potential of AR in accessibility. Future developments could include:
-- Integration with hearing aids
-- Multi-language support
-- Gesture-based controls
-- Social features for group conversations
-
-*Accessibility technology has the power to change lives. What accessibility challenges are you working to solve?*`,
-  },
-  {
-    slug: "from-civil-engineering-to-software",
-    title: "From Civil Engineering to Software Development: My Career Journey",
-    excerpt:
-      "The story of transitioning from civil engineering to becoming a senior software engineer, and lessons learned along the way.",
-    date: "2024-10-05",
-    readTime: "7 min read",
-    tags: ["Career", "Personal", "Engineering", "Growth"],
-    content: `Career transitions are never easy, but sometimes they lead to unexpected and fulfilling paths. My journey from civil engineering to software development taught me valuable lessons about adaptability, continuous learning, and following your passion.
-
-## The Starting Point
-
-I graduated from the University of Ilorin in 2018 with a Bachelor's degree in Civil Engineering. Like many engineering students, I had a clear path laid out: work on infrastructure projects, design buildings and bridges, and contribute to the physical development of communities.
-
-## The Spark of Interest
-
-During university, I was always drawn to the computational aspects of civil engineering - using software to model structures, optimize designs, and solve complex engineering problems. This interest in the intersection of engineering and technology planted the seeds for my eventual career change.
-
-## The Transition Period
-
-### Learning to Code
-
-The transition didn't happen overnight. I started learning programming during my final year of university:
-- **Self-taught**: Online courses, tutorials, and documentation
-- **Projects**: Building small applications to solve real problems
-- **Community**: Joining developer communities and local meetups
-- **Persistence**: Coding every day, even if just for 30 minutes
-
-### First Opportunities
-
-My first software development roles were with early-stage startups. This environment was perfect for learning because:
-- **Diverse Responsibilities**: Wearing multiple hats accelerated my learning
-- **Direct Impact**: Seeing how code translated to business value
-- **Mentorship**: Working closely with experienced developers
-- **Fast Feedback**: Quick iteration cycles and immediate results
-
-## Key Lessons from the Transition
-
-### Transferable Skills
-
-Engineering disciplines share fundamental problem-solving approaches:
-- **Systematic Thinking**: Breaking down complex problems into manageable parts
-- **Attention to Detail**: Understanding that small errors can have big consequences
-- **Project Management**: Planning, execution, and delivery skills
-- **Mathematical Foundation**: Logical reasoning and analytical skills
-
-### The Learning Mindset
-
-Software development requires continuous learning:
-- **Technology Changes Rapidly**: New frameworks, languages, and tools emerge constantly
-- **Documentation is Key**: Reading and writing clear documentation
-- **Testing and Validation**: Ensuring solutions work as intended
-- **Collaboration**: Working effectively in teams
-
-### Embracing Uncertainty
-
-Career transitions involve uncertainty, but this taught me:
-- **Comfort with Ambiguity**: Not every problem has a clear solution path
-- **Adaptability**: Being flexible when requirements change
-- **Resilience**: Bouncing back from failures and setbacks
-- **Growth Mindset**: Viewing challenges as opportunities to learn
-
-## The Rewards
-
-### Professional Growth
-
-The software industry offered opportunities I hadn't anticipated:
-- **Global Impact**: Building products used by people worldwide
-- **Innovation**: Working with cutting-edge technologies like AI and ML
-- **Flexibility**: Remote work and diverse career paths
-- **Community**: Amazing developer communities and knowledge sharing
-
-### Personal Fulfillment
-
-Finding work that aligns with your interests makes a huge difference:
-- **Creativity**: Software development is both analytical and creative
-- **Problem Solving**: Every day brings new challenges to solve
-- **Continuous Learning**: The field rewards curiosity and growth
-- **Impact**: Creating tools that improve people's lives and work
-
-## Advice for Career Changers
-
-### Start Small
-
-You don't need to quit your job immediately:
-- **Side Projects**: Build things in your spare time
-- **Online Learning**: Take advantage of excellent online resources
-- **Open Source**: Contribute to projects that interest you
-- **Networking**: Connect with developers in your area
-
-### Leverage Your Background
-
-Your previous experience is an asset:
-- **Domain Knowledge**: Understanding specific industries deeply
-- **Different Perspective**: Bringing fresh ideas to software teams
-- **Problem-Solving Skills**: Applying engineering thinking to software challenges
-- **Communication**: Bridging technical and non-technical stakeholders
-
-### Be Patient with Yourself
-
-Career transitions take time:
-- **Imposter Syndrome**: Everyone experiences this - you're not alone
-- **Learning Curve**: It's normal to feel overwhelmed initially
-- **Small Wins**: Celebrate progress, no matter how small
-- **Long-term View**: Focus on where you'll be in 2-3 years
-
-## Looking Back
-
-The transition from civil engineering to software development was one of the best decisions I've made. It taught me that:
-- **Passion Matters**: Working on something you're genuinely interested in makes all the difference
-- **Skills Transfer**: Core problem-solving abilities apply across domains
-- **Community Support**: The tech community is incredibly welcoming to career changers
-- **Continuous Growth**: Software development offers endless opportunities to learn and grow
-
-*Are you considering a career transition? What's holding you back, and how can the community help you take the first step?*`,
-  },
-  {
     slug: "predictive-analytics-energy-optimization",
     title: "Using Predictive Analytics for Energy Optimization",
     excerpt:
@@ -530,6 +307,122 @@ Predictive analytics in energy optimization represents a massive opportunity for
 The key to success lies in understanding that buildings are complex systems with intricate interactions between occupants, equipment, and environment. By leveraging predictive analytics to understand and optimize these interactions, we can create more efficient, comfortable, and sustainable buildings.
 
 *What sustainability challenges are you working on? How might predictive analytics help address environmental issues in your domain?*`,
+  },
+  {
+    slug: "from-civil-engineering-to-software",
+    title: "From Civil Engineering to Software Development: My Career Journey",
+    excerpt:
+      "The story of transitioning from civil engineering to becoming a senior software engineer, and lessons learned along the way.",
+    date: "2023-05-05",
+    readTime: "7 min read",
+    tags: ["Career", "Personal", "Engineering", "Growth"],
+    content: `Career transitions are never easy, but sometimes they lead to unexpected and fulfilling paths. My journey from civil engineering to software development taught me valuable lessons about adaptability, continuous learning, and following your passion.
+
+## The Starting Point
+
+I graduated from the University of Ilorin in 2018 with a Bachelor's degree in Civil Engineering. Like many engineering students, I had a clear path laid out: work on infrastructure projects, design buildings and bridges, and contribute to the physical development of communities.
+
+## The Spark of Interest
+
+During university, I was always drawn to the computational aspects of civil engineering - using software to model structures, optimize designs, and solve complex engineering problems. This interest in the intersection of engineering and technology planted the seeds for my eventual career change.
+
+## The Transition Period
+
+### Learning to Code
+
+The transition didn't happen overnight. I started learning programming during my final year of university:
+- **Self-taught**: Online courses, tutorials, and documentation
+- **Projects**: Building small applications to solve real problems
+- **Community**: Joining developer communities and local meetups
+- **Persistence**: Coding every day, even if just for 30 minutes
+
+### First Opportunities
+
+My first software development roles were with early-stage startups. This environment was perfect for learning because:
+- **Diverse Responsibilities**: Wearing multiple hats accelerated my learning
+- **Direct Impact**: Seeing how code translated to business value
+- **Mentorship**: Working closely with experienced developers
+- **Fast Feedback**: Quick iteration cycles and immediate results
+
+## Key Lessons from the Transition
+
+### Transferable Skills
+
+Engineering disciplines share fundamental problem-solving approaches:
+- **Systematic Thinking**: Breaking down complex problems into manageable parts
+- **Attention to Detail**: Understanding that small errors can have big consequences
+- **Project Management**: Planning, execution, and delivery skills
+- **Mathematical Foundation**: Logical reasoning and analytical skills
+
+### The Learning Mindset
+
+Software development requires continuous learning:
+- **Technology Changes Rapidly**: New frameworks, languages, and tools emerge constantly
+- **Documentation is Key**: Reading and writing clear documentation
+- **Testing and Validation**: Ensuring solutions work as intended
+- **Collaboration**: Working effectively in teams
+
+### Embracing Uncertainty
+
+Career transitions involve uncertainty, but this taught me:
+- **Comfort with Ambiguity**: Not every problem has a clear solution path
+- **Adaptability**: Being flexible when requirements change
+- **Resilience**: Bouncing back from failures and setbacks
+- **Growth Mindset**: Viewing challenges as opportunities to learn
+
+## The Rewards
+
+### Professional Growth
+
+The software industry offered opportunities I hadn't anticipated:
+- **Global Impact**: Building products used by people worldwide
+- **Innovation**: Working with cutting-edge technologies like AI and ML
+- **Flexibility**: Remote work and diverse career paths
+- **Community**: Amazing developer communities and knowledge sharing
+
+### Personal Fulfillment
+
+Finding work that aligns with your interests makes a huge difference:
+- **Creativity**: Software development is both analytical and creative
+- **Problem Solving**: Every day brings new challenges to solve
+- **Continuous Learning**: The field rewards curiosity and growth
+- **Impact**: Creating tools that improve people's lives and work
+
+## Advice for Career Changers
+
+### Start Small
+
+You don't need to quit your job immediately:
+- **Side Projects**: Build things in your spare time
+- **Online Learning**: Take advantage of excellent online resources
+- **Open Source**: Contribute to projects that interest you
+- **Networking**: Connect with developers in your area
+
+### Leverage Your Background
+
+Your previous experience is an asset:
+- **Domain Knowledge**: Understanding specific industries deeply
+- **Different Perspective**: Bringing fresh ideas to software teams
+- **Problem-Solving Skills**: Applying engineering thinking to software challenges
+- **Communication**: Bridging technical and non-technical stakeholders
+
+### Be Patient with Yourself
+
+Career transitions take time:
+- **Imposter Syndrome**: Everyone experiences this - you're not alone
+- **Learning Curve**: It's normal to feel overwhelmed initially
+- **Small Wins**: Celebrate progress, no matter how small
+- **Long-term View**: Focus on where you'll be in 2-3 years
+
+## Looking Back
+
+The transition from civil engineering to software development was one of the best decisions I've made. It taught me that:
+- **Passion Matters**: Working on something you're genuinely interested in makes all the difference
+- **Skills Transfer**: Core problem-solving abilities apply across domains
+- **Community Support**: The tech community is incredibly welcoming to career changers
+- **Continuous Growth**: Software development offers endless opportunities to learn and grow
+
+*Are you considering a career transition? What's holding you back, and how can the community help you take the first step?*`,
   },
 ];
 

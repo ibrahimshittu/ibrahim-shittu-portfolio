@@ -10,16 +10,22 @@ export default function Home() {
       company: "finiti legal",
       type: "Full-time",
       description:
-        "Building AI Agents that make lawyers' lives easier by developing secure multi-tenant architecture with SOC 2 compliance. Working on a product that automates tedious parts of SEC filings, integrating directly into Microsoft Word and Outlook, and auto-generating regulatory content that would normally take days to draft manually. This product transforms workflows from manual drudgery into intelligent, streamlined processes, helping legal teams focus on strategy.",
+        "Building AI Agents that make lawyers' lives easier by developing secure multi-tenant architecture with SOC 2 compliance. Working on a product that automates tedious parts of corporate law, integrating directly into Microsoft Word and Outlook, and auto-generating regulatory content that would normally take days to draft manually. This product transforms workflows from manual drudgery into intelligent, streamlined processes, helping legal teams focus on strategy.",
     },
     {
       title: "Lead Software Engineer",
       location: "London Area, United Kingdom",
-      period: "Jun 2022 - Mar 2025",
+      period: "Dec 2024 - Mar 2025",
       company: "fabrio",
       type: "Full-time",
       description:
-        "First hire at Fabrio, a VC-backed startup enhancing Computer-Aided Design (CAD) education and workflow efficiency. Spearheaded the ground-up rebuild of Fabrio using TypeScript, NextJS, Node/ExpressJS, GraphQL, and AWS services. Developed user-centric features, optimized customer support processes, and designed CI/CD pipelines. Contributed to the platform's growth and adoption by prestigious institutions.",
+        "Promoted to Lead Software Engineer after demonstrating technical leadership and exceptional performance. Led a team of developers while continuing to drive platform innovation and institutional adoption. Oversaw technical strategy in building scalable CAD education solutions.",
+      previousRole: {
+        title: "Software Engineer",
+        period: "Jun 2022 - Dec 2024",
+        description:
+          "First hire at Fabrio, a VC-backed startup enhancing Computer-Aided Design (CAD) education and workflow efficiency. Spearheaded the ground-up rebuild of Fabrio using TypeScript, NextJS, Node/ExpressJS, GraphQL, and AWS services. Developed user-centric features, optimized customer support processes, and designed CI/CD pipelines. Contributed to the platform's growth and adoption by prestigious institutions.",
+      },
     },
     {
       title: "Software Engineer",
@@ -34,7 +40,7 @@ export default function Home() {
       title: "Founding Software Engineer",
       location: "Lagos State, Nigeria",
       period: "Oct 2020 - Apr 2022",
-      company: "liveclasses institute",
+      company: "liveclasses",
       type: "Full-time",
       description:
         "Developed LiveClasses from ideation to a commercially viable product, scaling to thousands of users. Led the platform through acceptance into top startup incubators and secured funding. Developed a dynamic scheduling system and integrated multiple third-party systems, creating a strategic technical roadmap for sustainable growth.",
@@ -50,7 +56,7 @@ export default function Home() {
     },
     {
       title: "Software Developer",
-      location: "Remote",
+      location: "Remote (Worldwide)",
       period: "Aug 2018 - Sep 2020",
       company: "various startups",
       type: "Full-time",
@@ -62,11 +68,14 @@ export default function Home() {
   const skills = [
     "AI Agents",
     "LangGraph/LangChain",
+    "Python",
+    "FastAPI",
     "TypeScript",
     "NextJS/React",
-    "Python",
+    "React Native",
     "Node/ExpressJS",
     "GraphQL",
+    "Docker",
     "AWS/Azure",
   ];
 
@@ -108,7 +117,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 aria-label="Location: Malta"
               >
-                Malta
+                127.0.0.1:3000
               </a>
             </p>
             <div
@@ -125,15 +134,6 @@ export default function Home() {
                 <Mail className="size-4" />
               </a>
               <a
-                href="https://github.com/ibrahimshittu"
-                aria-label="GitHub"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground size-8"
-              >
-                <Github className="size-4" />
-              </a>
-              <a
                 href="https://linkedin.com/in/ibrahimshittu"
                 aria-label="LinkedIn"
                 target="_blank"
@@ -141,6 +141,15 @@ export default function Home() {
                 className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground size-8"
               >
                 <Linkedin className="size-4" />
+              </a>
+              <a
+                href="https://github.com/ibrahimshittu"
+                aria-label="GitHub"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground size-8"
+              >
+                <Github className="size-4" />
               </a>
             </div>
           </div>
@@ -187,6 +196,7 @@ export default function Home() {
                   key={index}
                   className="font-mono flex flex-col justify-start items-start gap-1"
                 >
+                  {/* Current Role */}
                   <div className="flex flex-wrap justify-between items-start self-stretch gap-2">
                     <div className="flex flex-wrap justify-start items-center gap-2">
                       <p className="text-base font-semibold text-left text-[#050914]">
@@ -212,6 +222,31 @@ export default function Home() {
                       {job.description}
                     </p>
                   </div>
+
+                  {/* Previous Role at Same Company (if exists) */}
+                  {job.previousRole && (
+                    <div className="mt-4 pl-4 border-l-2 border-[#eeeff0] space-y-2">
+                      <div className="flex flex-wrap justify-between items-start gap-2">
+                        <div className="flex flex-wrap justify-start items-center gap-2">
+                          <p className="text-base font-semibold text-left text-[#050914]">
+                            {job.previousRole.title}
+                          </p>
+                          <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gradient-to-r from-green-50 to-blue-50 border border-green-200">
+                            <div className="w-2 h-2 rounded-full bg-gradient-to-r from-green-400 to-blue-500"></div>
+                            <span className="text-[10px] font-semibold text-green-700">
+                              GROWTH
+                            </span>
+                          </div>
+                        </div>
+                        <p className="text-sm text-right text-[#54575e]">
+                          {job.previousRole.period}
+                        </p>
+                      </div>
+                      <p className="text-sm font-medium text-left text-[#6c737f]">
+                        {job.previousRole.description}
+                      </p>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -233,19 +268,19 @@ export default function Home() {
                       >
                         University of Ilorin
                       </h3>
-                      <div
+                      {/* <div
                         className="text-sm tabular-nums text-gray-500"
                         aria-label="Period: 2014 to 2018"
                       >
                         2014 - 2018
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                   <div
                     className="text-pretty font-mono text-sm mt-2 text-[#6c737f]"
                     aria-labelledby="education-university-of-ilorin"
                   >
-                    Bachelor of Engineering - BE, Civil Engineering
+                    Bachelor of Engineering, Civil Engineering
                   </div>
                 </div>
               </article>
@@ -272,6 +307,11 @@ export default function Home() {
                   </div>
                 </li>
               ))}
+              <li>
+                <div className="inline-flex items-center px-2 py-0.5 text-xs text-[#9CA0A8] font-mono">
+                  + 100 more
+                </div>
+              </li>
             </ul>
           </section>
         </div>

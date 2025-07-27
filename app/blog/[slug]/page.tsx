@@ -154,7 +154,7 @@ export default function BlogPost({ params }: PageProps) {
           </Link>
           <Link
             href="/blog"
-            className="font-mono text-sm text-[#9CA0A8] hover:text-[#050914] transition-colors"
+            className="font-mono text-sm text-[#050914] hover:underline"
           >
             Blog
           </Link>

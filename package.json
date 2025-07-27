@@ -2,11 +2,27 @@
   "name": "ibrahim-shittu-portfolio",
   "version": "0.1.0",
   "private": true,
+  "description": "Portfolio and blog for Ibrahim Shittu, Senior Software Engineer",
+  "keywords": [
+    "Ibrahim Shittu",
+    "Senior Software Engineer",
+    "Startup",
+    "Career",
+    "Engineering",
+    "Personal Journey"
+  ],
+  "author": {
+    "name": "Ibrahim Shittu",
+    "email": "ibshittu01@gmail.com",
+    "url": "https://ibrahimshittu.com"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "seo-check": "next build && echo 'SEO files generated:' && ls -la .next/server/app && echo 'Sitemap:' && curl -s http://localhost:3000/sitemap.xml | head -20",
+    "test-seo": "npm run build && npm run start & sleep 5 && curl -s http://localhost:3000/sitemap.xml > /dev/null && curl -s http://localhost:3000/robots.txt > /dev/null && echo 'SEO endpoints working!' && pkill -f 'next start'"
   },
   "dependencies": {
     "next": "14.0.0",
@@ -24,5 +40,13 @@
     "tailwindcss": "^3.3.0",
     "eslint": "^8",
     "eslint-config-next": "14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ibrahimshittu/portfolio"
+  },
+  "homepage": "https://ibrahimshittu.com",
+  "bugs": {
+    "url": "https://github.com/ibrahimshittu/portfolio/issues"
   }
 }

@@ -1,5 +1,42 @@
 import { Mail, Github, Linkedin } from "lucide-react";
 import Link from "next/link";
+import { Metadata } from "next";
+import {
+  siteConfig,
+  generatePersonSchema,
+  generateCanonicalUrl,
+} from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: "Senior Software Engineer - Portfolio & Blog",
+  description:
+    "Senior Software Engineer with expertise in web and mobile development, AI, and Machine Learning. Currently building AI agents for legal tech at Finiti Legal.",
+  openGraph: {
+    title: "Ibrahim Shittu - Senior Software Engineer",
+    description:
+      "Senior Software Engineer with expertise in web and mobile development, AI, and Machine Learning. Currently building AI agents for legal tech at Finiti Legal.",
+    url: siteConfig.url,
+    type: "profile",
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+        alt: "Ibrahim Shittu - Senior Software Engineer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ibrahim Shittu - Senior Software Engineer",
+    description:
+      "Senior Software Engineer with expertise in web and mobile development, AI, and Machine Learning.",
+    images: [siteConfig.ogImage],
+  },
+  alternates: {
+    canonical: siteConfig.url,
+  },
+};
 
 export default function Home() {
   const workExperience = [
@@ -79,8 +116,34 @@ export default function Home() {
     "AWS/Azure",
   ];
 
+  const personSchema = generatePersonSchema();
+
   return (
     <main className="flex-1 flex flex-col">
+      {/* Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(personSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfilePage",
+            mainEntity: {
+              "@type": "Person",
+              name: siteConfig.author.name,
+              jobTitle: "Senior Software Engineer",
+              url: siteConfig.url,
+              sameAs: [siteConfig.author.linkedin, siteConfig.author.github],
+            },
+          }),
+        }}
+      />
+
       {/* Navigation */}
       <nav className="mx-auto w-full max-w-2xl px-4 py-4">
         <div className="flex justify-between items-center">
@@ -125,7 +188,7 @@ export default function Home() {
               aria-label="Contact links"
             >
               <a
-                href="mailto:ibshittu01@gmail.com"
+                href={`mailto:${siteConfig.author.email}`}
                 aria-label="Email"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -134,7 +197,7 @@ export default function Home() {
                 <Mail className="size-4" />
               </a>
               <a
-                href="https://linkedin.com/in/ibrahimshittu"
+                href={siteConfig.author.linkedin}
                 aria-label="LinkedIn"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -143,7 +206,7 @@ export default function Home() {
                 <Linkedin className="size-4" />
               </a>
               <a
-                href="https://github.com/ibrahimshittu"
+                href={siteConfig.author.github}
                 aria-label="GitHub"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -160,7 +223,11 @@ export default function Home() {
             <img
               className="aspect-square h-full w-full"
               alt="Ibrahim Shittu's profile picture"
-              src="https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18zMFNVYTB5U011aGdYTXBvRHhueFlIZ09qU1gifQ"
+              src={siteConfig.author.image}
+              width={112}
+              height={112}
+              loading="eager"
+              decoding="async"
             />
           </span>
         </header>

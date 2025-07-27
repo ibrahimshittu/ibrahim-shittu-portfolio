@@ -11,11 +11,11 @@ import {
 export const metadata: Metadata = {
   title: "Senior Software Engineer - Portfolio & Blog",
   description:
-    "Senior Software Engineer with expertise in web and mobile development, AI, and Machine Learning. Currently building AI agents for legal tech at Finiti Legal.",
+    "Senior Software Engineer with expertise in web and mobile development, AI, and Machine Learning.",
   openGraph: {
     title: "Ibrahim Shittu - Senior Software Engineer",
     description:
-      "Senior Software Engineer with expertise in web and mobile development, AI, and Machine Learning. Currently building AI agents for legal tech at Finiti Legal.",
+      "Senior Software Engineer with expertise in web and mobile development, AI, and Machine Learning.",
     url: siteConfig.url,
     type: "profile",
     images: [

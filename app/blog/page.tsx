@@ -13,18 +13,18 @@ export const metadata: Metadata = {
   description:
     "Thoughts on technology, software development, AI, and building great products. Learn from real-world experiences in legal tech, education platforms, and startup development.",
   openGraph: {
-    title:
-      "Blog - Software Development, AI, and Tech Insights | Ibrahim Shittu",
-    description:
-      "Thoughts on technology, software development, AI, and building great products. Learn from real-world experiences in legal tech, education platforms, and startup development.",
-    url: generateCanonicalUrl("/blog"),
     type: "website",
+    title: "Blog - Ibrahim Shittu",
+    description:
+      "Thoughts on software engineering, AI, and building products that matter.",
+    url: `${siteConfig.url}/blog`,
+    siteName: siteConfig.name,
     images: [
       {
         url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: "Ibrahim Shittu's Blog",
+        alt: "Blog - Ibrahim Shittu",
       },
     ],
   },

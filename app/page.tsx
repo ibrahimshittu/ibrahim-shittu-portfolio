@@ -1,6 +1,7 @@
 import { Mail, Github, Linkedin } from "lucide-react";
 import Link from "next/link";
 import { Metadata } from "next";
+import Image from "next/image";
 import {
   siteConfig,
   generatePersonSchema,
@@ -220,14 +221,13 @@ export default function Home() {
             className="relative flex shrink-0 overflow-hidden rounded-full size-20 md:size-28"
             aria-hidden="true"
           >
-            <img
+            <Image
               className="aspect-square h-full w-full"
               alt="Ibrahim Shittu's profile picture"
               src={siteConfig.author.image}
               width={112}
               height={112}
-              loading="eager"
-              decoding="async"
+              priority
             />
           </span>
         </header>

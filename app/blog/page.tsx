@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 import { getAllBlogPosts } from "@/data/blog-posts";
 import { formatDate } from "@/lib/blog-utils";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import {
   siteConfig,
   generateCanonicalUrl,
@@ -9,9 +10,9 @@ import {
 } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Blog - Software Development, AI, and Tech Insights",
+  title: "Blog - Software Engineering, AI, and Tech Insights",
   description:
-    "Thoughts on technology, software development, AI, and building great products. Learn from real-world experiences in legal tech, education platforms, and startup development.",
+    "Thoughts on technology, software Engineering, AI, and building great products. Learn from real-world experiences in legal tech, education platforms, and startup development.",
   openGraph: {
     type: "website",
     title: "Blog - Ibrahim Shittu",
@@ -31,9 +32,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "Blog - Software Development, AI, and Tech Insights | Ibrahim Shittu",
+      "Blog - Software Engineering, AI, and Tech Insights | Ibrahim Shittu",
     description:
-      "Thoughts on technology, software development, AI, and building great products.",
+      "Thoughts on technology, software Engineering, AI, and building great products.",
     images: [siteConfig.ogImage],
   },
   alternates: {
@@ -66,7 +67,7 @@ export default function Blog() {
             "@type": "Blog",
             name: "Ibrahim Shittu's Blog",
             description:
-              "Thoughts on technology, software development, AI, and building great products.",
+              "Thoughts on technology, software Engineering, AI, and building great products.",
             url: generateCanonicalUrl("/blog"),
             author: {
               "@type": "Person",
@@ -92,21 +93,24 @@ export default function Blog() {
         <div className="flex justify-between items-center">
           <Link
             href="/"
-            className="font-mono text-sm text-[#9CA0A8] hover:text-[#050914] transition-colors"
+            className="font-mono text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             Resume
           </Link>
-          <Link
-            href="/blog"
-            className="font-mono text-sm text-[#050914] hover:underline"
-          >
-            Blog
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link
+              href="/blog"
+              className="font-mono text-sm text-foreground hover:underline"
+            >
+              Blog
+            </Link>
+            <ThemeToggle />
+          </div>
         </div>
       </nav>
 
       <section
-        className="mx-auto w-full max-w-2xl space-y-8 bg-white px-4 pb-8"
+        className="mx-auto w-full max-w-2xl space-y-8 bg-card px-4 pb-8"
         aria-label="Blog Content"
       >
         {/* Header */}
@@ -114,8 +118,8 @@ export default function Blog() {
           <h1 className="text-2xl font-bold" id="blog-title">
             Blog
           </h1>
-          <p className="text-pretty font-mono text-sm text-[#6c737f]">
-            Thoughts on technology, software development, AI, and building great
+          <p className="text-pretty font-mono text-sm text-muted-foreground">
+            Thoughts on technology, software Engineering, AI, and building great
             products.
           </p>
         </header>
@@ -130,24 +134,24 @@ export default function Blog() {
               {blogPosts.map((post) => (
                 <article
                   key={post.slug}
-                  className="font-mono flex flex-col justify-start items-start gap-3 pb-6 border-b border-[#eeeff0] last:border-b-0"
+                  className="font-mono flex flex-col justify-start items-start gap-3 pb-6 border-b border-muted last:border-b-0"
                 >
                   <div className="flex flex-wrap justify-between items-baseline self-stretch gap-2">
                     <div className="flex-1">
                       <Link href={`/blog/${post.slug}`}>
-                        <h3 className="text-base font-semibold text-left text-[#050914] hover:underline transition-all cursor-pointer">
+                        <h3 className="text-base font-semibold text-left text-foreground hover:underline transition-all cursor-pointer">
                           {post.title}
                         </h3>
                       </Link>
                     </div>
-                    <div className="flex items-center gap-2 text-xs text-[#54575e]">
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
                       <span>{formatDate(post.date)}</span>
                       <span>·</span>
                       <span>{post.readTime}</span>
                     </div>
                   </div>
 
-                  <p className="self-stretch text-sm font-medium text-left text-[#6c737f] leading-relaxed">
+                  <p className="self-stretch text-sm font-medium text-left text-muted-foreground leading-relaxed">
                     {post.excerpt}
                   </p>
 
@@ -155,13 +159,13 @@ export default function Blog() {
                     {post.tags.slice(0, 3).map((tag) => (
                       <div
                         key={tag}
-                        className="inline-flex items-center rounded-md border px-2 py-0.5 text-xs font-semibold font-mono transition-colors text-nowrap border-[#eeeff0] bg-[#eeeff0] text-[#54575e] pointer-events-none"
+                        className="inline-flex items-center rounded-md border px-2 py-0.5 text-xs font-semibold font-mono transition-colors text-nowrap border-muted bg-muted text-muted-foreground pointer-events-none"
                       >
                         {tag}
                       </div>
                     ))}
                     {post.tags.length > 3 && (
-                      <div className="inline-flex items-center px-2 py-0.5 text-xs text-[#9CA0A8] font-mono">
+                      <div className="inline-flex items-center px-2 py-0.5 text-xs text-muted-foreground font-mono">
                         +{post.tags.length - 3} more
                       </div>
                     )}
@@ -177,10 +181,10 @@ export default function Blog() {
               About This Blog
             </h2>
             <div
-              className="text-pretty font-mono text-sm text-[#6c737f]"
+              className="text-pretty font-mono text-sm text-muted-foreground"
               aria-labelledby="about-blog"
             >
-              I write about technology, software development, AI, and building
+              I write about technology, software engineering, AI, and building
               great products. My posts cover everything from technical
               deep-dives to career insights and lessons learned from working at
               startups and larger companies.
@@ -193,7 +197,7 @@ export default function Blog() {
               Stay Updated
             </h2>
             <div
-              className="text-pretty font-mono text-sm text-[#6c737f] mb-4"
+              className="text-pretty font-mono text-sm text-muted-foreground mb-4"
               aria-labelledby="stay-updated"
             >
               Get notified when I publish new posts. No spam, unsubscribe at any
@@ -203,7 +207,7 @@ export default function Blog() {
               <input
                 type="email"
                 placeholder="your@email.com"
-                className="flex-1 px-3 py-2 text-sm font-mono border border-input rounded-md bg-background text-foreground placeholder:text-[#9CA0A8] focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
+                className="flex-1 px-3 py-2 text-sm font-mono border border-input rounded-md bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
               />
               <button className="px-4 py-2 text-sm font-mono bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors">
                 Subscribe
@@ -215,11 +219,11 @@ export default function Blog() {
 
       <div className="text-center mt-8 mb-4">
         <a
-          className="text-[#9CA0A8] font-mono text-sm"
+          className="text-muted-foreground font-mono text-sm"
           href="/?ref=ibrahim-shittu"
         >
           Made with ❤️ by{" "}
-          <span className="text-[#050914] underline underline-offset-2">
+          <span className="text-foreground underline underline-offset-2">
             Ibrahim Shittu
           </span>
         </a>

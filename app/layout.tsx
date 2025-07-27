@@ -1,3 +1,4 @@
+import { ThemeProvider } from "@/components/providers/theme-provider";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { Metadata, Viewport } from "next";
@@ -105,8 +106,14 @@ export default function RootLayout({
   const organizationSchema = generateOrganizationSchema();
 
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
       <body className={inter.className}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
         {/* Structured Data Scripts */}
         <script
           type="application/ld+json"
@@ -142,6 +149,7 @@ export default function RootLayout({
         {children}
         <Analytics />
         <SpeedInsights />
+        </ThemeProvider>
       </body>
     </html>
   );

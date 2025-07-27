@@ -1,6 +1,8 @@
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, Moon, Sun } from "lucide-react";
 
 export const Icons = {
+  sun: Sun,
+  moon: Moon,
   mail: Mail,
   github: Github,
   linkedin: Linkedin,

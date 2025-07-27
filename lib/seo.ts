@@ -25,7 +25,7 @@ export const siteConfig = {
     "React",
     "Legal Tech",
     "Finiti Legal",
-    "Software Development",
+    "Software Engineering",
     "Web Development",
     "Mobile Development",
   ],
@@ -54,7 +54,7 @@ export function generatePersonSchema() {
       name: "University of Ilorin",
     },
     knowsAbout: [
-      "Software Development",
+      "Software Engineering",
       "AI Agents",
       "Machine Learning",
       "TypeScript",

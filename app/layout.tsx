@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/react";
 import {
   siteConfig,
   generatePersonSchema,
@@ -142,6 +143,7 @@ export default function RootLayout({
           }}
         />
         {children}
+        <Analytics />
       </body>
     </html>
   );

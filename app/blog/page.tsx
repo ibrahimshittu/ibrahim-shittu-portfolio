@@ -12,7 +12,7 @@ import {
 export const metadata: Metadata = {
   title: "Blog - Software Engineering, AI, and Tech Insights",
   description:
-    "Thoughts on technology, software Engineering, AI, and building great products. Learn from real-world experiences in legal tech, education platforms, and startup development.",
+    "Thoughts on Technology, Software Engineering, AI, and building great products. Learn from real-world experiences in legal tech, education platforms, and startup development.",
   openGraph: {
     type: "website",
     title: "Blog - Ibrahim Shittu",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     title:
       "Blog - Software Engineering, AI, and Tech Insights | Ibrahim Shittu",
     description:
-      "Thoughts on technology, software Engineering, AI, and building great products.",
+      "Thoughts on Technology, Software Engineering, AI, and building great products.",
     images: [siteConfig.ogImage],
   },
   alternates: {
@@ -67,7 +67,7 @@ export default function Blog() {
             "@type": "Blog",
             name: "Ibrahim Shittu's Blog",
             description:
-              "Thoughts on technology, software Engineering, AI, and building great products.",
+              "Thoughts on Technology, Software Engineering, AI, and building great products.",
             url: generateCanonicalUrl("/blog"),
             author: {
               "@type": "Person",
@@ -119,7 +119,7 @@ export default function Blog() {
             Blog
           </h1>
           <p className="text-pretty font-mono text-sm text-muted-foreground">
-            Thoughts on technology, software Engineering, AI, and building great
+            Thoughts on Technology, Software Engineering, AI, and building great
             products.
           </p>
         </header>

@@ -318,7 +318,7 @@ export default function Home() {
                           {job.previousRole.period}
                         </p>
                       </div>
-                      <p className="text-sm font-medium text-left text-[#6c737f]">
+                      <p className="text-sm font-medium text-left text-muted-foreground">
                         {job.previousRole.description}
                       </p>
                     </div>

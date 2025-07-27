@@ -130,13 +130,13 @@ export default function BlogPost({ params }: PageProps) {
             Resume
           </Link>
           <div className="flex items-center gap-4">
-          <Link
-            href="/blog"
-            className="font-mono text-sm text-foreground hover:underline"
-          >
-            Blog
-          </Link>
-          <ThemeToggle />
+            <Link
+              href="/blog"
+              className="font-mono text-sm text-foreground hover:underline"
+            >
+              Blog
+            </Link>
+            <ThemeToggle />
           </div>
         </div>
       </nav>
@@ -179,7 +179,9 @@ export default function BlogPost({ params }: PageProps) {
 
         {/* Article Content */}
         <article className="font-mono">
-          <div className="prose dark:prose-invert max-w-none">{formatContent(post.content)}</div>
+          <div className="prose dark:prose-invert max-w-none">
+            {formatContent(post.content)}
+          </div>
         </article>
 
         {/* Author Bio */}
@@ -201,8 +203,6 @@ export default function BlogPost({ params }: PageProps) {
               <p className="text-sm font-mono text-muted-foreground mb-4">
                 Senior Software Engineer passionate about AI, web/mobile
                 development, and building products that make a difference.
-                Currently working at Finiti Legal, building AI agents for the
-                legal industry.
               </p>
               <div className="flex gap-3">
                 <a

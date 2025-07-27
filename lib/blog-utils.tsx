@@ -16,7 +16,7 @@ export const formatInlineText = (text: string): React.ReactNode => {
   return parts.map((part, idx) => {
     if (part.startsWith("**") && part.endsWith("**")) {
       return (
-        <span key={idx} className="font-semibold text-[#050914]">
+        <span key={idx} className="font-semibold text-muted-foreground">
           {part.slice(2, -2)}
         </span>
       );
@@ -43,20 +43,20 @@ export const formatContent = (content: string): React.ReactNode[] => {
       const HeadingTag = ({ children }: { children: React.ReactNode }) => {
         if (headingLevel === 2) {
           return (
-            <h2 className="text-lg font-bold text-[#050914] mt-10 mb-6 leading-tight">
+            <h2 className="text-lg font-bold text-muted-foreground mt-10 mb-6 leading-tight">
               {children}
             </h2>
           );
         }
         if (headingLevel === 3) {
           return (
-            <h3 className="text-base font-semibold text-[#050914] mt-8 mb-4 leading-tight">
+            <h3 className="text-base font-semibold text-muted-foreground mt-8 mb-4 leading-tight">
               {children}
             </h3>
           );
         }
         return (
-          <h4 className="text-sm font-semibold text-[#050914] mt-6 mb-3 leading-tight">
+          <h4 className="text-sm font-semibold text-muted-foreground mt-6 mb-3 leading-tight">
             {children}
           </h4>
         );
@@ -74,9 +74,9 @@ export const formatContent = (content: string): React.ReactNode[] => {
               {restLines.map((item, itemIdx) => (
                 <li
                   key={itemIdx}
-                  className="text-sm text-[#6c737f] font-mono leading-relaxed flex items-start"
+                  className="text-sm text-muted-foreground font-mono leading-relaxed flex items-start"
                 >
-                  <span className="mr-3 text-[#9CA0A8]">•</span>
+                  <span className="mr-3 text-muted-foreground">•</span>
                   <span>{formatInlineText(item.substring(2))}</span>
                 </li>
               ))}
@@ -91,7 +91,7 @@ export const formatContent = (content: string): React.ReactNode[] => {
           {restLines.map((line, idxLine) => (
             <p
               key={idxLine}
-              className="text-sm text-[#6c737f] font-mono leading-relaxed mt-4 mb-6"
+              className="text-sm text-muted-foreground font-mono leading-relaxed mt-4 mb-6"
             >
               {formatInlineText(line.trim())}
             </p>
@@ -108,9 +108,9 @@ export const formatContent = (content: string): React.ReactNode[] => {
           {items.map((item, itemIdx) => (
             <li
               key={itemIdx}
-              className="text-sm text-[#6c737f] font-mono leading-relaxed flex items-start"
+              className="text-sm text-muted-foreground font-mono leading-relaxed flex items-start"
             >
-              <span className="mr-3 text-[#9CA0A8]">•</span>
+              <span className="mr-3 text-muted-foreground">•</span>
               <span>{formatInlineText(item.substring(2))}</span>
             </li>
           ))}
@@ -123,9 +123,9 @@ export const formatContent = (content: string): React.ReactNode[] => {
       return (
         <div
           key={index}
-          className="bg-[#f8f9fa] border border-[#eeeff0] rounded-md p-4 mt-4 mb-6 flex justify-center"
+          className="bg-muted border border-border rounded-md p-4 mt-4 mb-6 flex justify-center"
         >
-          <code className="text-sm font-mono text-[#050914] whitespace-pre-wrap text-center">
+          <code className="text-sm font-mono text-foreground whitespace-pre-wrap text-center">
             {trimmed.replace(/```/g, "")}
           </code>
         </div>
@@ -141,7 +141,7 @@ export const formatContent = (content: string): React.ReactNode[] => {
       return (
         <p
           key={index}
-          className="text-sm font-mono text-[#6c737f] italic mt-8 mb-6 leading-relaxed border-l-2 border-[#eeeff0] pl-4"
+          className="text-sm font-mono text-muted-foreground italic mt-8 mb-6 leading-relaxed border-l-2 border-border pl-4"
         >
           {trimmed.slice(1, -1)}
         </p>
@@ -169,7 +169,7 @@ export const formatContent = (content: string): React.ReactNode[] => {
     return (
       <p
         key={index}
-        className="text-sm text-[#6c737f] font-mono leading-relaxed mt-4 mb-6"
+        className="text-sm text-muted-foreground font-mono leading-relaxed mt-4 mb-6"
       >
         {formatInlineText(trimmed)}
       </p>

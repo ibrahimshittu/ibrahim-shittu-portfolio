@@ -1,14 +1,92 @@
 import Link from "next/link";
+import { Metadata } from "next";
 import { getAllBlogPosts } from "@/data/blog-posts";
 import { formatDate } from "@/lib/blog-utils";
+import {
+  siteConfig,
+  generateCanonicalUrl,
+  generateBreadcrumbSchema,
+} from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: "Blog - Software Development, AI, and Tech Insights",
+  description:
+    "Thoughts on technology, software development, AI, and building great products. Learn from real-world experiences in legal tech, education platforms, and startup development.",
+  openGraph: {
+    title:
+      "Blog - Software Development, AI, and Tech Insights | Ibrahim Shittu",
+    description:
+      "Thoughts on technology, software development, AI, and building great products. Learn from real-world experiences in legal tech, education platforms, and startup development.",
+    url: generateCanonicalUrl("/blog"),
+    type: "website",
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+        alt: "Ibrahim Shittu's Blog",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "Blog - Software Development, AI, and Tech Insights | Ibrahim Shittu",
+    description:
+      "Thoughts on technology, software development, AI, and building great products.",
+    images: [siteConfig.ogImage],
+  },
+  alternates: {
+    canonical: generateCanonicalUrl("/blog"),
+  },
+};
 
 export default function Blog() {
   const blogPosts = getAllBlogPosts();
 
-  // formatDate imported from utility
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: siteConfig.url },
+    { name: "Blog", url: generateCanonicalUrl("/blog") },
+  ]);
 
   return (
     <main className="flex-1 flex flex-col">
+      {/* Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            name: "Ibrahim Shittu's Blog",
+            description:
+              "Thoughts on technology, software development, AI, and building great products.",
+            url: generateCanonicalUrl("/blog"),
+            author: {
+              "@type": "Person",
+              name: siteConfig.author.name,
+              url: siteConfig.url,
+            },
+            blogPost: blogPosts.slice(0, 5).map((post) => ({
+              "@type": "BlogPosting",
+              headline: post.title,
+              url: generateCanonicalUrl(`/blog/${post.slug}`),
+              datePublished: post.date,
+              author: {
+                "@type": "Person",
+                name: siteConfig.author.name,
+              },
+            })),
+          }),
+        }}
+      />
+
       {/* Navigation */}
       <nav className="mx-auto w-full max-w-2xl px-4 py-4">
         <div className="flex justify-between items-center">

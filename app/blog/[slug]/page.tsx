@@ -1,13 +1,81 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { getBlogPost } from "@/data/blog-posts";
+import { Metadata } from "next";
+import { getBlogPost, getAllBlogPosts } from "@/data/blog-posts";
 import React from "react";
 import { formatDate, formatContent } from "@/lib/blog-utils";
+import {
+  siteConfig,
+  generateCanonicalUrl,
+  generateArticleSchema,
+  generateBreadcrumbSchema,
+  generateMetaDescription,
+  generateOgImageUrl,
+} from "@/lib/seo";
 
 interface PageProps {
   params: {
     slug: string;
+  };
+}
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const post = getBlogPost(params.slug);
+
+  if (!post) {
+    return {
+      title: "Post Not Found",
+      description: "The requested blog post could not be found.",
+    };
+  }
+
+  const description = generateMetaDescription(post.excerpt);
+  const canonicalUrl = generateCanonicalUrl(`/blog/${post.slug}`);
+  const ogImage = generateOgImageUrl(post.title);
+
+  return {
+    title: post.title,
+    description: description,
+    keywords: [...siteConfig.keywords, ...post.tags],
+    authors: [
+      {
+        name: siteConfig.author.name,
+        url: siteConfig.url,
+      },
+    ],
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: description,
+      url: canonicalUrl,
+      siteName: siteConfig.name,
+      publishedTime: post.date,
+      modifiedTime: post.date,
+      authors: [siteConfig.author.name],
+      tags: post.tags,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: description,
+      images: [ogImage],
+      creator: siteConfig.twitterHandle,
+    },
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    category: "technology",
   };
 }
 
@@ -18,8 +86,38 @@ export default function BlogPost({ params }: PageProps) {
     notFound();
   }
 
+  const articleSchema = generateArticleSchema(
+    post.title,
+    post.excerpt,
+    post.slug,
+    post.date,
+    post.date, // using same date for modified since we don't track modifications
+    post.tags,
+    post.readTime
+  );
+
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: siteConfig.url },
+    { name: "Blog", url: generateCanonicalUrl("/blog") },
+    { name: post.title, url: generateCanonicalUrl(`/blog/${post.slug}`) },
+  ]);
+
   return (
     <main className="flex-1 flex flex-col">
+      {/* Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+
       {/* Navigation */}
       <nav className="mx-auto w-full max-w-2xl px-4 py-4">
         <div className="flex justify-between items-center">
@@ -55,9 +153,11 @@ export default function BlogPost({ params }: PageProps) {
           </h1>
 
           <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-[#54575e]">
-            <span>{formatDate(post.date)}</span>
+            <time dateTime={post.date}>{formatDate(post.date)}</time>
             <span>·</span>
             <span>{post.readTime}</span>
+            <span>·</span>
+            <span>By {siteConfig.author.name}</span>
           </div>
 
           <div className="flex flex-wrap gap-1">
@@ -84,12 +184,14 @@ export default function BlogPost({ params }: PageProps) {
               <img
                 className="aspect-square h-full w-full"
                 alt="Ibrahim Shittu's profile picture"
-                src="https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18zMFNVYTB5U011aGdYTXBvRHhueFlIZ09qU1gifQ"
+                src={siteConfig.author.image}
+                width={48}
+                height={48}
               />
             </span>
             <div className="flex-1">
               <h3 className="text-base font-semibold text-[#050914] mb-2">
-                Ibrahim Shittu
+                {siteConfig.author.name}
               </h3>
               <p className="text-sm font-mono text-[#6c737f] mb-4">
                 Senior Software Engineer passionate about AI, web/mobile
@@ -99,7 +201,7 @@ export default function BlogPost({ params }: PageProps) {
               </p>
               <div className="flex gap-3">
                 <a
-                  href="https://github.com/ibrahimshittu"
+                  href={siteConfig.author.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs font-mono text-[#9CA0A8] hover:text-[#050914] transition-colors"
@@ -107,7 +209,7 @@ export default function BlogPost({ params }: PageProps) {
                   Follow on GitHub
                 </a>
                 <a
-                  href="https://linkedin.com/in/ibrahimshittu"
+                  href={siteConfig.author.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs font-mono text-[#9CA0A8] hover:text-[#050914] transition-colors"
@@ -145,11 +247,8 @@ export default function BlogPost({ params }: PageProps) {
 }
 
 export async function generateStaticParams() {
-  return [
-    { slug: "building-ai-agents-for-legal-tech" },
-    { slug: "scaling-cad-education-platform" },
-    { slug: "ar-smart-glasses-accessibility" },
-    { slug: "from-civil-engineering-to-software" },
-    { slug: "predictive-analytics-energy-optimization" },
-  ];
+  const posts = getAllBlogPosts();
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
 }

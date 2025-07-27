@@ -4,7 +4,7 @@ export const siteConfig = {
   description:
     "Senior Software Engineer with expertise in web and mobile development, AI, and Machine Learning.",
   url: "https://ibrahimshittu.com",
-  ogImage: "https://ibrahimshittu.com/og-image.jpg",
+  ogImage: "/og-image.jpg",
   twitterHandle: "@ibrahimshittu01",
   author: {
     name: "Ibrahim Shittu",

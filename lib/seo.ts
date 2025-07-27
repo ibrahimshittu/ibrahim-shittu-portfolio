@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Ibrahim Shittu",
   title: "Ibrahim Shittu - Senior Software Engineer",
   description:
-    "Senior Software Engineer with expertise in web and mobile development, AI, and Machine Learning.",
+    "Senior Software Engineer with expertise in building scalable web, mobile, and AI-driven solutions for startups and global enterprises across diverse industries.",
   url: "https://ibrahimshittu.com",
   ogImage: "/og-image.jpg",
   twitterHandle: "@ibrahimshittu01",

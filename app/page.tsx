@@ -290,7 +290,7 @@ export default function Home() {
                   </div>
                   <div className="flex flex-col justify-start items-start relative gap-1.5">
                     <p className="self-stretch text-sm font-medium text-left text-muted-foreground font-mono capitalize flex flex-wrap gap-1">
-                      <span>{job.company}</span>
+                      <span className="text-foreground">{job.company}</span>
                       <span>·</span>
                       <span>{job.type}</span>
                     </p>

@@ -2,20 +2,16 @@ import Link from "next/link";
 import { Metadata } from "next";
 import Image from "next/image";
 import { Icons } from "@/components/ui/icons";
-import {
-  siteConfig,
-  generatePersonSchema,
-  generateCanonicalUrl,
-} from "@/lib/seo";
+import { siteConfig, generatePersonSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Senior Software Engineer - Portfolio & Blog",
   description:
-    "Senior Software Engineer with expertise in web and mobile development, AI, and Machine Learning.",
+    "Senior Software Engineer with expertise in building scalable web, mobile, and AI-driven solutions for startups and global enterprises across diverse industries.",
   openGraph: {
     title: "Ibrahim Shittu - Senior Software Engineer",
     description:
-      "Senior Software Engineer with expertise in web and mobile development, AI, and Machine Learning.",
+      "Senior Software Engineer with expertise in building scalable web, mobile, and AI-driven solutions for startups and global enterprises across diverse industries.",
     url: siteConfig.url,
     type: "profile",
     images: [
@@ -31,7 +27,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Ibrahim Shittu - Senior Software Engineer",
     description:
-      "Senior Software Engineer with expertise in web and mobile development, AI, and Machine Learning.",
+      "Senior Software Engineer with expertise in building scalable web, mobile, and AI-driven solutions for startups and global enterprises across diverse industries.",
     images: [siteConfig.ogImage],
   },
   alternates: {

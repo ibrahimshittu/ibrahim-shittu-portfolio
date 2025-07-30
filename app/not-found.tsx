@@ -30,8 +30,8 @@ export default function NotFound() {
             Page Not Found
           </p>
           <p className="mt-4 text-lg text-muted-foreground">
-            Oops! It seems you've ventured into uncharted territory. The page
-            you're looking for doesn't exist.
+            Oops! It seems you&apos;ve ventured into uncharted territory. The
+            page you&apos;re looking for doesn&apos;t exist.
           </p>
           <Link
             href="/"

@@ -66,7 +66,7 @@ export default function Home() {
       title: "Software Engineer",
       location: "Federal Capital Territory, Nigeria",
       period: "Mar 2022 - Dec 2022",
-      company: "thrive agric",
+      company: "thrive agric (YC W19)",
       type: "Full-time",
       description:
         "Led the front-end engineering team at Crust Microfinance Bank, developing a financial technology platform that grew to over 73,000 customers and generated significant revenue. Developed mobile applications and an internal admin tool, streamlining customer onboarding processes and enhancing operational efficiency.",
@@ -307,12 +307,12 @@ export default function Home() {
                           <p className="text-base font-semibold text-left text-foreground">
                             {job.previousRole.title}
                           </p>
-                          <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gradient-to-r from-green-50 to-blue-50 border border-green-200">
+                          {/* <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gradient-to-r from-green-50 to-blue-50 border border-green-200">
                             <div className="w-2 h-2 rounded-full bg-gradient-to-r from-green-400 to-blue-500"></div>
                             <span className="text-[10px] font-semibold text-green-700">
                               GROWTH
                             </span>
-                          </div>
+                          </div> */}
                         </div>
                         <p className="text-sm text-right text-muted-foreground">
                           {job.previousRole.period}

@@ -525,29 +525,13 @@ My first software development roles were with very early-stage startups, which p
 
 ## Key Lessons from the Transition
 
-### Transferable Skills
+#### Transferable Skills
 
-Engineering disciplines share fundamental problem-solving approaches:
-- **Systematic Thinking**: Breaking down complex problems into manageable parts
-- **Attention to Detail**: Understanding that small errors can have big consequences
-- **Project Management**: Planning, execution, and delivery skills
-- **Mathematical Foundation**: Logical reasoning and analytical skills
+Engineering disciplines share fundamental problem-solving approaches that translate well to software development. Systematic thinking helps break down complex problems into manageable parts, while attention to detail ensures understanding that small errors can have big consequences. Take time to identify your own transferable skills from your background, they're often more valuable than you realise and can give you a unique advantage.
 
-### The Learning Mindset
+#### The Learning Mindset
 
-Software development requires continuous learning:
-- **Technology Changes Rapidly**: New frameworks, languages, and tools emerge constantly
-- **Documentation is Key**: Reading and writing clear documentation
-- **Testing and Validation**: Ensuring solutions work as intended
-- **Collaboration**: Working effectively in teams
-
-### Embracing Uncertainty
-
-Career transitions involve uncertainty, but this taught me:
-- **Comfort with Ambiguity**: Not every problem has a clear solution path
-- **Adaptability**: Being flexible when requirements change
-- **Resilience**: Bouncing back from failures and setbacks
-- **Growth Mindset**: Viewing challenges as opportunities to learn
+Software development requires continuous learning due to the rapidly changing nature of technology, where new frameworks, languages, and tools emerge constantly. Being eager to learn continuously and upskill regularly isn't just beneficial, it's essential to stay relevant in the field.
 
 ## The Rewards
 

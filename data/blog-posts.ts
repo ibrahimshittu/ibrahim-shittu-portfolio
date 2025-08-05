@@ -483,13 +483,9 @@ However, life had different plans. When the admission results came out, I was ac
 
 Early on in my university days, I realized I didn't want to be just another average civil engineer. Understanding how tough the job market could be and the importance of technology in engineering, I decided to learn various software tools and became increasingly interested in the computational aspects of engineering. I knew that to stand out, I needed to embrace technology and develop skills that would differentiate me from my peers.
 
-I became proficient with industry-standard software like AutoCAD for drafting, SAP2000 for structural analysis, and ETABS for building design. I also learned Revit for Building Information Modeling (BIM), which introduced me to visual programming through Dynamo - Revit's computational design environment. This visual programming experience was a revelation, allowing me to create parametric designs and automate complex modeling tasks.
+I became proficient with industry-standard software like AutoCAD for drafting, SAP2000 for structural analysis, and ETABS for building design. I also learnt Revit for Building Information Modeling (BIM), which introduced me to visual programming through Dynamo, Revit's computational design environment.
 
-But I didn't stop there. I explored programming languages like MATLAB for mathematical modeling and eventually dove into Python for automating repetitive calculations and data analysis. Python was the turning point - it brought me back to that original fascination with computers and programming that I had felt years earlier. Suddenly, I wasn't just using software; I was creating solutions, writing code that could solve engineering problems in ways I had never imagined.
-
-What started as a survival strategy in a competitive field gradually evolved into genuine fascination. I found myself drawn to projects that involved complex modeling, optimization algorithms, and data analysis. Whether it was using finite element analysis to understand stress distributions or writing scripts to automate design calculations, I discovered that the intersection of engineering principles and computational tools was where I felt most engaged.
-
-This computational focus wasn't just about learning software - it was about understanding how technology could enhance engineering thinking. I realized that the future of engineering lay not just in understanding physical principles, but in leveraging computational power to solve increasingly complex problems. This insight planted the seeds for my eventual career change.
+But I didn't stop there. I explored programming languages like MATLAB for mathematical modeling and eventually dove into Python for automating repetitive calculations. Python was the real turning point, it brought me back to that original fascination with computers and programming that I had felt years earlier. Suddenly, I wasn't just using software; I was creating solutions, writing code that could solve engineering problems in ways I had never imagined.
 
 ### Learning to Code
 

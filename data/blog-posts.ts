@@ -456,7 +456,7 @@ The key to success lies in understanding that buildings are complex systems with
 *What sustainability challenges are you working on? How might predictive analytics help address environmental issues in your domain?*`,
   },
   {
-    slug: "from-civil-engineering-to-software",
+    slug: "from-civil-engineering-to-software-development",
     title: "From Civil Engineering to Software Development: My Career Journey",
     excerpt:
       "The story of transitioning from civil engineering to becoming a senior software engineer, and lessons learned along the way.",
@@ -467,13 +467,29 @@ The key to success lies in understanding that buildings are complex systems with
 
 ## The Starting Point
 
-I graduated from the University of Ilorin in 2018 with a Bachelor's degree in Civil Engineering. Like many engineering students, I had a clear path laid out: work on infrastructure projects, design buildings and bridges, and contribute to the physical development of communities.
+My fascination with computers began long before university. I still remember the first time I encountered those hunched-back Windows computers at my cousin's house over a decade ago, I was mesmerized by how these machines could respond to commands and create things on screen. I was equally fascinated by the internet, this "magical" network that could connect me to information and people anywhere in the world.
 
-## The Spark of Interest
+When I finally got my first mobile phone at the age of 16, it was like holding the future in my hands. I spent so much time discovering online gaming, classics like Need For Speed, Asphalt 7 & 8, Subway Surfer, and Real Football showed me the incredible possibilities of interactive technology. That phone became my gateway to understanding technology in a more personal way.
 
-During university, I was always drawn to the computational aspects of civil engineering - using software to model structures, optimize designs, and solve complex engineering problems. This interest in the intersection of engineering and technology planted the seeds for my eventual career change.
+In secondary school, I naturally gravitated toward the sciences, with computer science and mathematics being my absolute favorite subjects. Although the computer science curriculum wasn't as exciting as you might imagine, mostly theoretical concepts with limited practical applications, it still fueled my curiosity. I held onto the hope that one day I would be able to fulfill this burning passion for the digital world.
+
+## The Civil Engineering Detour
+
+When it came time to apply for university, I had my heart set on studying Computer Engineering at the University of Ilorin. It seemed like the perfect fit, a chance to combine my passion for computer science with my love for engineering. I wanted to understand how technology worked, from the hardware that powers our devices to the software that brings them to life. I even spent 6 months in the school's pre-degree program (let's just say those 6 months weren't exactly what I'd call thrilling), filled with determination that this would be my path to finally diving deep into the world of technology.
+
+However, life had different plans. When the admission results came out, I was accepted to study Civil Engineering instead. It wasn't what I had dreamed of, but I decided to embrace this unexpected opportunity.
 
 ## The Transition Period
+
+Early on in my university days, I realized I didn't want to be just another average civil engineer. Understanding how tough the job market could be and the importance of technology in engineering, I decided to learn various software tools and became increasingly interested in the computational aspects of engineering. I knew that to stand out, I needed to embrace technology and develop skills that would differentiate me from my peers.
+
+I became proficient with industry-standard software like AutoCAD for drafting, SAP2000 for structural analysis, and ETABS for building design. I also learned Revit for Building Information Modeling (BIM), which introduced me to visual programming through Dynamo - Revit's computational design environment. This visual programming experience was a revelation, allowing me to create parametric designs and automate complex modeling tasks.
+
+But I didn't stop there. I explored programming languages like MATLAB for mathematical modeling and eventually dove into Python for automating repetitive calculations and data analysis. Python was the turning point - it brought me back to that original fascination with computers and programming that I had felt years earlier. Suddenly, I wasn't just using software; I was creating solutions, writing code that could solve engineering problems in ways I had never imagined.
+
+What started as a survival strategy in a competitive field gradually evolved into genuine fascination. I found myself drawn to projects that involved complex modeling, optimization algorithms, and data analysis. Whether it was using finite element analysis to understand stress distributions or writing scripts to automate design calculations, I discovered that the intersection of engineering principles and computational tools was where I felt most engaged.
+
+This computational focus wasn't just about learning software - it was about understanding how technology could enhance engineering thinking. I realized that the future of engineering lay not just in understanding physical principles, but in leveraging computational power to solve increasingly complex problems. This insight planted the seeds for my eventual career change.
 
 ### Learning to Code
 

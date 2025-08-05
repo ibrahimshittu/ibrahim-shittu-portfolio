@@ -491,15 +491,15 @@ But I didn't stop there. I explored programming languages like MATLAB for mathem
 
 Despite the disappointment of not getting into Computer Engineering, I was determined not to let go of my passion for programming. What followed was one of the most intensive and rewarding learning periods of my life, a double life where I attended classes during the day and transformed into a coding student by night.
 
-#### The Night Shift
+### The Night Shift
 
 My routine was simple but consistent: attend lectures during the day (when I could drag myself there), and then code until late into the night. Some nights I would find myself programming until 2 or 3 AM, completely lost in the flow of solving problems and building things. It wasn't always easy, especially when I had early morning classes the next day, assignments to submit, or tests to prepare for, but the excitement of learning something new every day kept me going.
 
-#### YouTube: My Programming University
+### YouTube: My Programming University
 
-If there's one resource that truly changed my life, it was YouTube. In a world where formal computer science education seemed out of reach, YouTube became my virtual university. The platform was a goldmine of programming tutorials, from absolute beginner content to advanced software engineering concepts.
+If there's one resource that truly changed my life, it was YouTube. Since I wasn't studying computer science formally, It became my virtual university. Youtube is a goldmine of programming tutorials, from absolute beginner content to advanced software engineering concepts.
 
-#### The Learning Process
+### The Learning Process
 
 My self-taught journey followed a pattern that evolved over time:
 
@@ -507,9 +507,9 @@ My self-taught journey followed a pattern that evolved over time:
 
 **Phase 2 - Language Deep Dives**: I focused intensively on specific programming languages, following comprehensive tutorial series that took me from beginner to intermediate level.
 
-**Phase 3 - Project Building**: Armed with basic knowledge, I started building small projects. YouTube project tutorials became my guide, showing me how to apply what I'd learned to create actual software.
+**Phase 3 - Independent Project Building**: Armed with basic knowledge and the confidence to work independently, I started building small projects from scratch. These weren't tutorial projects, they were solutions to problems I encountered or ideas I wanted to explore. This is where real learning happened.
 
-**Phase 4 - Problem Solving**: I discovered coding challenge websites and problem-solving tutorials on YouTube that helped me develop algorithmic thinking and debugging skills.
+**Phase 4 - Expanding Horizons**: I began exploring different programming paradigms, frameworks, and tools. I learned about web development with HTML, CSS, and JavaScript, and later delved into backend development with Node.js and Python.
 
 ### The Challenges
 
@@ -523,17 +523,6 @@ Learning to code while managing a full academic schedule wasn't without its chal
 
 **Resource Overload**: With so much content available on YouTube and other platforms, it was sometimes difficult to know which resources to trust and follow.
 
-### Building a Learning System
-
-Over time, I developed a systematic approach to learning:
-
-**Consistency Over Intensity**: Rather than marathon coding sessions, I found that coding for 2-3 hours every evening was more sustainable and effective.
-
-**Note-Taking**: I kept detailed notes of everything I learned, creating my own reference materials that I could revisit when needed.
-
-**Practice Projects**: For every major concept I learned, I would create a small project to reinforce the learning. These projects became my early portfolio.
-
-**Online Communities**: I joined programming forums and Discord servers where I could ask questions and learn from other developers, even if I couldn't interact face-to-face.
 
 ### The Breakthrough Moments
 

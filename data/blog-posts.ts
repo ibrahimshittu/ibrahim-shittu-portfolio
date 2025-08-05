@@ -487,6 +487,66 @@ I became proficient with industry-standard software like AutoCAD for drafting, S
 
 But I didn't stop there. I explored programming languages like MATLAB for mathematical modeling and eventually dove into Python for automating repetitive calculations. Python was the real turning point, it brought me back to that original fascination with computers and programming that I had felt years earlier. Suddenly, I wasn't just using software; I was creating solutions, writing code that could solve engineering problems in ways I had never imagined.
 
+## Learning How to Code
+
+Despite the disappointment of not getting into Computer Engineering, I was determined not to let go of my passion for programming. What followed was one of the most intensive and rewarding learning periods of my life, a double life where I attended classes during the day and transformed into a coding student by night.
+
+#### The Night Shift
+
+My routine was simple but consistent: attend lectures during the day (when I could drag myself there), and then code until late into the night. Some nights I would find myself programming until 2 or 3 AM, completely lost in the flow of solving problems and building things. It wasn't always easy, especially when I had early morning classes the next day, assignments to submit, or tests to prepare for, but the excitement of learning something new every day kept me going.
+
+#### YouTube: My Programming University
+
+If there's one resource that truly changed my life, it was YouTube. In a world where formal computer science education seemed out of reach, YouTube became my virtual university. The platform was a goldmine of programming tutorials, from absolute beginner content to advanced software engineering concepts.
+
+#### The Learning Process
+
+My self-taught journey followed a pattern that evolved over time:
+
+**Phase 1 - The Basics**: I started with fundamental programming concepts - variables, loops, conditionals, and functions. YouTube tutorials made these concepts accessible and engaging in a way that textbooks never could.
+
+**Phase 2 - Language Deep Dives**: I focused intensively on specific programming languages, following comprehensive tutorial series that took me from beginner to intermediate level.
+
+**Phase 3 - Project Building**: Armed with basic knowledge, I started building small projects. YouTube project tutorials became my guide, showing me how to apply what I'd learned to create actual software.
+
+**Phase 4 - Problem Solving**: I discovered coding challenge websites and problem-solving tutorials on YouTube that helped me develop algorithmic thinking and debugging skills.
+
+### The Challenges
+
+Learning to code while managing a full academic schedule wasn't without its challenges:
+
+**Time Management**: Balancing coursework with intensive coding practice required careful time management and often meant sacrificing social activities.
+
+**Motivation**: There were nights when I felt overwhelmed or stuck on a particular concept. The lack of immediate feedback or a structured curriculum made it easy to feel lost.
+
+**Isolation**: Learning alone meant missing out on the collaborative aspects of traditional computer science education. I had to find other ways to connect with the programming community.
+
+**Resource Overload**: With so much content available on YouTube and other platforms, it was sometimes difficult to know which resources to trust and follow.
+
+### Building a Learning System
+
+Over time, I developed a systematic approach to learning:
+
+**Consistency Over Intensity**: Rather than marathon coding sessions, I found that coding for 2-3 hours every evening was more sustainable and effective.
+
+**Note-Taking**: I kept detailed notes of everything I learned, creating my own reference materials that I could revisit when needed.
+
+**Practice Projects**: For every major concept I learned, I would create a small project to reinforce the learning. These projects became my early portfolio.
+
+**Online Communities**: I joined programming forums and Discord servers where I could ask questions and learn from other developers, even if I couldn't interact face-to-face.
+
+### The Breakthrough Moments
+
+Several moments during this period made me realize that programming was truly my calling:
+
+**First Working Program**: The moment I wrote my first program that actually solved a real problem was magical. It was a simple calculator, but seeing it work exactly as I intended was incredibly satisfying.
+
+**Understanding Object-Oriented Programming**: When OOP concepts finally clicked, it felt like I had unlocked a new way of thinking about problems and solutions.
+
+**Building My First Web Application**: Creating my first web app and seeing it run in a browser was a pivotal moment. It made programming feel real and tangible in a way that console applications never had.
+
+**Debugging Success**: The first time I successfully debugged a complex issue on my own, without relying on tutorials, I knew I was developing real problem-solving skills.
+
 ### Learning to Code
 
 The transition didn't happen overnight. I started learning programming during my final year of university:

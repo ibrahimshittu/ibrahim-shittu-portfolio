@@ -78,7 +78,7 @@ export default function Home() {
       company: "liveclasses",
       type: "Full-time",
       description:
-        "Developed LiveClasses from ideation to a commercially viable product, scaling to thousands of users. Led the platform through acceptance into top startup incubators and secured funding. Developed a dynamic scheduling system and integrated multiple third-party systems, creating a strategic technical roadmap for sustainable growth.",
+        "Developed LiveClasses from ideation to a commercially viable product, scaling to thousands of users. Led the platform through acceptance into top startup incubators and secured funding. Built and managed cross-functional teams across product, engineering, and marketing. Drove product roadmap, user acquisition strategy, and growth initiatives, resulting in a 300% increase in active users within 12 months. Established key partnerships and negotiated B2B contracts to expand distribution and monetization channels.",
     },
     {
       title: "Software Engineer",

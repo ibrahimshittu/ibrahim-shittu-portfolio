@@ -461,8 +461,15 @@ The key to success lies in understanding that buildings are complex systems with
     excerpt:
       "The story of transitioning from civil engineering to becoming a senior software engineer, and lessons learned along the way.",
     date: "2023-05-05",
-    readTime: "7 min read",
-    tags: ["Career", "Personal", "Engineering", "Growth"],
+    readTime: "12 min read",
+    tags: [
+      "Career Transition",
+      "Self-Taught Programming",
+      "Personal Journey",
+      "Civil Engineering",
+      "Software Development",
+      "Career Change",
+    ],
     content: `Career transitions are never easy, but sometimes they lead to unexpected and fulfilling paths. My journey from civil engineering to software development taught me valuable lessons about adaptability, continuous learning, and following your passion.
 
 ## The Starting Point

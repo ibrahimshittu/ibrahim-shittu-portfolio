@@ -334,7 +334,7 @@ Our AI system made continuous adjustments to building systems:
 #### Intelligent Lighting
 - **Daylight Harvesting**: Adjusting artificial lighting based on natural light
 - **Occupancy-based Control**: Automatic on/off switching
-- **Circadian Rhythm Optimization**: Adjusting color temperature throughout the day
+- **Circadian Rhythm Optimisation**: Adjusting colour temperature throughout the day
 - **Energy-efficient Scheduling**: Optimizing lighting schedules for energy savings
 
 #### Demand Response Management
@@ -488,11 +488,11 @@ However, life had different plans. When the admission results came out, I was ac
 
 ## The Transition Period
 
-Early on in my university days, I realized I didn't want to be just another average civil engineer. Understanding how tough the job market could be and the importance of technology in engineering, I decided to learn various software tools and became increasingly interested in the computational aspects of engineering. I knew that to stand out, I needed to embrace technology and develop skills that would differentiate me from my peers.
+Early on in my university days, I realised I didn't want to be just another average civil engineer. Understanding how tough the job market could be and the importance of technology in engineering, I decided to learn various software tools and became increasingly interested in the computational aspects of engineering. I knew that to stand out, I needed to embrace technology and develop skills that would differentiate me from my peers.
 
-I became proficient with industry-standard software like AutoCAD for drafting, SAP2000 for structural analysis, and ETABS for building design. I also learnt Revit for Building Information Modeling (BIM), which introduced me to visual programming through Dynamo, Revit's computational design environment.
+I became proficient with industry-standard software like AutoCAD for drafting, SAP2000 for structural analysis, and ETABS for building design. I also learnt Revit for Building Information Modelling (BIM), which introduced me to visual programming through Dynamo, Revit's computational design environment.
 
-But I didn't stop there. I explored programming languages like MATLAB for mathematical modeling and eventually dove into Python for automating repetitive calculations. Python was the real turning point, it brought me back to that original fascination with computers and programming that I had felt years earlier. Suddenly, I wasn't just using software; I was creating solutions, writing code that could solve engineering problems in ways I had never imagined.
+But I didn't stop there. I explored programming languages like MATLAB for mathematical modelling and eventually dove into Python for automating repetitive calculations. Python was the real turning point, it brought me back to that original fascination with computers and programming that I had felt years earlier. Suddenly, I wasn't just using software; I was creating solutions, writing code that could solve engineering problems in ways I had never imagined.
 
 ## Learning How to Code
 
@@ -542,7 +542,7 @@ Software development requires continuous learning due to the rapidly changing na
 
 ## The Rewards
 
-The software industry offered opportunities I hadn't anticipated. I found myself building products used by people worldwide, working with cutting-edge technologies like AI and ML, enjoying the flexibility of remote work and diverse career paths, and being part of amazing developer communities that thrive on knowledge sharing.
+The software industry offered opportunities I hadn't anticipated. I found myself building products used by people worldwide, working with cutting-edge technologies like AI and ML, collaborating with some of the most talented people from around the globe, and being part of amazing developer communities that thrive on knowledge sharing.
 
 Finding work that aligns with your interests makes a huge difference. Software development is both analytical and creative, bringing new challenges to solve every day. The field rewards curiosity and growth through continuous learning, and there's deep satisfaction in creating tools that improve people's lives and work.
 

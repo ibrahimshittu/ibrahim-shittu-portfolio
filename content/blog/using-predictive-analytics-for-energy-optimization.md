@@ -3,7 +3,7 @@ title: "Using Predictive Analytics for Energy Optimization"
 excerpt: "How we achieved a 25% reduction in energy waste using AI-driven analytics to monitor and optimize building energy consumption."
 date: "2024-09-15"
 readTime: "9 min read"
-image: "https://res.cloudinary.com/ibrahimshittu/image/upload/v1754476069/predictive-analytics-energy-optimization.png"
+image: "https://res.cloudinary.com/ibrahimshittu/image/upload/v1754477626/using-predictive-analytics-for-energy-optimization.png"
 tags: ["AI/ML", "Energy", "Predictive Analytics", "Sustainability"]
 ---
 

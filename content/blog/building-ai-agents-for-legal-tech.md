@@ -1,5 +1,5 @@
 ---
-title: "Building AI Agents for Legal Tech: Lessons from Finiti Legal"
+title: "Building AI Agents for Legal Tech: Key Lessons Learned"
 excerpt: "Exploring the challenges and solutions in developing AI agents that automate SEC filings and integrate with Microsoft Office suite for legal professionals."
 date: "2025-01-15"
 readTime: "8 min read"

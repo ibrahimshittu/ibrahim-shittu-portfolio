@@ -4,7 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Metadata } from "next";
 import Image from "next/image";
-import { getBlogPost, getAllBlogPosts } from "@/data/blog-posts";
+import { getBlogPost, getAllBlogPosts } from "@/lib/markdown";
 import React from "react";
 import { formatDate, formatContent } from "@/lib/blog-utils";
 import {

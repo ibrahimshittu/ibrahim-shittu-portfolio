@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Metadata } from "next";
-import { getAllBlogPosts } from "@/data/blog-posts";
+import { getAllBlogPosts } from "@/lib/markdown";
 import { formatDate } from "@/lib/blog-utils";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import {

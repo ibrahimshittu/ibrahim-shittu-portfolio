@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { getAllBlogPosts } from "@/data/blog-posts";
+import { getAllBlogPosts } from "@/lib/markdown";
 import { siteConfig } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {

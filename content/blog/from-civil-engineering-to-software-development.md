@@ -23,7 +23,7 @@ My fascination with computers began long before university. I still remember the
 
 When I finally got my first mobile phone at the age of 16, it was like holding the future in my hands. I spent so much time discovering online gaming, classics like Need For Speed, Asphalt 7 & 8, Subway Surfer, and Real Football showed me the incredible possibilities of interactive technology. That phone became my gateway to understanding technology in a more personal way.
 
-In secondary school, I naturally gravitated toward the sciences, with computer science and mathematics being my absolute favorite subjects. Although the computer science curriculum wasn't as exciting as you might imagine, mostly theoretical concepts with limited practical applications, it still fueled my curiosity. I held onto the hope that one day I would be able to fulfill this burning passion for the digital world.
+In secondary school, I naturally gravitated toward the sciences, with computer science and mathematics being my absolute favorite subjects. Although the computer science curriculum wasn't as exciting as you might imagine, mostly theoretical concepts with limited practical applications, it still fueled my curiosity. I held onto the hope that one day I would be able to fulfill this burning passion for technology.
 
 ## The Civil Engineering Detour
 
@@ -33,11 +33,11 @@ However, life had different plans. When the admission results came out, I was ac
 
 ## The Transition Period
 
-Early on in my university days, I realised I didn't want to be just another average civil engineer. Understanding how tough the job market could be and the importance of technology in engineering, I decided to learn various software tools and became increasingly interested in the computational aspects of engineering. I knew that to stand out, I needed to embrace technology and develop skills that would differentiate me from my peers.
+Early on in my university days, I realized I didn't want to be just another average civil engineer. Understanding how tough the job market could be and the importance of technology in engineering, I decided to learn various software tools and became increasingly interested in the computational aspects of engineering. I knew that to stand out, I needed to embrace technology and develop skills that would differentiate me from my peers.
 
-I became proficient with industry-standard software like AutoCAD for drafting, SAP2000 for structural analysis, and ETABS for building design. I also learnt Revit for Building Information Modelling (BIM), which introduced me to visual programming through Dynamo, Revit's computational design environment.
+I became proficient with industry-standard software like AutoCAD for drafting, SAP2000 for structural analysis, and ETABS for building design. I also learned Revit for Building Information Modeling (BIM), which introduced me to visual programming through Dynamo, Revit's computational design environment.
 
-But I didn't stop there. I explored programming languages like MATLAB for mathematical modelling and eventually dove into Python for automating repetitive calculations. Python was the real turning point, it brought me back to that original fascination with computers and programming that I had felt years earlier. Suddenly, I wasn't just using software; I was creating solutions, writing code that could solve engineering problems in ways I had never imagined.
+But I didn't stop there. I explored programming languages like MATLAB for mathematical modeling and eventually dove into Python for automating repetitive calculations. Python was the real turning point, it brought me back to that original fascination with computers and programming that I had felt years earlier. Suddenly, I wasn't just using software; I was creating solutions, writing code that could solve engineering problems in ways I had never imagined.
 
 ## Learning How to Code
 
@@ -79,7 +79,7 @@ My first software development roles were with very early-stage startups, which p
 
 ### Transferable Skills
 
-Engineering disciplines share fundamental problem-solving approaches that translate well to software development. Systematic thinking helps break down complex problems into manageable parts, while attention to detail ensures understanding that small errors can have big consequences. Take time to identify your own transferable skills from your background, they're often more valuable than you realise and can give you a unique advantage.
+Engineering disciplines share fundamental problem-solving approaches that translate well to software development. Systematic thinking helps break down complex problems into manageable parts, while attention to detail ensures understanding that small errors can have big consequences. Take time to identify your own transferable skills from your background, they're often more valuable than you realize and can give you a unique advantage.
 
 ### The Learning Mindset
 

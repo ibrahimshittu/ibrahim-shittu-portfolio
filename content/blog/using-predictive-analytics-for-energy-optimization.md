@@ -65,7 +65,7 @@ Our AI system made continuous adjustments to building systems:
 
 - **Daylight Harvesting**: Adjusting artificial lighting based on natural light
 - **Occupancy-based Control**: Automatic on/off switching
-- **Circadian Rhythm Optimisation**: Adjusting colour temperature throughout the day
+- **Circadian Rhythm Optimization**: Adjusting color temperature throughout the day
 - **Energy-efficient Scheduling**: Optimizing lighting schedules for energy savings
 
 #### Demand Response Management

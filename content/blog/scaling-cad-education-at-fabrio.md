@@ -3,7 +3,7 @@ title: "My Journey Building Fabrio: From First Engineering Hire to Serving World
 excerpt: "My personal journey as the first engineering hire at Fabrio, rebuilding the platform from scratch and scaling it to serve prestigious institutions like UCL and Imperial College London."
 date: "2024-12-20"
 readTime: "12 min read"
-image: "https://res.cloudinary.com/ibrahimshittu/image/upload/v1754477626/scaling-cad-education-at-fabrio.png"
+image: "https://res.cloudinary.com/ibrahimshittu/image/upload/c_fill,w_1200,q_auto,f_auto/v1754477626/scaling-cad-education-at-fabrio.png"
 tags:
   [
     "Education Tech",

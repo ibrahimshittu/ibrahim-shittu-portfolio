@@ -19,12 +19,14 @@ export const siteConfig = {
     "Ibrahim Shittu",
     "Senior Software Engineer",
     "AI",
+    "Artificial Intelligence",
     "Machine Learning",
     "TypeScript",
     "NextJS",
     "React",
     "Legal Tech",
-    "Finiti Legal",
+    "Education Tech",
+    "Startup",
     "Software Engineering",
     "Web Development",
     "Mobile Development",
@@ -56,11 +58,15 @@ export function generatePersonSchema() {
     knowsAbout: [
       "Software Engineering",
       "AI Agents",
+      "Web Development",
+      "Mobile Development",
+      "Cloud Computing",
+      "Artificial Intelligence",
+      "Data Science",
       "Machine Learning",
       "TypeScript",
       "NextJS",
       "React",
-      "CAD",
       "Education Tech",
       "Legal Tech",
       "Startup",
@@ -200,10 +206,4 @@ export function calculateReadingTime(content: string): string {
   const wordCount = content.trim().split(/\s+/).length;
   const minutes = Math.ceil(wordCount / wordsPerMinute);
   return `${minutes} min read`;
-}
-
-// Generate Open Graph image URL for articles
-export function generateOgImageUrl(title: string): string {
-  const encodedTitle = encodeURIComponent(title);
-  return `${siteConfig.url}/api/og?title=${encodedTitle}`;
 }

@@ -13,7 +13,6 @@ import {
   generateArticleSchema,
   generateBreadcrumbSchema,
   generateMetaDescription,
-  generateOgImageUrl,
 } from "@/lib/seo";
 
 interface PageProps {
@@ -36,7 +35,6 @@ export async function generateMetadata({
 
   const description = generateMetaDescription(post.excerpt);
   const canonicalUrl = generateCanonicalUrl(`/blog/${post.slug}`);
-  const ogImage = generateOgImageUrl(post.title);
 
   return {
     title: post.title,
@@ -60,7 +58,7 @@ export async function generateMetadata({
       tags: post.tags,
       images: [
         {
-          url: ogImage,
+          url: post.image,
           width: 1200,
           height: 630,
           alt: post.title,
@@ -71,7 +69,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: post.title,
       description: description,
-      images: [ogImage],
+      images: [post.image],
       creator: siteConfig.twitterHandle,
     },
     alternates: {

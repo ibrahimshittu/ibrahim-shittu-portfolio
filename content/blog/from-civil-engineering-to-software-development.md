@@ -3,6 +3,7 @@ title: "From Civil Engineering to Software Development: My Career Journey"
 excerpt: "The story of transitioning from civil engineering to becoming a senior software engineer, and lessons learned along the way."
 date: "2023-05-05"
 readTime: "12 min read"
+image: "https://res.cloudinary.com/ibrahimshittu/image/upload/v1754476069/from-civil-engineering-to-software-development.png"
 tags:
   [
     "Career Transition",

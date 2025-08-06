@@ -6,6 +6,7 @@ export interface BlogPost {
   date: string;
   readTime: string;
   tags: string[];
+  image: string;
 }
 
 // Re-export functions from markdown utility

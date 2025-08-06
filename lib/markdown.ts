@@ -10,6 +10,7 @@ export interface BlogPost {
   date: string;
   readTime: string;
   tags: string[];
+  image: string;
 }
 
 const CONTENT_DIR = path.join(process.cwd(), "content/blog");
@@ -39,6 +40,7 @@ function parseMarkdownFile(filename: string): BlogPost {
     date: data.date,
     readTime: data.readTime,
     tags: data.tags || [],
+    image: data.image,
   };
 }
 

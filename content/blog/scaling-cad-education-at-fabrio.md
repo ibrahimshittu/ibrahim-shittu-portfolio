@@ -21,9 +21,33 @@ Looking back at my time as the first engineering hire at Fabrio, I'm amazed at h
 
 I discovered Fabrio through a job posting that immediately caught my attention. But when I read about their mission to revolutionize Computer-Aided Design (CAD) education, I knew this wasn't just another job opportunity, this was something I had to be part of. Coming from my civil engineering background, I understood firsthand how crucial CAD skills are for engineers, and how outdated most educational approaches were.
 
-I didn't just apply once and wait. I was so excited about the opportunity that I took a multi-channel approach: I filled out the application on the job board where I first found it, then headed to LinkedIn to research the company more deeply. After learning more about their vision, I messaged the CEO directly on LinkedIn, sent a follow-up email, and also completed the application form they'd shared on their LinkedIn page. Some might call it overkill, but when you find a company whose mission resonates with your core beliefs about education and technology, you don't leave anything to chance.
+I didn't just apply once and wait. I was so excited about the opportunity that I took a multi-channel approach: I filled out the application on the job board where I first found it, then headed to LinkedIn to research the company more deeply. After learning more about their vision, I messaged the CEO, Jay, directly on LinkedIn, sent a follow-up email, and also completed the application form they'd shared on their LinkedIn page. Some might call it overkill, but when you find a company whose mission resonates with your core beliefs about education and technology, you don't leave anything to chance.
 
-The opportunity to join a very early-stage startup that had just raised pre-seed funding as the first engineering hire was both exciting and daunting. There was a minimal proof-of-concept codebase that needed complete rebuilding, no established technical patterns, no engineering culture - everything had to be built from scratch. We were starting from absolute zero with very tight deadlines to meet: choosing the tech stack, setting up infrastructure, establishing development practices, creating deployment pipelines, defining code standards - literally every technical decision, and they all needed to happen fast. The pressure was immense - we had potential university clients waiting and investor milestones to hit. But that's exactly what made it great. The chance to shape not just the technical foundation but the entire engineering culture of something transformative from day one, under real market pressure, was an opportunity most engineers never get.
+The opportunity to join a very early-stage startup that had just raised pre-seed funding as the first engineering hire was both exciting and daunting. There was a minimal proof-of-concept that needed to become a real product, no established patterns, no engineering culture - everything had to be built from scratch. We were starting from absolute zero with very tight deadlines to meet and every technical decision needed to happen fast. The pressure was immense, we had potential university clients waiting and investor milestones to hit. But that's exactly what made it great. The chance to shape the entire technical foundation and engineering culture of something transformative from day one, under real market pressure, was an opportunity most engineers never get.
+
+## The First 90 Days: Rebuilding Everything From Scratch
+
+When I joined Fabrio, the challenge was laid out: we had 90 days to completely rebuild the platform before our first major university pilot. The existing proof-of-concept had shown the vision was possible, but we needed production-ready software that could serve thousands of students reliably.
+
+### 90 days. To rebuild everything. From scratch
+
+The scope was overwhelming. We needed to build an entire learning management platform - from user authentication to content delivery, from real-time collaboration to automated assessments. Every single component needed to be built with scalability and reliability in mind. We chose NextJS for the frontend, AWS AppSync for our GraphQL API, Lambda functions for business logic, and deployed everything on AWS Amplify.
+
+But here's what made it even more challenging: I wasn't just building features, I was figuring out the entire AWS ecosystem, learning GraphQL patterns, establishing deployment pipelines, and trying to maintain engineering best practices - all while racing against an impossible deadline.
+
+My commit history from those early days tells the story. July 21st: "Authentication UI/Code" - building the entire auth flow from scratch. August 2nd: still perfecting authentication with state management. August 10th: "Step Page" - the core learning interface. August 12th: "Lesson page" and "Quiz Modal" - two major features in a single day. Every commit represented not just code, but decisions that would impact thousands of students.
+
+The hardest part wasn't the technical complexity - it was the mental load of knowing that every decision mattered. Should we optimize for speed or scalability? Build perfect code or ship fast? Document everything or focus on features? As the sole engineer, these weren't theoretical debates. They were daily choices that determined whether we'd meet our deadline.
+
+I developed a philosophy: build it right enough. Not perfect, but solid. Not hacky, but pragmatic. Every component had to work today but be ready to scale tomorrow. Authentication needed to be secure but implementation couldn't take three weeks. The quiz system had to be robust but we couldn't spend a month on edge cases.
+
+The days blurred together. Morning stand-ups with Jay to align on priorities. Coding through lunch. Testing in the evenings. Pushing commits late at night. Weekends became just another two days to get closer to the deadline. It wasn't sustainable, but it wasn't meant to be. This was our one shot to prove Fabrio could deliver.
+
+By early September, we had done it. A complete learning management system built from the ground up. Authentication, course management, content delivery, assessments, progress tracking - everything a university needed to run CAD courses online. Was it perfect? No. Was it ready? Yes.
+
+Looking back, those 90 days taught me what I was truly capable of. Not just as a coder, but as an engineer who could take ownership of an entire product. The platform we built in those three months became the foundation that would eventually serve UCL, Imperial College, and institutions worldwide.
+
+The lesson? Sometimes the best way to learn is to be thrown into the deep end with a deadline that doesn't care about your comfort zone. You either figure it out or you don't. We figured it out.
 
 ## The Technical Foundation Challenge
 

@@ -19,9 +19,11 @@ Looking back at my time as the first engineering hire at Fabrio, I'm amazed at h
 
 ## How I Joined Fabrio
 
-When I first heard about Fabrio's mission to revolutionize Computer-Aided Design education, I knew I had to be part of it. Coming from my civil engineering background, I understood firsthand how crucial CAD skills are for engineers, and how outdated most educational approaches were.
+I discovered Fabrio through a job posting that immediately caught my attention. But when I read about their mission to revolutionize Computer-Aided Design education, I knew this wasn't just another job opportunity - this was something I had to be part of. Coming from my civil engineering background, I understood firsthand how crucial CAD skills are for engineers, and how outdated most educational approaches were.
 
-The opportunity to join as the first engineering hire was both exciting and daunting. There was no existing codebase to learn, no established patterns to follow - just a vision and the responsibility to build something that could scale from zero to serving thousands of students at the world's top universities.
+I didn't just apply once and wait. I was so excited about the opportunity that I took a multi-channel approach: I filled out the application on the job board where I first found it, then headed to LinkedIn to research the company more deeply. After learning more about their vision, I messaged the CEO directly on LinkedIn, sent a follow-up email, and also completed the application form they'd shared on their LinkedIn page. Some might call it overkill, but when you find a company whose mission resonates with your core beliefs about education and technology, you don't leave anything to chance.
+
+The opportunity to join as the first engineering hire was both exciting and daunting. There was no existing codebase to learn, no established patterns to follow - just a vision and the responsibility to build something that could scale from zero to serving thousands of students at the world's top universities. But that's exactly what drew me in - the chance to shape the technical foundation of something transformative from day one.
 
 ## The Technical Foundation Challenge
 

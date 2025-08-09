@@ -29,7 +29,7 @@ The opportunity to join a very early-stage startup that had just raised pre-seed
 
 When I joined Fabrio, the challenge was laid out: we had 90 days to completely rebuild the platform before our first major pilot. The existing proof-of-concept had shown the vision was possible, but we needed production-ready software that could serve thousands of students reliably.
 
-### 90 days. To rebuild everything. From scratch
+### The 90-Day Sprint
 
 The scope was overwhelming. We needed to build an entire learning management platform - from user authentication to content delivery, from real-time collaboration to automated assessments. Every single component needed to be built with scalability and reliability in mind. We stuck with parts of the stack from the proof-of-concept, NextJS for the frontend, AWS Cognito for Authentication, AWS AppSync for our GraphQL API, Lambda functions for business logic, and deployed everything on AWS Amplify.
 
@@ -40,13 +40,30 @@ I developed a philosophy: build it right enough. Not perfect, but solid. Not hac
 Some pragmatic choices that saved us:
 
 - Used managed services wherever possible instead of building from scratch
-- Wrote integration tests for critical paths, skipped unit tests for UI components
 - Chose boring, proven patterns over cutting-edge solutions
 - Documented decisions, not code - why mattered more than how
 
-The days blurred together. Morning stand-ups with Jay to align on priorities. Coding through lunch. Testing in the evenings. Pushing commits late at night. Weekends became just another two days to get closer to the deadline. It wasn't sustainable, but it wasn't meant to be. This was our one shot to prove Fabrio could deliver.
+### Reinforcements Arrive
+
+About six weeks in, I got the best news possible: we were bringing on another engineer. When Evander (Ev) joined, everything changed. Suddenly I wasn't carrying the entire technical weight alone. We could divide and conquer, review each other's code, and bounce ideas off each other at 8 PM when we hit a wall.
+
+Ev brought fresh energy and different perspectives. While I focused on the core platform architecture and backend systems, Ev tackled the complex UI interactions and real-time collaboration features. We developed a rhythm - frequent sync-ups, shared documentation, and a simple rule: if you're stuck for more than 30 minutes, ask for help.
+
+Working with Ev taught me that even in the most intense sprints, investing time in knowledge transfer pays off. Those hours I spent walking EV through the codebase and architecture decisions came back tenfold in productivity. We could now parallelize work, and more importantly, we had someone to sanity-check decisions when exhaustion clouded judgment.
+
+### The Final Push
+
+The last two weeks before launch were unlike anything I'd experienced. Jay had secured our first pilot university, and they were expecting a working platform for the new semester. No pressure.
+
+The days blurred together. Morning stand-ups with Jay to align on priorities. Coding through lunch. Testing in the evenings. Pushing commits late at night. EV and I were practically living in Slack, sharing screens, debugging together, and keeping each other motivated. Weekends became just another two days to get closer to the deadline. It wasn't sustainable, but it wasn't meant to be. This was our one shot to prove Fabrio could deliver.
+
+Critical decisions had to be made fast. Which features were truly essential for launch? What could we push to v1.1? We created a "launch blocker" label and ruthlessly prioritized. Everything else went into the backlog. Perfect became the enemy of good enough, and good enough was what would get us across the finish line.
+
+### Launch Day
 
 By early September, we had done it. A complete learning management system built from the ground up. Authentication, course management, content delivery, assessments, progress tracking - everything a university needed to run CAD courses online. Was it perfect? No. Was it ready? Yes.
+
+The morning of launch, I watched the logs as the first students logged in. One user, then five, then fifty. The platform held. Our pragmatic choices had paid off - the managed services scaled automatically, the critical paths we'd tested extensively worked flawlessly, and the features we'd prioritized were exactly what users needed.
 
 Looking back, those 90 days taught me what I was truly capable of. Not just as a coder, but as an engineer who could take ownership of an entire product. The platform we built in those three months became the foundation that would eventually serve UCL, Imperial College, and institutions worldwide.
 

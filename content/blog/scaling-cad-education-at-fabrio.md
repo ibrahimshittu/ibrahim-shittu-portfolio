@@ -31,9 +31,11 @@ When I joined Fabrio, the challenge was laid out: we had 90 days to completely r
 
 ### The 90-Day Sprint
 
-The scope was overwhelming. We needed to build an entire learning management platform - from user authentication to content delivery, from real-time collaboration to automated assessments. Every single component needed to be built with scalability and reliability in mind. We stuck with parts of the stack from the proof-of-concept, NextJS for the frontend, AWS Cognito for Authentication, AWS AppSync for our GraphQL API, Lambda functions for business logic, and deployed everything on AWS Amplify.
+The scope was overwhelming. We needed to build an entire CAD education platform - from user authentication to content delivery, from real-time collaboration to automated assessments. Every single component needed to be built with scalability and reliability in mind. While we stuck with part of the tech stack from the proof-of-concept, we built out a comprehensive AWS architecture: Cognito for authentication, AppSync for our GraphQL API, Lambda functions for business logic, EventBridge for cron jobs and scheduled tasks, DynamoDB for data storage, S3 for file handling, and deployed on AWS Amplify. The biggest gamble? Going all-in on AWS serverless architecture.
 
-But here's what made it even more challenging: I wasn't just building features, I was figuring out the entire AWS ecosystem, learning GraphQL patterns, establishing deployment pipelines, and trying to maintain engineering best practices, all while racing against an impossible deadline.
+**The Learning Curve Was Vertical**
+
+But here's what made it even more challenging: I'd worked with AWS before, but AppSync was entirely new territory. The first week, I spent more time reading AWS documentation than writing code. GraphQL subscriptions for real-time updates? Had to figure it out. VTL resolvers? Learned them on the fly. DynamoDB single-table design? YouTube University at 2 AM. There's no course that prepares you for learning an entire ecosystem while building production software simultaneously.
 
 I developed a philosophy: build it right enough. Not perfect, but solid. Not hacky, but pragmatic. Every component had to work today but be ready to scale tomorrow. This philosophy guided every decision.
 
@@ -43,15 +45,25 @@ Some pragmatic choices that saved us:
 - Chose boring, proven patterns over cutting-edge solutions
 - Documented decisions, not code - why mattered more than how
 
-### Reinforcements Arrive
+#### Reinforcements Arrive
 
-About six weeks in, I got the best news possible: we were bringing on another engineer. When Evander (Ev) joined, everything changed. Suddenly I wasn't carrying the entire technical weight alone. We could divide and conquer, review each other's code, and bounce ideas off each other at 8 PM when we hit a wall.
+About six weeks in, I got the best news possible: we were bringing on another engineer. When Evander (Ev) joined, everything changed. Suddenly I wasn't carrying the entire technical weight alone. We could divide and conquer, review each other's code, and bounce ideas off each other at 9 PM when we hit a wall.
 
 Ev brought fresh energy and different perspectives. While I focused on the core platform architecture and backend systems, Ev tackled the complex UI interactions and real-time collaboration features. We developed a rhythm - frequent sync-ups, shared documentation, and a simple rule: if you're stuck for more than 30 minutes, ask for help.
 
 Working with Ev taught me that even in the most intense sprints, investing time in knowledge transfer pays off. Those hours I spent walking EV through the codebase and architecture decisions came back tenfold in productivity. We could now parallelize work, and more importantly, we had someone to sanity-check decisions when exhaustion clouded judgment.
 
-### The Final Push
+**The Feature Massacre of Week 6**
+
+Six weeks in, we had a come-to-Jesus moment. We were building too much. The feature list Jay had sold to universities was ambitious, and we were trying to deliver everything. The math didn't work - we had 42 days left and about 120 days of work.
+
+I called an emergency meeting with Jay. We printed out every feature, laid them on the floor, and played a brutal game of "ship or skip." Real-time collaboration? Ship. Advanced analytics dashboard? Skip. Basic assessment tools? Ship. Machine learning-powered feedback? Skip. Mobile app? Skip, but make the web app responsive.
+
+The hardest cut was the automated grading system for complex assemblies. Universities wanted it badly, but building it properly would take three weeks we didn't have. Instead, we built a simpler version that could grade individual parts and basic assemblies, with a promise to expand it post-launch. It was painful watching features we'd already started building go into the freezer, but shipping something that worked was better than not shipping at all.
+
+We also made strategic technical debt decisions. Instead of building a proper user permission system, we hardcoded three roles: student, instructor, and admin. Instead of a flexible content management system, we built specifically for CAD courses. Instead of supporting multiple file formats, we focused on the top three that covered 95% of use cases. Every shortcut was documented in a "Technical Debt Register" with a severity rating and estimated fix time. We were borrowing from our future selves, but at least we were honest about it.
+
+#### The Final Push
 
 The last two weeks before launch were unlike anything I'd experienced. Jay had secured our first pilot university, and they were expecting a working platform for the new semester. No pressure.
 

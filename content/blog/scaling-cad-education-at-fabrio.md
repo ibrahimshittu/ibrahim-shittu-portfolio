@@ -29,7 +29,7 @@ The opportunity to join a very early-stage startup that had just raised pre-seed
 
 When I joined Fabrio, the challenge was laid out: we had 90 days to completely rebuild the platform before our first major pilot. The existing proof-of-concept had shown the vision was possible, but we needed production-ready software that could serve thousands of students reliably.
 
-### The 90-Day Sprint
+### The 120-Day Sprint
 
 The scope was overwhelming. We needed to build an entire CAD education platform - from user authentication to content delivery, from real-time collaboration to automated assessments. Every single component needed to be built with scalability and reliability in mind. While we stuck with part of the tech stack from the proof-of-concept, we built out a comprehensive AWS architecture: Cognito for authentication, AppSync for our GraphQL API, Lambda functions for business logic, EventBridge for cron jobs and scheduled tasks, DynamoDB for data storage, S3 for file handling, and deployed on AWS Amplify. The biggest gamble? Going all-in on AWS serverless architecture.
 
@@ -53,15 +53,7 @@ Ev brought fresh energy and different perspectives. While I focused on the core 
 
 Working with Ev taught me that even in the most intense sprints, investing time in knowledge transfer pays off. Those hours I spent walking EV through the codebase and architecture decisions came back tenfold in productivity. We could now parallelize work, and more importantly, we had someone to sanity-check decisions when exhaustion clouded judgment.
 
-**The Feature Massacre of Week 6**
-
-Six weeks in, we had a come-to-Jesus moment. We were building too much. The feature list Jay had sold to universities was ambitious, and we were trying to deliver everything. The math didn't work - we had 42 days left and about 120 days of work.
-
-I called an emergency meeting with Jay. We printed out every feature, laid them on the floor, and played a brutal game of "ship or skip." Real-time collaboration? Ship. Advanced analytics dashboard? Skip. Basic assessment tools? Ship. Machine learning-powered feedback? Skip. Mobile app? Skip, but make the web app responsive.
-
-The hardest cut was the automated grading system for complex assemblies. Universities wanted it badly, but building it properly would take three weeks we didn't have. Instead, we built a simpler version that could grade individual parts and basic assemblies, with a promise to expand it post-launch. It was painful watching features we'd already started building go into the freezer, but shipping something that worked was better than not shipping at all.
-
-We also made strategic technical debt decisions. Instead of building a proper user permission system, we hardcoded three roles: student, instructor, and admin. Instead of a flexible content management system, we built specifically for CAD courses. Instead of supporting multiple file formats, we focused on the top three that covered 95% of use cases. Every shortcut was documented in a "Technical Debt Register" with a severity rating and estimated fix time. We were borrowing from our future selves, but at least we were honest about it.
+<!-- **The Feature Massacre** -->
 
 #### The Final Push
 

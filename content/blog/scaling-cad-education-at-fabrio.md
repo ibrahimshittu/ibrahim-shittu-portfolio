@@ -1,7 +1,7 @@
 ---
 title: "My Journey Building Fabrio: From First Engineering Hire to Serving World-Class Universities"
 excerpt: "My personal journey as the first engineering hire at Fabrio, rebuilding the platform from scratch and scaling it to serve prestigious institutions like UCL and Imperial College London."
-date: "2024-12-20"
+date: "2025-4-20"
 readTime: "12 min read"
 image: "https://res.cloudinary.com/ibrahimshittu/image/upload/v1754483726/ibrahim-shittu-portfolio/scaling-cad-education-at-fabrio.png"
 tags:
@@ -70,16 +70,6 @@ The last two weeks before launch were unlike anything I'd experienced. Jay had s
 The days blurred together. Morning stand-ups with Jay to align on priorities. Coding through lunch. Testing in the evenings. Pushing commits late at night. EV and I were practically living in Slack, sharing screens, debugging together, and keeping each other motivated. Weekends became just another two days to get closer to the deadline. It wasn't sustainable, but it wasn't meant to be. This was our one shot to prove Fabrio could deliver.
 
 Critical decisions had to be made fast. Which features were truly essential for launch? What could we push to v1.1? We created a "launch blocker" label and ruthlessly prioritized. Everything else went into the backlog. Perfect became the enemy of good enough, and good enough was what would get us across the finish line.
-
-### Launch Day
-
-By early September, we had done it. A complete learning management system built from the ground up. Authentication, course management, content delivery, assessments, progress tracking - everything a university needed to run CAD courses online. Was it perfect? No. Was it ready? Yes.
-
-The morning of launch, I watched the logs as the first students logged in. One user, then five, then fifty. The platform held. Our pragmatic choices had paid off - the managed services scaled automatically, the critical paths we'd tested extensively worked flawlessly, and the features we'd prioritized were exactly what users needed.
-
-Looking back, those 90 days taught me what I was truly capable of. Not just as a coder, but as an engineer who could take ownership of an entire product. The platform we built in those three months became the foundation that would eventually serve UCL, Imperial College, and institutions worldwide.
-
-The lesson? Sometimes the best way to learn is to be thrown into the deep end with a deadline that doesn't care about your comfort zone. You either figure it out or you don't. We figured it out.
 
 ## The Technical Foundation Challenge
 

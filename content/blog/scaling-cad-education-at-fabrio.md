@@ -49,9 +49,9 @@ Some pragmatic choices that saved us:
 
 About six weeks in, I got the best news possible: we were bringing on another engineer. When Evander (Ev) joined, everything changed. Suddenly I wasn't carrying the entire technical weight alone. We could divide and conquer, review each other's code, and bounce ideas off each other at 9 PM when we hit a wall.
 
-Ev brought fresh energy and different perspectives. While I focused on the core platform architecture and backend systems, Ev tackled the complex UI interactions and vice versa. We developed a rhythm - frequent sync-ups, shared documentation, and a simple rule: if you're stuck for more than 30 minutes, ask for help.
+Ev brought fresh energy and different perspectives. While I focused on the core platform architecture and backend systems, Ev was floating between the Fusion plug-in and the platform. We developed a rhythm - frequent sync-ups, shared documentation, and a simple rule: if you're stuck for more than 30 minutes, ask for help.
 
-Working with Ev taught me that even in the most intense sprints, investing time in knowledge transfer pays off. Those hours I spent walking Ev through the codebase and architecture decisions came back tenfold in productivity. We could now parallelize work, and more importantly, we had someone to sanity-check decisions when exhaustion clouded judgment.
+Working with Ev taught me that even in the most intense sprints, investing time in knowledge transfer pays off. Those hours I spent walking Ev through the codebase and architecture decisions came back tenfold in productivity. We could now parallelize work, and more importantly, we had someone to sanity-check decisions when exhaustion clouded judgment. From that point, the team kept growing, what started as just me coding alone in those first weeks evolved into a diverse engineering team.
 
 ### The Jay Effect
 
@@ -59,7 +59,7 @@ Here's the thing about Jay, he could sell ice to penguins and that wasn't what m
 
 "Oh, and I told them we'd have real-time collaboration in X weeks" Jay would casually mention during standup, while Ev and I exchanged smiles that roughly translated to "he said WHAT now?"
 
-My favorite was when Jay started selling CAD Assist, a feature that existed more in his imagination than in our codebase. Ev and Dr. Rob had to work their magic, building something from basically nothing was both terrifying and incredible.
+My favorite was when Jay started selling CAD Assist, a feature that existed more in his imagination than in our codebase. Ev and Rob had to work their magic, building something from basically nothing was both terrifying and incredible.
 
 Eventually, we had to sit down and figure out better communication. It wasn't really an intervention, more like a reality check for all of us. We needed to get better at setting realistic timelines and make sure engineering priorities aligned with business needs.
 

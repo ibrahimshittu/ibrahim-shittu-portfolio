@@ -39,12 +39,6 @@ But here's what made it even more challenging: I'd worked with AWS before, but A
 
 I developed a philosophy: build it right enough. Not perfect, but solid. Not hacky, but pragmatic. Every component had to work today but be ready to scale tomorrow. This philosophy guided every decision.
 
-Some pragmatic choices that saved us:
-
-- Used managed services wherever possible instead of building from scratch
-- Chose boring, proven patterns over cutting-edge solutions
-- Documented decisions, not code - why mattered more than how
-
 ## Reinforcements Arrive
 
 About six weeks in, I got the best news possible: we were bringing on another engineer. When Evander (Ev) joined, everything changed. Suddenly I wasn't carrying the entire technical weight alone. We could divide and conquer, review each other's code, and bounce ideas off each other at 9 PM when we hit a wall.
@@ -113,7 +107,7 @@ What started as a scramble to meet UCL's requirements evolved into something muc
 
 **Ship Fast, But Never Broken**: In startup land, everyone preaches "move fast and break things." But when your "things" are student grades and university assessments, breaking isn't an option. It's possible, but it requires a different mindset - every shortcut you take has to be deliberate, documented, and fixable.
 
-**The Best Code is Code You Don't Write**: We integrated with Autodesk's tools instead of building our own CAD viewer. We used AWS managed services instead of running our own infrastructure. Every line of code you don't write is a line you don't have to maintain, debug, or explain to the next engineer.
+**The Best Code is Code You Don't Write**: We used AWS managed services like Cognito and AppSync instead of building authentication and GraphQL servers from scratch. We chose proven libraries over custom implementations. Every line of code you don't write is a line you don't have to maintain, debug, or explain to the next engineer.
 
 ### What This Journey Taught Me About Startups
 
@@ -123,22 +117,16 @@ But here's what they don't tell you: that total ownership, that pressure, that c
 
 Would I do it again? Without hesitation. But maybe with better documentation this time.
 
-### Advice for Early-Stage Engineers
+## If You're Thinking About the First Engineering Hire Life
 
-If you're considering joining an early-stage startup:
+Here's what I wish someone had told me before I took the plunge: You won't know what you're doing half the time, and that's completely okay. Google, Stack Overflow, and Documentations will become your closest companions. The ability to figure things out quickly matters infinitely more than what you already know.
 
-**Choose Your Domain Carefully**: Pick something you're passionate about. You'll be living and breathing it for years.
+The most important advice I can give is to choose the mission, not the tech stack. You can learn any technology, but you can't manufacture passion for a problem you don't care about. I joined Fabrio because education mattered to me, not because of the AWS architecture.
 
-**Embrace the Chaos**: Early-stage startups are messy. That's where the best learning happens.
+## Looking Back, Moving Forward
 
-**Build for Tomorrow**: Every technical decision compounds. Think about where you'll be in 2-3 years.
+To the engineers considering the startup path: it's chaotic, exhausting, and occasionally terrifying. But it's also the fastest way to grow, the best way to see immediate impact, and the only way to experience the pure adrenaline rush of building something from absolutely nothing.
 
-**Find Great Co-founders**: The people you work with matter more than the technology stack.
+And to anyone facing their own "120-day sprint" - embrace it. The pressure creates diamonds, the constraints spark creativity, and the chaos somehow produces magic.
 
-## Final Thoughts
-
-Building Fabrio from the ground up was one of the most challenging and rewarding experiences of my career. From that first line of code to serving students at UCL and Imperial College London, every day brought new problems to solve and opportunities to make education better.
-
-The combination of cutting-edge technology and meaningful impact on education created something special. It taught me that the best products don't just solve technical problems - they solve human problems.
-
-_What challenges are you facing in EdTech or early-stage product development? I'd love to share more specific insights about building scalable educational platforms._
+_What challenges are you facing in early-stage product development? I always happy to chat about startups, or how to survive as an engineer._

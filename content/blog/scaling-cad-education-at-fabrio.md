@@ -50,7 +50,7 @@ Ev brought fresh energy and different perspectives. While I focused on the core 
 
 Working with Ev taught me that even in the most intense sprints, investing time in knowledge transfer pays off. Those hours I spent walking Ev through the codebase and architecture decisions came back tenfold in productivity. We could now parallelize work, and more importantly, we had someone to sanity-check decisions when exhaustion clouded judgment. From that point, the team kept growing. What started as just me coding alone in those first weeks evolved into a diverse engineering team.
 
-## The Jay Effect
+## The "Jay" Effect
 
 Here's the thing about Jay - he could sell ice to penguins, but that wasn't what made him great. Jay genuinely cared about transforming education, and that passion was infectious. When you have a CEO who truly believes in the mission, it makes those long nights feel worthwhile.
 

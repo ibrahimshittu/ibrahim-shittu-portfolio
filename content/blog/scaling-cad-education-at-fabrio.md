@@ -52,13 +52,13 @@ Working with Ev taught me that even in the most intense sprints, investing time 
 
 ## The Jay Effect
 
-Here's the thing about Jay - he could sell ice to penguins, but that wasn't what made him great. Jay genuinely cared about transforming education, and that passion was infectious. When you have a CEO who truly believes in the mission, it makes those long nights feel worthwhile. The only catch? His enthusiasm meant our backlogs grew faster than we could code, but hey, at least we were never bored!
+Here's the thing about Jay - he could sell ice to penguins, but that wasn't what made him great. Jay genuinely cared about transforming education, and that passion was infectious. When you have a CEO who truly believes in the mission, it makes those long nights feel worthwhile.
 
-"Oh, and I told them we'd have real-time collaboration in X weeks" Jay would casually mention during standup, while Ev and I exchanged smiles that roughly translated to "he said WHAT now?"
+The only catch? His enthusiasm meant our backlogs grew faster than we could code, but hey, at least we were never bored! "Oh, and I told them we'd have real-time collaboration in X weeks" Jay would casually mention during standup, while Ev and I exchanged smiles that roughly translated to "he said WHAT now?"
 
-Eventually, we had to sit down and figure out better communication. It wasn't really an intervention, more like a reality check for all of us. We needed to get better at setting realistic timelines and make sure engineering priorities aligned with business needs.
+It became clear we needed more than optimism, We needed to get better at setting realistic timelines and make sure engineering priorities aligned with business needs.
 
-We started having regular alignment meetings where Jay and Ani would share everything - what clients were asking for, upcoming investor meetings, company-wide updates, the whole picture. It was a huge improvement. Instead of panic, we had productive discussions about trade-offs and priorities.
+So, We started having regular alignment meetings where Jay and Ani would share everything - what clients were asking for, upcoming investor meetings, company-wide updates, the whole picture. It was a huge improvement. Instead of panic, we had productive discussions about trade-offs and priorities.
 
 ## Building With Brilliant Misfits
 

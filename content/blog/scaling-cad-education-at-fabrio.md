@@ -53,8 +53,6 @@ Here's the thing about Jay, he could sell ice to penguins and that wasn't what m
 
 "Oh, and I told them we'd have real-time collaboration in X weeks" Jay would casually mention during standup, while Ev and I exchanged smiles that roughly translated to "he said WHAT now?"
 
-My favorite was when Jay started selling CAD Assist, a feature that existed more in his imagination than in our codebase. Ev and Rob had to work their magic, building something from basically nothing was both terrifying and incredible.
-
 Eventually, we had to sit down and figure out better communication. It wasn't really an intervention, more like a reality check for all of us. We needed to get better at setting realistic timelines and make sure engineering priorities aligned with business needs.
 
 We started having regular alignment meetings where Jay and Ani would share everything - what clients were asking for, upcoming investor meetings, company-wide updates, the whole picture. It was a huge improvement. Instead of panic, we had productive discussions about trade-offs and priorities.
@@ -109,7 +107,7 @@ What started as a scramble to meet UCL's requirements evolved into something muc
 
 **The Best Code is Code You Don't Write**: We used AWS managed services like Cognito and AppSync instead of building authentication and GraphQL servers from scratch. We chose proven libraries over custom implementations. Every line of code you don't write is a line you don't have to maintain, debug, or explain to the next engineer.
 
-### What This Journey Taught Me About Startups
+## The Startup Bug
 
 Joining a startup as the first engineering hire isn't just a job - it's choosing to tie your success directly to the company's success. There's no hiding behind process, no blaming other teams, no "that's not my department." Everything is your department.
 
@@ -117,13 +115,13 @@ But here's what they don't tell you: that total ownership, that pressure, that c
 
 Would I do it again? Without hesitation. But maybe with better documentation this time.
 
-## If You're Thinking About the First Engineering Hire Life
+## So You Want to Be Engineer #1?
 
 Here's what I wish someone had told me before I took the plunge: You won't know what you're doing half the time, and that's completely okay. Google, Stack Overflow, and Documentations will become your closest companions. The ability to figure things out quickly matters infinitely more than what you already know.
 
 The most important advice I can give is to choose the mission, not the tech stack. You can learn any technology, but you can't manufacture passion for a problem you don't care about. I joined Fabrio because education mattered to me, not because of the AWS architecture.
 
-## Looking Back, Moving Forward
+## The Plot Twist
 
 To the engineers considering the startup path: it's chaotic, exhausting, and occasionally terrifying. But it's also the fastest way to grow, the best way to see immediate impact, and the only way to experience the pure adrenaline rush of building something from absolutely nothing.
 

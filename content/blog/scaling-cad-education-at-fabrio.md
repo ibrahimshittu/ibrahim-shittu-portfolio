@@ -2,16 +2,19 @@
 title: "My Journey Building Fabrio: From First Engineering Hire to Serving World-Class Universities"
 excerpt: "My personal journey as the first engineering hire at Fabrio, rebuilding the platform from scratch and scaling it to serve prestigious institutions like UCL and Imperial College London."
 date: "2025-4-20"
-readTime: "12 min read"
+readTime: "10 min read"
 image: "https://res.cloudinary.com/ibrahimshittu/image/upload/v1754483726/ibrahim-shittu-portfolio/scaling-cad-education-at-fabrio.png"
 tags:
   [
-    "Education Tech",
+    "EdTech",
     "Startup",
-    "CAD",
     "Career",
     "Engineering",
     "Personal Journey",
+    "First Engineering Hire",
+    "Technical Leadership",
+    "Product Development",
+    "Team Building",
   ]
 ---
 
@@ -45,11 +48,11 @@ About six weeks in, I got the best news possible: we were bringing on another en
 
 Ev brought fresh energy and different perspectives. While I focused on the core platform architecture and backend systems, Ev was floating between the Fusion plug-in and the platform. We developed a rhythm - frequent sync-ups, shared documentation, and a simple rule: if you're stuck for more than 30 minutes, ask for help.
 
-Working with Ev taught me that even in the most intense sprints, investing time in knowledge transfer pays off. Those hours I spent walking Ev through the codebase and architecture decisions came back tenfold in productivity. We could now parallelize work, and more importantly, we had someone to sanity-check decisions when exhaustion clouded judgment. From that point, the team kept growing, what started as just me coding alone in those first weeks evolved into a diverse engineering team.
+Working with Ev taught me that even in the most intense sprints, investing time in knowledge transfer pays off. Those hours I spent walking Ev through the codebase and architecture decisions came back tenfold in productivity. We could now parallelize work, and more importantly, we had someone to sanity-check decisions when exhaustion clouded judgment. From that point, the team kept growing. What started as just me coding alone in those first weeks evolved into a diverse engineering team.
 
 ## The Jay Effect
 
-Here's the thing about Jay, he could sell ice to penguins and that wasn't what made him great. Jay genuinely cared about transforming education, that passion was infectious. When you have a CEO who truly believes in the mission, it makes those long nights feel worthwhile. The only catch? His enthusiasm meant our backlogs grew faster than we could code, but hey, at least we were never bored!
+Here's the thing about Jay - he could sell ice to penguins, but that wasn't what made him great. Jay genuinely cared about transforming education, and that passion was infectious. When you have a CEO who truly believes in the mission, it makes those long nights feel worthwhile. The only catch? His enthusiasm meant our backlogs grew faster than we could code, but hey, at least we were never bored!
 
 "Oh, and I told them we'd have real-time collaboration in X weeks" Jay would casually mention during standup, while Ev and I exchanged smiles that roughly translated to "he said WHAT now?"
 
@@ -117,7 +120,7 @@ Would I do it again? Without hesitation. But maybe with better documentation thi
 
 ## So You Want to Be Engineer #1?
 
-Here's what I wish someone had told me before I took the plunge: You won't know what you're doing half the time, and that's completely okay. Google, Stack Overflow, and Documentations will become your closest companions. The ability to figure things out quickly matters infinitely more than what you already know.
+Here's what I wish someone had told me before I took the plunge: You won't know what you're doing half the time, and that's completely okay. Google, and Stack Overflow will become your closest companions. The ability to figure things out quickly matters infinitely more than what you already know.
 
 The most important advice I can give is to choose the mission, not the tech stack. You can learn any technology, but you can't manufacture passion for a problem you don't care about. I joined Fabrio because education mattered to me, not because of the AWS architecture.
 

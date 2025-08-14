@@ -107,25 +107,15 @@ We also established a pioneering partnership with Autodesk, the world's largest 
 
 What started as a scramble to meet UCL's requirements evolved into something much bigger than any of us imagined. We weren't just building software anymore, we were transforming engineering education. Every late night, and every "impossible" deadline - it all led to thousands of students learning CAD more effectively and thousands of teachers reclaiming their time for what matters most: actually teaching. That's the kind of impact that makes startup chaos worth it.
 
-## The Hard-Won Wisdom: What I Learned Building at Warp Speed
+## The Hard-Won Wisdom
 
-### The Evolution From Coder to Builder
-
-When you're the first engineering hire, job titles become meaningless. One moment I'm architecting a serverless infrastructure, the next I'm debugging why a student's 3D model won't render at 2 AM because their assignment is due at 8 AM. I went from writing code in isolation to being the person professors called directly when something went wrong during exams.
-
-This wasn't just career growth - it was career transformation. I learned that being a great engineer isn't about writing perfect code; it's about understanding the human problems behind the technical challenges. When a professor tells you they're spending 40 hours a week marking assignments, your job isn't to build a faster upload system - it's to reimagine the entire assessment workflow.
+**Job Titles Are Meaningless When You're First**: When you're the first engineering hire, you're not just an engineer. One moment I'm architecting serverless infrastructure, the next I'm debugging why a student's 3D model won't render at 2 AM because their assignment is due at 8 AM. I went from writing code in isolation to being the person professors called directly during exams. The lesson? Being a great engineer isn't about writing perfect code; it's about understanding the human problems behind the technical challenges.
 
 **Ship Fast, But Never Broken**: In startup land, everyone preaches "move fast and break things." But when your "things" are student grades and university assessments, breaking isn't an option. We learned to ship at startup speed while maintaining enterprise reliability. It's possible, but it requires a different mindset - every shortcut you take has to be deliberate, documented, and fixable.
 
 **Your Users Aren't Who You Think They Are**: We thought we were building for students. Then we realized we were building for professors. Then we discovered we were actually building for entire institutions. Each level brought different requirements, different politics, and different definitions of success. The lesson? Always dig deeper into who's really using your product and why.
 
 **The Best Code is Code You Don't Write**: We integrated with Autodesk's tools instead of building our own CAD viewer. We used AWS managed services instead of running our own infrastructure. Every line of code you don't write is a line you don't have to maintain, debug, or explain to the next engineer.
-
-### The Mindset Shift
-
-The biggest change wasn't in my technical skills - it was in how I approach problems. Before Fabrio, I optimized for elegant code. After Fabrio, I optimize for impact. Before, I built features. After, I solve problems. Before, I was an engineer. After, I became a builder.
-
-This shift is subtle but profound. When Jay would come with his latest "small request" that would require rewriting half the codebase, instead of explaining why it was technically impossible, I learned to ask: "What problem are we trying to solve?" Often, there was a simpler solution that gave 90% of the value with 10% of the effort.
 
 ### What This Journey Taught Me About Startups
 
@@ -134,26 +124,6 @@ Joining a startup as the first engineering hire isn't just a job - it's choosing
 But here's what they don't tell you: that total ownership, that pressure, that chaos - it's addictive. Once you've built something from nothing, once you've seen your code impact thousands of students, once you've transformed an industry workflow - regular jobs feel like playing with training wheels.
 
 Would I do it again? Without hesitation. But maybe with better documentation this time.
-
-## The Impact
-
-### On Students
-
-Seeing thousands of engineering students learn CAD more effectively was incredibly rewarding. We received emails from students who said our platform helped them grasp concepts they'd struggled with for months.
-
-### On Educators
-
-Professors could focus on teaching design principles instead of software mechanics. Our automated assessment tools gave them insights into student understanding they'd never had before.
-
-### On My Career
-
-Fabrio transformed me from a developer into a technical leader. The experience of building something from scratch, scaling it globally, and seeing it make a real difference in education was career-defining.
-
-## Looking Forward
-
-### What's Next for EdTech
-
-The future of engineering education lies in personalized learning paths, AI tutoring, and immersive experiences. Fabrio laid the groundwork, but there's so much more to build.
 
 ### Advice for Early-Stage Engineers
 

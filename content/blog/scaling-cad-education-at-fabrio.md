@@ -91,25 +91,15 @@ That's the thing about early-stage startups, the team isn't just important, it's
 
 ### The UCL Breakthrough
 
-Landing University College London as one of our first major clients was a pivotal moment. UCL's engineering department had specific requirements:
+UCL's engineering professors were overwhelmed, imagine marking over 2000 individual CAD files every semester, with students anxiously waiting weeks for feedback. We solved this by directly integrating into Autodesk's Fusion, providing instant automated assessment that saved professors hundreds of marking hours. The engineering challenge was intense: we had to ensure our add-in could handle thousands of concurrent users during submission deadlines, integrate seamlessly with their existing systems, and maintain sub-second response times for feedback. Working around the clock to meet UCL's semester start deadline, we delivered a platform that transformed how their students learned CAD - from waiting weeks for grades to getting instant feedback at every checkpoint. Having UCL trust us with their engineering program changed everything. Suddenly, investors took us seriously. Other universities started returning our calls. We went from "who's Fabrio?" to "the platform trusted by UCL."
 
-- Integration with their existing learning management system
-- Support for their unique assessment workflows
-- Compliance with UK data protection regulations
-- Scalability for thousands of concurrent users during exam periods
+### From UCL to Global Expansion
 
-Working with UCL taught me the importance of understanding not just the technical requirements, but the educational context. We had to think like educators, not just engineers.
+The UCL success story opened doors we didn't even know existed. Imperial College London came next, bringing their own set of challenges with their mechanical engineering program's need for advanced 3D modeling and real-time collaboration. But the momentum didn't stop there. We expanded to serve the University of Surrey, Birmingham, and even crossed the Atlantic to work with Howard University in the US. Each institution brought unique requirements that made our platform more robust and versatile.
 
-### Imperial College London and Beyond
+One of the most exciting moments was presenting at Autodesk University - the premier conference for CAD and design professionals. Standing on that stage, representing a startup that began with just me coding alone, showing how we were transforming CAD education to industry leaders, was surreal. We also partnered with F1 in Schools at Silverstone, bringing our platform to the next generation of engineers competing in one of the world's largest STEM competitions.
 
-Imperial College London brought different challenges. Their mechanical engineering program required:
-
-- Advanced 3D modeling capabilities
-- Real-time collaboration features for group projects
-- Integration with industry-standard CAD tools
-- Sophisticated assessment algorithms for complex geometric designs
-
-Each institution taught us something new about the diverse needs in engineering education.
+This institutional validation translated directly into investor confidence. We raised over £300,000 in additional funding, with investors specifically citing our prestigious client base as a key factor. What started as a scramble to meet UCL's requirements became the foundation for serving educational institutions globally, proving that when you build for the best, everyone else wants in too.
 
 ## Personal Growth and Career Lessons
 

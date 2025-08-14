@@ -107,61 +107,33 @@ We also established a pioneering partnership with Autodesk, the world's largest 
 
 What started as a scramble to meet UCL's requirements evolved into something much bigger than any of us imagined. We weren't just building software anymore, we were transforming engineering education. Every late night, and every "impossible" deadline - it all led to thousands of students learning CAD more effectively and thousands of teachers reclaiming their time for what matters most: actually teaching. That's the kind of impact that makes startup chaos worth it.
 
-## Personal Growth and Career Lessons
+## The Hard-Won Wisdom: What I Learned Building at Warp Speed
 
-### From Solo Developer to Technical Leader
+### The Evolution From Coder to Builder
 
-Starting as the first engineering hire meant wearing every hat:
+When you're the first engineering hire, job titles become meaningless. One moment I'm architecting a serverless infrastructure, the next I'm debugging why a student's 3D model won't render at 2 AM because their assignment is due at 8 AM. I went from writing code in isolation to being the person professors called directly when something went wrong during exams.
 
-- **Architect**: Designing scalable systems
-- **Developer**: Writing production code
-- **DevOps Engineer**: Setting up CI/CD and monitoring
-- **Product Manager**: Translating educational needs into technical requirements
-- **Support Engineer**: Debugging issues for stressed students during exams
+This wasn't just career growth - it was career transformation. I learned that being a great engineer isn't about writing perfect code; it's about understanding the human problems behind the technical challenges. When a professor tells you they're spending 40 hours a week marking assignments, your job isn't to build a faster upload system - it's to reimagine the entire assessment workflow.
 
-This experience taught me the value of T-shaped skills - being deep in one area while having broad knowledge across multiple domains.
+**Ship Fast, But Never Broken**: In startup land, everyone preaches "move fast and break things." But when your "things" are student grades and university assessments, breaking isn't an option. We learned to ship at startup speed while maintaining enterprise reliability. It's possible, but it requires a different mindset - every shortcut you take has to be deliberate, documented, and fixable.
 
-### Building for Education vs. Consumer Products
+**Your Users Aren't Who You Think They Are**: We thought we were building for students. Then we realized we were building for professors. Then we discovered we were actually building for entire institutions. Each level brought different requirements, different politics, and different definitions of success. The lesson? Always dig deeper into who's really using your product and why.
 
-Working in EdTech taught me unique lessons:
+**The Best Code is Code You Don't Write**: We integrated with Autodesk's tools instead of building our own CAD viewer. We used AWS managed services instead of running our own infrastructure. Every line of code you don't write is a line you don't have to maintain, debug, or explain to the next engineer.
 
-**Reliability is Non-Negotiable**: When students have assignment deadlines, our platform cannot go down. Ever.
+### The Mindset Shift
 
-**User Empathy**: Students using our platform are often stressed, learning complex concepts under time pressure. Every UX decision had to account for cognitive load.
+The biggest change wasn't in my technical skills - it was in how I approach problems. Before Fabrio, I optimized for elegant code. After Fabrio, I optimize for impact. Before, I built features. After, I solve problems. Before, I was an engineer. After, I became a builder.
 
-**Seasonal Traffic**: University semesters create massive traffic spikes. Our architecture had to handle 10x normal load during exam periods.
+This shift is subtle but profound. When Jay would come with his latest "small request" that would require rewriting half the codebase, instead of explaining why it was technically impossible, I learned to ask: "What problem are we trying to solve?" Often, there was a simpler solution that gave 90% of the value with 10% of the effort.
 
-**Data Sensitivity**: Student work and grades require the highest levels of security and privacy protection.
+### What This Journey Taught Me About Startups
 
-## Lessons Learned
+Joining a startup as the first engineering hire isn't just a job - it's choosing to tie your success directly to the company's success. There's no hiding behind process, no blaming other teams, no "that's not my department." Everything is your department.
 
-### Technical Lessons
+But here's what they don't tell you: that total ownership, that pressure, that chaos - it's addictive. Once you've built something from nothing, once you've seen your code impact thousands of students, once you've transformed an industry workflow - regular jobs feel like playing with training wheels.
 
-**Start Simple, Scale Smart**: Our initial architecture was much simpler than what we ended up with. The key was building with future scaling in mind without over-engineering early.
-
-**Observability is Everything**: When serving critical educational workflows, you need to know about problems before your users do. We invested heavily in monitoring, logging, and alerting.
-
-**Database Design Matters**: CAD projects create complex relational data. Poor database design decisions early on caused performance problems that took months to fix.
-
-**API Design for the Long Term**: Our APIs needed to evolve without breaking existing integrations with university systems. Versioning and backward compatibility became crucial.
-
-### Career Lessons
-
-**Domain Expertise is a Superpower**: Understanding education, CAD workflows, and university operations made me a better technologist than pure coding skills alone.
-
-**Communication Across Domains**: Being able to translate between technical and educational language became one of my most valuable skills.
-
-**Ownership Mindset**: As the first engineer, everything was my responsibility. This taught me to think like an owner, not just an employee.
-
-**Learning Never Stops**: From CAD file formats to educational psychology, working at Fabrio required constant learning across diverse fields.
-
-### Business Lessons
-
-**Product-Market Fit is Obvious**: When we found it with universities like UCL and Imperial, adoption accelerated rapidly. Before that, every sale was a struggle.
-
-**Enterprise Sales are Different**: Selling to universities requires understanding procurement processes, academic calendars, and institutional decision-making.
-
-**References Matter**: Success with prestigious institutions like UCL and Imperial opened doors to other world-class universities globally.
+Would I do it again? Without hesitation. But maybe with better documentation this time.
 
 ## The Impact
 

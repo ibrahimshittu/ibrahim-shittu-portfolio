@@ -99,11 +99,13 @@ Working around the clock to meet UCL's semester start deadline, we delivered a p
 
 ### From UCL to Global Expansion
 
-The UCL success story opened doors we didn't even know existed. Imperial College London came next, bringing their own set of challenges with their mechanical engineering program's need for advanced 3D modeling and real-time collaboration. But the momentum didn't stop there. We expanded to serve the University of Surrey, Birmingham, and even crossed the Atlantic to work with Howard University in the US. Each institution brought unique requirements that made our platform more robust and versatile.
+Imperial College London came next, bringing its own mix of challenges and opportunities. From there, we rapidly expanded - serving universities like the University of Surrey and the University of Birmingham in the UK, and eventually served over a hundred educational institutions across the UK, Italy, USA, and Hong Kong.
 
-One of the most exciting moments was presenting at Autodesk University - the premier conference for CAD and design professionals. Standing on that stage, representing a startup that began with just me coding alone, showing how we were transforming CAD education to industry leaders, was surreal. We also partnered with F1 in Schools at Silverstone, bringing our platform to the next generation of engineers competing in one of the world's largest STEM competitions.
+One of our biggest wins came when we scaled to serve the US's Co-op Academies Trust with their 34 schools and thousands of students. Our platform helped standardize CAD teaching across all their schools, giving teachers the confidence they needed and enabling students to complete independent projects that exceeded expectations.
 
-This institutional validation translated directly into investor confidence. We raised over £300,000 in additional funding, with investors specifically citing our prestigious client base as a key factor. What started as a scramble to meet UCL's requirements became the foundation for serving educational institutions globally, proving that when you build for the best, everyone else wants in too.
+We also established a pioneering partnership with Autodesk, the world's largest CAD provider, which validated our approach to transforming CAD education. Our reach extended beyond traditional classrooms. The team presented at Autodesk University, showcasing our platform to industry leaders. We also presented at F1 in Schools at Silverstone, connecting with the next generation of engineers competing in one of the world's largest STEM competitions.
+
+What started as a scramble to meet UCL's requirements evolved into something much bigger than any of us imagined. We weren't just building software anymore, we were transforming engineering education. Every late night, and every "impossible" deadline - it all led to thousands of students learning CAD more effectively and thousands of teachers reclaiming their time for what matters most: actually teaching. That's the kind of impact that makes startup chaos worth it.
 
 ## Personal Growth and Career Lessons
 

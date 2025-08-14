@@ -91,7 +91,11 @@ That's the thing about early-stage startups, the team isn't just important, it's
 
 ### The UCL Breakthrough
 
-UCL's engineering professors were overwhelmed, imagine marking over 2000 individual CAD files every semester, with students anxiously waiting weeks for feedback. We solved this by directly integrating into Autodesk's Fusion, providing instant automated assessment that saved professors hundreds of marking hours. The engineering challenge was intense: we had to ensure our add-in could handle thousands of concurrent users during submission deadlines, integrate seamlessly with their existing systems, and maintain sub-second response times for feedback. Working around the clock to meet UCL's semester start deadline, we delivered a platform that transformed how their students learned CAD - from waiting weeks for grades to getting instant feedback at every checkpoint. Having UCL trust us with their engineering program changed everything. Suddenly, investors took us seriously. Other universities started returning our calls. We went from "who's Fabrio?" to "the platform trusted by UCL."
+UCL's engineering professors were overwhelmed, imagine marking over 2000 individual CAD files every semester, with students anxiously waiting weeks for feedback. We solved this by directly integrating into Autodesk's Fusion, providing instant automated assessment that saved professors hundreds of marking hours.
+
+**The engineering challenge was intense**: we had to ensure our add-in could handle thousands of concurrent users during submission deadlines, handle thousands of 3D models being rendered and accessed simultaneously, sync massive amounts of data across the backend, web dashboard, and Fusion add-in in real-time, and give professors live visibility into student progress through their dashboard. All of this while maintaining sub-second response times during peak submission deadlines when thousands of students were working concurrently.
+
+Working around the clock to meet UCL's semester start deadline, we delivered a platform that transformed how their students learned CAD - from waiting weeks for grades to getting instant feedback at every checkpoint. Having UCL trust us with their engineering program changed everything. We went from "who's Fabrio?" to "the platform trusted by UCL."
 
 ### From UCL to Global Expansion
 

@@ -27,15 +27,15 @@ The opportunity to join a very early-stage startup that had just raised pre-seed
 
 ## Building the Plane While Flying
 
-When I joined Fabrio, the challenge was laid out: we had 90 days to completely rebuild the platform before our first major pilot. The existing proof-of-concept had shown the vision was possible, but we needed production-ready software that could serve thousands of students reliably.
+When I joined Fabrio, the challenge was laid out: we had 120 days to completely rebuild the platform before our first major pilot. The existing proof-of-concept had shown the vision was possible, but we needed production-ready software that could serve thousands of students reliably.
 
 ### The 120-Day Sprint
 
 The scope was overwhelming. We needed to build an entire CAD education platform - from user authentication to content delivery, from real-time collaboration to automated assessments. Every single component needed to be built with scalability and reliability in mind. While we stuck with part of the tech stack from the proof-of-concept, we built out a comprehensive AWS architecture: Cognito for authentication, AppSync for our GraphQL API, Lambda functions for business logic, EventBridge for cron jobs and scheduled tasks, DynamoDB for data storage, S3 for file handling, and deployed on AWS Amplify. The biggest gamble? Going all-in on AWS serverless architecture.
 
-**The Learning Curve Was Vertical**
+#### The Learning Curve Was Vertical
 
-But here's what made it even more challenging: I'd worked with AWS before, but AppSync was entirely new territory. The first week, I spent more time reading AWS documentation than writing code. GraphQL subscriptions for real-time updates? Had to figure it out. VTL resolvers? Learned them on the fly. DynamoDB single-table design? YouTube University at 2 AM. There's no course that prepares you for learning an entire ecosystem while building production software simultaneously.
+But here's what made it even more challenging: I'd worked with AWS before, but AppSync was entirely new territory. The first week, I spent more time reading AWS documentation than writing code. GraphQL subscriptions for real-time updates? Had to figure it out. VTL resolvers? Learned them on the fly. DynamoDB single-table design? Deep dives into documentation and tutorials until the early hours. There's no course that prepares you for learning an entire ecosystem while building production software simultaneously.
 
 I developed a philosophy: build it right enough. Not perfect, but solid. Not hacky, but pragmatic. Every component had to work today but be ready to scale tomorrow. This philosophy guided every decision.
 
@@ -53,9 +53,23 @@ Ev brought fresh energy and different perspectives. While I focused on the core 
 
 Working with Ev taught me that even in the most intense sprints, investing time in knowledge transfer pays off. Those hours I spent walking EV through the codebase and architecture decisions came back tenfold in productivity. We could now parallelize work, and more importantly, we had someone to sanity-check decisions when exhaustion clouded judgment.
 
-<!-- **The Feature Massacre** -->
+#### The Jay Effect
 
-#### The Final Push
+Here's the thing about Jay, the man could sell ice to penguins. And honestly? That's exactly what you want in a startup CEO. The only catch? Every client call seemed to magically add three new "must-have" features to our backlog. Our feature list grew faster than we could code, but hey, at least we were never bored!
+
+"Oh, and I told them we'd have real-time collaboration by launch," Jay would casually mention during standup, while Ev and I exchanged glances that roughly translated to "he said WHAT now?"
+
+My favorite was when Jay promised a university that we'd have "AI-powered automated grading with machine learning insights" - a feature that existed solely in Jay's imagination and would probably require hiring a team of ML engineers we definitely didn't have. Ev actually laughed out loud during that call.
+
+We started keeping a secret spreadsheet titled "Jay's Promise Tracker" (he found it eventually and thought it was hilarious). The delta between promises made and engineering capacity was... let's call it "ambitious." One Thursday evening, the spreadsheet showed we'd need approximately 47 weeks to deliver everything promised for our 4-week launch deadline.
+
+Time for an intervention. We pulled Jay into a meeting armed with the spreadsheet, a whiteboard, and what Ev called "basic mathematics." What followed was three hours of Jay bargaining like he was at a bazaar: "Okay, but what if we just do a simple version of the AI grading?" "Jay, there's no simple version of AI." "But what if-" "No, Jay."
+
+We ended up with three categories: "Actually Possible," "Jay's Wishlist," and "Pure Fantasy." The rule became simple - Jay could promise anything from column one, had to say "coming soon" for column two, and wasn't allowed to mention column three unless prefaced with "one day, in the distant future."
+
+The best part? Jay turned this into a selling point. He'd tell universities, "My engineers won't let me promise anything we can't deliver. They literally have a spreadsheet." It actually built more trust than all his grand visions combined.
+
+### The Final Push
 
 The last two weeks before launch were unlike anything I'd experienced. Jay had secured our first pilot university, and they were expecting a working platform for the new semester. No pressure.
 

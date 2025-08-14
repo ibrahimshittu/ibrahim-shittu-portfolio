@@ -55,23 +55,37 @@ Working with Ev taught me that even in the most intense sprints, investing time 
 
 ### The Jay Effect
 
-Here's the thing about Jay, the man could sell ice to penguins. And honestly? That's exactly what you want in a startup CEO. The only catch? Every client call seemed to magically add three new "must-have" features to our backlog. Our feature list grew faster than we could code, but hey, at least we were never bored!
+Here's the thing about Jay, the man could sell ice to penguins. And honestly? That's exactly what you want in a startup CEO. The only catch? Our feature list grew faster than we could code, but hey, at least we were never bored!
 
 "Oh, and I told them we'd have real-time collaboration in X weeks" Jay would casually mention during standup, while Ev and I exchanged smiles that roughly translated to "he said WHAT now?"
 
-My favorite was when Jay started selling CAD Assist, a feature that existed more in his imagination than in our codebase. He'd just put it out there like it was already live, talking about it with such confidence you'd think we'd been shipping it for months. Meanwhile, Ev and Dr. Rob had to work their magic, building something from basically nothing was both terrifying and incredible.
+My favorite was when Jay started selling CAD Assist, a feature that existed more in his imagination than in our codebase. Ev and Dr. Rob had to work their magic, building something from basically nothing was both terrifying and incredible.
 
-Eventually, we had to sit down and figure out better communication. It wasn't really an intervention, more like a reality check for all of us. We needed to get better at setting realistic timelines and managing expectations. The conversation helped us understand each other better: Jay learned to check with engineering before making commitments, and we learned to appreciate his vision while helping shape it into something achievable.
+Eventually, we had to sit down and figure out better communication. It wasn't really an intervention, more like a reality check for all of us. We needed to get better at setting realistic timelines and managing expectations.
 
 We started having regular alignment meetings where Jay and Ani would share everything - what clients were asking for, upcoming investor meetings, company-wide updates, the whole picture. We'd work together to figure out realistic timelines and make sure engineering priorities aligned with business needs. It wasn't perfect, but it was a huge improvement. Instead of panic, we had productive discussions about trade-offs and priorities.
 
-### The Final Push
+### Building With Brilliant Misfits
 
-The last two weeks before launch were unlike anything I'd experienced. Jay had secured our first pilot university, and they were expecting a working platform for the new semester. No pressure.
+Looking back, I realize that the initial team at a startup doesn't just build the product - they become the company's DNA. Every early hire brings their quirks, their work style, their values, and somehow it all melds into this unique culture that defines everything that comes after. At Fabrio, we had this incredible mix of academics, visionaries, and builders who somehow made magic happen.
 
-The days blurred together. Morning stand-ups with Jay to align on priorities. Coding through lunch. Testing in the evenings. Pushing commits late at night. EV and I were practically living in Slack, sharing screens, debugging together, and keeping each other motivated. Weekends became just another two days to get closer to the deadline. It wasn't sustainable, but it wasn't meant to be. This was our one shot to prove Fabrio could deliver.
+#### Ani - More Than a COO
 
-Critical decisions had to be made fast. Which features were truly essential for launch? What could we push to v1.1? We created a "launch blocker" label and ruthlessly prioritized. Everything else went into the backlog. Perfect became the enemy of good enough, and good enough was what would get us across the finish line.
+Anirudh (Ani) was our COO, but that title doesn't capture what he meant to the team, especially to me personally.
+
+What I appreciated most about Ani was how he looked out for people. When the pressure was crushing, he'd check in - not just about deadlines, but about how we were doing as humans. For a young engineer navigating the chaos of an early-stage startup, having someone like Ani in your corner made all the difference.
+
+#### The PhD Duo: Rob and Fabio
+
+Then there were Dr. Rob and Fabio, two PhD holders who chose the startup grind over academia. They were building Fabrio's Fusion plug-in, which was essentially the bridge between our platform and the actual CAD software students used.
+
+The mix of their theoretical depth with our practical urgency created this perfect balance. We'd learn from their systematic approach, and they'd adapt to our "ship it now, perfect it later" mentality. It was symbiotic in the best way.
+
+#### The Culture We Built
+
+The culture was defined by mutual respect, shared ownership, and this understanding that we were all in it together. When someone had a win, we all celebrated. When someone made a mistake, we learned from it together.
+
+That's the thing about early-stage startups, the team isn't just important, it's everything. The first ten people you hire will determine whether your company becomes a place where people do their best work or just another job. We were lucky. We had people who cared about the product, about the mission, and about each other.
 
 ## Serving World-Class Institutions
 

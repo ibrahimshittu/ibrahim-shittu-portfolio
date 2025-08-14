@@ -29,11 +29,11 @@ The opportunity to join a very early-stage startup that had just raised pre-seed
 
 When I joined Fabrio, the challenge was laid out: we had 120 days to completely rebuild the platform before our first major pilot. The existing proof-of-concept had shown the vision was possible, but we needed production-ready software that could serve thousands of students reliably.
 
-#### The 120-Day Sprint
+### The 120-Day Sprint
 
 The scope was overwhelming. We needed to build an entire CAD education platform - from user authentication to content delivery, from real-time collaboration to automated assessments. Every single component needed to be built with scalability and reliability in mind. While we stuck with part of the tech stack from the proof-of-concept, we built out a comprehensive AWS architecture: Cognito for authentication, AppSync for our GraphQL API, Lambda functions for business logic, EventBridge for cron jobs and scheduled tasks, DynamoDB for data storage, S3 for file handling, and deployed on AWS Amplify. The biggest gamble? Going all-in on AWS serverless architecture.
 
-#### The Learning Curve Was Vertical
+### The Learning Curve Was Vertical
 
 But here's what made it even more challenging: I'd worked with AWS before, but AppSync was entirely new territory. The first week, I spent more time reading AWS documentation than writing code. GraphQL subscriptions for real-time updates? Had to figure it out. VTL resolvers? Learned them on the fly. DynamoDB single-table design? Deep dives into documentation and tutorials until the early hours. There's no course that prepares you for learning an entire ecosystem while building production software simultaneously.
 
@@ -45,7 +45,7 @@ Some pragmatic choices that saved us:
 - Chose boring, proven patterns over cutting-edge solutions
 - Documented decisions, not code - why mattered more than how
 
-### Reinforcements Arrive
+## Reinforcements Arrive
 
 About six weeks in, I got the best news possible: we were bringing on another engineer. When Evander (Ev) joined, everything changed. Suddenly I wasn't carrying the entire technical weight alone. We could divide and conquer, review each other's code, and bounce ideas off each other at 9 PM when we hit a wall.
 
@@ -53,7 +53,7 @@ Ev brought fresh energy and different perspectives. While I focused on the core 
 
 Working with Ev taught me that even in the most intense sprints, investing time in knowledge transfer pays off. Those hours I spent walking Ev through the codebase and architecture decisions came back tenfold in productivity. We could now parallelize work, and more importantly, we had someone to sanity-check decisions when exhaustion clouded judgment. From that point, the team kept growing, what started as just me coding alone in those first weeks evolved into a diverse engineering team.
 
-### The Jay Effect
+## The Jay Effect
 
 Here's the thing about Jay, he could sell ice to penguins and that wasn't what made him great. Jay genuinely cared about transforming education, that passion was infectious. When you have a CEO who truly believes in the mission, it makes those long nights feel worthwhile. The only catch? His enthusiasm meant our backlogs grew faster than we could code, but hey, at least we were never bored!
 
@@ -65,7 +65,7 @@ Eventually, we had to sit down and figure out better communication. It wasn't re
 
 We started having regular alignment meetings where Jay and Ani would share everything - what clients were asking for, upcoming investor meetings, company-wide updates, the whole picture. It was a huge improvement. Instead of panic, we had productive discussions about trade-offs and priorities.
 
-### Building With Brilliant Misfits
+## Building With Brilliant Misfits
 
 Looking back, I realize that the initial team at a startup doesn't just build the product - they become the company's DNA. Every early hire brings their quirks, their work style, their values, and somehow it all melds into this unique culture that defines everything that comes after. At Fabrio, we had this incredible mix of academics, visionaries, and builders who somehow made magic happen.
 
@@ -109,11 +109,9 @@ What started as a scramble to meet UCL's requirements evolved into something muc
 
 ## The Hard-Won Wisdom
 
-**Job Titles Are Meaningless When You're First**: When you're the first engineering hire, you're not just an engineer. One moment I'm architecting serverless infrastructure, the next I'm debugging why a student's 3D model won't render at 2 AM because their assignment is due at 8 AM. I went from writing code in isolation to being the person professors called directly during exams. The lesson? Being a great engineer isn't about writing perfect code; it's about understanding the human problems behind the technical challenges.
+**Job Titles Are Meaningless When You're First**: When you're the first engineering hire, you're not just an engineer. One moment I'm designing serverless infrastructure, the next I'm fixing critical bugs at 4 AM, and somehow also becoming the person who writes documentation. The lesson? Being a great engineer isn't about writing perfect code; it's about understanding the human problems behind the technical challenges.
 
-**Ship Fast, But Never Broken**: In startup land, everyone preaches "move fast and break things." But when your "things" are student grades and university assessments, breaking isn't an option. We learned to ship at startup speed while maintaining enterprise reliability. It's possible, but it requires a different mindset - every shortcut you take has to be deliberate, documented, and fixable.
-
-**Your Users Aren't Who You Think They Are**: We thought we were building for students. Then we realized we were building for professors. Then we discovered we were actually building for entire institutions. Each level brought different requirements, different politics, and different definitions of success. The lesson? Always dig deeper into who's really using your product and why.
+**Ship Fast, But Never Broken**: In startup land, everyone preaches "move fast and break things." But when your "things" are student grades and university assessments, breaking isn't an option. It's possible, but it requires a different mindset - every shortcut you take has to be deliberate, documented, and fixable.
 
 **The Best Code is Code You Don't Write**: We integrated with Autodesk's tools instead of building our own CAD viewer. We used AWS managed services instead of running our own infrastructure. Every line of code you don't write is a line you don't have to maintain, debug, or explain to the next engineer.
 

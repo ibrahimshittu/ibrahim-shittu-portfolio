@@ -71,9 +71,9 @@ Looking back, I realize that the initial team at a startup doesn't just build th
 
 #### Ani - More Than a COO
 
-Anirudh (Ani) was our COO, but that title doesn't capture what he meant to the team, especially to me personally.
+Anirudh (Ani) was our COO and Head of Product, but those titles don't capture what he meant to the team. Ani was the bridge between our wants and reality, turning wishlist items into buildable features without losing the core value.
 
-What I appreciated most about Ani was how he looked out for people. When the pressure was crushing, he'd check in - not just about deadlines, but about how we were doing as humans. For a young engineer navigating the chaos of an early-stage startup, having someone like Ani in your corner made all the difference.
+What I appreciated most about Ani was how he looked out for people. When the pressure was crushing, he'd check in - not just about deadlines, but about how we were doing as humans. For an engineer navigating the chaos of an early-stage startup, having someone like Ani in your corner made all the difference.
 
 #### The PhD Duo: Rob and Fabio
 

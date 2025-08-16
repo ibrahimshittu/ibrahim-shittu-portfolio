@@ -40,6 +40,7 @@ next-env.d.ts
 .env.seo
 
 # IDE
+CLAUDE.md
 .vscode/
 .idea/
 *.swp

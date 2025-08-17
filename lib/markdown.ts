@@ -29,13 +29,10 @@ function parseMarkdownFile(filename: string): BlogPost {
 
   const slug = filename.replace(/\.md$/, "");
 
-  // Normalize markdown formatting - ensure asterisks are used for emphasis
-  const normalizedContent = content.replace(/_([^_\n]+)_/g, "*$1*");
-
   return {
     slug,
     title: data.title,
-    content: normalizedContent,
+    content: content,
     excerpt: data.excerpt,
     date: data.date,
     readTime: data.readTime,

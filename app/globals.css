@@ -82,3 +82,92 @@
     height: 7rem;
   }
 }
+
+/* Syntax highlighting theme customization */
+@layer components {
+  .syntax-highlighter-container pre {
+    background-color: hsl(var(--muted)) !important;
+    border: 1px solid hsl(var(--border)) !important;
+  }
+
+  .syntax-highlighter-container code {
+    color: hsl(var(--foreground)) !important;
+    background-color: transparent !important;
+  }
+
+  .syntax-highlighter-container .token.comment,
+  .syntax-highlighter-container .token.prolog,
+  .syntax-highlighter-container .token.doctype,
+  .syntax-highlighter-container .token.cdata {
+    color: hsl(var(--muted-foreground)) !important;
+  }
+
+  .syntax-highlighter-container .token.punctuation {
+    color: hsl(var(--foreground)) !important;
+  }
+
+  .syntax-highlighter-container .token.property,
+  .syntax-highlighter-container .token.tag,
+  .syntax-highlighter-container .token.boolean,
+  .syntax-highlighter-container .token.number,
+  .syntax-highlighter-container .token.constant,
+  .syntax-highlighter-container .token.symbol,
+  .syntax-highlighter-container .token.deleted {
+    color: hsl(var(--primary)) !important;
+  }
+
+  .syntax-highlighter-container .token.selector,
+  .syntax-highlighter-container .token.attr-name,
+  .syntax-highlighter-container .token.string,
+  .syntax-highlighter-container .token.char,
+  .syntax-highlighter-container .token.builtin,
+  .syntax-highlighter-container .token.inserted {
+    color: hsl(120 100% 35%) !important;
+  }
+
+  .dark .syntax-highlighter-container .token.selector,
+  .dark .syntax-highlighter-container .token.attr-name,
+  .dark .syntax-highlighter-container .token.string,
+  .dark .syntax-highlighter-container .token.char,
+  .dark .syntax-highlighter-container .token.builtin,
+  .dark .syntax-highlighter-container .token.inserted {
+    color: hsl(120 100% 65%) !important;
+  }
+
+  .syntax-highlighter-container .token.operator,
+  .syntax-highlighter-container .token.entity,
+  .syntax-highlighter-container .token.url,
+  .syntax-highlighter-container .language-css .token.string,
+  .syntax-highlighter-container .style .token.string {
+    color: hsl(var(--foreground)) !important;
+  }
+
+  .syntax-highlighter-container .token.atrule,
+  .syntax-highlighter-container .token.attr-value,
+  .syntax-highlighter-container .token.keyword {
+    color: hsl(220 100% 50%) !important;
+  }
+
+  .dark .syntax-highlighter-container .token.atrule,
+  .dark .syntax-highlighter-container .token.attr-value,
+  .dark .syntax-highlighter-container .token.keyword {
+    color: hsl(220 100% 70%) !important;
+  }
+
+  .syntax-highlighter-container .token.function,
+  .syntax-highlighter-container .token.class-name {
+    color: hsl(280 100% 60%) !important;
+  }
+
+  .syntax-highlighter-container .token.regex,
+  .syntax-highlighter-container .token.important,
+  .syntax-highlighter-container .token.variable {
+    color: hsl(30 100% 50%) !important;
+  }
+
+  .dark .syntax-highlighter-container .token.regex,
+  .dark .syntax-highlighter-container .token.important,
+  .dark .syntax-highlighter-container .token.variable {
+    color: hsl(30 100% 70%) !important;
+  }
+}

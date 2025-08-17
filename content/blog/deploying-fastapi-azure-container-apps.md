@@ -1,7 +1,7 @@
 ---
 title: "Deploying FastAPI to Azure Container Apps with Key Vault, Container Registry, and GitHub Actions"
 excerpt: "A comprehensive guide to deploying FastAPI applications using Azure Container Apps, Key Vault for secrets management, Container Registry for images, and GitHub Actions for CI/CD automation."
-date: 2025-01-16
+date: 2025-02-3
 readTime: "15 min read"
 image: "https://res.cloudinary.com/dud5rx9vj/image/upload/v1737049200/azure-container-apps-deployment.jpg"
 tags:
@@ -53,7 +53,7 @@ git --version
 
 ## Project Setup
 
-Let's start by creating our project structure and minimal FastAPI application.
+Let's start by creating our project structure and FastAPI application.
 
 ### Create Project Structure
 
@@ -69,6 +69,8 @@ Create the following structure:
 fastapi-azure-demo/
 ├── app/
 │   └── main.py
+├── tests/
+│   └── test_main.py
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml
@@ -79,7 +81,7 @@ fastapi-azure-demo/
 └── README.md
 ```
 
-### Minimal FastAPI Application
+### FastAPI Application
 
 Create `app/main.py`:
 
@@ -114,6 +116,90 @@ def get_config():
         "api_key_configured": bool(os.getenv("API_KEY")),
         "environment": os.getenv("ENVIRONMENT", "development")
     }
+```
+
+### Test Script
+
+Create `tests/test_main.py`:
+
+```python
+import pytest
+from fastapi.testclient import TestClient
+from app.main import app
+
+client = TestClient(app)
+
+def test_root_endpoint():
+    """Test the root endpoint returns expected response."""
+    response = client.get("/")
+    assert response.status_code == 200
+    data = response.json()
+    assert "message" in data
+    assert "timestamp" in data
+    assert "version" in data
+    assert data["message"] == "Hello from Azure Container Apps!"
+    assert data["version"] == "1.0.0"
+
+def test_health_endpoint():
+    """Test the health check endpoint."""
+    response = client.get("/health")
+    assert response.status_code == 200
+    data = response.json()
+    assert "status" in data
+    assert "timestamp" in data
+    assert "environment" in data
+    assert data["status"] == "healthy"
+    assert data["environment"] == "development"
+
+def test_config_endpoint():
+    """Test the configuration endpoint."""
+    response = client.get("/config")
+    assert response.status_code == 200
+    data = response.json()
+    assert "database_configured" in data
+    assert "api_key_configured" in data
+    assert "environment" in data
+    assert isinstance(data["database_configured"], bool)
+    assert isinstance(data["api_key_configured"], bool)
+
+def test_invalid_endpoint():
+    """Test that invalid endpoints return 404."""
+    response = client.get("/invalid")
+    assert response.status_code == 404
+
+if __name__ == "__main__":
+    # Run tests with simple output when executed directly
+    print("Running FastAPI tests...\n")
+
+    test_functions = [
+        test_root_endpoint,
+        test_health_endpoint,
+        test_config_endpoint,
+        test_invalid_endpoint
+    ]
+
+    passed = 0
+    failed = 0
+
+    for test_func in test_functions:
+        try:
+            test_func()
+            print(f"✅ {test_func.__name__}: PASSED")
+            passed += 1
+        except AssertionError as e:
+            print(f"❌ {test_func.__name__}: FAILED - {e}")
+            failed += 1
+        except Exception as e:
+            print(f"❌ {test_func.__name__}: ERROR - {e}")
+            failed += 1
+
+    print(f"\n{'='*50}")
+    print(f"Results: {passed} passed, {failed} failed")
+    print(f"{'='*50}")
+
+    if failed > 0:
+        exit(1)
+    print("\n🎉 All tests passed!")
 ```
 
 Create `requirements.txt`:
@@ -323,85 +409,6 @@ az ad sp create-for-rbac \
 
 **Important**: Save the JSON output from the service principal creation. You'll need it for GitHub Actions.
 
-## Manual Deployment Test
-
-Before setting up automation, let's manually deploy our application to verify everything works.
-
-### Build and Push to ACR
-
-```bash
-# Login to ACR
-az acr login --name $ACR_NAME
-
-# Build and push image
-docker build -t $ACR_LOGIN_SERVER/fastapi-demo:latest .
-docker push $ACR_LOGIN_SERVER/fastapi-demo:latest
-
-# Verify image
-az acr repository list --name $ACR_NAME --output table
-```
-
-### Deploy to Container Apps
-
-```bash
-# Create Container App
-az containerapp create \
-  --name $CONTAINER_APP_NAME \
-  --resource-group $RESOURCE_GROUP \
-  --environment $CONTAINER_APP_ENV \
-  --image $ACR_LOGIN_SERVER/fastapi-demo:latest \
-  --target-port 8000 \
-  --ingress external \
-  --registry-server $ACR_LOGIN_SERVER \
-  --registry-username $ACR_USERNAME \
-  --registry-password $ACR_PASSWORD \
-  --env-vars ENVIRONMENT=production \
-  --min-replicas 1 \
-  --max-replicas 3 \
-  --cpu 0.5 \
-  --memory 1.0Gi
-
-# Get the app URL
-APP_URL=$(az containerapp show \
-  --name $CONTAINER_APP_NAME \
-  --resource-group $RESOURCE_GROUP \
-  --query properties.configuration.ingress.fqdn \
-  --output tsv)
-
-echo "App URL: https://$APP_URL"
-
-# Test the deployment
-curl https://$APP_URL/
-curl https://$APP_URL/health
-```
-
-### Update App with Key Vault Secrets
-
-```bash
-# Get secrets from Key Vault
-DATABASE_URL=$(az keyvault secret show \
-  --vault-name $KEYVAULT_NAME \
-  --name DATABASE-URL \
-  --query value --output tsv)
-
-API_KEY=$(az keyvault secret show \
-  --vault-name $KEYVAULT_NAME \
-  --name API-KEY \
-  --query value --output tsv)
-
-# Update Container App with secrets
-az containerapp update \
-  --name $CONTAINER_APP_NAME \
-  --resource-group $RESOURCE_GROUP \
-  --set-env-vars \
-    DATABASE_URL="$DATABASE_URL" \
-    API_KEY="$API_KEY" \
-    ENVIRONMENT=production
-
-# Test configuration endpoint
-curl https://$APP_URL/config
-```
-
 ## GitHub Actions CI/CD Pipeline
 
 Now let's automate this entire process with GitHub Actions.
@@ -470,32 +477,9 @@ jobs:
           pip install -r requirements.txt
           pip install pytest httpx
 
-      - name: Test application
+      - name: Run tests with pytest
         run: |
-          # Simple import test
-          python -c "from app.main import app; print('✅ App imports successfully')"
-
-          # Basic endpoint test
-          python -c "
-          from fastapi.testclient import TestClient
-          from app.main import app
-
-          client = TestClient(app)
-
-          # Test root endpoint
-          response = client.get('/')
-          assert response.status_code == 200
-          assert 'message' in response.json()
-          print('✅ Root endpoint works')
-
-          # Test health endpoint
-          response = client.get('/health')
-          assert response.status_code == 200
-          assert response.json()['status'] == 'healthy'
-          print('✅ Health endpoint works')
-
-          print('🎉 All tests passed!')
-          "
+          pytest tests/ -v --tb=short
 
   build:
     name: Build and Push Docker Image
@@ -566,45 +550,27 @@ jobs:
         run: |
           IMAGE_TAG=${{ secrets.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
-          # Check if Container App exists
-          if az containerapp show \
+          echo "🚀 Deploying to Azure Container Apps..."
+          
+          az containerapp up \
             --name ${{ env.CONTAINER_APP_NAME }} \
-            --resource-group ${{ env.RESOURCE_GROUP }} &> /dev/null; then
-            
-            echo "🔄 Updating existing Container App..."
-            
-            az containerapp update \
-              --name ${{ env.CONTAINER_APP_NAME }} \
-              --resource-group ${{ env.RESOURCE_GROUP }} \
-              --image $IMAGE_TAG \
-              --set-env-vars \
-                DATABASE_URL="${{ steps.keyvault.outputs.DATABASE_URL }}" \
-                API_KEY="${{ steps.keyvault.outputs.API_KEY }}" \
-                ENVIRONMENT=production \
-                VERSION=${{ github.sha }}
-          else
-            echo "🆕 Creating new Container App..."
-            
-            az containerapp create \
-              --name ${{ env.CONTAINER_APP_NAME }} \
-              --resource-group ${{ env.RESOURCE_GROUP }} \
-              --environment ${{ env.CONTAINER_APP_ENV }} \
-              --image $IMAGE_TAG \
-              --target-port 8000 \
-              --ingress external \
-              --registry-server ${{ secrets.ACR_NAME }}.azurecr.io \
-              --registry-username ${{ secrets.ACR_USERNAME }} \
-              --registry-password ${{ secrets.ACR_PASSWORD }} \
-              --env-vars \
-                DATABASE_URL="${{ steps.keyvault.outputs.DATABASE_URL }}" \
-                API_KEY="${{ steps.keyvault.outputs.API_KEY }}" \
-                ENVIRONMENT=production \
-                VERSION=${{ github.sha }} \
-              --min-replicas 1 \
-              --max-replicas 5 \
-              --cpu 0.5 \
-              --memory 1.0Gi
-          fi
+            --resource-group ${{ env.RESOURCE_GROUP }} \
+            --environment ${{ env.CONTAINER_APP_ENV }} \
+            --image $IMAGE_TAG \
+            --target-port 8000 \
+            --ingress external \
+            --registry-server ${{ secrets.ACR_NAME }}.azurecr.io \
+            --registry-username ${{ secrets.ACR_USERNAME }} \
+            --registry-password ${{ secrets.ACR_PASSWORD }} \
+            --env-vars \
+              DATABASE_URL="${{ steps.keyvault.outputs.DATABASE_URL }}" \
+              API_KEY="${{ steps.keyvault.outputs.API_KEY }}" \
+              ENVIRONMENT=production \
+              VERSION=${{ github.sha }} \
+            --min-replicas 1 \
+            --max-replicas 5 \
+            --cpu 0.5 \
+            --memory 1.0Gi
 
       - name: Get deployment URL and test
         run: |
@@ -679,18 +645,6 @@ az containerapp update \
   --health-probe-timeout 5
 ```
 
-### Configure Custom Domain (Optional)
-
-```bash
-# Add custom domain
-az containerapp hostname add \
-  --hostname your-domain.com \
-  --resource-group $RESOURCE_GROUP \
-  --name $CONTAINER_APP_NAME
-
-# SSL certificate is automatically managed
-```
-
 ## Monitoring and Debugging
 
 ### View Application Logs
@@ -729,16 +683,6 @@ az containerapp replica list \
   --name $CONTAINER_APP_NAME \
   --resource-group $RESOURCE_GROUP \
   --output table
-```
-
-### Monitor Key Vault Access
-
-```bash
-# Check Key Vault access logs
-az monitor activity-log list \
-  --resource-group $RESOURCE_GROUP \
-  --offset 1d \
-  --query "[?contains(resourceId, '$KEYVAULT_NAME')]"
 ```
 
 ## Security Best Practices

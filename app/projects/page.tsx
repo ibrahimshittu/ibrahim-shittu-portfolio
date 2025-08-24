@@ -141,25 +141,26 @@ export default function ProjectsPage() {
               className="text-pretty font-mono text-sm text-muted-foreground"
               aria-labelledby="about-projects"
             >
-              These projects represent my journey in software engineering, from
-              building MVPs for startups to developing enterprise-grade solutions.
-              Each project taught me valuable lessons about architecture,
-              scalability, and user experience. I'm always working on something
-              new, exploring emerging technologies and solving real-world problems.
+              These projects showcase my diverse experience across AI/ML, Web3,
+              computer vision, and enterprise solutions. Each project reflects
+              my passion for leveraging cutting-edge technology to solve complex
+              real-world challenges. I focus on creating scalable, user-centric
+              solutions that drive meaningful impact.
             </div>
           </section>
 
           {/* Contact for Collaboration */}
           <section className="flex min-h-0 flex-col gap-y-3 pt-4">
             <h2 className="text-xl font-bold" id="collaborate">
-              Let's Build Something Together
+              Let&apos;s Build Something Together
             </h2>
             <div
               className="text-pretty font-mono text-sm text-muted-foreground mb-4"
               aria-labelledby="collaborate"
             >
-              Interested in collaborating on a project or have an idea you'd like
-              to discuss? I'm always open to new opportunities and challenges.
+              Interested in collaborating on a project or have an idea
+              you&apos;d like to discuss? I&apos;m always open to new
+              opportunities and challenges.
             </div>
             <div className="flex gap-3">
               <a

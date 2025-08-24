@@ -184,46 +184,92 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         {project.gallery && project.gallery.length > 0 && (
           <section className="mb-8">
             <h2 className="text-xl font-bold mb-3">Gallery</h2>
-            <div className="grid gap-4 md:grid-cols-2">
-              {project.gallery.map((image, index) => (
-                <div key={index} className="relative group overflow-hidden rounded-lg border">
-                  <Image
-                    src={image.url}
-                    alt={image.caption}
-                    width={600}
-                    height={400}
-                    className="w-full h-auto object-cover transition-transform group-hover:scale-105"
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                    <p className="text-white text-xs font-mono">
-                      {image.caption}
-                    </p>
+            <div className="space-y-4">
+              {project.gallery.map((media, index) => {
+                const isVideo = media.url.match(/\.(mp4|webm|ogg|mov)$/i);
+                const isCanva = media.url.includes('canva.com');
+                
+                if (isCanva) {
+                  return (
+                    <div key={index} className="w-full">
+                      <div 
+                        style={{ 
+                          position: 'relative', 
+                          width: '100%', 
+                          height: 0, 
+                          paddingTop: '56.25%',
+                          paddingBottom: 0, 
+                          boxShadow: '0 2px 8px 0 rgba(63,69,81,0.16)', 
+                          marginTop: '1.6em', 
+                          marginBottom: '0.9em', 
+                          overflow: 'hidden',
+                          borderRadius: '8px', 
+                          willChange: 'transform'
+                        }}
+                      >
+                        <iframe
+                          loading="lazy"
+                          style={{ 
+                            position: 'absolute', 
+                            width: '100%', 
+                            height: '100%', 
+                            top: 0, 
+                            left: 0, 
+                            border: 'none', 
+                            padding: 0,
+                            margin: 0
+                          }}
+                          src={media.url}
+                          allowFullScreen
+                          allow="fullscreen"
+                        />
+                      </div>
+                      <p className="text-xs font-mono text-muted-foreground mt-2">
+                        {media.caption}
+                      </p>
+                    </div>
+                  );
+                }
+                
+                return (
+                  <div key={index} className={`relative group overflow-hidden rounded-lg border ${isVideo ? '' : 'md:max-w-lg'}`}>
+                    {isVideo ? (
+                      <>
+                        <video
+                          src={media.url}
+                          controls
+                          className="w-full h-auto"
+                          preload="metadata"
+                        >
+                          Your browser does not support the video tag.
+                        </video>
+                        <p className="text-xs font-mono text-muted-foreground mt-2">
+                          {media.caption}
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <Image
+                          src={media.url}
+                          alt={media.caption}
+                          width={600}
+                          height={400}
+                          className="w-full h-auto object-cover transition-transform group-hover:scale-105"
+                        />
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                          <p className="text-white text-xs font-mono">
+                            {media.caption}
+                          </p>
+                        </div>
+                      </>
+                    )}
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </section>
         )}
 
-        {/* Challenges & Solutions */}
-        <section className="mb-8">
-          <h2 className="text-xl font-bold mb-3">Technical Challenges</h2>
-          <div className="space-y-4">
-            {project.challenges.map((challenge, index) => (
-              <div key={index} className="flex gap-3">
-                <span className="text-muted-foreground font-mono text-lg mt-0.5">▸</span>
-                <div className="flex-1">
-                  <p className="font-mono text-sm text-foreground mb-1">
-                    {challenge}
-                  </p>
-                  <p className="font-mono text-sm text-muted-foreground">
-                    <span className="text-green-600 dark:text-green-400">Solution:</span> {project.solutions[index]}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
 
         {/* Impact */}
         <section className="mb-8">

@@ -125,7 +125,7 @@ export const formatContent = (content: string): React.ReactNode[] => {
           key={`i-${nodes.length}`}
           className="text-sm font-mono text-muted-foreground italic mt-8 mb-6 leading-relaxed border-l-2 border-border pl-4"
         >
-          {text.slice(1, -1)}
+          {formatInlineText(text.slice(1, -1))}
         </p>
       );
     } else {

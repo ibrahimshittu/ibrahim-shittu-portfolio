@@ -1,7 +1,7 @@
 ---
 title: "From Civil Engineering to Software Development: My Career Journey"
-excerpt: "The story of transitioning from civil engineering to becoming a senior software engineer, and lessons learned along the way."
-date: "2023-05-05"
+excerpt: "The story of transitioning from civil engineering to becoming a senior software engineer, and lessons learned along the way. Featured in Daily Trust, one of Nigeria's leading newspapers."
+date: "2023-02-05"
 readTime: "12 min read"
 image: "https://res.cloudinary.com/ibrahimshittu/image/upload/v1754483725/ibrahim-shittu-portfolio/from-civil-engineering-to-software-development.png"
 tags:
@@ -14,6 +14,8 @@ tags:
     "Career Change",
   ]
 ---
+
+_This article was featured in [Daily Trust](https://dailytrust.com/how-i-transitioned-from-civil-engineering-to-software-development-ibrahim-shittu/), one of Nigeria's leading newspapers._
 
 Career transitions are never easy, but sometimes they lead to unexpected and fulfilling paths. My journey from civil engineering to software development taught me valuable lessons about adaptability, continuous learning, and following your passion.
 

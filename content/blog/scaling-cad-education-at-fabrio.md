@@ -1,7 +1,7 @@
 ---
 title: "My Journey Building Fabrio: From First Engineering Hire to Serving World-Class Universities"
-excerpt: "My personal journey as the first engineering hire at Fabrio, rebuilding the platform from scratch and scaling it to serve prestigious institutions like UCL and Imperial College London."
-date: "2025-4-20"
+excerpt: "My personal journey as the first engineering hire at Fabrio, rebuilding the platform from scratch and scaling it to serve prestigious institutions like UCL and Imperial College London. Featured in Tribune, one of Nigeria's leading newspapers."
+date: "2025-4-1"
 readTime: "10 min read"
 image: "https://res.cloudinary.com/ibrahimshittu/image/upload/v1754483726/ibrahim-shittu-portfolio/scaling-cad-education-at-fabrio.png"
 tags:
@@ -17,6 +17,8 @@ tags:
     "Team Building",
   ]
 ---
+
+_This article was featured in [Tribune](https://tribuneonlineng.com/nigerian-software-engineer-ibrahim-shittu-reflects-on-how-he-helped-build-a-startup-to-global-impact/), one of Nigeria's leading newspapers._
 
 Looking back at my time as the first engineering hire at Fabrio, I'm amazed at how far we've come. What started as a bold vision to revolutionize CAD education became a platform trusted by world-renowned institutions like University College London (UCL) and Imperial College London, and has expanded to serve educational institutions across the globe, from universities in the United States, Europe and Asia to innovative programs like F1 in Schools that inspire the next generation of engineers worldwide. This is the story of my journey, the challenges we faced, and the lessons I learned building a product that truly transforms how engineering students learn across continents.
 

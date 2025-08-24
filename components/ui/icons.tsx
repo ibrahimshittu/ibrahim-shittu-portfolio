@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, Moon, Sun } from "lucide-react";
+import { Github, Linkedin, Mail, Moon, Sun, ExternalLink } from "lucide-react";
 
 export const Icons = {
   sun: Sun,
@@ -6,6 +6,7 @@ export const Icons = {
   mail: Mail,
   github: Github,
   linkedin: Linkedin,
+  externalLink: ExternalLink,
   x: (props: React.SVGProps<SVGSVGElement>) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"

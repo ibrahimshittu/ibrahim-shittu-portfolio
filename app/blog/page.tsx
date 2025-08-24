@@ -99,6 +99,12 @@ export default function Blog() {
           </Link>
           <div className="flex items-center gap-4">
             <Link
+              href="/projects"
+              className="font-mono text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Projects
+            </Link>
+            <Link
               href="/blog"
               className="font-mono text-sm text-foreground hover:underline"
             >

@@ -87,7 +87,7 @@ export default function ProjectsPage() {
           {/* Projects List */}
           <section className="flex min-h-0 flex-col gap-y-3">
             <h2 className="text-lg font-bold" id="all-projects">
-              All Projects
+              Selected Projects
             </h2>
             <div className="flex flex-col gap-6" aria-labelledby="all-projects">
               {projects.map((project) => (

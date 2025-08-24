@@ -17,9 +17,40 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    slug: "phantom-ai",
+    title: "PhantomAI - AI-Powered Frontend Testing Automation",
+    excerpt:
+      "AI agent that converts natural language commands into automated frontend tests using LangGraph and Playwright.",
+    description: `PhantomAI revolutionizes frontend testing by leveraging AI to generate, execute, and maintain comprehensive test suites from natural language descriptions. This production-ready system eliminates the traditional bottleneck of manual test creation while ensuring robust test coverage for modern web applications.
+
+The platform uses LangGraph for intelligent workflow orchestration, creating a multi-agent system where each node specializes in a specific aspect of test automation. From parsing user intent to analyzing page structure, generating test code, and providing detailed failure analysis, PhantomAI handles the entire testing lifecycle autonomously.
+
+Key innovations include self-healing selectors that automatically adapt when UI elements change, comprehensive test planning that generates edge cases and negative scenarios, and React-aware testing that understands component structures and props. The system supports multiple LLM providers (OpenAI and Anthropic) and provides parallel test execution for optimal performance.
+
+Built with Python, LangGraph, and Playwright, the architecture features six specialized nodes: Intent Parser for converting natural language to structured requirements, Page Analyzer for understanding web page structure, Test Planner for creating comprehensive scenarios, Code Generator for producing executable pytest code, Executor for running tests with retry logic, and Result Analyzer for detailed failure analysis and recommendations.
+
+The CLI interface makes it accessible to developers of all skill levels, supporting commands like 'phantom test "Test the login form with invalid email"' for instant test generation and execution. The system includes advanced features like automatic waits for React components, screenshot capture on failures, video recording, network monitoring, and performance metrics tracking.`,
+    technologies: [
+      "Python",
+      "LangGraph",
+      "Playwright",
+      "LangChain",
+      "OpenAI",
+      "Anthropic",
+      "pytest",
+      "Docker",
+      "Redis",
+    ],
+    github: "https://github.com/phantom-ai/phantom-ai",
+    date: "2025-06-20",
+    impact:
+      "Currently in active development, reducing test creation time by 90%, supporting parallel execution of 100+ tests, achieving 95% accuracy in selector generation, and processing natural language test descriptions in seconds.",
+  },
+  {
     slug: "revit-virtual-assistant",
     title: "Revit Virtual Assistant - BIM Data Query System",
-    excerpt: "AI-powered assistant for querying and analyzing structural data from Revit models using Python and ODBC integration.",
+    excerpt:
+      "AI-powered assistant for querying and analyzing structural data from Revit models using Python and ODBC integration.",
     description: `Developed an innovative virtual assistant that bridges the gap between Building Information Modeling (BIM) software and data analysis. The system enables structural engineers and architects to query complex Revit model data using natural language, significantly improving workflow efficiency in the AEC industry.
 
 The assistant extracts structural data from Revit 2020 models and exports it to an ODBC database, making it accessible for advanced querying and analysis. Using Python programming, the system processes structural column data, material properties, dimensions, and relationships between building elements. Engineers can ask questions about load calculations, material quantities, structural integrity checks, and generate reports without manually navigating through the complex Revit interface.
@@ -27,17 +58,29 @@ The assistant extracts structural data from Revit 2020 models and exports it to 
 The solution addresses a critical challenge in the construction industry where valuable BIM data is often underutilized due to the complexity of accessing and analyzing it. By providing an intuitive interface for data extraction and query, the assistant helps teams make data-driven decisions faster, identify potential structural issues early, and optimize material usage.
 
 Built with Python for backend processing, the system integrates with Revit API for model data extraction, uses ODBC for database connectivity, and implements natural language processing for query interpretation. The assistant features real-time data synchronization with Revit models, automated report generation, structural analysis capabilities, and visualization of query results.`,
-    technologies: ["Python", "Revit API", "ODBC", "SQL", "Pandas", "NumPy", "NLP", "C#"],
+    technologies: [
+      "Python",
+      "Revit API",
+      "ODBC",
+      "SQL",
+      "Pandas",
+      "NumPy",
+      "NLP",
+      "C#",
+    ],
     github: "https://github.com",
     date: "2020-02-15",
-    image: "https://res.cloudinary.com/ibrahimshittu/video/upload/v1756033918/revit-assistant-demo_pm02e0.mp4",
+    image:
+      "https://res.cloudinary.com/ibrahimshittu/video/upload/v1756033918/revit-assistant-demo_pm02e0.mp4",
     gallery: [
       {
         url: "https://res.cloudinary.com/ibrahimshittu/video/upload/v1756033918/revit-assistant-demo_pm02e0.mp4",
-        caption: "Revit Virtual Assistant demo showing structural column data query"
-      }
+        caption:
+          "Revit Virtual Assistant demo showing structural column data query",
+      },
     ],
-    impact: "Reduced model analysis time by 70%, processed 50+ complex structural models, saved 15+ hours per week for engineering teams, and improved data accuracy by eliminating manual extraction errors."
+    impact:
+      "Reduced model analysis time by 70%, processed 50+ complex structural models, saved 15+ hours per week for engineering teams, and improved data accuracy by eliminating manual extraction errors.",
   },
   {
     slug: "unheard-mental-health",
@@ -141,44 +184,6 @@ Technical implementation includes optimization for edge devices using TensorFlow
     ],
     impact:
       "Deployed in 10+ locations, processed 100,000+ detections daily, achieved 95%+ accuracy, and helped maintain safety compliance in public spaces.",
-  },
-  {
-    slug: "ai-legal-document-automation",
-    title: "AI-Powered Legal Document Automation",
-    excerpt:
-      "Intelligent system that automates legal document generation and review using advanced NLP and machine learning.",
-    description: `Built an enterprise-grade AI system that revolutionizes legal document workflows for law firms and corporate legal departments. The platform leverages advanced natural language processing and machine learning to automate document generation, review, and compliance checking.
-
-The system integrates seamlessly with Microsoft Office suite, allowing lawyers to work within their familiar environment while benefiting from AI-powered assistance. It includes features like intelligent clause suggestions, regulatory compliance checking, and automated document assembly based on templates and precedents.
-
-Key technical achievements include implementing a secure multi-tenant architecture with SOC 2 compliance, developing custom NLP models for legal text understanding, and creating a real-time collaboration system that allows multiple lawyers to work on documents simultaneously with AI assistance.`,
-    technologies: [
-      "Python",
-      "LangChain",
-      "FastAPI",
-      "React",
-      "Azure AI",
-      "PostgreSQL",
-      "Docker",
-      "Kubernetes",
-    ],
-    date: "2023-12-01",
-    gallery: [
-      {
-        url: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800",
-        caption: "Dashboard showing document automation workflow",
-      },
-      {
-        url: "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?w=800",
-        caption: "AI-powered contract analysis interface",
-      },
-      {
-        url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800",
-        caption: "Real-time collaboration features",
-      },
-    ],
-    impact:
-      "Reduced document preparation time by 80%, processed over 100,000 documents monthly, and saved law firms an average of 20 hours per week per lawyer.",
   },
 ];
 

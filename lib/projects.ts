@@ -68,7 +68,6 @@ Built with Python for backend processing, the system integrates with Revit API f
       "NLP",
       "C#",
     ],
-    github: "https://github.com",
     date: "2020-02-15",
     image:
       "https://res.cloudinary.com/ibrahimshittu/video/upload/v1756033918/revit-assistant-demo_pm02e0.mp4",
@@ -104,7 +103,6 @@ Built with cutting-edge technology including TypeScript, React/React Native for 
       "WebRTC",
       "Node.js",
     ],
-    link: "https://www.canva.com/design/DAF6Z7i3t1c/57o1EQWMSPhQMu0kOXWUZQ/view",
     date: "2023-09-15",
     gallery: [
       {
@@ -137,7 +135,6 @@ The project originated from a community-driven initiative and has evolved into a
       "IPFS",
       "TailwindCSS",
     ],
-    link: "https://rio-marketplace.vercel.app",
     date: "2023-03-20",
     image:
       "https://res.cloudinary.com/ibrahimshittu/video/upload/v1756030620/rio-marketplace-demo_eh8t1c.mp4",
@@ -172,7 +169,6 @@ Technical implementation includes optimization for edge devices using TensorFlow
       "Keras",
       "Flask",
     ],
-    github: "https://github.com",
     date: "2021-05-15",
     image:
       "https://res.cloudinary.com/ibrahimshittu/video/upload/v1756029390/face-mask-detector-demo_emvpyg.mp4",

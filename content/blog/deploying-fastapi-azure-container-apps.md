@@ -551,7 +551,7 @@ jobs:
           IMAGE_TAG=${{ secrets.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
           echo "🚀 Deploying to Azure Container Apps..."
-          
+
           az containerapp up \
             --name ${{ env.CONTAINER_APP_NAME }} \
             --resource-group ${{ env.RESOURCE_GROUP }} \
@@ -566,11 +566,7 @@ jobs:
               DATABASE_URL="${{ steps.keyvault.outputs.DATABASE_URL }}" \
               API_KEY="${{ steps.keyvault.outputs.API_KEY }}" \
               ENVIRONMENT=production \
-              VERSION=${{ github.sha }} \
-            --min-replicas 1 \
-            --max-replicas 5 \
-            --cpu 0.5 \
-            --memory 1.0Gi
+              VERSION=${{ github.sha }}
 
       - name: Get deployment URL and test
         run: |
@@ -765,20 +761,6 @@ az keyvault show \
 
 # Verify secrets exist
 az keyvault secret list --vault-name $KEYVAULT_NAME
-```
-
-## Clean Up Resources
-
-When you're done testing, clean up to avoid charges:
-
-```bash
-# Delete the entire resource group
-az group delete --name $RESOURCE_GROUP --yes --no-wait
-
-# Or delete individual resources
-az containerapp delete --name $CONTAINER_APP_NAME --resource-group $RESOURCE_GROUP --yes
-az acr delete --name $ACR_NAME --resource-group $RESOURCE_GROUP --yes
-az keyvault delete --name $KEYVAULT_NAME --resource-group $RESOURCE_GROUP
 ```
 
 ## Conclusion

@@ -11,31 +11,59 @@ export const formatDate = (dateString: string): string => {
   });
 };
 
-// Parse **bold** markers inside text and return React nodes with <span> wrappers
+// Parse **bold** markers, links, and inline code inside text and return React nodes
 export const formatInlineText = (text: string): React.ReactNode => {
-  // Support inline code with backticks and bold markers
-  const parts = text.split(/(`[^`]+`|\*\*[^*]+\*\*)/g);
-  return parts.map((part, idx) => {
-    if (!part) return null;
+  // Support inline code with backticks, bold markers, and markdown links
+  const parts = text.split(/(`[^`]+`|\*\*[^*]+\*\*|\[([^\]]+)\]\(([^)]+)\))/g);
+  const nodes: React.ReactNode[] = [];
+
+  for (let i = 0; i < parts.length; i++) {
+    const part = parts[i];
+    if (!part) continue;
+
+    // Check if this is a markdown link pattern
+    if (
+      i + 2 < parts.length &&
+      parts[i + 1] &&
+      parts[i + 2] &&
+      text.includes(`[${parts[i + 1]}](${parts[i + 2]})`)
+    ) {
+      nodes.push(
+        <a
+          key={`link-${i}`}
+          href={parts[i + 2]}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted-foreground underline underline-offset-2 hover:text-foreground transition-colors"
+        >
+          {parts[i + 1]}
+        </a>
+      );
+      i += 2; // Skip the next two parts as they're part of the link
+      continue;
+    }
+
     if (part.startsWith("`") && part.endsWith("`")) {
-      return (
+      nodes.push(
         <code
-          key={idx}
+          key={`code-${i}`}
           className="px-1 py-0.5 rounded bg-muted text-foreground font-mono text-[0.8em]"
         >
           {part.slice(1, -1)}
         </code>
       );
-    }
-    if (part.startsWith("**") && part.endsWith("**")) {
-      return (
-        <span key={idx} className="font-semibold text-muted-foreground">
+    } else if (part.startsWith("**") && part.endsWith("**")) {
+      nodes.push(
+        <span key={`bold-${i}`} className="font-semibold text-muted-foreground">
           {part.slice(2, -2)}
         </span>
       );
+    } else {
+      nodes.push(<React.Fragment key={`text-${i}`}>{part}</React.Fragment>);
     }
-    return <React.Fragment key={idx}>{part}</React.Fragment>;
-  });
+  }
+
+  return nodes;
 };
 
 // Transform full markdown-lite content (headings, lists, code) into React nodes
@@ -176,6 +204,30 @@ export const formatContent = (content: string): React.ReactNode[] => {
       } else {
         codeLines.push(raw); // keep original spacing
       }
+      continue;
+    }
+
+    // Handle YouTube embeds with special marker
+    if (line.startsWith("{{youtube:") && line.endsWith("}}")) {
+      flushParagraph();
+      flushList();
+      flushQuote();
+      const videoId = line.slice(10, -2).trim();
+      nodes.push(
+        <div
+          key={`yt-${nodes.length}`}
+          className="relative w-full mt-6 mb-8"
+          style={{ paddingBottom: "56.25%" }}
+        >
+          <iframe
+            className="absolute top-0 left-0 w-full h-full rounded-lg border-0"
+            src={`https://www.youtube.com/embed/${videoId}`}
+            title="YouTube video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        </div>
+      );
       continue;
     }
 

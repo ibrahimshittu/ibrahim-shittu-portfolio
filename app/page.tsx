@@ -182,12 +182,12 @@ export default function Home() {
             <p className="max-w-md items-center text-pretty font-mono text-xs text-foreground">
               <a
                 className="inline-flex gap-x-1.5 align-baseline leading-none hover:underline text-muted-foreground"
-                href="https://www.google.com/maps/search/Malta"
+                href="https://www.google.com/maps/search/San+Francisco,+USA"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Location: Malta"
+                aria-label="Location: San Francisco, USA"
               >
-                127.0.0.1:3000
+                San Francisco, USA
               </a>
             </p>
             <div

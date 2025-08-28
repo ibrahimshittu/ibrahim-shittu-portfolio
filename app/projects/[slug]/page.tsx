@@ -76,33 +76,6 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
   return (
     <main className="flex-1 flex flex-col">
-      {/* Navigation */}
-      <nav className="mx-auto w-full max-w-2xl px-4 py-4">
-        <div className="flex justify-between items-center">
-          <Link
-            href="/"
-            className="font-mono text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Resume
-          </Link>
-          <div className="flex items-center gap-4">
-            <Link
-              href="/projects"
-              className="font-mono text-sm text-foreground hover:underline"
-            >
-              Projects
-            </Link>
-            <Link
-              href="/blog"
-              className="font-mono text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Blog
-            </Link>
-            <ThemeToggle />
-          </div>
-        </div>
-      </nav>
-
       <article className="mx-auto w-full max-w-2xl px-4 pb-8">
         {/* Back to Projects */}
         <Link
@@ -172,8 +145,11 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         <section className="mb-8">
           <h2 className="text-xl font-bold mb-3">About This Project</h2>
           <div className="prose prose-neutral dark:prose-invert max-w-none">
-            {project.description.split('\n\n').map((paragraph, index) => (
-              <p key={index} className="text-muted-foreground font-mono text-sm leading-relaxed mb-4">
+            {project.description.split("\n\n").map((paragraph, index) => (
+              <p
+                key={index}
+                className="text-muted-foreground font-mono text-sm leading-relaxed mb-4"
+              >
                 {paragraph}
               </p>
             ))}
@@ -187,37 +163,37 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             <div className="space-y-4">
               {project.gallery.map((media, index) => {
                 const isVideo = media.url.match(/\.(mp4|webm|ogg|mov)$/i);
-                const isCanva = media.url.includes('canva.com');
-                
+                const isCanva = media.url.includes("canva.com");
+
                 if (isCanva) {
                   return (
                     <div key={index} className="w-full">
-                      <div 
-                        style={{ 
-                          position: 'relative', 
-                          width: '100%', 
-                          height: 0, 
-                          paddingTop: '56.25%',
-                          paddingBottom: 0, 
-                          boxShadow: '0 2px 8px 0 rgba(63,69,81,0.16)', 
-                          marginTop: '1.6em', 
-                          marginBottom: '0.9em', 
-                          overflow: 'hidden',
-                          borderRadius: '8px', 
-                          willChange: 'transform'
+                      <div
+                        style={{
+                          position: "relative",
+                          width: "100%",
+                          height: 0,
+                          paddingTop: "56.25%",
+                          paddingBottom: 0,
+                          boxShadow: "0 2px 8px 0 rgba(63,69,81,0.16)",
+                          marginTop: "1.6em",
+                          marginBottom: "0.9em",
+                          overflow: "hidden",
+                          borderRadius: "8px",
+                          willChange: "transform",
                         }}
                       >
                         <iframe
                           loading="lazy"
-                          style={{ 
-                            position: 'absolute', 
-                            width: '100%', 
-                            height: '100%', 
-                            top: 0, 
-                            left: 0, 
-                            border: 'none', 
+                          style={{
+                            position: "absolute",
+                            width: "100%",
+                            height: "100%",
+                            top: 0,
+                            left: 0,
+                            border: "none",
                             padding: 0,
-                            margin: 0
+                            margin: 0,
                           }}
                           src={media.url}
                           allowFullScreen
@@ -230,9 +206,14 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                     </div>
                   );
                 }
-                
+
                 return (
-                  <div key={index} className={`relative group overflow-hidden rounded-lg border ${isVideo ? '' : 'md:max-w-lg'}`}>
+                  <div
+                    key={index}
+                    className={`relative group overflow-hidden rounded-lg border ${
+                      isVideo ? "" : "md:max-w-lg"
+                    }`}
+                  >
                     {isVideo ? (
                       <>
                         <video
@@ -270,7 +251,6 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           </section>
         )}
 
-
         {/* Impact */}
         <section className="mb-8">
           <h2 className="text-xl font-bold mb-3">Impact & Results</h2>
@@ -294,7 +274,9 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                   href={`/projects/${relatedProject.slug}`}
                   className="block p-4 border rounded-lg hover:bg-accent transition-colors"
                 >
-                  <h4 className="font-semibold text-sm mb-1">{relatedProject.title}</h4>
+                  <h4 className="font-semibold text-sm mb-1">
+                    {relatedProject.title}
+                  </h4>
                   <p className="text-xs text-muted-foreground font-mono line-clamp-2">
                     {relatedProject.excerpt}
                   </p>

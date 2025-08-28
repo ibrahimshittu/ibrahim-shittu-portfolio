@@ -1,9 +1,9 @@
 ---
-title: "Speaking at BIM Harambee Africa 2020: Getting Started with AEC Automation"
+title: "Speaking at BIM Harambee Africa, 2020: Getting Started with AEC Automation, Computational BIM and Beyond"
 excerpt: "Presenting alongside 58 speakers from across Africa on how innovative technologies are transforming AEC workflows through automation, computational BIM, and AI-driven solutions for the construction industry"
 date: "2020-10-15"
 readTime: "8 min read"
-image: "https://res.cloudinary.com/ibrahimshittu/image/upload/v1756050000/bim-harambee-speaker.jpg"
+image: "https://res.cloudinary.com/ibrahimshittu/image/upload/v1756384706/speaking-at-bim-harambee-africa-2020.png"
 tags:
   [
     "BIM",

@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { SiteNav } from "@/components/ui/site-nav";
 import {
   siteConfig,
   generatePersonSchema,
@@ -114,41 +115,42 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-        {/* Structured Data Scripts */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(personSchema),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(websiteSchema),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationSchema),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "ContactPoint",
-              telephone: "",
-              contactType: "technical support",
-              areaServed: "Worldwide",
-              availableLanguage: "English",
-            }),
-          }}
-        />
-        {children}
-        <Analytics />
-        <SpeedInsights />
+          {/* Structured Data Scripts */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(personSchema),
+            }}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(websiteSchema),
+            }}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(organizationSchema),
+            }}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "ContactPoint",
+                telephone: "",
+                contactType: "technical support",
+                areaServed: "Worldwide",
+                availableLanguage: "English",
+              }),
+            }}
+          />
+          <SiteNav />
+          {children}
+          <Analytics />
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>

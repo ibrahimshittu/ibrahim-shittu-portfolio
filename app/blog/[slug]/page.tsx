@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Metadata } from "next";
 import Image from "next/image";
 import { getBlogPost, getAllBlogPosts } from "@/lib/markdown";
@@ -118,32 +117,7 @@ export default function BlogPost({ params }: PageProps) {
         }}
       />
 
-      {/* Navigation */}
-      <nav className="mx-auto w-full max-w-2xl px-4 py-4">
-        <div className="flex justify-between items-center">
-          <Link
-            href="/"
-            className="font-mono text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Resume
-          </Link>
-          <div className="flex items-center gap-4">
-            <Link
-              href="/blog"
-              className="font-mono text-sm text-foreground hover:underline"
-            >
-              Blog
-            </Link>
-            <Link
-              href="/projects"
-              className="font-mono text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Projects
-            </Link>
-            <ThemeToggle />
-          </div>
-        </div>
-      </nav>
+      {/* Global nav is rendered by RootLayout */}
 
       <section className="mx-auto w-full max-w-2xl space-y-8 bg-card px-4 pb-8">
         {/* Back to Blog */}

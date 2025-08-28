@@ -41,33 +41,6 @@ export default function ProjectsPage() {
 
   return (
     <main className="flex-1 flex flex-col">
-      {/* Navigation */}
-      <nav className="mx-auto w-full max-w-2xl px-4 py-4">
-        <div className="flex justify-between items-center">
-          <Link
-            href="/"
-            className="font-mono text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Resume
-          </Link>
-          <div className="flex items-center gap-4">
-            <Link
-              href="/blog"
-              className="font-mono text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Blog
-            </Link>
-            <Link
-              href="/projects"
-              className="font-mono text-sm text-foreground hover:underline"
-            >
-              Projects
-            </Link>
-            <ThemeToggle />
-          </div>
-        </div>
-      </nav>
-
       <section
         className="mx-auto w-full max-w-2xl space-y-8 bg-card px-4 pb-8"
         aria-label="Projects Content"

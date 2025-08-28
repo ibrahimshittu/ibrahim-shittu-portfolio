@@ -52,16 +52,16 @@ export default function ProjectsPage() {
           </Link>
           <div className="flex items-center gap-4">
             <Link
-              href="/projects"
-              className="font-mono text-sm text-foreground hover:underline"
-            >
-              Projects
-            </Link>
-            <Link
               href="/blog"
               className="font-mono text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Blog
+            </Link>
+            <Link
+              href="/projects"
+              className="font-mono text-sm text-foreground hover:underline"
+            >
+              Projects
             </Link>
             <ThemeToggle />
           </div>

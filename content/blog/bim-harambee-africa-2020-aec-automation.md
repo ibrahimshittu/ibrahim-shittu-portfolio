@@ -4,7 +4,16 @@ excerpt: "Presenting alongside 58 speakers from across Africa on how innovative 
 date: "2020-10-15"
 readTime: "8 min read"
 image: "https://res.cloudinary.com/ibrahimshittu/image/upload/v1756050000/bim-harambee-speaker.jpg"
-tags: ["BIM", "AEC", "Conference", "Automation", "Python", "Africa Tech"]
+tags:
+  [
+    "BIM",
+    "AEC",
+    "Visual Programming",
+    "Python",
+    "C#",
+    "Africa Tech",
+    "Autodesk Revit",
+  ]
 ---
 
 It was an incredible honor to present at the **BIM Harambee Africa 2020 Virtual Conference**, sharing the virtual stage with 58 distinguished speakers from across the African continent. My session, titled **"Getting Started with AEC Automation: Computational BIM and Beyond"**, marked a significant milestone in my journey as a technologist passionate about transforming the Architecture, Engineering, and Construction (AEC) industry.
@@ -77,10 +86,6 @@ Learning to code transforms how you approach AEC challenges. Python provides an 
 
 The African BIM community is vibrant and supportive. Engaging with peers accelerates learning and creates opportunities for collaboration on innovative projects.
 
-#### 4. Computational Design is Accessible
-
-Tools like Dynamo and Grasshopper have democratized computational design. You don't need to be a programmer to start benefiting from automation.
-
 ## Gratitude and Recognition
 
 I'm deeply grateful to the BIM Harambee team and everyone who made this event possible. Their dedication to advancing digital construction in Africa is truly inspiring.
@@ -93,14 +98,10 @@ This presentation has had a lasting impact on the African AEC community and beyo
 
 The future of AEC in Africa is bright. As we continue to embrace digital transformation, the possibilities are endless. Whether it's using AI for structural optimization, implementing IoT for smart buildings, or leveraging VR/AR for design visualization, the tools and knowledge shared in this presentation form the foundation for these innovations.
 
-## Connect and Learn More
-
-If you're interested in AEC automation or want to discuss how computational design can transform your workflows, feel free to reach out. The journey of digital transformation in construction is best traveled together.
-
 ### Resources Mentioned
 
 - [Dynamo BIM](https://dynamobim.org/)
 - [Grasshopper 3D](https://www.grasshopper3d.com/)
-- [BIM Africa Community](https://bimafrica.org/)
+- [BIM Africa](https://bimafrica.org/)
 
 _This presentation was part of the BIM Harambee Africa 2020 Virtual Conference, featuring speakers from across the continent advancing digital construction and Building Information Modeling in Africa._

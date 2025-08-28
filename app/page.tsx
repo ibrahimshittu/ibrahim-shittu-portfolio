@@ -237,7 +237,7 @@ export default function Home() {
             aria-hidden="true"
           >
             <Image
-              className="aspect-square h-full w-full"
+              className="h-full w-full object-cover object-center"
               alt="Ibrahim Shittu's profile picture"
               src={siteConfig.author.image}
               width={112}

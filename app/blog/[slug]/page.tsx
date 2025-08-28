@@ -187,7 +187,7 @@ export default function BlogPost({ params }: PageProps) {
           <div className="flex items-start gap-4">
             <span className="relative flex shrink-0 overflow-hidden rounded-full size-12">
               <Image
-                className="aspect-square h-full w-full"
+                className="h-full w-full object-cover object-center"
                 alt="Ibrahim Shittu's profile picture"
                 src={siteConfig.author.image}
                 width={48}

@@ -1,28 +1,8 @@
 import Link from "next/link";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export default function NotFound() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <nav className="mx-auto w-full max-w-2xl px-4 py-4">
-        <div className="flex justify-between items-center">
-          <Link
-            href="/"
-            className="font-mono text-sm text-foreground hover:underline"
-          >
-            Resume
-          </Link>
-          <div className="flex items-center gap-4">
-            <Link
-              href="/blog"
-              className="font-mono text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Blog
-            </Link>
-            <ThemeToggle />
-          </div>
-        </div>
-      </nav>
+    <div className="flex min-h-screen flex-col">
       <main className="flex-1 flex flex-col items-center justify-center text-center px-4">
         <div className="max-w-md">
           <h1 className="text-9xl font-bold tracking-tighter">404</h1>

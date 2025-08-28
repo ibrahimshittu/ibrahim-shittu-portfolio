@@ -1,9 +1,11 @@
 import { MetadataRoute } from "next";
 import { getAllBlogPosts } from "@/lib/markdown";
+import { getAllProjects } from "@/lib/projects";
 import { siteConfig } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const blogPosts = getAllBlogPosts();
+  const projects = getAllProjects();
 
   // Static pages
   const staticPages = [
@@ -19,6 +21,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly" as const,
       priority: 0.8,
     },
+    {
+      url: `${siteConfig.url}/projects`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
   ];
 
   // Dynamic blog post pages
@@ -29,5 +37,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...blogPages];
+  const projectPages = projects.map((project) => ({
+    url: `${siteConfig.url}/projects/${project.slug}`,
+    lastModified: new Date(project.date),
+    changeFrequency: "monthly" as const,
+    priority: 0.55,
+  }));
+
+  return [...staticPages, ...blogPages, ...projectPages];
 }

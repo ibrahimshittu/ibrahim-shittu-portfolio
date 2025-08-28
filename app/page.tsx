@@ -6,11 +6,11 @@ import { siteConfig, generatePersonSchema } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Ibrahim Shittu - Senior Software Engineer",
   description:
-    "Senior Software Engineer with expertise in building scalable web, mobile, and AI-driven solutions for startups and global enterprises across diverse industries.",
+    "Senior Software Engineer with a proven track record of building scalable, high-performance web, mobile, and AI-driven solutions for startups and global enterprises across diverse industries.",
   openGraph: {
     title: "Ibrahim Shittu - Senior Software Engineer",
     description:
-      "Senior Software Engineer with expertise in building scalable web, mobile, and AI-driven solutions for startups and global enterprises across diverse industries.",
+      "Senior Software Engineer with a proven track record of building scalable, high-performance web, mobile, and AI-driven solutions for startups and global enterprises across diverse industries.",
     url: siteConfig.url,
     type: "profile",
     images: [
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Ibrahim Shittu - Senior Software Engineer",
     description:
-      "Senior Software Engineer with expertise in building scalable web, mobile, and AI-driven solutions for startups and global enterprises across diverse industries.",
+      "Senior Software Engineer with a proven track record of building scalable, high-performance web, mobile, and AI-driven solutions for startups and global enterprises across diverse industries.",
     images: [siteConfig.ogImage],
   },
   alternates: {
@@ -230,10 +230,12 @@ export default function Home() {
               className="text-pretty font-mono text-sm text-muted-foreground"
               aria-labelledby="about-section"
             >
-              Senior Software Engineer with expertise in web and mobile
-              development, AI, and Machine Learning. Passionate about leveraging
-              technology to create scalable, high-quality solutions and drive
-              innovation in startups and larger teams.
+              Senior Software Engineer with a proven track record of building
+              scalable, high-performance web, mobile, and AI-driven solutions
+              for startups and global enterprises across diverse industries.
+              Passionate about leveraging technology to deliver innovative,
+              reliable, and growth-oriented solutions, driving efficiency, and
+              creating measurable business impact.
             </div>
           </section>
 

@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Ibrahim Shittu",
   title: "Ibrahim Shittu - Senior Software Engineer",
   description:
-    "Senior Software Engineer with expertise in building scalable web, mobile, and AI-driven solutions for startups and global enterprises across diverse industries.",
+    "Senior Software Engineer with a proven track record of building scalable, high-performance web, mobile, and AI-driven solutions for startups and global enterprises across diverse industries.",
   url: "https://ibrahimshittu.com",
   ogImage:
     "https://res.cloudinary.com/ibrahimshittu/image/upload/c_fill,g_face,h_630,w_1200,q_auto,f_auto/v1756380032/Ibrahim_Shittu_ctsunj.png",
@@ -204,12 +204,4 @@ export function generateMetaDescription(text: string, maxLength = 160): string {
   return lastSpace > 100
     ? truncated.slice(0, lastSpace) + "..."
     : truncated + "...";
-}
-
-// Extract reading time from content
-export function calculateReadingTime(content: string): string {
-  const wordsPerMinute = 200;
-  const wordCount = content.trim().split(/\s+/).length;
-  const minutes = Math.ceil(wordCount / wordsPerMinute);
-  return `${minutes} min read`;
 }

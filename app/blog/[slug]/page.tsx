@@ -5,7 +5,12 @@ import { Metadata } from "next";
 import Image from "next/image";
 import { getBlogPost, getAllBlogPosts } from "@/lib/markdown";
 import React from "react";
-import { formatDate, formatContent } from "@/lib/blog-utils";
+import {
+  formatDate,
+  formatContent,
+  extractYouTubeVideos,
+  generateBlogVideoMetadata,
+} from "@/lib/blog-utils";
 import {
   siteConfig,
   generateCanonicalUrl,
@@ -13,6 +18,8 @@ import {
   generateBreadcrumbSchema,
   generateMetaDescription,
 } from "@/lib/seo";
+import { generateVideoObjectSchema } from "@/lib/video-seo";
+import { StructuredData } from "@/components/StructuredData";
 
 interface PageProps {
   params: {
@@ -85,6 +92,10 @@ export default function BlogPost({ params }: PageProps) {
     notFound();
   }
 
+  // Extract YouTube videos from content
+  const youtubeVideoIds = extractYouTubeVideos(post.content);
+  const pageUrl = generateCanonicalUrl(`/blog/${post.slug}`);
+
   const articleSchema = generateArticleSchema(
     post.title,
     post.excerpt,
@@ -98,24 +109,28 @@ export default function BlogPost({ params }: PageProps) {
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Home", url: siteConfig.url },
     { name: "Blog", url: generateCanonicalUrl("/blog") },
-    { name: post.title, url: generateCanonicalUrl(`/blog/${post.slug}`) },
+    { name: post.title, url: pageUrl },
   ]);
+
+  // Generate video schemas for each YouTube video
+  const videoSchemas = youtubeVideoIds.map((videoId) => {
+    const videoMetadata = generateBlogVideoMetadata(
+      videoId,
+      post.title,
+      post.excerpt,
+      post.date
+    );
+    return generateVideoObjectSchema(videoMetadata, pageUrl);
+  });
 
   return (
     <main className="flex-1 flex flex-col">
       {/* Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(articleSchema),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbSchema),
-        }}
-      />
+      <StructuredData data={articleSchema} />
+      <StructuredData data={breadcrumbSchema} />
+      {videoSchemas.map((videoSchema, index) => (
+        <StructuredData key={`video-${index}`} data={videoSchema} />
+      ))}
 
       {/* Global nav is rendered by RootLayout */}
 

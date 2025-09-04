@@ -8,6 +8,11 @@ import { getProjectBySlug, getAllProjects } from "@/lib/projects";
 import { siteConfig, generateMetaDescription } from "@/lib/seo";
 import { formatDate } from "@/lib/blog-utils";
 import { StructuredData } from "@/components/StructuredData";
+import {
+  generateVideoObjectSchema,
+  parseCloudinaryVideoUrl,
+  type VideoMetadata,
+} from "@/lib/video-seo";
 
 export async function generateStaticParams() {
   const projects = getAllProjects();
@@ -171,10 +176,48 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
     ],
   };
 
+  // Generate video schemas for project videos
+  const pageUrl = `${siteConfig.url}/projects/${project.slug}`;
+  const videoSchemas: any[] = [];
+
+  // Check for main project video (image field that contains video)
+  if (project.image && project.image.match(/\.(mp4|webm|ogg|mov)$/i)) {
+    const { title: videoTitle } = parseCloudinaryVideoUrl(project.image);
+    const videoMetadata: VideoMetadata = {
+      title: videoTitle || `${project.title} - Demo Video`,
+      description: `Demo video showcasing ${project.title}: ${project.excerpt}`,
+      thumbnailUrl: project.image.replace(/\.(mp4|webm|ogg|mov)$/i, ".jpg"), // Cloudinary auto-generates thumbnails
+      uploadDate: project.date,
+      contentUrl: project.image,
+    };
+    videoSchemas.push(generateVideoObjectSchema(videoMetadata, pageUrl));
+  }
+
+  // Check for gallery videos
+  if (project.gallery) {
+    project.gallery.forEach((media, index) => {
+      const isVideo = media.url.match(/\.(mp4|webm|ogg|mov)$/i);
+      if (isVideo) {
+        const { title: videoTitle } = parseCloudinaryVideoUrl(media.url);
+        const videoMetadata: VideoMetadata = {
+          title: videoTitle || `${project.title} - Gallery Video ${index + 1}`,
+          description: media.caption || `Gallery video for ${project.title}`,
+          thumbnailUrl: media.url.replace(/\.(mp4|webm|ogg|mov)$/i, ".jpg"),
+          uploadDate: project.date,
+          contentUrl: media.url,
+        };
+        videoSchemas.push(generateVideoObjectSchema(videoMetadata, pageUrl));
+      }
+    });
+  }
+
   return (
     <>
       <StructuredData data={projectSchema} />
       <StructuredData data={breadcrumbSchema} />
+      {videoSchemas.map((videoSchema, index) => (
+        <StructuredData key={`video-${index}`} data={videoSchema} />
+      ))}
       <main className="flex-1 flex flex-col">
         <article className="mx-auto w-full max-w-2xl px-4 pb-8">
           {/* Back to Projects */}

@@ -1,5 +1,38 @@
 import React from "react";
+import {
+  getYouTubeThumbnail,
+  getYouTubeEmbedUrl,
+  type VideoMetadata,
+} from "./video-seo";
 import { CodeBlock } from "@/components/ui/code-block";
+
+// Extract YouTube video IDs from markdown content
+export function extractYouTubeVideos(content: string): string[] {
+  const matches = content.match(/\{\{youtube:([^}]+)\}\}/g);
+  if (!matches) return [];
+
+  return matches.map((match) => {
+    const videoId = match.slice(10, -2).trim();
+    return videoId;
+  });
+}
+
+// Generate video metadata for blog posts
+export function generateBlogVideoMetadata(
+  videoId: string,
+  blogTitle: string,
+  blogDescription: string,
+  blogDate: string
+): VideoMetadata {
+  return {
+    title: `${blogTitle} - Video Content`,
+    description: blogDescription,
+    thumbnailUrl: getYouTubeThumbnail(videoId),
+    uploadDate: blogDate,
+    embedUrl: getYouTubeEmbedUrl(videoId),
+    videoId: videoId,
+  };
+}
 
 // Format a date into human-readable long form (e.g., January 15, 2025)
 export const formatDate = (dateString: string): string => {
@@ -213,11 +246,24 @@ export const formatContent = (content: string): React.ReactNode[] => {
       flushList();
       flushQuote();
       const videoId = line.slice(10, -2).trim();
+
+      // Store video information for structured data (can be accessed by parent component)
+      const videoMetadata: VideoMetadata = {
+        title: "YouTube Video", // This will be enhanced in the blog post component
+        description: "Embedded YouTube video content",
+        thumbnailUrl: getYouTubeThumbnail(videoId),
+        uploadDate: new Date().toISOString(), // This should be the actual upload date
+        embedUrl: getYouTubeEmbedUrl(videoId),
+        videoId: videoId,
+      };
+
       nodes.push(
         <div
           key={`yt-${nodes.length}`}
           className="relative w-full mt-6 mb-8"
           style={{ paddingBottom: "56.25%" }}
+          data-video-id={videoId}
+          data-video-metadata={JSON.stringify(videoMetadata)}
         >
           <iframe
             className="absolute top-0 left-0 w-full h-full rounded-lg border-0"

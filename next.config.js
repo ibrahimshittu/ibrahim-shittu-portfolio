@@ -87,9 +87,10 @@ const nextConfig = {
     ];
   },
 
-  // Redirect www to non-www
+  // Redirect www to non-www and handle query parameters
   async redirects() {
     return [
+      // Redirect www to non-www
       {
         source: "/:path*",
         has: [
@@ -99,6 +100,50 @@ const nextConfig = {
           },
         ],
         destination: "https://ibrahimshittu.com/:path*",
+        permanent: true,
+      },
+      // Redirect URLs with ref parameter to clean URLs
+      {
+        source: "/",
+        has: [
+          {
+            type: "query",
+            key: "ref",
+          },
+        ],
+        destination: "/",
+        permanent: true,
+      },
+      // Redirect broken blog URLs to correct ones
+      {
+        source: "/blog/from-civil-engineering-to-software",
+        destination: "/blog/from-civil-engineering-to-software-development",
+        permanent: true,
+      },
+      {
+        source: "/blog/predictive-analytics-energy-optimization",
+        destination: "/blog/using-predictive-analytics-for-energy-optimization",
+        permanent: true,
+      },
+      // Redirect old URLs without trailing dashes
+      {
+        source: "/blog/building-ai-agents-legal-tech",
+        destination: "/blog/building-ai-agents-for-legal-tech",
+        permanent: true,
+      },
+      {
+        source: "/blog/deploying-fastapi-azure-container",
+        destination: "/blog/deploying-fastapi-azure-container-apps",
+        permanent: true,
+      },
+      {
+        source: "/blog/scaling-cad-education-fabrio",
+        destination: "/blog/scaling-cad-education-at-fabrio",
+        permanent: true,
+      },
+      {
+        source: "/blog/speaking-bim-harambee-africa-2020",
+        destination: "/blog/speaking-at-bim-harambee-africa-2020",
         permanent: true,
       },
     ];

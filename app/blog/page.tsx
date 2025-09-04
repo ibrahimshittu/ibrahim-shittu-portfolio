@@ -9,16 +9,36 @@ import {
 } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Blog - Software Engineering, AI, and Tech Insights",
+  title: "Blog - Software Engineering, AI, and Tech Insights | Ibrahim Shittu",
   description:
     "Thoughts on Technology, Software Engineering, AI, and building great products. Learn from real-world experiences in legal tech, education platforms, and startup development.",
+  keywords: [
+    "software engineering blog",
+    "AI insights",
+    "technology blog",
+    "startup development",
+    "legal tech",
+    "education technology",
+    "web development",
+    "machine learning",
+    "Ibrahim Shittu blog",
+  ],
+  authors: [
+    {
+      name: siteConfig.author.name,
+      url: siteConfig.url,
+    },
+  ],
+  creator: siteConfig.author.name,
   openGraph: {
     type: "website",
-    title: "Blog - Ibrahim Shittu",
+    title:
+      "Blog - Software Engineering, AI, and Tech Insights | Ibrahim Shittu",
     description:
-      "Thoughts on software engineering, AI, and building products that matter.",
+      "Thoughts on Technology, Software Engineering, AI, and building great products. Learn from real-world experiences in legal tech, education platforms, and startup development.",
     url: `${siteConfig.url}/blog`,
     siteName: siteConfig.name,
+    locale: "en_US",
     images: [
       {
         url: siteConfig.ogImage,
@@ -34,11 +54,27 @@ export const metadata: Metadata = {
       "Blog - Software Engineering, AI, and Tech Insights | Ibrahim Shittu",
     description:
       "Thoughts on Technology, Software Engineering, AI, and building great products.",
+    creator: siteConfig.twitterHandle,
     images: [siteConfig.ogImage],
   },
   alternates: {
     canonical: generateCanonicalUrl("/blog"),
+    types: {
+      "application/rss+xml": `${siteConfig.url}/rss.xml`,
+    },
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  category: "technology",
 };
 
 export default function Blog() {
@@ -198,10 +234,7 @@ export default function Blog() {
       </section>
 
       <div className="text-center mt-8 mb-4">
-        <a
-          className="text-muted-foreground font-mono text-sm"
-          href="/?ref=ibrahim-shittu"
-        >
+        <a className="text-muted-foreground font-mono text-sm" href="/">
           Made with ❤️ by{" "}
           <span className="text-foreground underline underline-offset-2">
             Ibrahim Shittu

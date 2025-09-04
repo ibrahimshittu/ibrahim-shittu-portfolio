@@ -6,15 +6,36 @@ import { siteConfig } from "@/lib/seo";
 import { formatDate } from "@/lib/blog-utils";
 
 export const metadata: Metadata = {
-  title: "Projects - Ibrahim Shittu",
+  title: "Projects - Ibrahim Shittu | Software Engineer Portfolio",
   description:
-    "Explore my portfolio of projects showcasing expertise in web development, mobile applications, AI/ML solutions, and open-source contributions.",
+    "Explore my portfolio of projects showcasing expertise in AI/ML, web development, mobile applications, and open-source contributions. From React and Next.js to Python and machine learning solutions.",
+  keywords: [
+    "Ibrahim Shittu projects",
+    "software engineer portfolio",
+    "AI projects",
+    "machine learning",
+    "React projects",
+    "Next.js projects",
+    "Python projects",
+    "web development",
+    "mobile development",
+    "open source",
+  ],
+  authors: [
+    {
+      name: siteConfig.author.name,
+      url: siteConfig.url,
+    },
+  ],
+  creator: siteConfig.author.name,
   openGraph: {
-    title: "Projects - Ibrahim Shittu",
+    title: "Projects - Ibrahim Shittu | Software Engineer Portfolio",
     description:
-      "Explore my portfolio of projects showcasing expertise in web development, mobile applications, AI/ML solutions, and open-source contributions.",
+      "Explore my portfolio of projects showcasing expertise in AI/ML, web development, mobile applications, and open-source contributions. From React and Next.js to Python and machine learning solutions.",
     url: `${siteConfig.url}/projects`,
     type: "website",
+    siteName: siteConfig.name,
+    locale: "en_US",
     images: [
       {
         url: siteConfig.ogImage,
@@ -26,14 +47,27 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Projects - Ibrahim Shittu",
+    title: "Projects - Ibrahim Shittu | Software Engineer Portfolio",
     description:
-      "Explore my portfolio of projects showcasing expertise in web development, mobile applications, AI/ML solutions, and open-source contributions.",
+      "Explore my portfolio of projects showcasing expertise in AI/ML, web development, mobile applications, and open-source contributions.",
+    creator: siteConfig.twitterHandle,
     images: [siteConfig.ogImage],
   },
   alternates: {
     canonical: `${siteConfig.url}/projects`,
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  category: "technology",
 };
 
 export default function ProjectsPage() {
@@ -156,10 +190,7 @@ export default function ProjectsPage() {
       </section>
 
       <div className="text-center mt-8 mb-4">
-        <a
-          className="text-muted-foreground font-mono text-sm"
-          href="/?ref=ibrahim-shittu"
-        >
+        <a className="text-muted-foreground font-mono text-sm" href="/">
           Made with ❤️ by{" "}
           <span className="text-foreground underline underline-offset-2">
             Ibrahim Shittu

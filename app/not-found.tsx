@@ -22,10 +22,7 @@ export default function NotFound() {
         </div>
       </main>
       <footer className="text-center mt-auto mb-4">
-        <a
-          className="text-muted-foreground font-mono text-sm"
-          href="/?ref=ibrahim-shittu"
-        >
+        <a className="text-muted-foreground font-mono text-sm" href="/">
           Made with ❤️ by{" "}
           <span className="text-foreground underline underline-offset-2">
             Ibrahim Shittu

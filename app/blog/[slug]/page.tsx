@@ -215,10 +215,7 @@ export default function BlogPost({ params }: PageProps) {
       </section>
 
       <div className="text-center mt-8 mb-4">
-        <a
-          className="text-muted-foreground font-mono text-sm"
-          href="/?ref=ibrahim-shittu"
-        >
+        <a className="text-muted-foreground font-mono text-sm" href="/">
           Made with ❤️ by{" "}
           <span className="text-foreground underline underline-offset-2">
             Ibrahim Shittu

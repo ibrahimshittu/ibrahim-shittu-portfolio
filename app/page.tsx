@@ -366,22 +366,13 @@ export default function Home() {
               ))}
               <li>
                 <div className="inline-flex items-center px-2 py-0.5 text-xs text-muted-foreground font-mono">
-                  + 99 more
+                  + <span className="text-foreground text-xl ml-1">∞</span>
                 </div>
               </li>
             </ul>
           </section>
         </div>
       </section>
-
-      <div className="text-center mt-8 mb-4">
-        <a className="text-muted-foreground font-mono text-sm" href="/">
-          Made with ❤️ by{" "}
-          <span className="text-foreground underline underline-offset-2">
-            Ibrahim Shittu
-          </span>
-        </a>
-      </div>
     </main>
   );
 }

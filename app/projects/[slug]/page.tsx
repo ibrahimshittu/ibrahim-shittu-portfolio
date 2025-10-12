@@ -428,15 +428,6 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             </div>
           </nav>
         </article>
-
-        <div className="text-center mt-8 mb-4">
-          <a className="text-muted-foreground font-mono text-sm" href="/">
-            Made with ❤️ by{" "}
-            <span className="text-foreground underline underline-offset-2">
-              Ibrahim Shittu
-            </span>
-          </a>
-        </div>
       </main>
     </>
   );

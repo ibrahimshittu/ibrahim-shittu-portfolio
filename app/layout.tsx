@@ -152,6 +152,17 @@ export default function RootLayout({
           />
           <SiteNav />
           {children}
+          <footer className="text-center mt-8 mb-4">
+            <a
+              className="text-muted-foreground font-mono text-sm"
+              href="mailto:ibshittu01@gmail.com"
+            >
+              Made with 💻 by{" "}
+              <span className="text-foreground underline underline-offset-2">
+                Ibrahim Shittu
+              </span>
+            </a>
+          </footer>
           <Analytics />
           <SpeedInsights />
         </ThemeProvider>

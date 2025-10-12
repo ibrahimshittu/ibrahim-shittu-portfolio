@@ -18,7 +18,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     slug: "phantom-ai",
-    title: "PhantomAI - AI-Powered Frontend Testing Automation",
+    title: "PhantomAI - Frontend Testing Automation using AI",
     excerpt:
       "AI agent that converts natural language commands into automated frontend tests using LangGraph and Playwright.",
     description: `PhantomAI revolutionizes frontend testing by leveraging AI to generate, execute, and maintain comprehensive test suites from natural language descriptions. This production-ready system eliminates the traditional bottleneck of manual test creation while ensuring robust test coverage for modern web applications.
@@ -83,7 +83,7 @@ Built with Python for backend processing, the system integrates with Revit API f
   },
   {
     slug: "unheard-mental-health",
-    title: "Unheard - AI-Powered Mental Health Support Platform",
+    title: "Unheard - Mental Health Support Platform",
     excerpt:
       "Fostering mental well-being through personalized support and a secure, confidential space to share and be heard.",
     description: `Unheard is an innovative mental health platform that addresses critical gaps in mental healthcare accessibility and personalization. The platform creates a safe, anonymous environment where individuals can express themselves freely while receiving professional guidance from licensed therapists.

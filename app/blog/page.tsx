@@ -85,6 +85,82 @@ export default function Blog() {
     { name: "Blog", url: generateCanonicalUrl("/blog") },
   ]);
 
+  // Build timeline items with year and month separators
+  const timelineItems = (() => {
+    const items: React.ReactNode[] = [];
+    let lastYear = "";
+    let lastMonth = "";
+
+    for (const post of blogPosts) {
+      const date = new Date(post.date);
+      const year = String(date.getFullYear());
+      const month = date.toLocaleString("en-US", { month: "long" });
+
+      if (year !== lastYear) {
+        lastYear = year;
+        lastMonth = ""; // reset when year changes
+        items.push(
+          <li key={`year-${year}`} className="ml-0 mb-2">
+            <span className="absolute -left-1.5 mt-1 h-3 w-3 rounded-full border bg-background"></span>
+            <span className="ml-4 text-xs font-mono tracking-wider text-muted-foreground">
+              {year}
+            </span>
+          </li>
+        );
+      }
+
+      if (month !== lastMonth) {
+        lastMonth = month;
+        items.push(
+          <li key={`month-${year}-${month}`} className="ml-0 mb-2">
+            <span className="absolute -left-1.5 mt-1 h-3 w-3 rounded-full border bg-background"></span>
+            <span className="ml-4 text-[11px] font-mono uppercase text-muted-foreground">
+              {month}
+            </span>
+          </li>
+        );
+      }
+
+      items.push(
+        <li key={post.slug} className="mb-8 ml-4">
+          <span className="absolute -left-1.5 mt-1 h-3 w-3 rounded-full border bg-background"></span>
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center justify-between gap-3">
+              <Link href={`/blog/${post.slug}`} className="flex-1">
+                <h3 className="text-base font-semibold leading-tight hover:underline">
+                  {post.title}
+                </h3>
+              </Link>
+              <span className="text-[11px] font-mono text-muted-foreground whitespace-nowrap">
+                {post.readTime}
+              </span>
+            </div>
+            <p className="text-sm font-mono text-muted-foreground">
+              {post.excerpt}
+            </p>
+            <div className="flex flex-wrap gap-1">
+              {post.tags.slice(0, 5).map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-flex items-center rounded-md border px-2 py-0.5 text-[11px] font-semibold font-mono bg-muted text-muted-foreground"
+                >
+                  {tag}
+                </span>
+              ))}
+              {post.tags.length > 5 && (
+                <span className="inline-flex items-center px-2 py-0.5 text-[11px] font-mono text-muted-foreground">
+                  +{post.tags.length - 5} more
+                </span>
+              )}
+            </div>
+          </div>
+        </li>
+      );
+    }
+
+    return items;
+  })();
+
   return (
     <main className="flex-1 flex flex-col">
       {/* Structured Data */}
@@ -135,60 +211,23 @@ export default function Blog() {
             Blog
           </h1>
           <p className="text-pretty font-mono text-sm text-muted-foreground">
-            Thoughts on Technology, Software Engineering, AI, and building great
-            products.
+            Thoughts on startups, product engineering, AI/ML, and the evolving
+            relationship between technology, innovation, and human creativity.
           </p>
         </header>
 
-        <div className="flex flex-col gap-6">
-          {/* Blog Posts */}
-          <section className="flex min-h-0 flex-col gap-y-3">
+        <div className="flex flex-col gap-10">
+          {/* Blog Posts as vertical timeline with year/month separators */}
+          <section className="flex min-h-0 flex-col gap-y-5">
             <h2 className="text-lg font-bold" id="recent-posts">
               Recent Posts
             </h2>
-            <div className="flex flex-col gap-6" aria-labelledby="recent-posts">
-              {blogPosts.map((post) => (
-                <article
-                  key={post.slug}
-                  className="font-mono flex flex-col justify-start items-start gap-3 pb-6 border-b border-muted last:border-b-0"
-                >
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-2">
-                    <div className="flex-1">
-                      <Link href={`/blog/${post.slug}`}>
-                        <h3 className="text-base font-semibold text-left text-foreground hover:underline transition-all cursor-pointer">
-                          {post.title}
-                        </h3>
-                      </Link>
-                    </div>
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                      <span>{formatDate(post.date)}</span>
-                      <span>·</span>
-                      <span>{post.readTime}</span>
-                    </div>
-                  </div>
-
-                  <p className="self-stretch text-sm font-medium text-left text-muted-foreground leading-relaxed">
-                    {post.excerpt}
-                  </p>
-
-                  <div className="flex flex-wrap gap-1">
-                    {post.tags.slice(0, 3).map((tag) => (
-                      <div
-                        key={tag}
-                        className="inline-flex items-center rounded-md border px-2 py-0.5 text-xs font-semibold font-mono transition-colors text-nowrap border-muted bg-muted text-muted-foreground pointer-events-none"
-                      >
-                        {tag}
-                      </div>
-                    ))}
-                    {post.tags.length > 3 && (
-                      <div className="inline-flex items-center px-2 py-0.5 text-xs text-muted-foreground font-mono">
-                        +{post.tags.length - 3} more
-                      </div>
-                    )}
-                  </div>
-                </article>
-              ))}
-            </div>
+            <ol
+              className="relative ml-2 border-l border-muted"
+              aria-labelledby="recent-posts"
+            >
+              {timelineItems}
+            </ol>
           </section>
 
           {/* About Blog */}
@@ -232,15 +271,6 @@ export default function Blog() {
           </section>
         </div>
       </section>
-
-      <div className="text-center mt-8 mb-4">
-        <a className="text-muted-foreground font-mono text-sm" href="/">
-          Made with ❤️ by{" "}
-          <span className="text-foreground underline underline-offset-2">
-            Ibrahim Shittu
-          </span>
-        </a>
-      </div>
     </main>
   );
 }

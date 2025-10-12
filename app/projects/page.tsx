@@ -100,22 +100,22 @@ export default function ProjectsPage() {
               {projects.map((project) => (
                 <article
                   key={project.slug}
-                  className="font-mono flex flex-col justify-start items-start gap-3 pb-6 border-b border-muted last:border-b-0"
+                  className="font-mono flex flex-col justify-start items-start gap-2 pb-6 border-b border-muted last:border-b-0"
                 >
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-2 w-full">
                     <div className="flex-1">
                       <Link href={`/projects/${project.slug}`}>
-                        <h3 className="text-base font-semibold text-left text-foreground hover:underline transition-all cursor-pointer">
+                        <h3 className="text-base font-semibold leading-tight hover:underline">
                           {project.title}
                         </h3>
                       </Link>
                     </div>
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <div className="flex items-center gap-2 text-[11px] font-mono text-muted-foreground">
                       <span>{formatDate(project.date)}</span>
                     </div>
                   </div>
 
-                  <p className="self-stretch text-sm font-medium text-left text-muted-foreground leading-relaxed">
+                  <p className="self-stretch text-sm font-mono text-left text-muted-foreground leading-relaxed">
                     {project.excerpt}
                   </p>
 
@@ -123,13 +123,13 @@ export default function ProjectsPage() {
                     {project.technologies.slice(0, 4).map((tech) => (
                       <div
                         key={tech}
-                        className="inline-flex items-center rounded-md border px-2 py-0.5 text-xs font-semibold font-mono transition-colors text-nowrap border-muted bg-muted text-muted-foreground pointer-events-none"
+                        className="inline-flex items-center rounded-md border px-2 py-0.5 text-[11px] font-semibold font-mono transition-colors text-nowrap border-muted bg-muted text-muted-foreground pointer-events-none"
                       >
                         {tech}
                       </div>
                     ))}
                     {project.technologies.length > 4 && (
-                      <div className="inline-flex items-center px-2 py-0.5 text-xs text-muted-foreground font-mono">
+                      <div className="inline-flex items-center px-2 py-0.5 text-[11px] text-muted-foreground font-mono">
                         +{project.technologies.length - 4} more
                       </div>
                     )}
@@ -188,15 +188,6 @@ export default function ProjectsPage() {
           </section>
         </div>
       </section>
-
-      <div className="text-center mt-8 mb-4">
-        <a className="text-muted-foreground font-mono text-sm" href="/">
-          Made with ❤️ by{" "}
-          <span className="text-foreground underline underline-offset-2">
-            Ibrahim Shittu
-          </span>
-        </a>
-      </div>
     </main>
   );
 }

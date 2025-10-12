@@ -123,7 +123,7 @@ export default function Blog() {
 
       items.push(
         <li key={post.slug} className="mb-8 ml-4">
-          <span className="absolute -left-1.5 mt-1 h-3 w-3 rounded-full border bg-background"></span>
+          {/* <span className="absolute -left-1.5 mt-1 h-3 w-3 rounded-full border bg-background"></span> */}
           <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between gap-3">
               <Link href={`/blog/${post.slug}`} className="flex-1">
@@ -239,8 +239,8 @@ export default function Blog() {
               className="text-pretty font-mono text-sm text-muted-foreground"
               aria-labelledby="about-blog"
             >
-              I write about technology, software engineering, AI, and building
-              great products. My posts cover everything from technical
+              I write about technology, software engineering, AI/ML, and
+              building great products. My posts cover everything from technical
               deep-dives to career insights and lessons learned from working at
               startups and larger companies.
             </div>

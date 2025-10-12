@@ -31,11 +31,11 @@ Built with Python, LangGraph, Playwright, Browserbase, and Stagehand (browser au
     technologies: [
       "Python",
       "LangGraph",
+      "Browserbase",
       "Playwright",
       "LangChain",
       "OpenAI",
       "Anthropic",
-      "Browserbase",
       "Stagehand",
       "Docker",
     ],

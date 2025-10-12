@@ -17,19 +17,17 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    slug: "phantom-ai",
-    title: "PhantomAI - Frontend Testing Automation using AI",
+    slug: "tunnel-ai",
+    title: "Tunnel AI - Natural Language to Frontend Tests",
     excerpt:
-      "AI agent that converts natural language commands into automated frontend tests using LangGraph and Playwright.",
-    description: `PhantomAI revolutionizes frontend testing by leveraging AI to generate, execute, and maintain comprehensive test suites from natural language descriptions. This production-ready system eliminates the traditional bottleneck of manual test creation while ensuring robust test coverage for modern web applications.
+      "AI agent that turns plain-English instructions into automated Playwright tests using LangGraph, Browserbase, and Stagehand.",
+    description: `Tunnel AI transforms natural language into executable frontend tests. It generates, executes, and maintains tests end‑to‑end, eliminating the bottleneck of manual test creation while improving reliability for modern web apps.
 
-The platform uses LangGraph for intelligent workflow orchestration, creating a multi-agent system where each node specializes in a specific aspect of test automation. From parsing user intent to analyzing page structure, generating test code, and providing detailed failure analysis, PhantomAI handles the entire testing lifecycle autonomously.
+The workflow is orchestrated with LangGraph as a multi‑agent system: a Planning agent structures requirements, a Generator produces Playwright code, an Executor runs tests at scale on Browserbase's cloud browsers, a Validator analyzes results, and a Self‑Healing agent fixes brittle selectors and timing issues.
 
-Key innovations include self-healing selectors that automatically adapt when UI elements change, comprehensive test planning that generates edge cases and negative scenarios, and React-aware testing that understands component structures and props. The system supports multiple LLM providers (OpenAI and Anthropic) and provides parallel test execution for optimal performance.
+Key features include self‑healing selectors, comprehensive test planning with edge cases, React‑aware strategies, parallel execution, and detailed reporting with screenshots and recordings. Tests can be run synchronously for fast feedback or enqueued for large suites.
 
-Built with Python, LangGraph, and Playwright, the architecture features six specialized nodes: Intent Parser for converting natural language to structured requirements, Page Analyzer for understanding web page structure, Test Planner for creating comprehensive scenarios, Code Generator for producing executable pytest code, Executor for running tests with retry logic, and Result Analyzer for detailed failure analysis and recommendations.
-
-The CLI interface makes it accessible to developers of all skill levels, supporting commands like 'phantom test "Test the login form with invalid email"' for instant test generation and execution. The system includes advanced features like automatic waits for React components, screenshot capture on failures, video recording, network monitoring, and performance metrics tracking.`,
+Built with Python, LangGraph, Playwright, Browserbase, and Stagehand (browser automation SDK), Tunnel AI supports multiple LLM providers (OpenAI and Anthropic) and provides a simple CLI for developers.`,
     technologies: [
       "Python",
       "LangGraph",
@@ -37,14 +35,14 @@ The CLI interface makes it accessible to developers of all skill levels, support
       "LangChain",
       "OpenAI",
       "Anthropic",
-      "pytest",
+      "Browserbase",
+      "Stagehand",
       "Docker",
-      "Redis",
     ],
-    github: "https://github.com/phantom-ai/phantom-ai",
+    github: "https://github.com/ibrahimshittu/tunnel-ai",
     date: "2025-06-20",
     impact:
-      "Currently in active development, reducing test creation time by 90%, supporting parallel execution of 100+ tests, achieving 95% accuracy in selector generation, and processing natural language test descriptions in seconds.",
+      "Currently in active development. Achieves 90%+ reduction in authoring time, executes 100+ tests in parallel on Browserbase, and auto-recovers broken selectors without manual edits.",
   },
   {
     slug: "revit-virtual-assistant",

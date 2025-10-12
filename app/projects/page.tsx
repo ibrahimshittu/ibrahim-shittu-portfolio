@@ -100,7 +100,7 @@ export default function ProjectsPage() {
               {projects.map((project) => (
                 <article
                   key={project.slug}
-                  className="font-mono flex flex-col justify-start items-start gap-2 pb-6 border-b border-muted last:border-b-0"
+                  className="flex flex-col justify-start items-start gap-2 pb-6 border-b border-muted last:border-b-0"
                 >
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-2 w-full">
                     <div className="flex-1">

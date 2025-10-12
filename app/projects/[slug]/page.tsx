@@ -13,6 +13,7 @@ import {
   parseCloudinaryVideoUrl,
   type VideoMetadata,
 } from "@/lib/video-seo";
+import { ArrowLeft } from "lucide-react";
 
 export async function generateStaticParams() {
   const projects = getAllProjects();
@@ -219,24 +220,27 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         <StructuredData key={`video-${index}`} data={videoSchema} />
       ))}
       <main className="flex-1 flex flex-col">
-        <article className="mx-auto w-full max-w-2xl px-4 pb-8">
+        <section className="mx-auto w-full max-w-2xl space-y-8 bg-card px-4 pb-8">
           {/* Back to Projects */}
           <Link
             href="/projects"
-            className="inline-flex items-center gap-1 text-sm font-mono text-muted-foreground hover:text-foreground transition-colors mb-6"
+            className="inline-flex items-center gap-2 text-sm font-mono text-muted-foreground hover:text-foreground transition-colors"
           >
-            ← Back to projects
+            <ArrowLeft className="size-4" />
+            Back to Projects
           </Link>
 
           {/* Project Header */}
-          <header className="mb-8">
-            <h1 className="text-3xl font-bold mb-4">{project.title}</h1>
+          <header className="space-y-4">
+            <h1 className="text-2xl font-bold text-foreground leading-tight">
+              {project.title}
+            </h1>
 
             <div className="flex items-center gap-3 text-sm font-mono text-muted-foreground mb-4">
               <time dateTime={project.date}>{formatDate(project.date)}</time>
             </div>
 
-            <p className="text-lg text-muted-foreground font-mono leading-relaxed">
+            <p className="text-base text-muted-foreground font-mono leading-relaxed">
               {project.excerpt}
             </p>
 
@@ -427,7 +431,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                 ))}
             </div>
           </nav>
-        </article>
+        </section>
       </main>
     </>
   );

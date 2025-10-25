@@ -3,7 +3,7 @@ title: "My Journey Building Fabrio: From First Engineering Hire to Serving World
 excerpt: "My personal journey as the first engineering hire at Fabrio, rebuilding the platform from scratch and scaling it to serve prestigious institutions like UCL and Imperial College London. Featured in Tribune, one of Nigeria's leading newspapers."
 date: "2025-4-1"
 readTime: "10 min read"
-image: "https://res.cloudinary.com/ibrahimshittu/image/upload/v1754483726/ibrahim-shittu-portfolio/scaling-cad-education-at-fabrio.png"
+image: "https://res.cloudinary.com/ibrahimshittu/image/upload/v1761403648/ibrahim-shittu-portfolio/blog/scaling-cad-education-at-fabrio.png"
 tags:
   [
     "EdTech",

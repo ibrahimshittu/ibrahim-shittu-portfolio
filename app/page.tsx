@@ -3,6 +3,20 @@ import Image from "next/image";
 import { Icons } from "@/components/ui/icons";
 import { siteConfig, generatePersonSchema } from "@/lib/seo";
 
+interface WorkExperience {
+  title: string;
+  location: string;
+  period: string;
+  company: string;
+  type: string;
+  description: string;
+  previousRole?: {
+    title: string;
+    period: string;
+    description: string;
+  };
+}
+
 export const metadata: Metadata = {
   title: "Ibrahim Shittu - Senior Software Engineer",
   description:
@@ -35,35 +49,37 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  const workExperience = [
-    {
-      title: "Software Engineer",
-      location: "San Francisco, California, United States",
-      period: "Apr 2025 - Present",
-      company: "finiti legal",
-      type: "Full-time",
-      description:
-        "Building AI Agents that make lawyers' lives easier by developing secure multi-tenant architecture with SOC 2 compliance. Working on a product that automates tedious parts of corporate law, integrating directly into Microsoft Word and Outlook, and auto-generating regulatory content that would normally take days to draft manually. This product transforms workflows from manual drudgery into intelligent, streamlined processes, helping legal teams focus on strategy.",
-    },
+  const workExperience: WorkExperience[] = [
+    // {
+    //   title: "Software Engineer",
+    //   location: "San Francisco, California, United States",
+    //   period: "Apr 2025 - Present",
+    //   company: "finiti legal",
+    //   type: "Full-time",
+    //   description:
+    //     "Building AI Agents that make lawyers' lives easier by developing secure multi-tenant architecture with SOC 2 compliance. Working on a product that automates tedious parts of corporate law, integrating directly into Microsoft Word and Outlook, and auto-generating regulatory content that would normally take days to draft manually. This product transforms workflows from manual drudgery into intelligent, streamlined processes, helping legal teams focus on strategy.",
+    // },
     {
       title: "Lead Software Engineer",
       location: "London Area, United Kingdom",
-      period: "Dec 2024 - Mar 2025",
+      period: "Jun 2022 - Mar 2025",
       company: "fabrio",
       type: "Full-time",
       description:
-        "Promoted to Lead Software Engineer after demonstrating technical leadership and exceptional performance. Led a team of developers while continuing to drive platform innovation and institutional adoption. Oversaw technical strategy in building scalable CAD education solutions.",
-      previousRole: {
-        title: "Software Engineer",
-        period: "Jun 2022 - Dec 2024",
-        description:
-          "First hire at Fabrio, a VC-backed startup enhancing Computer-Aided Design (CAD) education and workflow efficiency. Spearheaded the ground-up rebuild of Fabrio using TypeScript, NextJS, Node/ExpressJS, GraphQL, and AWS services. Developed user-centric features, optimized customer support processes, and designed CI/CD pipelines. Contributed to the platform's growth and adoption by prestigious institutions.",
-      },
+        // "Promoted to Lead Software Engineer after demonstrating technical leadership and exceptional performance. Led a team of developers while continuing to drive platform innovation and institutional adoption. Oversaw technical strategy in building scalable CAD education solutions.",
+        "First hire at Fabrio, a VC-backed startup enhancing Computer-Aided Design (CAD) education and workflow efficiency. Spearheaded the ground-up rebuild of Fabrio using TypeScript, NextJS, Node/ExpressJS, GraphQL, and AWS services. Developed user-centric features, optimized customer support processes, and designed CI/CD pipelines. Contributed to the platform's growth and adoption by prestigious institutions.",
+
+      // previousRole: {
+      //   title: "Software Engineer",
+      //   period: "Jun 2022 - Dec 2024",
+      //   description:
+      //     "First hire at Fabrio, a VC-backed startup enhancing Computer-Aided Design (CAD) education and workflow efficiency. Spearheaded the ground-up rebuild of Fabrio using TypeScript, NextJS, Node/ExpressJS, GraphQL, and AWS services. Developed user-centric features, optimized customer support processes, and designed CI/CD pipelines. Contributed to the platform's growth and adoption by prestigious institutions.",
+      // },
     },
     {
       title: "Software Engineer",
       location: "Federal Capital Territory, Nigeria",
-      period: "Mar 2022 - Dec 2022",
+      period: "Feb 2022 - Dec 2022",
       company: "thrive agric (YC W19)",
       type: "Full-time",
       description:
@@ -72,7 +88,7 @@ export default function Home() {
     {
       title: "Founding Software Engineer",
       location: "Lagos State, Nigeria",
-      period: "Oct 2020 - Apr 2022",
+      period: "Oct 2020 - Mar 2022",
       company: "liveclasses",
       type: "Full-time",
       description:
@@ -155,12 +171,12 @@ export default function Home() {
             <p className="max-w-md items-center text-pretty font-mono text-xs text-foreground">
               <a
                 className="inline-flex gap-x-1.5 align-baseline leading-none hover:underline text-muted-foreground"
-                href="https://www.google.com/maps/search/San+Francisco,+USA"
+                href="https://www.google.com/maps/search/Lagos,+Nigeria"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Location: San Francisco, USA"
+                aria-label="Location: Lagos, Nigeria"
               >
-                San Francisco, USA
+                Lagos, Nigeria
               </a>
             </p>
             <div

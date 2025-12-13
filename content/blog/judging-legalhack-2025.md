@@ -3,7 +3,7 @@ title: "Judging at LegalHack 2025: When Blockchain Meets Legal Technology"
 excerpt: "My first time judging a legal tech hackathon taught me unexpected lessons about innovation at the intersection of traditional industries and emerging technology. Here's what I learned evaluating 91 projects from 320 hackers across the globe."
 date: 2025-12-08
 readTime: "4 min read"
-image: "https://res.cloudinary.com/djnkubmws/image/upload/v1733677200/legal-tech-blockchain_placeholder.jpg"
+image: "https://res.cloudinary.com/ibrahimshittu/image/upload/v1765607344/ibrahim-shittu-portfolio/blog/judging-legalhack-2025.png"
 tags:
   - legal-tech
   - blockchain
@@ -12,6 +12,8 @@ tags:
   - career
   - innovation
 ---
+
+_This article was featured on the [Blockchain Legal Institute website](https://bli.tools/when-blockchain-meets-legal-technology-a-perspective/)._
 
 I spend my days building AI-powered tools for the legal industry. When I learned about the Blockchain Legal Institute's Legal Tech Hackathon and the opportunity to judge, I was immediately interested. Hackathons have always fascinated me—the energy, the creativity, the pressure of building something meaningful in a short time.
 

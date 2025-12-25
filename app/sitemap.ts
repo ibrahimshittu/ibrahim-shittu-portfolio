@@ -3,64 +3,62 @@ import { getAllBlogPosts } from "@/lib/markdown";
 import { getAllProjects } from "@/lib/projects";
 import { siteConfig } from "@/lib/seo";
 
+function toDate(dateStr: string | undefined): Date {
+  if (!dateStr) return new Date();
+  const parsed = new Date(dateStr);
+  return isNaN(parsed.getTime()) ? new Date() : parsed;
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const blogPosts = getAllBlogPosts();
   const projects = getAllProjects();
-
-  const currentDate = new Date();
+  const now = new Date();
   const lastMonth = new Date(
-    currentDate.getFullYear(),
-    currentDate.getMonth() - 1,
-    currentDate.getDate()
+    now.getFullYear(),
+    now.getMonth() - 1,
+    now.getDate()
   );
 
-  // Static pages with higher priorities and proper frequency
   const staticPages = [
     {
       url: siteConfig.url,
-      lastModified: currentDate,
+      lastModified: now,
       changeFrequency: "weekly" as const,
       priority: 1.0,
     },
     {
       url: `${siteConfig.url}/blog`,
-      lastModified:
-        blogPosts.length > 0 ? new Date(blogPosts[0].date) : currentDate,
+      lastModified: blogPosts.length > 0 ? toDate(blogPosts[0].date) : now,
       changeFrequency: "daily" as const,
       priority: 0.9,
     },
     {
       url: `${siteConfig.url}/projects`,
-      lastModified:
-        projects.length > 0 ? new Date(projects[0].date) : currentDate,
+      lastModified: projects.length > 0 ? toDate(projects[0].date) : now,
       changeFrequency: "weekly" as const,
       priority: 0.8,
     },
   ];
 
-  // Dynamic blog post pages with better priorities for recent posts
   const blogPages = blogPosts.map((post, index) => {
-    const postDate = new Date(post.date);
+    const postDate = toDate(post.date);
     const isRecent = postDate >= lastMonth;
-
     return {
       url: `${siteConfig.url}/blog/${post.slug}`,
       lastModified: postDate,
       changeFrequency: "monthly" as const,
-      priority: isRecent ? 0.8 : Math.max(0.5, 0.7 - index * 0.05), // Recent posts get higher priority
+      priority: isRecent ? 0.8 : Math.max(0.5, 0.7 - index * 0.05),
     };
   });
 
-  // Dynamic project pages with proper prioritization
   const projectPages = projects.map((project, index) => {
-    const projectDate = new Date(project.date);
+    const projectDate = toDate(project.date);
     const isRecent = projectDate >= lastMonth;
-
     return {
       url: `${siteConfig.url}/projects/${project.slug}`,
       lastModified: projectDate,
       changeFrequency: "monthly" as const,
-      priority: isRecent ? 0.7 : Math.max(0.4, 0.6 - index * 0.05), // Recent projects get higher priority
+      priority: isRecent ? 0.7 : Math.max(0.4, 0.6 - index * 0.05),
     };
   });
 

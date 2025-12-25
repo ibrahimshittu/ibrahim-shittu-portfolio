@@ -1,7 +1,7 @@
 ---
 title: "Deploying FastAPI to Azure Container Apps with Key Vault, Container Registry, and GitHub Actions"
 excerpt: "A comprehensive guide to deploying FastAPI applications using Azure Container Apps, Key Vault for secrets management, Container Registry for images, and GitHub Actions for CI/CD automation."
-date: 2025-02-3
+date: "2025-02-03"
 readTime: "15 min read"
 image: "https://res.cloudinary.com/dud5rx9vj/image/upload/v1737049200/azure-container-apps-deployment.jpg"
 tags:

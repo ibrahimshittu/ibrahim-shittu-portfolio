@@ -105,6 +105,13 @@ export function generateWebsiteSchema() {
   };
 }
 
+function toISO(dateStr: string): string {
+  const parsed = new Date(dateStr);
+  return isNaN(parsed.getTime())
+    ? new Date().toISOString()
+    : parsed.toISOString();
+}
+
 export function generateArticleSchema(
   title: string,
   description: string,
@@ -120,8 +127,8 @@ export function generateArticleSchema(
     headline: title,
     description: description,
     url: `${siteConfig.url}/blog/${slug}`,
-    datePublished: datePublished,
-    dateModified: dateModified,
+    datePublished: toISO(datePublished),
+    dateModified: toISO(dateModified),
     author: {
       "@type": "Person",
       name: siteConfig.author.name,
@@ -181,12 +188,10 @@ export function generateOrganizationSchema() {
   };
 }
 
-// Helper function to generate canonical URLs
 export function generateCanonicalUrl(path: string) {
   return `${siteConfig.url}${path}`;
 }
 
-// Helper function to create SEO-friendly URLs
 export function createSlug(text: string): string {
   return text
     .toLowerCase()
@@ -194,7 +199,6 @@ export function createSlug(text: string): string {
     .replace(/(^-|-$)+/g, "");
 }
 
-// Generate meta description with optimal length
 export function generateMetaDescription(text: string, maxLength = 160): string {
   if (text.length <= maxLength) return text;
 

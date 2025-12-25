@@ -27,6 +27,13 @@ interface PageProps {
   };
 }
 
+function toISO(dateStr: string): string {
+  const parsed = new Date(dateStr);
+  return isNaN(parsed.getTime())
+    ? new Date().toISOString()
+    : parsed.toISOString();
+}
+
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
@@ -36,11 +43,14 @@ export async function generateMetadata({
     return {
       title: "Post Not Found",
       description: "The requested blog post could not be found.",
+      robots: { index: false, follow: false },
     };
   }
 
   const description = generateMetaDescription(post.excerpt);
   const canonicalUrl = generateCanonicalUrl(`/blog/${post.slug}`);
+  const isoDate = toISO(post.date);
+  const imageUrl = post.image || siteConfig.ogImage;
 
   return {
     title: post.title,
@@ -58,13 +68,13 @@ export async function generateMetadata({
       description: description,
       url: canonicalUrl,
       siteName: siteConfig.name,
-      publishedTime: post.date,
-      modifiedTime: post.date,
+      publishedTime: isoDate,
+      modifiedTime: isoDate,
       authors: [siteConfig.author.name],
       tags: post.tags,
       images: [
         {
-          url: post.image,
+          url: imageUrl,
           width: 1200,
           height: 630,
           alt: post.title,
@@ -75,11 +85,22 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: post.title,
       description: description,
-      images: [post.image],
+      images: [imageUrl],
       creator: siteConfig.twitterHandle,
     },
     alternates: {
       canonical: canonicalUrl,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
     },
     category: "technology",
   };
@@ -92,7 +113,6 @@ export default function BlogPost({ params }: PageProps) {
     notFound();
   }
 
-  // Extract YouTube videos from content
   const youtubeVideoIds = extractYouTubeVideos(post.content);
   const pageUrl = generateCanonicalUrl(`/blog/${post.slug}`);
 
@@ -101,7 +121,7 @@ export default function BlogPost({ params }: PageProps) {
     post.excerpt,
     post.slug,
     post.date,
-    post.date, // using same date for modified since we don't track modifications
+    post.date,
     post.tags,
     post.readTime
   );
@@ -112,7 +132,6 @@ export default function BlogPost({ params }: PageProps) {
     { name: post.title, url: pageUrl },
   ]);
 
-  // Generate video schemas for each YouTube video
   const videoSchemas = youtubeVideoIds.map((videoId) => {
     const videoMetadata = generateBlogVideoMetadata(
       videoId,
@@ -125,17 +144,13 @@ export default function BlogPost({ params }: PageProps) {
 
   return (
     <main className="flex-1 flex flex-col">
-      {/* Structured Data */}
       <StructuredData data={articleSchema} />
       <StructuredData data={breadcrumbSchema} />
       {videoSchemas.map((videoSchema, index) => (
         <StructuredData key={`video-${index}`} data={videoSchema} />
       ))}
 
-      {/* Global nav is rendered by RootLayout */}
-
       <section className="mx-auto w-full max-w-2xl space-y-8 bg-card px-4 pb-8">
-        {/* Back to Blog */}
         <Link
           href="/blog"
           className="inline-flex items-center gap-2 text-sm font-mono text-muted-foreground hover:text-foreground transition-colors"
@@ -144,7 +159,6 @@ export default function BlogPost({ params }: PageProps) {
           Back to Blog
         </Link>
 
-        {/* Article Header */}
         <header className="space-y-4">
           <h1 className="text-2xl font-bold text-foreground leading-tight">
             {post.title}
@@ -170,14 +184,12 @@ export default function BlogPost({ params }: PageProps) {
           </div>
         </header>
 
-        {/* Article Content */}
         <article className="font-mono">
           <div className="prose dark:prose-invert max-w-none">
             {formatContent(post.content)}
           </div>
         </article>
 
-        {/* Author Bio */}
         <div className="border-t border-muted pt-8 mt-12">
           <div className="flex items-start gap-4">
             <span className="relative flex shrink-0 overflow-hidden rounded-full size-12">
@@ -219,7 +231,6 @@ export default function BlogPost({ params }: PageProps) {
           </div>
         </div>
 
-        {/* Navigation */}
         <div className="flex justify-center pt-8">
           <Link href="/blog">
             <button className="px-4 py-2 text-sm font-mono bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors">

@@ -17,6 +17,7 @@ import {
   generateArticleSchema,
   generateBreadcrumbSchema,
   generateMetaDescription,
+  toISO,
 } from "@/lib/seo";
 import { generateVideoObjectSchema } from "@/lib/video-seo";
 import { StructuredData } from "@/components/StructuredData";
@@ -25,13 +26,6 @@ interface PageProps {
   params: {
     slug: string;
   };
-}
-
-function toISO(dateStr: string): string {
-  const parsed = new Date(dateStr);
-  return isNaN(parsed.getTime())
-    ? new Date().toISOString()
-    : parsed.toISOString();
 }
 
 export async function generateMetadata({

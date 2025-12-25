@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Icons } from "@/components/ui/icons";
 import { getProjectBySlug, getAllProjects } from "@/lib/projects";
-import { siteConfig, generateMetaDescription } from "@/lib/seo";
+import { siteConfig, generateMetaDescription, toISO } from "@/lib/seo";
 import { formatDate } from "@/lib/blog-utils";
 import { StructuredData } from "@/components/StructuredData";
 import {
@@ -32,10 +32,12 @@ export async function generateMetadata({
   if (!project) {
     return {
       title: "Project Not Found",
+      robots: { index: false, follow: false },
     };
   }
 
   const description = generateMetaDescription(project.description, 160);
+  const isoDate = toISO(project.date);
 
   return {
     title: `${project.title} - Projects | Ibrahim Shittu`,
@@ -59,8 +61,8 @@ export async function generateMetadata({
       title: project.title,
       description: description,
       type: "article",
-      publishedTime: project.date,
-      modifiedTime: project.date,
+      publishedTime: isoDate,
+      modifiedTime: isoDate,
       url: `${siteConfig.url}/projects/${project.slug}`,
       siteName: siteConfig.name,
       locale: "en_US",
@@ -106,7 +108,7 @@ export async function generateMetadata({
     category: "technology",
     other: {
       "article:author": siteConfig.author.name,
-      "article:published_time": project.date,
+      "article:published_time": isoDate,
       "article:tag": project.technologies.join(", "),
     },
   };
@@ -119,7 +121,8 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
     notFound();
   }
 
-  // Generate structured data for the project
+  const isoDate = toISO(project.date);
+
   const projectSchema = {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
@@ -135,8 +138,8 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         siteConfig.author.twitter,
       ],
     },
-    dateCreated: project.date,
-    datePublished: project.date,
+    dateCreated: isoDate,
+    datePublished: isoDate,
     url: `${siteConfig.url}/projects/${project.slug}`,
     keywords: project.technologies,
     programmingLanguage: project.technologies.filter((tech) =>
@@ -177,11 +180,9 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
     ],
   };
 
-  // Generate video schemas for project videos
   const pageUrl = `${siteConfig.url}/projects/${project.slug}`;
   const videoSchemas: any[] = [];
 
-  // Check for main project video (image field that contains video)
   if (project.image && project.image.match(/\.(mp4|webm|ogg|mov)$/i)) {
     const { title: videoTitle } = parseCloudinaryVideoUrl(project.image);
     const videoMetadata: VideoMetadata = {
@@ -194,7 +195,6 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
     videoSchemas.push(generateVideoObjectSchema(videoMetadata, pageUrl));
   }
 
-  // Check for gallery videos
   if (project.gallery) {
     project.gallery.forEach((media, index) => {
       const isVideo = media.url.match(/\.(mp4|webm|ogg|mov)$/i);
@@ -221,7 +221,6 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       ))}
       <main className="flex-1 flex flex-col">
         <section className="mx-auto w-full max-w-2xl space-y-8 bg-card px-4 pb-8">
-          {/* Back to Projects */}
           <Link
             href="/projects"
             className="inline-flex items-center gap-2 text-sm font-mono text-muted-foreground hover:text-foreground transition-colors"
@@ -230,7 +229,6 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             Back to Projects
           </Link>
 
-          {/* Project Header */}
           <header className="space-y-4">
             <h1 className="text-2xl font-bold text-foreground leading-tight">
               {project.title}
@@ -244,7 +242,6 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
               {project.excerpt}
             </p>
 
-            {/* Project Links */}
             {(project.github || project.link) && (
               <div className="flex gap-4 mt-4">
                 {project.github && (
@@ -273,7 +270,6 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             )}
           </header>
 
-          {/* Technologies */}
           <section className="mb-8">
             <h2 className="text-xl font-bold mb-3">Technologies Used</h2>
             <div className="flex flex-wrap gap-1">
@@ -288,7 +284,6 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             </div>
           </section>
 
-          {/* Project Description */}
           <section className="mb-8">
             <h2 className="text-xl font-bold mb-3">About This Project</h2>
             <div className="prose prose-neutral dark:prose-invert max-w-none">
@@ -303,7 +298,6 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             </div>
           </section>
 
-          {/* Gallery */}
           {project.gallery && project.gallery.length > 0 && (
             <section className="mb-8">
               <h2 className="text-xl font-bold mb-3">Gallery</h2>
@@ -398,7 +392,6 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             </section>
           )}
 
-          {/* Impact */}
           <section className="mb-8">
             <h2 className="text-xl font-bold mb-3">Impact & Results</h2>
             <div className="bg-muted/50 rounded-lg p-4 border">
@@ -408,7 +401,6 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             </div>
           </section>
 
-          {/* Navigation to other projects */}
           <nav className="mt-12 pt-8 border-t">
             <h3 className="text-lg font-bold mb-4">More Projects</h3>
             <div className="grid gap-4 sm:grid-cols-2">

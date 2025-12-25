@@ -1,13 +1,7 @@
 import { MetadataRoute } from "next";
 import { getAllBlogPosts } from "@/lib/markdown";
 import { getAllProjects } from "@/lib/projects";
-import { siteConfig } from "@/lib/seo";
-
-function toDate(dateStr: string | undefined): Date {
-  if (!dateStr) return new Date();
-  const parsed = new Date(dateStr);
-  return isNaN(parsed.getTime()) ? new Date() : parsed;
-}
+import { siteConfig, toDate } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const blogPosts = getAllBlogPosts();

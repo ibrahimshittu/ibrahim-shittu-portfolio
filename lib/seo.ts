@@ -105,11 +105,17 @@ export function generateWebsiteSchema() {
   };
 }
 
-function toISO(dateStr: string): string {
+export function toISO(dateStr: string): string {
   const parsed = new Date(dateStr);
   return isNaN(parsed.getTime())
     ? new Date().toISOString()
     : parsed.toISOString();
+}
+
+export function toDate(dateStr: string | undefined): Date {
+  if (!dateStr) return new Date();
+  const parsed = new Date(dateStr);
+  return isNaN(parsed.getTime()) ? new Date() : parsed;
 }
 
 export function generateArticleSchema(

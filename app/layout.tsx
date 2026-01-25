@@ -85,10 +85,7 @@ export const metadata: Metadata = {
   },
   category: "technology",
   icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon.svg", type: "image/svg+xml" },
-    ],
+    icon: [{ url: "/favicon.ico", sizes: "any" }],
     apple: "/apple-touch-icon.png",
   },
   manifest: "/manifest.json",

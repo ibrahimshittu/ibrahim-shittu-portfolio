@@ -77,7 +77,7 @@ export default function Home() {
       // },
     },
     {
-      title: "Software Engineer",
+      title: "Lead Software Engineer",
       location: "Federal Capital Territory, Nigeria",
       period: "Feb 2022 - Dec 2022",
       company: "thrive agric (YC W19)",

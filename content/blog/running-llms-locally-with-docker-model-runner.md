@@ -4,7 +4,19 @@ excerpt: "A practical guide to running large language models on your machine usi
 date: "2026-01-25"
 readTime: "10 min read"
 image: "https://res.cloudinary.com/ibrahimshittu/image/upload/v1769340606/ibrahim-shittu-portfolio/blog/running-llms-locally-with-docker-model-runner.png"
-tags: ["docker", "llm", "ai", "local-development", "model-runner"]
+tags:
+  [
+    "docker",
+    "llm",
+    "docker-model-runner",
+    "ai-infrastructure",
+    "open-source-ai",
+    "local-llm",
+    "offline-ai",
+    "model-serving",
+    "inference",
+    "developer-tools",
+  ]
 ---
 
 Running large language models locally has never been easier. Docker Model Runner brings the simplicity of container workflows to AI models - pull, run, and interact with LLMs using familiar Docker commands. This guide walks you through everything you need to get started.

@@ -4,8 +4,7 @@ export const siteConfig = {
   description:
     "Senior Software Engineer with a proven track record of building scalable, high-performance web, mobile, and AI-driven solutions for startups and global enterprises across diverse industries.",
   url: "https://ibrahimshittu.com",
-  ogImage:
-    "https://res.cloudinary.com/ibrahimshittu/image/upload/c_fill,g_face,h_630,w_1200,q_auto,f_auto/v1756380032/Ibrahim_Shittu_s_Photo.png",
+  ogImage: "https://ibrahimshittu.com/og-image.png",
   twitterHandle: "@ibrahimshittu01",
   author: {
     name: "Ibrahim Shittu",

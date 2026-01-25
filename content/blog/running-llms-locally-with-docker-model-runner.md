@@ -309,17 +309,6 @@ pip install openai
 python chatbot.py
 ```
 
-## Configuring Models
-
-Adjust model settings like context size:
-
-```bash
-# Increase context window for longer conversations
-docker model configure --context-size 8192 llama3.2:1B-Q8_0
-```
-
-Default context sizes range from 2,048 to 8,192 tokens depending on the model.
-
 ## Using from Docker Containers
 
 If your application runs in a Docker container, use the internal hostname:
@@ -360,11 +349,7 @@ docker model list
 
 ## Conclusion
 
-Docker Model Runner makes local LLM development accessible to everyone. With just a few commands, you can:
-
-- Pull and run various open-source models
-- Integrate with applications using familiar OpenAI-compatible APIs
-- Develop and test without cloud dependencies or costs
+Docker Model Runner makes local LLM development accessible to everyone. With just a few commands, you can pull and run various open-source models, integrate with applications using familiar OpenAI-compatible APIs, and develop and test without cloud dependencies or costs.
 
 Start with a small model like `ai/smollm2` or `ai/llama3.2:1B-Q8_0` to get familiar with the workflow, then scale up to larger models as your needs grow.
 

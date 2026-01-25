@@ -22,7 +22,7 @@ export function generateBlogVideoMetadata(
   videoId: string,
   blogTitle: string,
   blogDescription: string,
-  blogDate: string
+  blogDate: string,
 ): VideoMetadata {
   return {
     title: `${blogTitle} - Video Content`,
@@ -46,8 +46,10 @@ export const formatDate = (dateString: string): string => {
 
 // Parse **bold** markers, links, and inline code inside text and return React nodes
 export const formatInlineText = (text: string): React.ReactNode => {
-  // Support inline code with backticks, bold markers, and markdown links
-  const parts = text.split(/(`[^`]+`|\*\*[^*]+\*\*|\[([^\]]+)\]\(([^)]+)\))/g);
+  // Support inline code with single/double backticks, bold markers, and links
+  const parts = text.split(
+    /(``[^`]+``|`[^`]+`|\*\*[^*]+\*\*|\[([^\]]+)\]\(([^)]+)\))/g,
+  );
   const nodes: React.ReactNode[] = [];
 
   for (let i = 0; i < parts.length; i++) {
@@ -70,26 +72,31 @@ export const formatInlineText = (text: string): React.ReactNode => {
           className="text-muted-foreground underline underline-offset-2 hover:text-foreground transition-colors"
         >
           {parts[i + 1]}
-        </a>
+        </a>,
       );
       i += 2; // Skip the next two parts as they're part of the link
       continue;
     }
 
-    if (part.startsWith("`") && part.endsWith("`")) {
+    if (
+      (part.startsWith("``") && part.endsWith("``")) ||
+      (part.startsWith("`") && part.endsWith("`"))
+    ) {
+      const isDouble = part.startsWith("``");
+      const content = isDouble ? part.slice(2, -2) : part.slice(1, -1);
       nodes.push(
         <code
           key={`code-${i}`}
           className="px-1 py-0.5 rounded bg-muted text-foreground font-mono text-[0.8em]"
         >
-          {part.slice(1, -1)}
-        </code>
+          {content}
+        </code>,
       );
     } else if (part.startsWith("**") && part.endsWith("**")) {
       nodes.push(
         <span key={`bold-${i}`} className="font-semibold text-muted-foreground">
           {part.slice(2, -2)}
-        </span>
+        </span>,
       );
     } else {
       nodes.push(<React.Fragment key={`text-${i}`}>{part}</React.Fragment>);
@@ -99,7 +106,7 @@ export const formatInlineText = (text: string): React.ReactNode => {
   return nodes;
 };
 
-// Transform full markdown-lite content (headings, lists, code) into React nodes
+// Transform full markdown-lite content (headings, lists, code, images, tables) into React nodes
 export const formatContent = (content: string): React.ReactNode[] => {
   const lines = content.split("\n");
   const nodes: React.ReactNode[] = [];
@@ -111,6 +118,8 @@ export const formatContent = (content: string): React.ReactNode[] => {
   let listItems: string[] | null = null;
   let paragraphBuf: string[] = [];
   let quoteBuf: string[] | null = null;
+  let tableRows: string[][] | null = null;
+  let tableHeader: string[] | null = null;
 
   const HeadingTag = ({
     level,
@@ -159,7 +168,7 @@ export const formatContent = (content: string): React.ReactNode[] => {
           className="text-sm font-mono text-muted-foreground italic mt-8 mb-6 leading-relaxed border-l-2 border-border pl-4"
         >
           {formatInlineText(text.slice(1, -1))}
-        </p>
+        </p>,
       );
     } else {
       // Split paragraph by single newlines into separate <p> like previous behavior
@@ -171,7 +180,7 @@ export const formatContent = (content: string): React.ReactNode[] => {
         nodes.push(
           <p key={`p-${nodes.length}`} className={cls}>
             {formatInlineText(line.trim())}
-          </p>
+          </p>,
         );
       });
     }
@@ -191,7 +200,7 @@ export const formatContent = (content: string): React.ReactNode[] => {
             <span>{formatInlineText(item)}</span>
           </li>
         ))}
-      </ul>
+      </ul>,
     );
     listItems = null;
   };
@@ -201,7 +210,7 @@ export const formatContent = (content: string): React.ReactNode[] => {
     nodes.push(
       <div key={`code-${nodes.length}`} className="mt-4 mb-6">
         <CodeBlock language={codeLang} code={codeLines.join("\n")} />
-      </div>
+      </div>,
     );
     inCode = false;
     codeLines = [];
@@ -222,9 +231,69 @@ export const formatContent = (content: string): React.ReactNode[] => {
             {formatInlineText(l)}
           </p>
         ))}
-      </blockquote>
+      </blockquote>,
     );
     quoteBuf = null;
+  };
+
+  const flushTable = () => {
+    if (!tableHeader || !tableRows || tableRows.length === 0) return;
+    nodes.push(
+      <div
+        key={`table-${nodes.length}`}
+        className="mt-4 mb-6 -mx-4 sm:mx-0 overflow-x-auto"
+      >
+        <table className="w-full min-w-[520px] text-xs sm:text-sm font-mono border-collapse">
+          <thead>
+            <tr className="border-b border-border">
+              {tableHeader.map((cell, i) => (
+                <th
+                  key={i}
+                  className="text-left py-2 px-2 sm:px-3 text-muted-foreground font-semibold"
+                >
+                  {formatInlineText(cell)}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {tableRows.map((row, rowIdx) => (
+              <tr key={rowIdx} className="border-b border-border/50">
+                {row.map((cell, cellIdx) => (
+                  <td
+                    key={cellIdx}
+                    className="py-2 px-2 sm:px-3 text-muted-foreground leading-relaxed"
+                  >
+                    {formatInlineText(cell)}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>,
+    );
+    tableHeader = null;
+    tableRows = null;
+  };
+
+  // Helper to check if a line is a table row
+  const isTableRow = (line: string): boolean => {
+    return line.trim().startsWith("|") && line.trim().endsWith("|");
+  };
+
+  // Helper to check if a line is a table separator (|---|---|)
+  const isTableSeparator = (line: string): boolean => {
+    return /^\|[\s-:|]+\|$/.test(line.trim());
+  };
+
+  // Helper to parse table cells from a row
+  const parseTableCells = (line: string): string[] => {
+    return line
+      .trim()
+      .slice(1, -1) // Remove leading and trailing |
+      .split("|")
+      .map((cell) => cell.trim());
   };
 
   for (let idx = 0; idx < lines.length; idx++) {
@@ -245,6 +314,7 @@ export const formatContent = (content: string): React.ReactNode[] => {
       flushParagraph();
       flushList();
       flushQuote();
+      flushTable();
       const videoId = line.slice(10, -2).trim();
 
       // Store video information for structured data (can be accessed by parent component)
@@ -272,7 +342,7 @@ export const formatContent = (content: string): React.ReactNode[] => {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
           />
-        </div>
+        </div>,
       );
       continue;
     }
@@ -295,6 +365,7 @@ export const formatContent = (content: string): React.ReactNode[] => {
       flushParagraph();
       flushList();
       flushQuote();
+      flushTable();
       inCode = true;
       codeLang = codeStart[1] ? codeStart[1].toLowerCase() : "text";
       continue;
@@ -305,6 +376,7 @@ export const formatContent = (content: string): React.ReactNode[] => {
       flushParagraph();
       flushList();
       flushQuote();
+      flushTable();
       continue;
     }
 
@@ -312,9 +384,66 @@ export const formatContent = (content: string): React.ReactNode[] => {
     if (/^>\s?.*/.test(line)) {
       flushParagraph();
       flushList();
+      flushTable();
       if (!quoteBuf) quoteBuf = [];
       quoteBuf.push(line);
       continue;
+    }
+
+    // Image: ![alt](src)
+    const imageMatch = line.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+    if (imageMatch) {
+      flushParagraph();
+      flushList();
+      flushQuote();
+      flushTable();
+      const alt = imageMatch[1];
+      const src = imageMatch[2];
+      nodes.push(
+        <figure key={`img-${nodes.length}`} className="mt-6 mb-8">
+          <img
+            src={src}
+            alt={alt}
+            className="w-full rounded-lg border border-border"
+          />
+          {alt && (
+            <figcaption className="mt-2 text-center text-xs text-muted-foreground font-mono">
+              {alt}
+            </figcaption>
+          )}
+        </figure>,
+      );
+      continue;
+    }
+
+    // Table handling
+    if (isTableRow(line)) {
+      flushParagraph();
+      flushList();
+      flushQuote();
+
+      // If we don't have a header yet, this is the header row
+      if (!tableHeader) {
+        tableHeader = parseTableCells(line);
+        tableRows = [];
+        continue;
+      }
+
+      // If this is the separator row (|---|---|), skip it
+      if (isTableSeparator(line)) {
+        continue;
+      }
+
+      // Otherwise, it's a data row
+      if (tableRows) {
+        tableRows.push(parseTableCells(line));
+      }
+      continue;
+    }
+
+    // If we were in a table and hit a non-table line, flush the table
+    if (tableHeader && !isTableRow(line)) {
+      flushTable();
     }
 
     // Heading (##, ###, ####)
@@ -323,12 +452,13 @@ export const formatContent = (content: string): React.ReactNode[] => {
       flushParagraph();
       flushList();
       flushQuote();
+      flushTable();
       const level = headingMatch[1].length;
       const text = headingMatch[2].trim();
       nodes.push(
         <HeadingTag key={`h-${nodes.length}`} level={level}>
           {text}
-        </HeadingTag>
+        </HeadingTag>,
       );
       continue;
     }
@@ -338,6 +468,7 @@ export const formatContent = (content: string): React.ReactNode[] => {
     if (listMatch) {
       flushParagraph();
       flushQuote();
+      flushTable();
       if (!listItems) listItems = [];
       listItems.push(listMatch[1]);
       continue;
@@ -351,6 +482,7 @@ export const formatContent = (content: string): React.ReactNode[] => {
   flushCode();
   flushList();
   flushQuote();
+  flushTable();
   flushParagraph();
 
   return nodes;

@@ -179,7 +179,7 @@ export default function BlogPost({ params }: PageProps) {
         </header>
 
         <article className="font-mono">
-          <div className="prose dark:prose-invert max-w-none">
+          <div className="prose dark:prose-invert max-w-none prose-code:before:content-none prose-code:after:content-none">
             {formatContent(post.content)}
           </div>
         </article>

@@ -43,6 +43,7 @@ const experience: WorkEntry[] = [
     summary:
       "AI agents that automate corporate-law drudgery — multi-tenant, SOC 2, deep Word & Outlook integrations. Turning days of manual drafting into minutes.",
     stack: ["Python", "LangGraph", "TypeScript", "Azure"],
+    impact: { head: "days → minutes", tail: "draft time" },
   },
   {
     title: "Lead Software Engineer",
@@ -52,6 +53,7 @@ const experience: WorkEntry[] = [
     summary:
       "First hire at a VC-backed CAD-education startup. Led the ground-up rebuild with TypeScript, Next.js, GraphQL, and AWS. Drove adoption by 40+ institutions worldwide.",
     stack: ["TypeScript", "Next.js", "GraphQL", "AWS"],
+    impact: { head: "40+", tail: "institutions" },
   },
   {
     title: "Lead Software Engineer",
@@ -61,6 +63,7 @@ const experience: WorkEntry[] = [
     summary:
       "Led frontend at Crust Microfinance Bank. Shipped the mobile apps and internal admin tools behind a financial product that reached 73,000 customers.",
     stack: ["React Native", "TypeScript", "Node"],
+    impact: { head: "73,000+", tail: "customers" },
   },
   {
     title: "Founding Engineer",
@@ -70,6 +73,7 @@ const experience: WorkEntry[] = [
     summary:
       "From zero to product. Accepted into top incubators, raised funding, built the team, and shipped the roadmap that grew active users by more than 300%.",
     stack: ["React", "Node", "Postgres"],
+    impact: { head: "+300%", tail: "active users" },
   },
   {
     title: "Software Engineer",
@@ -79,6 +83,7 @@ const experience: WorkEntry[] = [
     summary:
       "Predictive models for carbon tracking and AI-driven analytics that cut building energy waste by 25% across deployed sites.",
     stack: ["Python", "ML"],
+    impact: { head: "−25%", tail: "energy waste" },
   },
   {
     title: "Software Developer",
@@ -88,6 +93,7 @@ const experience: WorkEntry[] = [
     summary:
       "Took several early-stage ideas from concept to launch. Full-stack across diverse stacks and industries, with six products shipped.",
     stack: ["JS", "Python", "Ruby"],
+    impact: { head: "6", tail: "products shipped" },
   },
 ];
 
@@ -186,65 +192,149 @@ export default function Home() {
 
       {/* Hero */}
       <section className="border-b border-[#d4d1c7] dark:border-[#35332c]">
-        <div className="mx-auto max-w-[1280px] px-6 py-14 md:px-12 md:py-[72px]">
-          <div className="mb-6 font-mono text-[11px] tracking-[0.08em] text-[#7a7f86] dark:text-[#74706a]">
-            {"// senior software engineer · 8y shipping"}
-          </div>
-          <h1 className="m-0 max-w-[920px] font-sans text-[44px] font-semibold leading-[1.02] tracking-[-0.035em] text-[#0e0f11] sm:text-[60px] md:text-[76px] dark:text-[#f2efe7]">
-            I build systems that hold up under{" "}
-            <span className="gold-marker">real traffic.</span>
-          </h1>
-          <p className="mt-7 max-w-[680px] font-sans text-[16px] leading-[1.6] text-[#3d4147] md:text-[18px] dark:text-[#b9b5aa]">
-            Eight years shipping web, mobile, and AI agents — from zero-to-one
-            prototypes to platforms adopted by universities, banks, and law
-            firms. Three-time founding engineer; currently building agentic
-            systems for corporate law at{" "}
-            <span className="font-medium text-[#0e0f11] dark:text-[#f2efe7]">
-              Finiti Legal
-            </span>
-            .
-          </p>
-          <div className="mt-8 flex flex-wrap items-center gap-2.5">
-            <a
-              href={`mailto:${siteConfig.author.email}`}
-              className="rounded-[4px] bg-[#0e0f11] px-4 py-2.5 font-mono text-[12px] tracking-wide text-[#fafaf7] transition-opacity hover:opacity-90 dark:bg-[#f2efe7] dark:text-[#0f0f0d]"
-            >
-              get in touch ↗
-            </a>
-            <a
-              href="https://drive.google.com/file/d/1QHgz0bOiAq4x1XqztYN39f0WPQD00Kvx/view"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-[4px] border border-[#e7e5de] bg-white px-4 py-2.5 font-mono text-[12px] tracking-wide text-[#0e0f11] transition-colors hover:border-[#7a7f86] dark:border-[#26251f] dark:bg-[#1a1a17] dark:text-[#f2efe7] dark:hover:border-[#74706a]"
-            >
-              resume.pdf
-            </a>
-            <div className="flex gap-4 px-2 font-mono text-[12px] tracking-wide text-[#3d4147] dark:text-[#b9b5aa]">
-              <a
-                href={siteConfig.author.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-[#0e0f11] dark:hover:text-[#f2efe7]"
-              >
-                github
-              </a>
-              <a
-                href={siteConfig.author.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-[#0e0f11] dark:hover:text-[#f2efe7]"
-              >
-                linkedin
-              </a>
-              <a
-                href={siteConfig.author.twitter}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-[#0e0f11] dark:hover:text-[#f2efe7]"
-              >
-                x
-              </a>
+        <div className="mx-auto grid max-w-[1280px] grid-cols-1 md:grid-cols-[1.3fr_1fr]">
+          <div className="border-b border-[#e7e5de] px-6 py-14 md:border-b-0 md:border-r md:px-12 md:py-[72px] dark:border-[#26251f]">
+            <div className="mb-6 font-mono text-[11px] tracking-[0.08em] text-[#7a7f86] dark:text-[#74706a]">
+              {"// senior software engineer · 8y shipping"}
             </div>
+            <h1 className="m-0 font-sans text-[44px] font-semibold leading-[1.02] tracking-[-0.035em] text-[#0e0f11] sm:text-[54px] md:text-[64px] dark:text-[#f2efe7]">
+              I build systems
+              <br />
+              that hold up under{" "}
+              <span className="gold-marker">real traffic.</span>
+            </h1>
+            <p className="mt-7 max-w-[560px] font-sans text-[16px] leading-[1.6] text-[#3d4147] md:text-[17px] dark:text-[#b9b5aa]">
+              Eight years shipping web, mobile, and AI agents — from
+              zero-to-one prototypes to platforms adopted by universities,
+              banks, and law firms. Three-time founding engineer; currently
+              building agentic systems for corporate law.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-2.5">
+              <a
+                href={`mailto:${siteConfig.author.email}`}
+                className="rounded-[4px] bg-[#0e0f11] px-4 py-2.5 font-mono text-[12px] tracking-wide text-[#fafaf7] transition-opacity hover:opacity-90 dark:bg-[#f2efe7] dark:text-[#0f0f0d]"
+              >
+                get in touch ↗
+              </a>
+              <a
+                href="https://drive.google.com/file/d/1QHgz0bOiAq4x1XqztYN39f0WPQD00Kvx/view"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-[4px] border border-[#e7e5de] bg-white px-4 py-2.5 font-mono text-[12px] tracking-wide text-[#0e0f11] transition-colors hover:border-[#7a7f86] dark:border-[#26251f] dark:bg-[#1a1a17] dark:text-[#f2efe7] dark:hover:border-[#74706a]"
+              >
+                resume.pdf
+              </a>
+              <div className="flex gap-4 px-2 font-mono text-[12px] tracking-wide text-[#3d4147] dark:text-[#b9b5aa]">
+                <a
+                  href={siteConfig.author.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#0e0f11] dark:hover:text-[#f2efe7]"
+                >
+                  github
+                </a>
+                <a
+                  href={siteConfig.author.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#0e0f11] dark:hover:text-[#f2efe7]"
+                >
+                  linkedin
+                </a>
+                <a
+                  href={siteConfig.author.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#0e0f11] dark:hover:text-[#f2efe7]"
+                >
+                  x
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col bg-white px-6 py-14 md:px-12 md:py-[72px] dark:bg-[#1a1a17]/40">
+            <div className="mb-6 font-mono text-[11px] tracking-[0.08em] text-[#7a7f86] dark:text-[#74706a]">
+              {"// selected"}
+            </div>
+            <dl className="m-0 border-t border-[#e7e5de] dark:border-[#26251f]">
+              {[
+                {
+                  k: "NOW",
+                  body: (
+                    <>
+                      Building AI agents for corporate law at{" "}
+                      <strong className="font-semibold text-[#0e0f11] dark:text-[#f2efe7]">
+                        Finiti Legal
+                      </strong>
+                      .
+                    </>
+                  ),
+                },
+                {
+                  k: "PAST",
+                  body: (
+                    <>
+                      Shipped{" "}
+                      <strong className="font-semibold text-[#0e0f11] dark:text-[#f2efe7]">
+                        Crust
+                      </strong>{" "}
+                      — mobile bank to{" "}
+                      <strong className="font-semibold text-[#0e0f11] dark:text-[#f2efe7]">
+                        73k
+                      </strong>{" "}
+                      customers with a team of four.
+                    </>
+                  ),
+                },
+                {
+                  k: "SCALE",
+                  body: (
+                    <>
+                      Rebuilt{" "}
+                      <strong className="font-semibold text-[#0e0f11] dark:text-[#f2efe7]">
+                        Fabrio
+                      </strong>{" "}
+                      for{" "}
+                      <strong className="font-semibold text-[#0e0f11] dark:text-[#f2efe7]">
+                        40+
+                      </strong>{" "}
+                      universities. Led the v2 cut.
+                    </>
+                  ),
+                },
+                {
+                  k: "BEFORE",
+                  body: (
+                    <>
+                      Founding engineer{" "}
+                      <strong className="font-semibold text-[#0e0f11] dark:text-[#f2efe7]">
+                        3×
+                      </strong>
+                      . Exited once. Learned something each time.
+                    </>
+                  ),
+                },
+              ].map((row) => (
+                <div
+                  key={row.k}
+                  className="grid grid-cols-[72px_1fr] items-baseline gap-4 border-b border-[#e7e5de] py-3.5 md:grid-cols-[80px_1fr] dark:border-[#26251f]"
+                >
+                  <dt className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#7a7f86] dark:text-[#74706a]">
+                    {row.k}
+                  </dt>
+                  <dd className="m-0 font-sans text-[14px] leading-[1.55] text-[#3d4147] md:text-[14.5px] dark:text-[#b9b5aa]">
+                    {row.body}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+            <Link
+              href="/projects"
+              className="mt-5 self-start border-b border-[#0e0f11] pb-0.5 font-mono text-[12px] text-[#0e0f11] dark:border-[#f2efe7] dark:text-[#f2efe7]"
+            >
+              case studies →
+            </Link>
           </div>
         </div>
       </section>
@@ -377,7 +467,7 @@ export default function Home() {
                       {w.tags.slice(0, 4).map((t) => (
                         <span
                           key={t}
-                          className="inline-block rounded-[3px] border border-[#e7e5de] bg-[#fafaf7] px-2 py-[2px] font-mono text-[10.5px] text-[#3d4147] dark:border-[#26251f] dark:bg-[#0f0f0d] dark:text-[#b9b5aa]"
+                          className="inline-block rounded-[3px] border border-[#e7e5de] bg-[#fafaf7] px-2 py-[2px] font-mono text-[10px] uppercase tracking-[0.08em] text-[#3d4147] dark:border-[#26251f] dark:bg-[#0f0f0d] dark:text-[#b9b5aa]"
                         >
                           {t}
                         </span>

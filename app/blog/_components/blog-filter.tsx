@@ -11,6 +11,7 @@ export interface BlogRow {
   excerpt: string;
   body: string;
   tag: string;
+  tags: string[];
 }
 
 interface Props {
@@ -141,10 +142,9 @@ export function BlogFilter({ posts }: Props) {
       {/* Rest — table */}
       {rest.length > 0 && (
         <>
-          <div className="grid grid-cols-[90px_1fr_70px_40px] gap-3 border-t border-[#d4d1c7] border-b border-[#e7e5de] px-2 py-2.5 font-mono text-[10px] uppercase tracking-[0.12em] text-[#7a7f86] md:grid-cols-[120px_1fr_100px_80px_40px] md:gap-4 dark:border-t-[#35332c] dark:border-b-[#26251f] dark:text-[#74706a]">
+          <div className="grid grid-cols-[90px_1fr_70px_40px] gap-3 border-t border-[#d4d1c7] border-b border-[#e7e5de] px-2 py-2.5 font-mono text-[10px] uppercase tracking-[0.12em] text-[#7a7f86] md:grid-cols-[120px_1fr_80px_40px] md:gap-4 dark:border-t-[#35332c] dark:border-b-[#26251f] dark:text-[#74706a]">
             <span>Date</span>
             <span>Title</span>
-            <span className="hidden md:block">Tag</span>
             <span>Read</span>
             <span className="text-right">—</span>
           </div>
@@ -152,7 +152,7 @@ export function BlogFilter({ posts }: Props) {
             <Link
               href={`/blog/${w.slug}`}
               key={w.slug}
-              className="grid grid-cols-[90px_1fr_70px_40px] items-baseline gap-3 border-b border-[#e7e5de] px-2 py-5 transition-colors hover:bg-white md:grid-cols-[120px_1fr_100px_80px_40px] md:gap-4 dark:border-[#26251f] dark:hover:bg-[#1a1a17]/60"
+              className="grid grid-cols-[90px_1fr_70px_40px] items-baseline gap-3 border-b border-[#e7e5de] px-2 py-5 transition-colors hover:bg-white md:grid-cols-[120px_1fr_80px_40px] md:gap-4 dark:border-[#26251f] dark:hover:bg-[#1a1a17]/60"
             >
               <div className="font-mono text-[12px] text-[#7a7f86] dark:text-[#74706a]">
                 {formatDate(w.date)}
@@ -164,9 +164,18 @@ export function BlogFilter({ posts }: Props) {
                 <div className="max-w-[640px] font-sans text-[13px] leading-[1.55] text-[#3d4147] md:text-[13.5px] dark:text-[#b9b5aa]">
                   {w.excerpt}
                 </div>
-              </div>
-              <div className="hidden font-mono text-[11px] uppercase tracking-[0.08em] text-[#1f5d3b] md:block dark:text-[#6fb292]">
-                {w.tag}
+                {w.tags.length > 0 && (
+                  <div className="mt-2.5 flex flex-wrap gap-1.5">
+                    {w.tags.slice(0, 5).map((t) => (
+                      <span
+                        key={t}
+                        className="inline-block rounded-[3px] border border-[#e7e5de] bg-[#fafaf7] px-2 py-[2px] font-mono text-[10px] uppercase tracking-[0.08em] text-[#3d4147] dark:border-[#26251f] dark:bg-[#0f0f0d] dark:text-[#b9b5aa]"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
               <div className="font-mono text-[11px] text-[#7a7f86] dark:text-[#74706a]">
                 {w.readTime}

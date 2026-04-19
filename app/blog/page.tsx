@@ -86,6 +86,7 @@ export default function Blog() {
     excerpt: p.excerpt,
     body: p.excerpt,
     tag: classifyTag(p.tags),
+    tags: p.tags,
   }));
 
   const breadcrumbSchema = generateBreadcrumbSchema([

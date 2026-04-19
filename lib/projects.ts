@@ -17,6 +17,90 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    slug: "finiti",
+    title: "Finiti — The AI Compliance Layer for Capital Markets",
+    excerpt:
+      "Gusto-for-compliance: an AI compliance layer that sits between regulated companies and their regulators — validating filings, benchmarking disclosures against peers, and running end-to-end filing prep with humans in the loop.",
+    description: `Finiti is the AI compliance layer between regulated companies and their regulators. Gusto gave small companies the payroll infrastructure only enterprises could afford — Finiti is doing the same for compliance. Lean teams get Fortune-500 compliance infrastructure at a fraction of the cost: we validate filings, benchmark disclosures against peer practice, and handle end-to-end filing prep with humans in the loop.
+
+We start with micro-to-mid-cap public companies, dual-listed companies, and the capital-markets law firms that advise them — filers across Nasdaq, HKEX, ASX, and LSE. The product drafts and reviews 10-K, 10-Q, 8-K, 20-F, and DEF 14A filings (plus international equivalents), checks them against Reg S-K and recurring SEC staff comment themes, and surfaces gaps against peer disclosures as actionable edits rather than generic advice.
+
+Under the hood, Finiti is a multi-agent orchestration — LangGraph coordinating specialised agents (planning, retrieval, drafting, benchmarking, review, self-healing), with Pydantic AI enforcing typed tool contracts so every step is structured, auditable, and evaluable. Retrieval is grounded in millions of SEC filings plus the company's own history and peer set, so every claim is traceable to a specific paragraph of a specific document — surfaced as inline citations the reviewer can verify in one click.
+
+The system ships where the work already happens: a Word add-in and Outlook plugin let attorneys accept, reject, or modify proposed edits as tracked changes. SOC 2 Type II, full audit logging, per-tenant isolation, and eval suites driven by real redacted matters gate every prompt and retrieval change before release.`,
+    technologies: [
+      "Python",
+      "LangGraph",
+      "Pydantic AI",
+      "TypeScript",
+      "Azure",
+      "SEC Corpus",
+      "Microsoft Graph",
+      "SOC 2",
+    ],
+    link: "https://finiti.legal",
+    date: "2025-04-01",
+    impact:
+      "Live with paying customers across Nasdaq, HKEX, ASX, and LSE filers; lean teams file with Fortune-500-grade rigor in a fraction of the time.",
+  },
+  {
+    slug: "fabrio",
+    title: "Fabrio — AI Grading for Engineering CAD at Scale",
+    excerpt:
+      "Rebuilt the Fabrio platform from the ground up to revolutionise grading for engineering CAD work — saving professors thousands of hours at universities like Imperial College London and UCL.",
+    description: `Fabrio is a platform that revolutionised grading for engineering CAD work. Professors at engineering schools were marking thousands of individual Fusion files by hand every term; Fabrio turned that into instant, automated assessment with live progress dashboards, saving them thousands of hours a year.
+
+I joined as the first engineering hire. The company raised venture money, grew to a 6-figure ARR, built a team of six, and secured customers like Imperial College London and University College London — with the platform ultimately reaching 40+ institutions worldwide, from Surrey and Birmingham in the UK to universities across the US, Italy, and Hong Kong, plus programmes like F1 in Schools and Co-op Academies Trust.
+
+I led the ground-up rebuild of the platform on AWS serverless (Cognito, AppSync, Lambda, DynamoDB, S3) with a TypeScript and Next.js frontend over GraphQL. SSR caching took p95 page load from 3.1s to 680ms; the grading engine was rebuilt as a queue-backed worker pool that processed thousands of submissions during deadline peaks without the instructor dashboard ever stalling.
+
+Beyond performance, we made the platform collaborative — live CAD sessions, shared assignments, tight feedback loops — and trustworthy to institutional buyers, with auth, logging, and access controls that held up under university IT review. We also established a pioneering partnership with Autodesk, validating the approach to transforming CAD education.`,
+    technologies: [
+      "TypeScript",
+      "Next.js",
+      "GraphQL",
+      "AWS",
+      "DynamoDB",
+      "AppSync",
+    ],
+    link: "https://fabrio.com",
+    date: "2024-06-01",
+    impact:
+      "Saved professors thousands of hours across Imperial College London, UCL, and 40+ institutions; 6-figure ARR with a team of six.",
+  },
+  {
+    slug: "crust-mobile-bank",
+    title: "Crust Mobile Bank",
+    excerpt:
+      "Bank for the underbanked. iOS, Android, and an admin console, shipped as a lean team of four.",
+    description: `Crust Microfinance Bank is the consumer-facing product I led frontend for at Thrive Agric (YC W19). It's a full-stack mobile bank aimed at the underbanked in Nigeria, with iOS and Android apps plus an internal admin console used by the bank's operations team.
+
+One React Native codebase powered both mobile apps; the admin tool ran the same design system and primitives on web. That shared foundation meant a four-person team could ship and maintain three surfaces — iOS, Android, and admin — without constant duplication.
+
+On the product side, the work spanned onboarding flows, KYC, payments, card issuance, and transaction reconciliation. On the engineering side, it was about keeping the mobile apps responsive on the low-end Android devices most customers used, handling spotty connectivity gracefully, and making the admin tool genuinely usable for non-technical bank operators.
+
+Inside a year, the platform reached 73,000+ customers and moved over $1M in transaction volume, while staying within the ops capacity of a small team.`,
+    technologies: ["React Native", "TypeScript", "Node", "Postgres", "AWS"],
+    date: "2022-06-01",
+    impact:
+      "73,000+ customers and $1M+ in transaction volume in the first year, on a four-person engineering team.",
+  },
+  {
+    slug: "liveclasses",
+    title: "LiveClasses",
+    excerpt:
+      "Online learning for Nigerian universities. Grew from MVP to funded startup with an active user base.",
+    description: `LiveClasses was my first founding-engineer run. We built an online learning platform for Nigerian universities from scratch — live sessions, assignments, payments, and admin — and grew it from an MVP into a funded startup.
+
+The product started as a pandemic-era response to universities going remote with no real infrastructure. We shipped the first usable version in weeks, then spent the following months turning it into something a university could actually run a semester on: real attendance tracking, graded assignments, instructor tools, and payment flows that handled the reality of student billing in Nigeria.
+
+As the founding engineer, my role covered the whole stack — frontend, backend, infra, and a lot of the product decisions. We were accepted into top incubators, raised a round, and grew monthly active users by more than 300% in a six-month stretch. Most of what I know about founding-engineer tradeoffs — which ones compound, which ones don't — came out of this project.`,
+    technologies: ["React", "Node", "Postgres", "AWS"],
+    date: "2021-03-01",
+    impact:
+      "Grew MAU 3× in six months; accepted into top incubators and funded; platform ran live semesters at multiple Nigerian universities.",
+  },
+  {
     slug: "tunnel-ai",
     title: "Tunnel AI - Natural Language to Frontend Tests",
     excerpt:
@@ -173,7 +257,7 @@ Technical implementation includes optimization for edge devices using TensorFlow
     gallery: [
       {
         url: "https://res.cloudinary.com/ibrahimshittu/video/upload/v1756029390/face-mask-detector-demo_emvpyg.mp4",
-        caption: "Real-time face mask detection demo",
+        caption: "Real-time face mask detection",
       },
     ],
     impact:
@@ -187,6 +271,6 @@ export function getProjectBySlug(slug: string): Project | undefined {
 
 export function getAllProjects(): Project[] {
   return projects.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   );
 }

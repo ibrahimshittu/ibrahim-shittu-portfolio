@@ -2,24 +2,62 @@ import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { Icons } from "@/components/ui/icons";
 import { getProjectBySlug, getAllProjects } from "@/lib/projects";
 import { siteConfig, generateMetaDescription, toISO } from "@/lib/seo";
-import { formatDate } from "@/lib/blog-utils";
 import { StructuredData } from "@/components/StructuredData";
 import {
   generateVideoObjectSchema,
   parseCloudinaryVideoUrl,
   type VideoMetadata,
 } from "@/lib/video-seo";
-import { ArrowLeft } from "lucide-react";
+import { ContactFooter } from "@/components/ui/contact-footer";
+import { PrevNext } from "@/components/ui/prev-next";
+import { RelatedStrip, type RelatedItem } from "@/components/ui/related-strip";
+
+const SLUG_TAGS: Record<string, string> = {
+  "tunnel-ai": "Dev Tools",
+  finiti: "Capital Markets AI",
+  fabrio: "EdTech",
+  "crust-mobile-bank": "Fintech",
+  liveclasses: "EdTech",
+  "revit-virtual-assistant": "AEC",
+  "unheard-mental-health": "HealthTech",
+  "rio-metaverse-marketplace": "Web3",
+  "face-mask-detector": "Computer Vision",
+};
+
+const SLUG_ROLES: Record<string, string> = {
+  "tunnel-ai": "Author · Side project",
+  finiti: "Founding Software Engineer · Finiti",
+  fabrio: "Lead Software Engineer · Fabrio",
+  "crust-mobile-bank": "Lead Software Engineer · Thrive Agric",
+  liveclasses: "Founding Engineer · LiveClasses",
+  "revit-virtual-assistant": "Engineer · Final-year project",
+  "unheard-mental-health": "Engineer · Co-builder",
+  "rio-metaverse-marketplace": "Engineer",
+  "face-mask-detector": "Engineer",
+};
+
+function projectTag(slug: string): string {
+  return SLUG_TAGS[slug] ?? "Project";
+}
+
+function projectRole(slug: string): string {
+  return SLUG_ROLES[slug] ?? "Engineer";
+}
+
+function projectYear(date: string): string {
+  return new Date(date).getFullYear().toString();
+}
+
+function splitMetric(m: string): { head: string; tail: string } {
+  const parts = m.trim().split(/\s+/);
+  if (parts.length === 1) return { head: parts[0], tail: "impact" };
+  return { head: parts[0], tail: parts.slice(1).join(" ") };
+}
 
 export async function generateStaticParams() {
-  const projects = getAllProjects();
-  return projects.map((project) => ({
-    slug: project.slug,
-  }));
+  return getAllProjects().map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({
@@ -28,7 +66,6 @@ export async function generateMetadata({
   params: { slug: string };
 }): Promise<Metadata> {
   const project = getProjectBySlug(params.slug);
-
   if (!project) {
     return {
       title: "Project Not Found",
@@ -40,26 +77,20 @@ export async function generateMetadata({
   const isoDate = toISO(project.date);
 
   return {
-    title: `${project.title} - Projects | Ibrahim Shittu`,
-    description: description,
+    title: `${project.title} — Projects | Ibrahim Shittu`,
+    description,
     keywords: [
       ...project.technologies,
       project.title,
       "project",
       "portfolio",
-      "software development",
       "Ibrahim Shittu",
     ],
-    authors: [
-      {
-        name: siteConfig.author.name,
-        url: siteConfig.url,
-      },
-    ],
+    authors: [{ name: siteConfig.author.name, url: siteConfig.url }],
     creator: siteConfig.author.name,
     openGraph: {
       title: project.title,
-      description: description,
+      description,
       type: "article",
       publishedTime: isoDate,
       modifiedTime: isoDate,
@@ -87,41 +118,56 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title: project.title,
-      description: description,
+      description,
       images: project.image ? [project.image] : [siteConfig.ogImage],
       creator: siteConfig.twitterHandle,
     },
-    alternates: {
-      canonical: `${siteConfig.url}/projects/${project.slug}`,
-    },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        "max-video-preview": -1,
-        "max-image-preview": "large",
-        "max-snippet": -1,
-      },
-    },
+    alternates: { canonical: `${siteConfig.url}/projects/${project.slug}` },
+    robots: { index: true, follow: true },
     category: "technology",
-    other: {
-      "article:author": siteConfig.author.name,
-      "article:published_time": isoDate,
-      "article:tag": project.technologies.join(", "),
-    },
   };
 }
 
-export default function ProjectPage({ params }: { params: { slug: string } }) {
+export default function ProjectPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const project = getProjectBySlug(params.slug);
+  if (!project) notFound();
 
-  if (!project) {
-    notFound();
-  }
+  const all = getAllProjects();
+  const idx = all.findIndex((p) => p.slug === project.slug);
+  const prev = idx > 0 ? all[idx - 1] : null;
+  const next = idx >= 0 && idx < all.length - 1 ? all[idx + 1] : null;
+
+  const tag = projectTag(project.slug);
+  const role = projectRole(project.slug);
+  const year = projectYear(project.date);
+
+  const related: RelatedItem[] = all
+    .filter((p) => p.slug !== project.slug && projectTag(p.slug) === tag)
+    .slice(0, 3)
+    .map((p) => ({
+      href: `/projects/${p.slug}`,
+      tag: projectTag(p.slug),
+      date: projectYear(p.date),
+      title: p.title.split(" - ")[0],
+      blurb: p.excerpt,
+    }));
+
+  // Split description into paragraphs; use first as problem, rest as approach steps.
+  const paragraphs = project.description
+    .split(/\n\n+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const problem = paragraphs[0] ?? project.excerpt;
+  const approach = paragraphs.slice(1);
+
+  const { head: metricHead, tail: metricTail } = splitMetric(project.impact);
 
   const isoDate = toISO(project.date);
+  const pageUrl = `${siteConfig.url}/projects/${project.slug}`;
 
   const projectSchema = {
     "@context": "https://schema.org",
@@ -140,31 +186,18 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
     },
     dateCreated: isoDate,
     datePublished: isoDate,
-    url: `${siteConfig.url}/projects/${project.slug}`,
+    url: pageUrl,
     keywords: project.technologies,
-    programmingLanguage: project.technologies.filter((tech) =>
-      ["Python", "TypeScript", "JavaScript", "React", "NextJS", "C#"].includes(
-        tech
-      )
-    ),
     ...(project.github && { codeRepository: project.github }),
     ...(project.link && { sameAs: project.link }),
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": `${siteConfig.url}/projects/${project.slug}`,
-    },
+    mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
   };
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: siteConfig.url,
-      },
+      { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
       {
         "@type": "ListItem",
         position: 2,
@@ -175,256 +208,251 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         "@type": "ListItem",
         position: 3,
         name: project.title,
-        item: `${siteConfig.url}/projects/${project.slug}`,
+        item: pageUrl,
       },
     ],
   };
 
-  const pageUrl = `${siteConfig.url}/projects/${project.slug}`;
-  const videoSchemas: any[] = [];
-
+  const videoSchemas: Record<string, unknown>[] = [];
   if (project.image && project.image.match(/\.(mp4|webm|ogg|mov)$/i)) {
     const { title: videoTitle } = parseCloudinaryVideoUrl(project.image);
     const videoMetadata: VideoMetadata = {
       title: videoTitle || `${project.title} - Demo Video`,
       description: `Demo video showcasing ${project.title}: ${project.excerpt}`,
-      thumbnailUrl: project.image.replace(/\.(mp4|webm|ogg|mov)$/i, ".jpg"), // Cloudinary auto-generates thumbnails
+      thumbnailUrl: project.image.replace(/\.(mp4|webm|ogg|mov)$/i, ".jpg"),
       uploadDate: project.date,
       contentUrl: project.image,
     };
     videoSchemas.push(generateVideoObjectSchema(videoMetadata, pageUrl));
   }
 
-  if (project.gallery) {
-    project.gallery.forEach((media, index) => {
-      const isVideo = media.url.match(/\.(mp4|webm|ogg|mov)$/i);
-      if (isVideo) {
-        const { title: videoTitle } = parseCloudinaryVideoUrl(media.url);
-        const videoMetadata: VideoMetadata = {
-          title: videoTitle || `${project.title} - Gallery Video ${index + 1}`,
-          description: media.caption || `Gallery video for ${project.title}`,
-          thumbnailUrl: media.url.replace(/\.(mp4|webm|ogg|mov)$/i, ".jpg"),
-          uploadDate: project.date,
-          contentUrl: media.url,
-        };
-        videoSchemas.push(generateVideoObjectSchema(videoMetadata, pageUrl));
-      }
-    });
-  }
-
   return (
-    <>
+    <main className="bg-[#fafaf7] text-[#0e0f11] dark:bg-[#0f0f0d] dark:text-[#f2efe7]">
       <StructuredData data={projectSchema} />
       <StructuredData data={breadcrumbSchema} />
-      {videoSchemas.map((videoSchema, index) => (
-        <StructuredData key={`video-${index}`} data={videoSchema} />
+      {videoSchemas.map((schema, i) => (
+        <StructuredData key={`video-${i}`} data={schema} />
       ))}
-      <main className="flex-1 flex flex-col">
-        <section className="mx-auto w-full max-w-2xl space-y-8 bg-card px-4 pb-8">
-          <Link
-            href="/projects"
-            className="inline-flex items-center gap-2 text-sm font-mono text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <ArrowLeft className="size-4" />
-            Back to Projects
-          </Link>
 
-          <header className="space-y-4">
-            <h1 className="text-2xl font-bold text-foreground leading-tight">
-              {project.title}
-            </h1>
-
-            <div className="flex items-center gap-3 text-sm font-mono text-muted-foreground mb-4">
-              <time dateTime={project.date}>{formatDate(project.date)}</time>
-            </div>
-
-            <p className="text-base text-muted-foreground font-mono leading-relaxed">
-              {project.excerpt}
-            </p>
-
-            {(project.github || project.link) && (
-              <div className="flex gap-4 mt-4">
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-mono border rounded-md hover:bg-accent transition-colors"
-                  >
-                    <Icons.github className="size-4" />
-                    View Code
-                  </a>
-                )}
-                {project.link && (
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-mono border rounded-md hover:bg-accent transition-colors"
-                  >
-                    <Icons.externalLink className="size-4" />
-                    Live Demo
-                  </a>
-                )}
+      <section className="border-b border-[#d4d1c7] dark:border-[#35332c]">
+        <div className="mx-auto max-w-[1280px] px-6 py-14 md:px-12 md:py-[72px]">
+          <div className="mb-6 flex flex-wrap gap-4 font-mono text-[11px] uppercase tracking-[0.12em]">
+            <Link
+              href="/projects"
+              className="text-[#7a7f86] hover:text-[#0e0f11] dark:text-[#74706a] dark:hover:text-[#f2efe7]"
+            >
+              ← projects
+            </Link>
+            <span className="text-[#1f5d3b] dark:text-[#6fb292]">{tag}</span>
+            <span className="text-[#7a7f86] dark:text-[#74706a]">{year}</span>
+            <span className="text-[#7a7f86] dark:text-[#74706a]">Shipped</span>
+          </div>
+          <div className="grid grid-cols-1 items-start gap-12 md:grid-cols-[1.4fr_1fr]">
+            <div>
+              <h1 className="m-0 font-sans text-[44px] font-semibold leading-[1.02] tracking-[-0.04em] text-[#0e0f11] sm:text-[60px] md:text-[72px] dark:text-[#f2efe7]">
+                {project.title.split(" - ")[0]}
+              </h1>
+              <p className="mt-5 max-w-[640px] font-sans text-[17px] leading-[1.55] text-[#3d4147] md:text-[20px] dark:text-[#b9b5aa]">
+                {project.excerpt}
+              </p>
+              <div className="mt-6 font-mono text-[12px] text-[#7a7f86] dark:text-[#74706a]">
+                role ·{" "}
+                <span className="text-[#0e0f11] dark:text-[#f2efe7]">
+                  {role}
+                </span>
               </div>
-            )}
-          </header>
-
-          <section className="mb-8">
-            <h2 className="text-xl font-bold mb-3">Technologies Used</h2>
-            <div className="flex flex-wrap gap-1">
-              {project.technologies.map((tech) => (
-                <div
-                  key={tech}
-                  className="inline-flex items-center rounded-md border px-2 py-0.5 text-xs font-semibold font-mono transition-colors text-nowrap border-muted bg-muted text-muted-foreground"
-                >
-                  {tech}
+              {(project.github || project.link) && (
+                <div className="mt-6 flex flex-wrap gap-2.5">
+                  {project.link && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-[4px] bg-[#0e0f11] px-4 py-2.5 font-mono text-[12px] tracking-wide text-[#fafaf7] transition-opacity hover:opacity-90 dark:bg-[#f2efe7] dark:text-[#0f0f0d]"
+                    >
+                      live demo ↗
+                    </a>
+                  )}
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-[4px] border border-[#e7e5de] bg-white px-4 py-2.5 font-mono text-[12px] tracking-wide text-[#0e0f11] transition-colors hover:border-[#7a7f86] dark:border-[#26251f] dark:bg-[#1a1a17] dark:text-[#f2efe7] dark:hover:border-[#74706a]"
+                    >
+                      view code ↗
+                    </a>
+                  )}
                 </div>
-              ))}
+              )}
             </div>
-          </section>
 
-          <section className="mb-8">
-            <h2 className="text-xl font-bold mb-3">About This Project</h2>
-            <div className="prose prose-neutral dark:prose-invert max-w-none">
-              {project.description.split("\n\n").map((paragraph, index) => (
-                <p
-                  key={index}
-                  className="text-muted-foreground font-mono text-sm leading-relaxed mb-4"
-                >
-                  {paragraph}
-                </p>
-              ))}
+            <aside className="rounded-md border border-[#e7e5de] bg-white p-6 dark:border-[#26251f] dark:bg-[#1a1a17]">
+              <div className="mb-3.5 font-mono text-[10px] uppercase tracking-[0.12em] text-[#7a7f86] dark:text-[#74706a]">
+                {"// outcome"}
+              </div>
+              <div className="grid grid-cols-1 gap-4">
+                <div>
+                  <div className="font-sans text-[28px] font-semibold leading-[1.1] tracking-[-0.02em] text-[#0e0f11] dark:text-[#f2efe7]">
+                    {metricHead}
+                  </div>
+                  <div className="mt-1 font-mono text-[10.5px] uppercase tracking-[0.1em] text-[#7a7f86] dark:text-[#74706a]">
+                    {metricTail}
+                  </div>
+                </div>
+              </div>
+              <div className="mt-6 mb-2.5 font-mono text-[10px] uppercase tracking-[0.12em] text-[#7a7f86] dark:text-[#74706a]">
+                {"// stack"}
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {project.technologies.map((s) => (
+                  <span
+                    key={s}
+                    className="inline-block rounded-[3px] border border-[#e7e5de] bg-[#fafaf7] px-2 py-[3px] font-mono text-[10.5px] text-[#3d4147] dark:border-[#26251f] dark:bg-[#0f0f0d] dark:text-[#b9b5aa]"
+                  >
+                    {s}
+                  </span>
+                ))}
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-[#e7e5de] dark:border-[#26251f]">
+        <div className="mx-auto max-w-[1200px] px-6 py-14 md:px-12 md:py-[72px]">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-[180px_1fr] md:gap-10">
+            <div className="pt-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#7a7f86] dark:text-[#74706a]">
+              01 · problem
             </div>
-          </section>
+            <p className="m-0 font-sans text-[17px] leading-[1.6] tracking-[-0.005em] text-[#0e0f11] md:text-[19px] dark:text-[#f2efe7]">
+              {problem}
+            </p>
+          </div>
+
+          {approach.length > 0 && (
+            <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-[180px_1fr] md:gap-10">
+              <div className="pt-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#7a7f86] dark:text-[#74706a]">
+                02 · approach
+              </div>
+              <div>
+                {approach.map((a, i) => (
+                  <div
+                    key={i}
+                    className={[
+                      "grid grid-cols-[40px_1fr] items-start gap-4 py-4 border-b border-[#e7e5de] dark:border-[#26251f]",
+                      i === 0 ? "border-t" : "",
+                    ].join(" ")}
+                  >
+                    <div className="font-mono text-[12px] font-semibold text-[#1f5d3b] dark:text-[#6fb292]">
+                      {String(i + 1).padStart(2, "0")}
+                    </div>
+                    <p className="m-0 font-sans text-[15px] leading-[1.6] text-[#3d4147] md:text-[16px] dark:text-[#b9b5aa]">
+                      {a}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {project.gallery && project.gallery.length > 0 && (
-            <section className="mb-8">
-              <h2 className="text-xl font-bold mb-3">Gallery</h2>
-              <div className="space-y-4">
-                {project.gallery.map((media, index) => {
-                  const isVideo = media.url.match(/\.(mp4|webm|ogg|mov)$/i);
+            <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-[180px_1fr] md:gap-10">
+              <div className="pt-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#7a7f86] dark:text-[#74706a]">
+                03 · visuals
+              </div>
+              <div className="flex flex-col gap-7">
+                {project.gallery.map((media, i) => {
+                  const isVideo = /\.(mp4|webm|ogg|mov)$/i.test(media.url);
                   const isCanva = media.url.includes("canva.com");
-
-                  if (isCanva) {
-                    return (
-                      <div key={index} className="w-full">
+                  return (
+                    <figure
+                      key={i}
+                      className="overflow-hidden border border-[#e7e5de] bg-white dark:border-[#26251f] dark:bg-[#1a1a17]"
+                    >
+                      {isCanva ? (
                         <div
                           style={{
                             position: "relative",
                             width: "100%",
-                            height: 0,
                             paddingTop: "56.25%",
-                            paddingBottom: 0,
-                            boxShadow: "0 2px 8px 0 rgba(63,69,81,0.16)",
-                            marginTop: "1.6em",
-                            marginBottom: "0.9em",
-                            overflow: "hidden",
-                            borderRadius: "8px",
-                            willChange: "transform",
                           }}
                         >
                           <iframe
                             loading="lazy"
-                            style={{
-                              position: "absolute",
-                              width: "100%",
-                              height: "100%",
-                              top: 0,
-                              left: 0,
-                              border: "none",
-                              padding: 0,
-                              margin: 0,
-                            }}
                             src={media.url}
                             allowFullScreen
                             allow="fullscreen"
+                            className="absolute left-0 top-0 h-full w-full border-0"
                           />
                         </div>
-                        <p className="text-xs font-mono text-muted-foreground mt-2">
-                          {media.caption}
-                        </p>
-                      </div>
-                    );
-                  }
-
-                  return (
-                    <div
-                      key={index}
-                      className={`relative group overflow-hidden rounded-lg border ${
-                        isVideo ? "" : "md:max-w-lg"
-                      }`}
-                    >
-                      {isVideo ? (
-                        <>
-                          <video
-                            src={media.url}
-                            controls
-                            className="w-full h-auto"
-                            preload="metadata"
-                          >
-                            Your browser does not support the video tag.
-                          </video>
-                          <p className="text-xs font-mono text-muted-foreground mt-2">
-                            {media.caption}
-                          </p>
-                        </>
+                      ) : isVideo ? (
+                        <video
+                          src={media.url}
+                          controls
+                          preload="metadata"
+                          className="h-auto w-full"
+                        >
+                          Your browser does not support the video tag.
+                        </video>
                       ) : (
-                        <>
-                          <Image
-                            src={media.url}
-                            alt={media.caption}
-                            width={600}
-                            height={400}
-                            className="w-full h-auto object-cover transition-transform group-hover:scale-105"
-                          />
-                          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                            <p className="text-white text-xs font-mono">
-                              {media.caption}
-                            </p>
-                          </div>
-                        </>
+                        <Image
+                          src={media.url}
+                          alt={media.caption}
+                          width={1200}
+                          height={800}
+                          className="h-auto w-full"
+                        />
                       )}
-                    </div>
+                      <figcaption className="border-t border-[#e7e5de] bg-[#fafaf7] px-4 py-2.5 font-mono text-[11px] text-[#7a7f86] dark:border-[#26251f] dark:bg-[#0f0f0d] dark:text-[#74706a]">
+                        {media.caption}
+                      </figcaption>
+                    </figure>
                   );
                 })}
               </div>
-            </section>
+            </div>
           )}
 
-          <section className="mb-8">
-            <h2 className="text-xl font-bold mb-3">Impact & Results</h2>
-            <div className="bg-muted/50 rounded-lg p-4 border">
-              <p className="font-mono text-sm text-foreground leading-relaxed">
-                {project.impact}
-              </p>
+          <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-[180px_1fr] md:gap-10">
+            <div className="pt-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#7a7f86] dark:text-[#74706a]">
+              {project.gallery && project.gallery.length > 0
+                ? "04 · impact"
+                : "03 · impact"}
             </div>
-          </section>
+            <p className="m-0 font-sans text-[16px] leading-[1.65] text-[#3d4147] md:text-[17px] dark:text-[#b9b5aa]">
+              {project.impact}
+            </p>
+          </div>
+        </div>
+      </section>
 
-          <nav className="mt-12 pt-8 border-t">
-            <h3 className="text-lg font-bold mb-4">More Projects</h3>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {getAllProjects()
-                .filter((p) => p.slug !== project.slug)
-                .slice(0, 2)
-                .map((relatedProject) => (
-                  <Link
-                    key={relatedProject.slug}
-                    href={`/projects/${relatedProject.slug}`}
-                    className="block p-4 border rounded-lg hover:bg-accent transition-colors"
-                  >
-                    <h4 className="font-semibold text-sm mb-1">
-                      {relatedProject.title}
-                    </h4>
-                    <p className="text-xs text-muted-foreground font-mono line-clamp-2">
-                      {relatedProject.excerpt}
-                    </p>
-                  </Link>
-                ))}
-            </div>
-          </nav>
-        </section>
-      </main>
-    </>
+      <PrevNext
+        prev={
+          prev
+            ? {
+                href: `/projects/${prev.slug}`,
+                title: prev.title.split(" - ")[0],
+              }
+            : null
+        }
+        next={
+          next
+            ? {
+                href: `/projects/${next.slug}`,
+                title: next.title.split(" - ")[0],
+              }
+            : null
+        }
+      />
+
+      <RelatedStrip
+        label={`more ${tag.toLowerCase()} projects`}
+        backHref="/projects"
+        items={related}
+      />
+
+      <ContactFooter />
+    </main>
   );
 }

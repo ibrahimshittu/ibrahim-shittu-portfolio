@@ -1,12 +1,35 @@
 "use client";
 
-import React, { useState } from 'react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import React, { useState } from "react";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+
+import { darkTheme, lightTheme } from "./code-block-themes";
 
 interface CodeBlockProps {
   language: string;
   code: string;
+}
+
+const HIGHLIGHTER_RESET = { background: "transparent", padding: 0, margin: 0 };
+
+interface HighlightedProps {
+  language: string;
+  code: string;
+  style: { [key: string]: React.CSSProperties };
+}
+
+function Highlighted({ language, code, style }: HighlightedProps) {
+  return (
+    <SyntaxHighlighter
+      language={language}
+      style={style}
+      PreTag="div"
+      CodeTag="code"
+      customStyle={HIGHLIGHTER_RESET}
+    >
+      {code}
+    </SyntaxHighlighter>
+  );
 }
 
 export function CodeBlock({ language, code }: CodeBlockProps) {
@@ -18,48 +41,31 @@ export function CodeBlock({ language, code }: CodeBlockProps) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error('Failed to copy code:', err);
+      console.error("Failed to copy code:", err);
     }
   };
 
   return (
-    <div className="my-6 group">
-      <div className="flex items-center justify-between bg-muted border-x border-t border-border rounded-t-md px-3 py-2">
-        <span className="text-xs font-mono text-muted-foreground">
+    <div className="not-prose group relative my-6 overflow-hidden rounded-md border border-[#e7e5de] bg-[#f5f3ec] dark:border-[#26251f] dark:bg-[#15140f]">
+      <div className="flex items-center justify-between border-b border-[#e7e5de] px-4 py-2 dark:border-[#26251f]">
+        <span className="!font-mono text-[10.5px] tracking-[0.04em] text-[#7a7f86] dark:text-[#74706a]">
           {language}
         </span>
         <button
+          type="button"
           onClick={handleCopy}
-          className="opacity-0 group-hover:opacity-100 transition-opacity text-xs font-mono text-muted-foreground hover:text-foreground bg-background border border-border rounded px-2 py-1"
+          className="!font-mono text-[10.5px] text-[#7a7f86] opacity-0 transition-opacity hover:text-[#0e0f11] group-hover:opacity-100 dark:text-[#74706a] dark:hover:text-[#f2efe7]"
         >
-          {copied ? 'Copied!' : 'Copy'}
+          {copied ? "copied" : "copy"}
         </button>
       </div>
-      <div className="relative syntax-highlighter-container">
-        <SyntaxHighlighter
-          language={language}
-          style={vscDarkPlus} // Default theme, overridden by CSS
-          customStyle={{
-            margin: 0,
-            borderRadius: '0 0 0.375rem 0.375rem',
-            borderTop: 0,
-            fontSize: '0.75rem',
-            lineHeight: '1.25rem',
-            backgroundColor: 'hsl(var(--muted))',
-            color: 'hsl(var(--foreground))',
-          }}
-          showLineNumbers={true}
-          lineNumberStyle={{
-            minWidth: '2.5rem',
-            paddingRight: '1rem',
-            color: 'hsl(var(--muted-foreground))',
-            fontSize: '0.75rem',
-          }}
-          wrapLines={true}
-          wrapLongLines={true}
-        >
-          {code}
-        </SyntaxHighlighter>
+      <div className="overflow-x-auto px-4 py-4">
+        <span className="hidden dark:block">
+          <Highlighted language={language} code={code} style={darkTheme} />
+        </span>
+        <span className="block dark:hidden">
+          <Highlighted language={language} code={code} style={lightTheme} />
+        </span>
       </div>
     </div>
   );

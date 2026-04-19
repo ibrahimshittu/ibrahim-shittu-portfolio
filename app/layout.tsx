@@ -1,10 +1,10 @@
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Inter, IBM_Plex_Mono } from "next/font/google";
 import { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { SiteNav } from "@/components/ui/site-nav";
+import { PortfolioNav } from "@/components/ui/portfolio-nav";
 import {
   siteConfig,
   generatePersonSchema,
@@ -18,8 +18,18 @@ const inter = Inter({
   display: "swap",
 });
 
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-plex-mono",
+  display: "swap",
+});
+
 export const viewport: Viewport = {
-  themeColor: "#050914",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fafaf7" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f0f0d" },
+  ],
 };
 
 export const metadata: Metadata = {
@@ -107,7 +117,11 @@ export default function RootLayout({
   const organizationSchema = generateOrganizationSchema();
 
   return (
-    <html lang="en" className={inter.variable} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${inter.variable} ${plexMono.variable}`}
+      suppressHydrationWarning
+    >
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
@@ -115,7 +129,6 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {/* Structured Data Scripts */}
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
@@ -147,19 +160,8 @@ export default function RootLayout({
               }),
             }}
           />
-          <SiteNav />
+          <PortfolioNav />
           {children}
-          <footer className="text-center mt-8 mb-4">
-            <a
-              className="text-muted-foreground font-mono text-sm"
-              href="mailto:ibshittu01@gmail.com"
-            >
-              Made with 💻 by{" "}
-              <span className="text-foreground underline underline-offset-2">
-                Ibrahim Shittu
-              </span>
-            </a>
-          </footer>
           <Analytics />
           <SpeedInsights />
         </ThemeProvider>

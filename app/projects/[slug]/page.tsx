@@ -17,6 +17,10 @@ import { RelatedStrip, type RelatedItem } from "@/components/ui/related-strip";
 
 const SLUG_TAGS: Record<string, string> = {
   "tunnel-ai": "Dev Tools",
+  "agent-runway": "Legal AI",
+  "fabrio-v2": "EdTech",
+  "crust-mobile-bank": "Fintech",
+  liveclasses: "EdTech",
   "revit-virtual-assistant": "AEC",
   "unheard-mental-health": "HealthTech",
   "rio-metaverse-marketplace": "Web3",
@@ -25,6 +29,10 @@ const SLUG_TAGS: Record<string, string> = {
 
 const SLUG_ROLES: Record<string, string> = {
   "tunnel-ai": "Author · Side project",
+  "agent-runway": "Software Engineer · Finiti Legal",
+  "fabrio-v2": "Lead Software Engineer · Fabrio",
+  "crust-mobile-bank": "Lead Software Engineer · Thrive Agric",
+  liveclasses: "Founding Engineer · LiveClasses",
   "revit-virtual-assistant": "Engineer · Final-year project",
   "unheard-mental-health": "Engineer · Co-builder",
   "rio-metaverse-marketplace": "Engineer",

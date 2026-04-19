@@ -28,44 +28,51 @@ export function WorkSection({ experience }: Props) {
           </h2>
         </div>
 
-        <div className="grid grid-cols-[100px_1fr_140px] gap-4 border-t border-[#d4d1c7] border-b border-[#e7e5de] px-2 py-3 font-mono text-[10px] uppercase tracking-[0.12em] text-[#7a7f86] md:grid-cols-[140px_1fr_180px] md:gap-8 dark:border-t-[#35332c] dark:border-b-[#26251f] dark:text-[#74706a]">
-          <span>Period</span>
-          <span>Role · Company</span>
-          <span className="text-right">Impact</span>
-        </div>
+        <div className="overflow-hidden rounded-md border border-[#e7e5de] bg-white dark:border-[#26251f] dark:bg-[#1a1a17]">
+          <div className="grid grid-cols-[100px_1fr_140px] gap-4 border-b border-[#e7e5de] bg-[#fafaf7] px-5 py-3 font-mono text-[10px] uppercase tracking-[0.12em] text-[#7a7f86] md:grid-cols-[140px_1fr_180px] md:gap-8 md:px-8 dark:border-[#26251f] dark:bg-[#0f0f0d] dark:text-[#74706a]">
+            <span>Period</span>
+            <span>Role · Company</span>
+            <span className="text-right">Impact</span>
+          </div>
 
-        {experience.map((job, i) => (
-          <article
-            key={i}
-            className="grid grid-cols-[100px_1fr_140px] items-start gap-4 border-b border-[#e7e5de] px-2 py-6 md:grid-cols-[140px_1fr_180px] md:gap-8 dark:border-[#26251f]"
-          >
-            <div className="pt-1 font-mono text-[12px] text-[#7a7f86] dark:text-[#74706a]">
-              {job.period}
-            </div>
-            <div>
-              <div className="font-sans text-[16px] font-semibold tracking-[-0.01em] text-[#0e0f11] md:text-[17px] dark:text-[#f2efe7]">
-                {job.title}{" "}
-                <span className="font-normal text-[#7a7f86] dark:text-[#74706a]">
-                  @ {job.company}
-                </span>
+          {experience.map((job, i) => (
+            <article
+              key={i}
+              className={[
+                "grid grid-cols-[100px_1fr_140px] items-start gap-4 px-5 py-6 md:grid-cols-[140px_1fr_180px] md:gap-8 md:px-8",
+                i < experience.length - 1
+                  ? "border-b border-[#e7e5de] dark:border-[#26251f]"
+                  : "",
+              ].join(" ")}
+            >
+              <div className="pt-1 font-mono text-[12px] text-[#7a7f86] dark:text-[#74706a]">
+                {job.period}
               </div>
-              <div className="mt-1 font-mono text-[11px] text-[#7a7f86] dark:text-[#74706a]">
-                {job.location}
+              <div>
+                <div className="font-sans text-[16px] font-semibold tracking-[-0.01em] text-[#0e0f11] md:text-[17px] dark:text-[#f2efe7]">
+                  {job.title}{" "}
+                  <span className="font-normal text-[#7a7f86] dark:text-[#74706a]">
+                    @ {job.company}
+                  </span>
+                </div>
+                <div className="mt-1 font-mono text-[11px] text-[#7a7f86] dark:text-[#74706a]">
+                  {job.location}
+                </div>
+                <p className="mt-2.5 max-w-[640px] font-sans text-[13.5px] leading-[1.6] text-[#3d4147] md:text-[14px] dark:text-[#b9b5aa]">
+                  {job.summary}
+                </p>
               </div>
-              <p className="mt-2.5 max-w-[640px] font-sans text-[13.5px] leading-[1.6] text-[#3d4147] md:text-[14px] dark:text-[#b9b5aa]">
-                {job.summary}
-              </p>
-            </div>
-            <div className="pt-1 text-right">
-              <div className="font-sans text-[18px] font-semibold leading-[1.1] tracking-[-0.015em] text-[#0e0f11] md:text-[20px] dark:text-[#f2efe7]">
-                {job.impact.head}
+              <div className="pt-1 text-right">
+                <div className="font-sans text-[18px] font-semibold leading-[1.1] tracking-[-0.015em] text-[#0e0f11] md:text-[20px] dark:text-[#f2efe7]">
+                  {job.impact.head}
+                </div>
+                <div className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-[#7a7f86] dark:text-[#74706a]">
+                  {job.impact.tail}
+                </div>
               </div>
-              <div className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-[#7a7f86] dark:text-[#74706a]">
-                {job.impact.tail}
-              </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );

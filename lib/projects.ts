@@ -17,6 +17,88 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    slug: "agent-runway",
+    title: "Agent Runway - AI Agents for Corporate Law",
+    excerpt:
+      "Multi-agent system that drafts, reviews, and files corporate-law documents directly inside Word and Outlook.",
+    description: `Agent Runway is the product I build and ship day-to-day at Finiti Legal. It's a multi-tenant, SOC 2 Type II platform that drops AI agents into the tools lawyers already use — Microsoft Word and Outlook — to automate the most repetitive parts of corporate law work.
+
+The core pattern is a graph of typed agents coordinated through a narrow tool layer. Planning, retrieval, drafting, and review each run as their own step, grounded in the firm's precedent library and matter graph rather than open-web knowledge. Every factual claim the agent makes is traceable to a specific section of a specific document, surfaced as inline citations the attorney can verify in one click.
+
+Beyond the agent system, the platform ships as a Word add-in and Outlook plugin so the document stays the source of truth. Proposed edits appear as tracked changes the attorney can accept, reject, or modify — meeting lawyers in the surface they already live in. Evals driven by real redacted matters gate every prompt and retrieval change, so regressions are caught before release.
+
+Built with Python, LangGraph, and TypeScript on Azure, with a tool layer designed around idempotent, typed contracts and full audit logging.`,
+    technologies: [
+      "Python",
+      "LangGraph",
+      "TypeScript",
+      "Azure",
+      "Microsoft Graph",
+      "SOC 2",
+    ],
+    link: "https://finiti.legal",
+    date: "2025-04-01",
+    impact:
+      "Live with paying law firms; cut corporate-law drafting from days to minutes per matter, with full provenance on every agent output.",
+  },
+  {
+    slug: "fabrio-v2",
+    title: "Fabrio Platform v2 - CAD Education at Scale",
+    excerpt:
+      "Ground-up rebuild of a CAD-education platform used by universities worldwide. Real-time, collaborative, and four times faster.",
+    description: `Fabrio v2 was a ground-up rebuild of a CAD-education platform I led as the first engineering hire and eventual tech lead. The v1 had grown organically and stopped scaling — auth, content pipelines, and the grading engine were all bottlenecks. v2 reset the architecture.
+
+On the frontend, we moved to TypeScript and Next.js with GraphQL, introducing SSR caching that took p95 page load from 3.1s to 680ms. The grading engine was rebuilt as a queue-backed worker pool that could process submissions for hundreds of students in parallel without the instructor dashboard ever seeing a stall.
+
+Beyond performance, v2 made the platform collaborative — live CAD sessions, shared assignments, and a tighter feedback loop between students and instructors. It also made the product trustworthy for institutional buyers, with auth, logging, and access controls that actually held up under a university IT review.
+
+The rebuild shipped to paying institutions while v1 continued to serve legacy customers, with a gradual migration path. By the time I left, Fabrio had been adopted by 40+ universities worldwide.`,
+    technologies: [
+      "TypeScript",
+      "Next.js",
+      "GraphQL",
+      "AWS",
+      "Postgres",
+      "Redis",
+    ],
+    link: "https://fabrio.com",
+    date: "2024-06-01",
+    impact:
+      "Adopted by 40+ institutions; p95 page load 3.1s → 680ms; grading engine scales to hundreds of concurrent submissions.",
+  },
+  {
+    slug: "crust-mobile-bank",
+    title: "Crust Mobile Bank",
+    excerpt:
+      "Full-stack mobile bank for the underbanked. iOS, Android, and an admin console, shipped as a lean team of four.",
+    description: `Crust Microfinance Bank is the consumer-facing product I led frontend for at Thrive Agric (YC W19). It's a full-stack mobile bank aimed at the underbanked in Nigeria, with iOS and Android apps plus an internal admin console used by the bank's operations team.
+
+One React Native codebase powered both mobile apps; the admin tool ran the same design system and primitives on web. That shared foundation meant a four-person team could ship and maintain three surfaces — iOS, Android, and admin — without constant duplication.
+
+On the product side, the work spanned onboarding flows, KYC, payments, card issuance, and transaction reconciliation. On the engineering side, it was about keeping the mobile apps responsive on the low-end Android devices most customers used, handling spotty connectivity gracefully, and making the admin tool genuinely usable for non-technical bank operators.
+
+Inside a year, the platform reached 73,000+ customers and moved over $1M in transaction volume, while staying within the ops capacity of a small team.`,
+    technologies: ["React Native", "TypeScript", "Node", "Postgres", "AWS"],
+    date: "2022-06-01",
+    impact:
+      "73,000+ customers and $1M+ in transaction volume in the first year, on a four-person engineering team.",
+  },
+  {
+    slug: "liveclasses",
+    title: "LiveClasses",
+    excerpt:
+      "Online learning for Nigerian universities. Grew from MVP to funded startup with an active user base.",
+    description: `LiveClasses was my first founding-engineer run. We built an online learning platform for Nigerian universities from scratch — live sessions, assignments, payments, and admin — and grew it from an MVP into a funded startup.
+
+The product started as a pandemic-era response to universities going remote with no real infrastructure. We shipped the first usable version in weeks, then spent the following months turning it into something a university could actually run a semester on: real attendance tracking, graded assignments, instructor tools, and payment flows that handled the reality of student billing in Nigeria.
+
+As the founding engineer, my role covered the whole stack — frontend, backend, infra, and a lot of the product decisions. We were accepted into top incubators, raised a round, and grew monthly active users by more than 300% in a six-month stretch. Most of what I know about founding-engineer tradeoffs — which ones compound, which ones don't — came out of this project.`,
+    technologies: ["React", "Node", "Postgres", "AWS"],
+    date: "2021-03-01",
+    impact:
+      "Grew MAU 3× in six months; accepted into top incubators and funded; platform ran live semesters at multiple Nigerian universities.",
+  },
+  {
     slug: "tunnel-ai",
     title: "Tunnel AI - Natural Language to Frontend Tests",
     excerpt:

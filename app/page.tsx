@@ -63,7 +63,7 @@ const experience: WorkEntry[] = [
     summary:
       "Led frontend at Crust Microfinance Bank. Shipped the mobile apps and internal admin tools behind a financial product that reached 73,000 customers.",
     stack: ["React Native", "TypeScript", "Node"],
-    impact: { head: "73,000+", tail: "customers" },
+    impact: { head: "$1M+", tail: "transaction volume" },
   },
   {
     title: "Founding Engineer",
@@ -114,7 +114,7 @@ const projects = [
     blurb:
       "Multi-agent system that drafts, reviews, and files corporate-law documents directly inside Word and Outlook.",
     metric: "Days → minutes",
-    href: "https://finiti.legal",
+    href: "/projects/agent-runway",
   },
   {
     name: "Fabrio Platform v2",
@@ -123,7 +123,7 @@ const projects = [
     blurb:
       "Ground-up rebuild of a CAD-education platform used by universities worldwide. Real-time, collaborative, and four times faster.",
     metric: "40+ institutions",
-    href: "https://fabrio.com",
+    href: "/projects/fabrio-v2",
   },
   {
     name: "Unheard",
@@ -140,8 +140,8 @@ const projects = [
     tag: "Fintech",
     blurb:
       "Full-stack mobile bank for the underbanked. iOS, Android, and an admin console, shipped as a lean team of four.",
-    metric: "73k customers",
-    href: undefined,
+    metric: "$1M+ transactions",
+    href: "/projects/crust-mobile-bank",
   },
   {
     name: "Revit Virtual Assistant",
@@ -191,8 +191,12 @@ export default function Home() {
       />
 
       {/* Hero */}
-      <section className="border-b border-[#d4d1c7] dark:border-[#35332c]">
-        <div className="mx-auto grid max-w-[1280px] grid-cols-1 md:grid-cols-[1.3fr_1fr]">
+      <section className="relative border-b border-[#d4d1c7] dark:border-[#35332c]">
+        <div
+          aria-hidden
+          className="hero-right-bleed pointer-events-none absolute inset-y-0 hidden bg-white md:block dark:bg-[#1a1a17]"
+        />
+        <div className="relative mx-auto grid max-w-[1280px] grid-cols-1 md:grid-cols-[1.3fr_1fr]">
           <div className="border-b border-[#e7e5de] px-6 py-14 md:border-b-0 md:border-r md:px-12 md:py-[72px] dark:border-[#26251f]">
             <div className="mb-6 font-mono text-[11px] tracking-[0.08em] text-[#7a7f86] dark:text-[#74706a]">
               {"// senior software engineer · 8y shipping"}
@@ -204,10 +208,9 @@ export default function Home() {
               <span className="gold-marker">real traffic.</span>
             </h1>
             <p className="mt-7 max-w-[560px] font-sans text-[16px] leading-[1.6] text-[#3d4147] md:text-[17px] dark:text-[#b9b5aa]">
-              Eight years shipping web, mobile, and AI agents — from
-              zero-to-one prototypes to platforms adopted by universities,
-              banks, and law firms. Three-time founding engineer; currently
-              building agentic systems for corporate law.
+              Eight years shipping web, mobile, and AI agents — from zero-to-one
+              prototypes to platforms adopted by universities, banks, and law
+              firms.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-2.5">
               <a
@@ -253,11 +256,11 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex flex-col bg-white px-6 py-14 md:px-12 md:py-[72px] dark:bg-[#1a1a17]/40">
+          <div className="flex flex-col bg-white px-6 py-14 md:px-12 md:py-[72px] dark:bg-[#1a1a17]">
             <div className="mb-6 font-mono text-[11px] tracking-[0.08em] text-[#7a7f86] dark:text-[#74706a]">
               {"// selected"}
             </div>
-            <dl className="m-0 border-t border-[#e7e5de] dark:border-[#26251f]">
+            <div className="border-t border-[#e7e5de] dark:border-[#26251f]">
               {[
                 {
                   k: "NOW",
@@ -320,15 +323,15 @@ export default function Home() {
                   key={row.k}
                   className="grid grid-cols-[72px_1fr] items-baseline gap-4 border-b border-[#e7e5de] py-3.5 md:grid-cols-[80px_1fr] dark:border-[#26251f]"
                 >
-                  <dt className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#7a7f86] dark:text-[#74706a]">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#7a7f86] dark:text-[#74706a]">
                     {row.k}
-                  </dt>
-                  <dd className="m-0 font-sans text-[14px] leading-[1.55] text-[#3d4147] md:text-[14.5px] dark:text-[#b9b5aa]">
+                  </span>
+                  <span className="font-sans text-[14px] leading-[1.55] text-[#3d4147] md:text-[14.5px] dark:text-[#b9b5aa]">
                     {row.body}
-                  </dd>
+                  </span>
                 </div>
               ))}
-            </dl>
+            </div>
             <Link
               href="/projects"
               className="mt-5 self-start border-b border-[#0e0f11] pb-0.5 font-mono text-[12px] text-[#0e0f11] dark:border-[#f2efe7] dark:text-[#f2efe7]"

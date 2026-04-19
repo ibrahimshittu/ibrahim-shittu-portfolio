@@ -78,7 +78,7 @@ const projects: ProjectRow[] = [
       "Graph-based agents coordinate through a typed tool layer, grounded in the firm's own precedent library. Ships as a Word add-in and Outlook plugin, SOC 2 Type II.",
     stack: ["Python", "LangGraph", "TypeScript", "Azure"],
     metric: "Days → minutes",
-    href: "https://finiti.legal",
+    href: "/projects/agent-runway",
   },
   {
     slug: "fabrio-v2",
@@ -93,7 +93,7 @@ const projects: ProjectRow[] = [
       "Rebuilt auth, content pipelines, and the grading engine for scale. Introduced SSR caching that took p95 from 3.1s to 680ms.",
     stack: ["TypeScript", "Next.js", "GraphQL", "AWS"],
     metric: "40+ institutions",
-    href: "https://fabrio.com",
+    href: "/projects/fabrio-v2",
   },
   {
     slug: "unheard-mental-health",
@@ -137,8 +137,8 @@ const projects: ProjectRow[] = [
     detail:
       "One React Native codebase served iOS and Android; the admin tool ran the same design system on web. Reached 73k customers inside a year.",
     stack: ["React Native", "TypeScript", "Node"],
-    metric: "73k customers",
-    href: "https://crustmfb.com",
+    metric: "$1M+ volume",
+    href: "/projects/crust-mobile-bank",
   },
   {
     slug: "liveclasses",
@@ -153,7 +153,7 @@ const projects: ProjectRow[] = [
       "Built the full product from scratch — live sessions, assignments, payments, admin. Accepted into top incubators; grew MAU 3× in six months.",
     stack: ["React", "Node", "Postgres"],
     metric: "+300% MAU",
-    href: "https://liveclasses.ng",
+    href: "/projects/liveclasses",
   },
   {
     slug: "face-mask-detector",

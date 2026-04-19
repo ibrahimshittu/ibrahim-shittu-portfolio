@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 
 const experience: WorkEntry[] = [
   {
-    title: "Software Engineer",
+    title: "Founding Software Engineer",
     company: "Finiti Legal",
     period: "2025 —",
     location: "San Francisco (remote)",
@@ -282,11 +282,11 @@ export default function Home() {
                       <strong className="font-semibold text-[#0e0f11] dark:text-[#f2efe7]">
                         Crust
                       </strong>{" "}
-                      — mobile bank to{" "}
+                      — mobile bank that moved{" "}
                       <strong className="font-semibold text-[#0e0f11] dark:text-[#f2efe7]">
-                        73k
+                        $1M+
                       </strong>{" "}
-                      customers with a team of four.
+                      with a team of four.
                     </>
                   ),
                 },
@@ -453,10 +453,15 @@ export default function Home() {
               <Link
                 href={`/blog/${w.slug}`}
                 key={w.slug}
-                className="grid grid-cols-[90px_1fr_60px] items-baseline gap-3 border-b border-[#e7e5de] py-5 transition-colors hover:bg-white md:grid-cols-[120px_1fr_80px] md:gap-6 dark:border-[#26251f] dark:hover:bg-[#1a1a17]/60"
+                className="block border-b border-[#e7e5de] py-5 transition-colors hover:bg-white md:grid md:grid-cols-[120px_1fr_80px] md:items-baseline md:gap-6 dark:border-[#26251f] dark:hover:bg-[#1a1a17]/60"
               >
-                <div className="font-mono text-[11px] text-[#7a7f86] dark:text-[#74706a]">
-                  {formatWritingDate(w.date)}
+                <div className="mb-2 flex items-center justify-between md:mb-0 md:block">
+                  <div className="font-mono text-[11px] text-[#7a7f86] dark:text-[#74706a]">
+                    {formatWritingDate(w.date)}
+                  </div>
+                  <div className="font-mono text-[11px] text-[#7a7f86] md:hidden dark:text-[#74706a]">
+                    {w.readTime}
+                  </div>
                 </div>
                 <div>
                   <div className="mb-1 font-sans text-[16px] font-semibold tracking-[-0.01em] text-[#0e0f11] md:text-[17px] dark:text-[#f2efe7]">
@@ -478,7 +483,7 @@ export default function Home() {
                     </div>
                   )}
                 </div>
-                <div className="text-right font-mono text-[11px] text-[#7a7f86] dark:text-[#74706a]">
+                <div className="hidden text-right font-mono text-[11px] text-[#7a7f86] md:block dark:text-[#74706a]">
                   {w.readTime}
                 </div>
               </Link>

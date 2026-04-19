@@ -29,7 +29,7 @@ export function WorkSection({ experience }: Props) {
         </div>
 
         <div className="overflow-hidden rounded-md border border-[#e7e5de] bg-white dark:border-[#26251f] dark:bg-[#1a1a17]">
-          <div className="grid grid-cols-[100px_1fr_140px] gap-4 border-b border-[#e7e5de] bg-[#fafaf7] px-5 py-3 font-mono text-[10px] uppercase tracking-[0.12em] text-[#7a7f86] md:grid-cols-[140px_1fr_180px] md:gap-8 md:px-8 dark:border-[#26251f] dark:bg-[#0f0f0d] dark:text-[#74706a]">
+          <div className="hidden md:grid md:grid-cols-[140px_1fr_180px] md:gap-8 md:border-b md:border-[#e7e5de] md:bg-[#fafaf7] md:px-8 md:py-3 md:font-mono md:text-[10px] md:uppercase md:tracking-[0.12em] md:text-[#7a7f86] dark:md:border-[#26251f] dark:md:bg-[#0f0f0d] dark:md:text-[#74706a]">
             <span>Period</span>
             <span>Role · Company</span>
             <span className="text-right">Impact</span>
@@ -39,15 +39,32 @@ export function WorkSection({ experience }: Props) {
             <article
               key={i}
               className={[
-                "grid grid-cols-[100px_1fr_140px] items-start gap-4 px-5 py-6 md:grid-cols-[140px_1fr_180px] md:gap-8 md:px-8",
+                "px-5 py-6 md:grid md:grid-cols-[140px_1fr_180px] md:items-start md:gap-8 md:px-8",
                 i < experience.length - 1
                   ? "border-b border-[#e7e5de] dark:border-[#26251f]"
                   : "",
               ].join(" ")}
             >
-              <div className="pt-1 font-mono text-[12px] text-[#7a7f86] dark:text-[#74706a]">
+              {/* Mobile: period + impact inline */}
+              <div className="mb-3 flex items-start justify-between md:hidden">
+                <div className="font-mono text-[11px] text-[#7a7f86] dark:text-[#74706a]">
+                  {job.period}
+                </div>
+                <div className="text-right">
+                  <div className="font-sans text-[16px] font-semibold leading-[1.1] tracking-[-0.015em] text-[#0e0f11] dark:text-[#f2efe7]">
+                    {job.impact.head}
+                  </div>
+                  <div className="mt-1 font-mono text-[9.5px] uppercase tracking-[0.12em] text-[#7a7f86] dark:text-[#74706a]">
+                    {job.impact.tail}
+                  </div>
+                </div>
+              </div>
+
+              {/* Desktop period */}
+              <div className="hidden pt-1 font-mono text-[12px] text-[#7a7f86] md:block dark:text-[#74706a]">
                 {job.period}
               </div>
+
               <div>
                 <div className="font-sans text-[16px] font-semibold tracking-[-0.01em] text-[#0e0f11] md:text-[17px] dark:text-[#f2efe7]">
                   {job.title}{" "}
@@ -62,7 +79,9 @@ export function WorkSection({ experience }: Props) {
                   {job.summary}
                 </p>
               </div>
-              <div className="pt-1 text-right">
+
+              {/* Desktop impact */}
+              <div className="hidden pt-1 text-right md:block">
                 <div className="font-sans text-[18px] font-semibold leading-[1.1] tracking-[-0.015em] text-[#0e0f11] md:text-[20px] dark:text-[#f2efe7]">
                   {job.impact.head}
                 </div>

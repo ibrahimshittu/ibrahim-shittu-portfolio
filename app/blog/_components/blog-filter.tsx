@@ -142,20 +142,31 @@ export function BlogFilter({ posts }: Props) {
       {/* Rest — table */}
       {rest.length > 0 && (
         <>
-          <div className="grid grid-cols-[90px_1fr_70px_40px] gap-3 border-t border-[#d4d1c7] border-b border-[#e7e5de] px-2 py-2.5 font-mono text-[10px] uppercase tracking-[0.12em] text-[#7a7f86] md:grid-cols-[120px_1fr_80px_40px] md:gap-4 dark:border-t-[#35332c] dark:border-b-[#26251f] dark:text-[#74706a]">
+          <div className="hidden grid-cols-[120px_1fr_80px_40px] gap-4 border-t border-[#d4d1c7] border-b border-[#e7e5de] px-2 py-2.5 font-mono text-[10px] uppercase tracking-[0.12em] text-[#7a7f86] md:grid dark:border-t-[#35332c] dark:border-b-[#26251f] dark:text-[#74706a]">
             <span>Date</span>
             <span>Title</span>
             <span>Read</span>
             <span className="text-right">—</span>
           </div>
+          <div className="md:hidden border-t border-[#d4d1c7] dark:border-t-[#35332c]" />
           {rest.map((w) => (
             <Link
               href={`/blog/${w.slug}`}
               key={w.slug}
-              className="grid grid-cols-[90px_1fr_70px_40px] items-baseline gap-3 border-b border-[#e7e5de] px-2 py-5 transition-colors hover:bg-white md:grid-cols-[120px_1fr_80px_40px] md:gap-4 dark:border-[#26251f] dark:hover:bg-[#1a1a17]/60"
+              className="block border-b border-[#e7e5de] px-2 py-5 transition-colors hover:bg-white md:grid md:grid-cols-[120px_1fr_80px_40px] md:items-baseline md:gap-4 dark:border-[#26251f] dark:hover:bg-[#1a1a17]/60"
             >
-              <div className="font-mono text-[12px] text-[#7a7f86] dark:text-[#74706a]">
-                {formatDate(w.date)}
+              <div className="mb-2 flex items-center justify-between md:mb-0 md:block">
+                <div className="font-mono text-[12px] text-[#7a7f86] dark:text-[#74706a]">
+                  {formatDate(w.date)}
+                </div>
+                <div className="flex items-center gap-3 md:hidden">
+                  <span className="font-mono text-[11px] text-[#7a7f86] dark:text-[#74706a]">
+                    {w.readTime}
+                  </span>
+                  <span className="font-mono text-[13px] text-[#0e0f11] dark:text-[#f2efe7]">
+                    ↗
+                  </span>
+                </div>
               </div>
               <div>
                 <div className="mb-1 font-sans text-[16px] font-semibold tracking-[-0.01em] text-[#0e0f11] md:text-[17px] dark:text-[#f2efe7]">
@@ -177,10 +188,10 @@ export function BlogFilter({ posts }: Props) {
                   </div>
                 )}
               </div>
-              <div className="font-mono text-[11px] text-[#7a7f86] dark:text-[#74706a]">
+              <div className="hidden font-mono text-[11px] text-[#7a7f86] md:block dark:text-[#74706a]">
                 {w.readTime}
               </div>
-              <div className="text-right font-mono text-[13px] text-[#0e0f11] dark:text-[#f2efe7]">
+              <div className="hidden text-right font-mono text-[13px] text-[#0e0f11] md:block dark:text-[#f2efe7]">
                 ↗
               </div>
             </Link>

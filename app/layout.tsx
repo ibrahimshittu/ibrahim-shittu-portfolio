@@ -129,7 +129,6 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {/* Structured Data Scripts */}
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{

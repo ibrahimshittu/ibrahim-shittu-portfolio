@@ -54,7 +54,7 @@ export function generatePersonSchema() {
     jobTitle: "Senior Software Engineer",
     worksFor: {
       "@type": "Organization",
-      name: "Finiti Legal",
+      name: "Finiti",
     },
     alumniOf: {
       "@type": "EducationalOrganization",

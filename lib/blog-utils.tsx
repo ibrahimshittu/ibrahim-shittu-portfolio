@@ -6,18 +6,12 @@ import {
 } from "./video-seo";
 import { CodeBlock } from "@/components/ui/code-block";
 
-// Extract YouTube video IDs from markdown content
 export function extractYouTubeVideos(content: string): string[] {
   const matches = content.match(/\{\{youtube:([^}]+)\}\}/g);
   if (!matches) return [];
-
-  return matches.map((match) => {
-    const videoId = match.slice(10, -2).trim();
-    return videoId;
-  });
+  return matches.map((match) => match.slice(10, -2).trim());
 }
 
-// Generate video metadata for blog posts
 export function generateBlogVideoMetadata(
   videoId: string,
   blogTitle: string,
@@ -34,19 +28,8 @@ export function generateBlogVideoMetadata(
   };
 }
 
-// Format a date into human-readable long form (e.g., January 15, 2025)
-export const formatDate = (dateString: string): string => {
-  const date = new Date(dateString);
-  return date.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-};
-
-// Parse **bold** markers, links, and inline code inside text and return React nodes
+// Parse inline code (single/double backticks), **bold**, and [links](url) into React nodes.
 export const formatInlineText = (text: string): React.ReactNode => {
-  // Support inline code with single/double backticks, bold markers, and links
   const parts = text.split(
     /(``[^`]+``|`[^`]+`|\*\*[^*]+\*\*|\[([^\]]+)\]\(([^)]+)\))/g,
   );
@@ -56,7 +39,7 @@ export const formatInlineText = (text: string): React.ReactNode => {
     const part = parts[i];
     if (!part) continue;
 
-    // Check if this is a markdown link pattern
+    // Markdown link: the split captures the label (i+1) and href (i+2) as adjacent parts.
     if (
       i + 2 < parts.length &&
       parts[i + 1] &&
@@ -74,7 +57,7 @@ export const formatInlineText = (text: string): React.ReactNode => {
           {parts[i + 1]}
         </a>,
       );
-      i += 2; // Skip the next two parts as they're part of the link
+      i += 2;
       continue;
     }
 
@@ -171,14 +154,13 @@ export const formatContent = (content: string): React.ReactNode[] => {
         </p>,
       );
     } else {
-      // Split paragraph by single newlines into separate <p> like previous behavior
-      text.split("\n").forEach((line, i) => {
-        const cls =
-          i === 0
-            ? "text-sm text-muted-foreground font-mono leading-relaxed mt-4 mb-6"
-            : "text-sm text-muted-foreground font-mono leading-relaxed mt-4 mb-6";
+      // Split paragraph by single newlines so each line renders as its own <p>
+      text.split("\n").forEach((line) => {
         nodes.push(
-          <p key={`p-${nodes.length}`} className={cls}>
+          <p
+            key={`p-${nodes.length}`}
+            className="text-sm text-muted-foreground font-mono leading-relaxed mt-4 mb-6"
+          >
             {formatInlineText(line.trim())}
           </p>,
         );
@@ -277,24 +259,19 @@ export const formatContent = (content: string): React.ReactNode[] => {
     tableRows = null;
   };
 
-  // Helper to check if a line is a table row
-  const isTableRow = (line: string): boolean => {
-    return line.trim().startsWith("|") && line.trim().endsWith("|");
-  };
+  const isTableRow = (line: string): boolean =>
+    line.trim().startsWith("|") && line.trim().endsWith("|");
 
-  // Helper to check if a line is a table separator (|---|---|)
-  const isTableSeparator = (line: string): boolean => {
-    return /^\|[\s-:|]+\|$/.test(line.trim());
-  };
+  // Matches a separator row like |---|:--:|---:|
+  const isTableSeparator = (line: string): boolean =>
+    /^\|[\s-:|]+\|$/.test(line.trim());
 
-  // Helper to parse table cells from a row
-  const parseTableCells = (line: string): string[] => {
-    return line
+  const parseTableCells = (line: string): string[] =>
+    line
       .trim()
-      .slice(1, -1) // Remove leading and trailing |
+      .slice(1, -1)
       .split("|")
       .map((cell) => cell.trim());
-  };
 
   for (let idx = 0; idx < lines.length; idx++) {
     const raw = lines[idx];
@@ -309,7 +286,8 @@ export const formatContent = (content: string): React.ReactNode[] => {
       continue;
     }
 
-    // Handle YouTube embeds with special marker
+    // {{youtube:VIDEO_ID}} custom marker — render as an embed and surface
+    // metadata to parent components via data-* attributes.
     if (line.startsWith("{{youtube:") && line.endsWith("}}")) {
       flushParagraph();
       flushList();
@@ -317,12 +295,12 @@ export const formatContent = (content: string): React.ReactNode[] => {
       flushTable();
       const videoId = line.slice(10, -2).trim();
 
-      // Store video information for structured data (can be accessed by parent component)
+      // Placeholder metadata — enriched with real post/video details by callers.
       const videoMetadata: VideoMetadata = {
-        title: "YouTube Video", // This will be enhanced in the blog post component
+        title: "YouTube Video",
         description: "Embedded YouTube video content",
         thumbnailUrl: getYouTubeThumbnail(videoId),
-        uploadDate: new Date().toISOString(), // This should be the actual upload date
+        uploadDate: new Date().toISOString(),
         embedUrl: getYouTubeEmbedUrl(videoId),
         videoId: videoId,
       };
@@ -353,10 +331,9 @@ export const formatContent = (content: string): React.ReactNode[] => {
       continue;
     }
 
-    // A non-blank non-quote line ends a quote block
+    // A non-blank non-quote line ends a quote block; fall through to re-process it below.
     if (quoteBuf && line.trim() !== "" && !/^>\s?/.test(line)) {
       flushQuote();
-      // fall through to process this line normally
     }
 
     // Code block start
@@ -416,32 +393,22 @@ export const formatContent = (content: string): React.ReactNode[] => {
       continue;
     }
 
-    // Table handling
+    // Table: first row is the header, second is the `|---|` separator, rest are data rows.
     if (isTableRow(line)) {
       flushParagraph();
       flushList();
       flushQuote();
 
-      // If we don't have a header yet, this is the header row
       if (!tableHeader) {
         tableHeader = parseTableCells(line);
         tableRows = [];
         continue;
       }
-
-      // If this is the separator row (|---|---|), skip it
-      if (isTableSeparator(line)) {
-        continue;
-      }
-
-      // Otherwise, it's a data row
-      if (tableRows) {
-        tableRows.push(parseTableCells(line));
-      }
+      if (isTableSeparator(line)) continue;
+      if (tableRows) tableRows.push(parseTableCells(line));
       continue;
     }
 
-    // If we were in a table and hit a non-table line, flush the table
     if (tableHeader && !isTableRow(line)) {
       flushTable();
     }
@@ -474,11 +441,9 @@ export const formatContent = (content: string): React.ReactNode[] => {
       continue;
     }
 
-    // Default: part of a paragraph
     paragraphBuf.push(line);
   }
 
-  // Flush any remaining buffers
   flushCode();
   flushList();
   flushQuote();

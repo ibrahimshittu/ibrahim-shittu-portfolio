@@ -29,7 +29,7 @@ const SLUG_TAGS: Record<string, string> = {
 const SLUG_ROLES: Record<string, string> = {
   "tunnel-ai": "Author · Side project",
   finiti: "Founding Software Engineer · Finiti",
-  fabrio: "Founder · Fabrio",
+  fabrio: "Lead Software Engineer · Fabrio",
   "crust-mobile-bank": "Lead Software Engineer · Thrive Agric",
   liveclasses: "Founding Engineer · LiveClasses",
   "revit-virtual-assistant": "Engineer · Final-year project",
@@ -234,7 +234,6 @@ export default function ProjectPage({
         <StructuredData key={`video-${i}`} data={schema} />
       ))}
 
-      {/* Hero */}
       <section className="border-b border-[#d4d1c7] dark:border-[#35332c]">
         <div className="mx-auto max-w-[1280px] px-6 py-14 md:px-12 md:py-[72px]">
           <div className="mb-6 flex flex-wrap gap-4 font-mono text-[11px] uppercase tracking-[0.12em]">
@@ -320,10 +319,8 @@ export default function ProjectPage({
         </div>
       </section>
 
-      {/* Body — numbered rail */}
       <section className="border-b border-[#e7e5de] dark:border-[#26251f]">
         <div className="mx-auto max-w-[1200px] px-6 py-14 md:px-12 md:py-[72px]">
-          {/* 01 · problem */}
           <div className="grid grid-cols-1 gap-6 md:grid-cols-[180px_1fr] md:gap-10">
             <div className="pt-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#7a7f86] dark:text-[#74706a]">
               01 · problem
@@ -417,7 +414,6 @@ export default function ProjectPage({
             </div>
           )}
 
-          {/* Impact */}
           <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-[180px_1fr] md:gap-10">
             <div className="pt-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#7a7f86] dark:text-[#74706a]">
               {project.gallery && project.gallery.length > 0

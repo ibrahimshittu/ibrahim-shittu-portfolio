@@ -47,12 +47,12 @@ The system ships where the work already happens: a Word add-in and Outlook plugi
     slug: "fabrio",
     title: "Fabrio — AI Grading for Engineering CAD at Scale",
     excerpt:
-      "Founded Fabrio to revolutionise grading for engineering CAD work — saving professors thousands of hours at universities like Imperial College London and UCL.",
-    description: `Previously, I founded Fabrio, a platform that revolutionised grading for engineering CAD work. Professors at engineering schools were marking thousands of individual Fusion files by hand every term; Fabrio turned that into instant, automated assessment with live progress dashboards, saving them thousands of hours a year.
+      "Rebuilt the Fabrio platform from the ground up to revolutionise grading for engineering CAD work — saving professors thousands of hours at universities like Imperial College London and UCL.",
+    description: `Fabrio is a platform that revolutionised grading for engineering CAD work. Professors at engineering schools were marking thousands of individual Fusion files by hand every term; Fabrio turned that into instant, automated assessment with live progress dashboards, saving them thousands of hours a year.
 
-We raised venture money, grew to a 6-figure ARR, built a team of six, and secured customers like Imperial College London and University College London, with the platform ultimately reaching 40+ institutions worldwide — from Surrey and Birmingham in the UK to universities across the US, Italy, and Hong Kong, plus programmes like F1 in Schools and Co-op Academies Trust.
+I joined as the first engineering hire. The company raised venture money, grew to a 6-figure ARR, built a team of six, and secured customers like Imperial College London and University College London — with the platform ultimately reaching 40+ institutions worldwide, from Surrey and Birmingham in the UK to universities across the US, Italy, and Hong Kong, plus programmes like F1 in Schools and Co-op Academies Trust.
 
-As the first engineering hire, I led the ground-up rebuild of the platform on AWS serverless (Cognito, AppSync, Lambda, DynamoDB, S3) with a TypeScript and Next.js frontend over GraphQL. SSR caching took p95 page load from 3.1s to 680ms; the grading engine was rebuilt as a queue-backed worker pool that processed thousands of submissions during deadline peaks without the instructor dashboard ever stalling.
+I led the ground-up rebuild of the platform on AWS serverless (Cognito, AppSync, Lambda, DynamoDB, S3) with a TypeScript and Next.js frontend over GraphQL. SSR caching took p95 page load from 3.1s to 680ms; the grading engine was rebuilt as a queue-backed worker pool that processed thousands of submissions during deadline peaks without the instructor dashboard ever stalling.
 
 Beyond performance, we made the platform collaborative — live CAD sessions, shared assignments, tight feedback loops — and trustworthy to institutional buyers, with auth, logging, and access controls that held up under university IT review. We also established a pioneering partnership with Autodesk, validating the approach to transforming CAD education.`,
     technologies: [

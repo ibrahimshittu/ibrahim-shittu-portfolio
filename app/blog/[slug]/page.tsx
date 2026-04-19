@@ -3,8 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
 import { getBlogPost, getAllBlogPosts } from "@/lib/markdown";
+import { formatDate } from "@/lib/date";
 import {
-  formatDate,
   formatContent,
   extractYouTubeVideos,
   generateBlogVideoMetadata,
@@ -159,7 +159,6 @@ export default function BlogPost({ params }: PageProps) {
         <StructuredData key={`video-${i}`} data={schema} />
       ))}
 
-      {/* Hero */}
       <section className="border-b border-[#d4d1c7] dark:border-[#35332c]">
         <div className="mx-auto max-w-[1040px] px-6 py-16 md:px-12 md:py-[72px]">
           <div className="mb-6 flex flex-wrap gap-4 font-mono text-[11px] uppercase tracking-[0.12em]">
@@ -200,7 +199,6 @@ export default function BlogPost({ params }: PageProps) {
         </div>
       </section>
 
-      {/* Body */}
       <section>
         <div className="mx-auto max-w-[960px] px-6 py-14 md:px-12 md:py-[72px]">
           <article className="prose-article prose prose-neutral max-w-none dark:prose-invert prose-headings:font-sans prose-headings:font-semibold prose-headings:tracking-[-0.02em] prose-h2:mt-11 prose-h2:mb-3.5 prose-h2:text-[26px] prose-h3:mt-7 prose-h3:mb-2.5 prose-h3:text-[20px] prose-p:font-sans prose-p:text-[17px] prose-p:leading-[1.7] prose-p:text-[#3d4147] prose-p:my-[18px] prose-li:text-[#3d4147] prose-li:font-sans prose-li:text-[16px] prose-li:leading-[1.7] prose-blockquote:border-l-[3px] prose-blockquote:border-[#1f5d3b] prose-blockquote:not-italic prose-blockquote:bg-white prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:my-8 prose-blockquote:text-[20px] prose-blockquote:font-sans prose-blockquote:tracking-[-0.015em] prose-blockquote:leading-[1.45] prose-a:text-[#0e0f11] prose-a:underline-offset-4 prose-code:before:content-none prose-code:after:content-none prose-code:font-mono prose-code:text-[13.5px] prose-code:bg-white prose-code:border prose-code:border-[#e7e5de] prose-code:px-1.5 prose-code:py-[2px] prose-code:rounded-sm prose-pre:bg-white prose-pre:border prose-pre:border-[#e7e5de] prose-pre:text-[#0e0f11] dark:prose-p:text-[#b9b5aa] dark:prose-li:text-[#b9b5aa] dark:prose-blockquote:border-[#6fb292] dark:prose-blockquote:bg-[#1a1a17] dark:prose-a:text-[#f2efe7] dark:prose-code:bg-[#1a1a17] dark:prose-code:border-[#26251f] dark:prose-pre:bg-[#1a1a17] dark:prose-pre:border-[#26251f] dark:prose-pre:text-[#f2efe7]">

@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { siteConfig, generatePersonSchema } from "@/lib/seo";
 import { getAllBlogPosts } from "@/lib/markdown";
+import { formatMonthYear } from "@/lib/date";
 import { ContactFooter } from "@/components/ui/contact-footer";
 import { WorkSection, type WorkEntry } from "./_components/work-section";
 
@@ -46,12 +47,12 @@ const experience: WorkEntry[] = [
     impact: { head: "days → minutes", tail: "filing prep" },
   },
   {
-    title: "Founder",
+    title: "Lead Software Engineer",
     company: "Fabrio",
     period: "2022 — 2025",
     location: "London, UK",
     summary:
-      "Founded Fabrio to revolutionise grading for engineering CAD work — saving professors thousands of hours. Raised venture money, grew to 6-figure ARR, built a team of six, and secured customers like Imperial College London and UCL.",
+      "First engineering hire at a VC-backed CAD-education startup. Led the ground-up rebuild that revolutionised grading for engineering CAD work — saving professors thousands of hours at Imperial College London, UCL, and 40+ institutions worldwide.",
     stack: ["TypeScript", "Next.js", "GraphQL", "AWS"],
     impact: { head: "40+", tail: "institutions" },
   },
@@ -154,11 +155,6 @@ const projects = [
   },
 ];
 
-function formatWritingDate(iso: string): string {
-  const d = new Date(iso);
-  return d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
-}
-
 export default function Home() {
   const writing = getAllBlogPosts().slice(0, 4);
   const personSchema = generatePersonSchema();
@@ -190,7 +186,6 @@ export default function Home() {
         }}
       />
 
-      {/* Hero */}
       <section className="relative border-b border-[#d4d1c7] dark:border-[#35332c]">
         <div
           aria-hidden
@@ -294,7 +289,7 @@ export default function Home() {
                   k: "SCALE",
                   body: (
                     <>
-                      Founded{" "}
+                      Built{" "}
                       <strong className="font-semibold text-[#0e0f11] dark:text-[#f2efe7]">
                         Fabrio
                       </strong>
@@ -348,7 +343,6 @@ export default function Home() {
 
       <WorkSection experience={experience} />
 
-      {/* Projects */}
       <section
         id="projects"
         className="border-b border-[#d4d1c7] bg-white dark:border-[#35332c] dark:bg-[#1a1a17]/40"
@@ -429,7 +423,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Writing */}
       <section
         id="writing"
         className="border-b border-[#d4d1c7] dark:border-[#35332c]"
@@ -452,7 +445,13 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="border-t border-[#d4d1c7] dark:border-[#35332c]">
+          <div className="hidden grid-cols-[120px_1fr_80px] gap-6 border-t border-b border-t-[#d4d1c7] border-b-[#e7e5de] px-0 py-2.5 font-mono text-[10px] uppercase tracking-[0.12em] text-[#7a7f86] md:grid dark:border-t-[#35332c] dark:border-b-[#26251f] dark:text-[#74706a]">
+            <span>Date</span>
+            <span>Title</span>
+            <span className="text-right">Read</span>
+          </div>
+          <div className="md:hidden border-t border-[#d4d1c7] dark:border-t-[#35332c]" />
+          <div>
             {writing.map((w) => (
               <Link
                 href={`/blog/${w.slug}`}
@@ -461,7 +460,7 @@ export default function Home() {
               >
                 <div className="mb-2 flex items-center justify-between md:mb-0 md:block">
                   <div className="font-mono text-[11px] text-[#7a7f86] dark:text-[#74706a]">
-                    {formatWritingDate(w.date)}
+                    {formatMonthYear(w.date)}
                   </div>
                   <div className="font-mono text-[11px] text-[#7a7f86] md:hidden dark:text-[#74706a]">
                     {w.readTime}

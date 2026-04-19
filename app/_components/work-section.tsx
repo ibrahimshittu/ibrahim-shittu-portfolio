@@ -45,7 +45,6 @@ export function WorkSection({ experience }: Props) {
                   : "",
               ].join(" ")}
             >
-              {/* Mobile: period + impact inline */}
               <div className="mb-3 flex items-start justify-between md:hidden">
                 <div className="font-mono text-[11px] text-[#7a7f86] dark:text-[#74706a]">
                   {job.period}
@@ -60,7 +59,6 @@ export function WorkSection({ experience }: Props) {
                 </div>
               </div>
 
-              {/* Desktop period */}
               <div className="hidden pt-1 font-mono text-[12px] text-[#7a7f86] md:block dark:text-[#74706a]">
                 {job.period}
               </div>
@@ -80,7 +78,6 @@ export function WorkSection({ experience }: Props) {
                 </p>
               </div>
 
-              {/* Desktop impact */}
               <div className="hidden pt-1 text-right md:block">
                 <div className="font-sans text-[18px] font-semibold leading-[1.1] tracking-[-0.015em] text-[#0e0f11] md:text-[20px] dark:text-[#f2efe7]">
                   {job.impact.head}

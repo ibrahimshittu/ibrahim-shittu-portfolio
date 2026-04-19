@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { formatMonthYear } from "@/lib/date";
 
 export interface BlogRow {
   slug: string;
@@ -16,11 +17,6 @@ export interface BlogRow {
 
 interface Props {
   posts: BlogRow[];
-}
-
-function formatDate(iso: string): string {
-  const d = new Date(iso);
-  return d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
 }
 
 export function BlogFilter({ posts }: Props) {
@@ -49,7 +45,6 @@ export function BlogFilter({ posts }: Props) {
 
   return (
     <div className="mx-auto max-w-[1280px] px-6 py-14 md:px-12 md:py-20">
-      {/* Filter bar */}
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap items-center gap-1.5">
           <span className="mr-1 font-mono text-[11px] text-[#7a7f86] dark:text-[#74706a]">
@@ -89,7 +84,6 @@ export function BlogFilter({ posts }: Props) {
         </div>
       )}
 
-      {/* Featured */}
       {featured && (
         <Link
           href={`/blog/${featured.slug}`}
@@ -104,7 +98,7 @@ export function BlogFilter({ posts }: Props) {
                 {featured.tag}
               </span>
               <span className="text-[#7a7f86] dark:text-[#74706a]">
-                {formatDate(featured.date)}
+                {formatMonthYear(featured.date)}
               </span>
               <span className="text-[#7a7f86] dark:text-[#74706a]">
                 {featured.readTime}
@@ -133,13 +127,12 @@ export function BlogFilter({ posts }: Props) {
               &ldquo;{(featured.body || featured.excerpt).split(".")[0]}.&rdquo;
             </blockquote>
             <div className="mt-auto font-mono text-[11px] text-[#7a7f86] dark:text-[#74706a]">
-              ibrahim shittu · {formatDate(featured.date)}
+              ibrahim shittu · {formatMonthYear(featured.date)}
             </div>
           </div>
         </Link>
       )}
 
-      {/* Rest — table */}
       {rest.length > 0 && (
         <>
           <div className="hidden grid-cols-[120px_1fr_80px_40px] gap-4 border-t border-[#d4d1c7] border-b border-[#e7e5de] px-2 py-2.5 font-mono text-[10px] uppercase tracking-[0.12em] text-[#7a7f86] md:grid dark:border-t-[#35332c] dark:border-b-[#26251f] dark:text-[#74706a]">
@@ -157,7 +150,7 @@ export function BlogFilter({ posts }: Props) {
             >
               <div className="mb-2 flex items-center justify-between md:mb-0 md:block">
                 <div className="font-mono text-[12px] text-[#7a7f86] dark:text-[#74706a]">
-                  {formatDate(w.date)}
+                  {formatMonthYear(w.date)}
                 </div>
                 <div className="flex items-center gap-3 md:hidden">
                   <span className="font-mono text-[11px] text-[#7a7f86] dark:text-[#74706a]">

@@ -86,11 +86,11 @@ const projects: ProjectRow[] = [
     year: "2024",
     tag: "EdTech",
     status: "Live",
-    role: "Founder · Fabrio",
+    role: "Lead Software Engineer · Fabrio",
     blurb:
       "Revolutionised grading for engineering CAD work — saving professors thousands of hours at Imperial College London, UCL, and 40+ institutions worldwide.",
     detail:
-      "VC-backed, 6-figure ARR, team of six. Led the ground-up rebuild on AWS serverless with TypeScript and Next.js. p95 3.1s → 680ms; grading engine scales to thousands of concurrent submissions.",
+      "First engineering hire at a VC-backed startup. Led the ground-up rebuild on AWS serverless with TypeScript and Next.js. p95 3.1s → 680ms; grading engine scales to thousands of concurrent submissions.",
     stack: ["TypeScript", "Next.js", "GraphQL", "AWS"],
     metric: "40+ institutions",
     href: "/projects/fabrio",

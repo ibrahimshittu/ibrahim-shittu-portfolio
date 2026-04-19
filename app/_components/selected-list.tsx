@@ -18,8 +18,8 @@ const rows: Row[] = [
     k: "NOW",
     body: (
       <>
-        Building <Strong>Finiti</Strong> — the AI compliance layer for capital
-        markets.
+        Building <Strong>Finiti Legal</Strong> — the AI compliance layer for
+        capital markets.
       </>
     ),
   },

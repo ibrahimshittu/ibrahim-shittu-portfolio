@@ -10,7 +10,7 @@ import { experience } from "./_data/experience";
 import { projects } from "./_data/projects";
 
 const heroDescription =
-  "Senior software engineer with eight years shipping web, mobile, and AI agents. Three-time founding engineer, currently building Finiti — the AI compliance layer for capital markets.";
+  "Senior software engineer with eight years shipping web, mobile, and AI agents. Three-time founding engineer, currently building Finiti Legal — the AI compliance layer for capital markets.";
 
 const heroTitle = "Ibrahim Shittu - Senior Software Engineer";
 

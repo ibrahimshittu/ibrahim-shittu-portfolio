@@ -3,7 +3,7 @@ import type { WorkEntry } from "../_components/work-section";
 export const experience: WorkEntry[] = [
   {
     title: "Founding Software Engineer",
-    company: "Finiti",
+    company: "Finiti Legal",
     period: "2025 —",
     location: "San Francisco (remote)",
     summary:

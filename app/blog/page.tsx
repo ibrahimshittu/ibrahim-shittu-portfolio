@@ -129,7 +129,7 @@ export default function Blog() {
       />
 
       <SubHero
-        kicker="// 02 — writing · notes from the field"
+        kicker="// 03 — writing · notes from the field"
         title={
           <>
             Thinking out loud,

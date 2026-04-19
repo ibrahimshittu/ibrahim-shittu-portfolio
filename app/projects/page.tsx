@@ -191,7 +191,7 @@ export default function Projects() {
   return (
     <main className="bg-[#fafaf7] text-[#0e0f11] dark:bg-[#0f0f0d] dark:text-[#f2efe7]">
       <SubHero
-        kicker="// 03 — projects · selected work"
+        kicker="// 02 — projects · selected work"
         title={
           <>
             Projects I&apos;ve <GoldMarker>actually</GoldMarker>

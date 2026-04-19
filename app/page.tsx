@@ -251,56 +251,6 @@ export default function Home() {
 
       <WorkSection experience={experience} />
 
-      {/* Writing */}
-      <section
-        id="writing"
-        className="border-b border-[#d4d1c7] dark:border-[#35332c]"
-      >
-        <div className="mx-auto max-w-[1280px] px-6 py-14 md:px-12 md:py-20">
-          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <div className="font-mono text-[11px] tracking-[0.1em] text-[#7a7f86] dark:text-[#74706a]">
-                02 ——
-              </div>
-              <h2 className="mt-1 font-sans text-3xl font-semibold tracking-[-0.02em] text-[#0e0f11] md:text-[32px] dark:text-[#f2efe7]">
-                Writing
-              </h2>
-            </div>
-            <Link
-              href="/blog"
-              className="font-mono text-[12px] text-[#0e0f11] underline-offset-4 hover:underline dark:text-[#f2efe7]"
-            >
-              all writing ↗
-            </Link>
-          </div>
-
-          <div className="border-t border-[#d4d1c7] dark:border-[#35332c]">
-            {writing.map((w) => (
-              <Link
-                href={`/blog/${w.slug}`}
-                key={w.slug}
-                className="grid grid-cols-[90px_1fr_60px] items-baseline gap-3 border-b border-[#e7e5de] py-5 transition-colors hover:bg-white md:grid-cols-[120px_1fr_80px] md:gap-6 dark:border-[#26251f] dark:hover:bg-[#1a1a17]/60"
-              >
-                <div className="font-mono text-[11px] text-[#7a7f86] dark:text-[#74706a]">
-                  {formatWritingDate(w.date)}
-                </div>
-                <div>
-                  <div className="mb-1 font-sans text-[16px] font-semibold tracking-[-0.01em] text-[#0e0f11] md:text-[17px] dark:text-[#f2efe7]">
-                    {w.title}
-                  </div>
-                  <div className="max-w-[640px] font-sans text-[13px] leading-[1.55] text-[#3d4147] md:text-[13.5px] dark:text-[#b9b5aa]">
-                    {w.excerpt}
-                  </div>
-                </div>
-                <div className="text-right font-mono text-[11px] text-[#7a7f86] dark:text-[#74706a]">
-                  {w.readTime}
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Projects */}
       <section
         id="projects"
@@ -310,7 +260,7 @@ export default function Home() {
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
             <div>
               <div className="font-mono text-[11px] tracking-[0.1em] text-[#7a7f86] dark:text-[#74706a]">
-                03 ——
+                02 ——
               </div>
               <h2 className="mt-1 font-sans text-3xl font-semibold tracking-[-0.02em] text-[#0e0f11] md:text-[32px] dark:text-[#f2efe7]">
                 Selected projects
@@ -378,6 +328,68 @@ export default function Home() {
                 </Link>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Writing */}
+      <section
+        id="writing"
+        className="border-b border-[#d4d1c7] dark:border-[#35332c]"
+      >
+        <div className="mx-auto max-w-[1280px] px-6 py-14 md:px-12 md:py-20">
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <div className="font-mono text-[11px] tracking-[0.1em] text-[#7a7f86] dark:text-[#74706a]">
+                03 ——
+              </div>
+              <h2 className="mt-1 font-sans text-3xl font-semibold tracking-[-0.02em] text-[#0e0f11] md:text-[32px] dark:text-[#f2efe7]">
+                Writing
+              </h2>
+            </div>
+            <Link
+              href="/blog"
+              className="font-mono text-[12px] text-[#0e0f11] underline-offset-4 hover:underline dark:text-[#f2efe7]"
+            >
+              all writing ↗
+            </Link>
+          </div>
+
+          <div className="border-t border-[#d4d1c7] dark:border-[#35332c]">
+            {writing.map((w) => (
+              <Link
+                href={`/blog/${w.slug}`}
+                key={w.slug}
+                className="grid grid-cols-[90px_1fr_60px] items-baseline gap-3 border-b border-[#e7e5de] py-5 transition-colors hover:bg-white md:grid-cols-[120px_1fr_80px] md:gap-6 dark:border-[#26251f] dark:hover:bg-[#1a1a17]/60"
+              >
+                <div className="font-mono text-[11px] text-[#7a7f86] dark:text-[#74706a]">
+                  {formatWritingDate(w.date)}
+                </div>
+                <div>
+                  <div className="mb-1 font-sans text-[16px] font-semibold tracking-[-0.01em] text-[#0e0f11] md:text-[17px] dark:text-[#f2efe7]">
+                    {w.title}
+                  </div>
+                  <div className="max-w-[640px] font-sans text-[13px] leading-[1.55] text-[#3d4147] md:text-[13.5px] dark:text-[#b9b5aa]">
+                    {w.excerpt}
+                  </div>
+                  {w.tags.length > 0 && (
+                    <div className="mt-2.5 flex flex-wrap gap-1.5">
+                      {w.tags.slice(0, 4).map((t) => (
+                        <span
+                          key={t}
+                          className="inline-block rounded-[3px] border border-[#e7e5de] bg-[#fafaf7] px-2 py-[2px] font-mono text-[10.5px] text-[#3d4147] dark:border-[#26251f] dark:bg-[#0f0f0d] dark:text-[#b9b5aa]"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <div className="text-right font-mono text-[11px] text-[#7a7f86] dark:text-[#74706a]">
+                  {w.readTime}
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

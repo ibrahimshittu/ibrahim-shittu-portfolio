@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { siteConfig } from "@/lib/seo";
 
-type NavKey = "work" | "writing" | "projects" | "contact";
+type NavKey = "work" | "projects" | "writing";
 
 interface NavItem {
   key: NavKey;
@@ -31,13 +31,8 @@ export function PortfolioNav() {
 
   const items: NavItem[] = [
     { key: "work", label: "01 work", href: onIndex ? "#work" : "/#work" },
-    { key: "writing", label: "02 writing", href: "/blog" },
-    { key: "projects", label: "03 projects", href: "/projects" },
-    {
-      key: "contact",
-      label: "04 contact",
-      href: onIndex ? "#contact" : "/#contact",
-    },
+    { key: "projects", label: "02 projects", href: "/projects" },
+    { key: "writing", label: "03 writing", href: "/blog" },
   ];
 
   const meta: Array<[string, string]> = [

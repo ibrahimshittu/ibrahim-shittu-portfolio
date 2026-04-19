@@ -82,9 +82,9 @@ const experience: WorkEntry[] = [
     period: "2021",
     location: "Aberdeen, UK",
     summary:
-      "Predictive models for carbon tracking and AI-driven analytics that cut building energy waste by 25% across deployed sites.",
+      "Proposed predictive models for carbon tracking and AI-driven analytics, with projected 25% reductions in building energy waste across target sites.",
     stack: ["Python", "ML"],
-    impact: { head: "−25%", tail: "energy waste" },
+    impact: { head: "−25%", tail: "projected waste" },
   },
   {
     title: "Software Developer",
@@ -92,9 +92,9 @@ const experience: WorkEntry[] = [
     period: "2018 — 2020",
     location: "Remote",
     summary:
-      "Took several early-stage ideas from concept to launch. Full-stack across diverse stacks and industries, with six products shipped.",
+      "Took several early-stage ideas from concept to launch. Full-stack across diverse stacks and industries, with four products shipped.",
     stack: ["JS", "Python", "Ruby"],
-    impact: { head: "6", tail: "products shipped" },
+    impact: { head: "4", tail: "products shipped" },
   },
 ];
 
@@ -140,7 +140,7 @@ const projects = [
     year: "2022",
     tag: "Fintech",
     blurb:
-      "Full-stack mobile bank for the underbanked. iOS, Android, and an admin console, shipped as a lean team of four.",
+      "Bank for the underbanked. iOS, Android, and an admin console, shipped as a lean team of four.",
     metric: "$1M+ transactions",
     href: "/projects/crust-mobile-bank",
   },

@@ -72,7 +72,7 @@ Beyond performance, we made the platform collaborative — live CAD sessions, sh
     slug: "crust-mobile-bank",
     title: "Crust Mobile Bank",
     excerpt:
-      "Full-stack mobile bank for the underbanked. iOS, Android, and an admin console, shipped as a lean team of four.",
+      "Bank for the underbanked. iOS, Android, and an admin console, shipped as a lean team of four.",
     description: `Crust Microfinance Bank is the consumer-facing product I led frontend for at Thrive Agric (YC W19). It's a full-stack mobile bank aimed at the underbanked in Nigeria, with iOS and Android apps plus an internal admin console used by the bank's operations team.
 
 One React Native codebase powered both mobile apps; the admin tool ran the same design system and primitives on web. That shared foundation meant a four-person team could ship and maintain three surfaces — iOS, Android, and admin — without constant duplication.
@@ -257,7 +257,7 @@ Technical implementation includes optimization for edge devices using TensorFlow
     gallery: [
       {
         url: "https://res.cloudinary.com/ibrahimshittu/video/upload/v1756029390/face-mask-detector-demo_emvpyg.mp4",
-        caption: "Real-time face mask detection demo",
+        caption: "Real-time face mask detection",
       },
     ],
     impact:

@@ -133,7 +133,7 @@ const projects: ProjectRow[] = [
     status: "Shipped",
     role: "Lead Software Engineer · Thrive Agric",
     blurb:
-      "Full-stack mobile bank for the underbanked. iOS, Android, and an admin console, shipped as a lean team of four.",
+      "Bank for the underbanked. iOS, Android, and an admin console, shipped as a lean team of four.",
     detail:
       "One React Native codebase served iOS and Android; the admin tool ran the same design system on web. Reached 73k customers inside a year.",
     stack: ["React Native", "TypeScript", "Node"],

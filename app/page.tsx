@@ -8,11 +8,11 @@ import { WorkSection, type WorkEntry } from "./_components/work-section";
 export const metadata: Metadata = {
   title: "Ibrahim Shittu - Senior Software Engineer",
   description:
-    "Senior software engineer with eight years shipping web, mobile, and AI agents. Three-time founding engineer, currently building agentic systems for corporate law.",
+    "Senior software engineer with eight years shipping web, mobile, and AI agents. Three-time founding engineer, currently building Finiti — the AI compliance layer for capital markets.",
   openGraph: {
     title: "Ibrahim Shittu - Senior Software Engineer",
     description:
-      "Senior software engineer with eight years shipping web, mobile, and AI agents. Three-time founding engineer, currently building agentic systems for corporate law.",
+      "Senior software engineer with eight years shipping web, mobile, and AI agents. Three-time founding engineer, currently building Finiti — the AI compliance layer for capital markets.",
     url: siteConfig.url,
     type: "profile",
     images: [
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Ibrahim Shittu - Senior Software Engineer",
     description:
-      "Senior software engineer with eight years shipping web, mobile, and AI agents. Three-time founding engineer, currently building agentic systems for corporate law.",
+      "Senior software engineer with eight years shipping web, mobile, and AI agents. Three-time founding engineer, currently building Finiti — the AI compliance layer for capital markets.",
     images: [siteConfig.ogImage],
   },
   alternates: { canonical: siteConfig.url },
@@ -37,21 +37,21 @@ export const metadata: Metadata = {
 const experience: WorkEntry[] = [
   {
     title: "Founding Software Engineer",
-    company: "Finiti Legal",
+    company: "Finiti",
     period: "2025 —",
     location: "San Francisco (remote)",
     summary:
-      "AI agents that automate corporate-law drudgery — multi-tenant, SOC 2, deep Word & Outlook integrations. Turning days of manual drafting into minutes.",
-    stack: ["Python", "LangGraph", "TypeScript", "Azure"],
-    impact: { head: "days → minutes", tail: "draft time" },
+      "AI compliance layer between regulated companies and their regulators. Multi-agent orchestration with LangGraph and Pydantic AI over millions of SEC filings — validating filings, benchmarking disclosures, and running end-to-end filing prep with humans in the loop.",
+    stack: ["Python", "LangGraph", "Pydantic AI", "Azure"],
+    impact: { head: "days → minutes", tail: "filing prep" },
   },
   {
-    title: "Lead Software Engineer",
+    title: "Founder",
     company: "Fabrio",
     period: "2022 — 2025",
     location: "London, UK",
     summary:
-      "First hire at a VC-backed CAD-education startup. Led the ground-up rebuild with TypeScript, Next.js, GraphQL, and AWS. Drove adoption by 40+ institutions worldwide.",
+      "Founded Fabrio to revolutionise grading for engineering CAD work — saving professors thousands of hours. Raised venture money, grew to 6-figure ARR, built a team of six, and secured customers like Imperial College London and UCL.",
     stack: ["TypeScript", "Next.js", "GraphQL", "AWS"],
     impact: { head: "40+", tail: "institutions" },
   },
@@ -108,22 +108,22 @@ const projects = [
     href: "/projects/tunnel-ai",
   },
   {
-    name: "Agent Runway",
+    name: "Finiti AI",
     year: "2025",
-    tag: "Legal AI",
+    tag: "Capital Markets AI",
     blurb:
-      "Multi-agent system that drafts, reviews, and files corporate-law documents directly inside Word and Outlook.",
+      "AI compliance layer between regulated companies and their regulators. Multi-agent orchestration with LangGraph and Pydantic AI over millions of SEC filings.",
     metric: "Days → minutes",
-    href: "/projects/agent-runway",
+    href: "/projects/finiti",
   },
   {
-    name: "Fabrio Platform v2",
+    name: "Fabrio",
     year: "2024",
     tag: "EdTech",
     blurb:
-      "Ground-up rebuild of a CAD-education platform used by universities worldwide. Real-time, collaborative, and four times faster.",
+      "Revolutionised grading for engineering CAD work — saving professors thousands of hours at Imperial College London, UCL, and 40+ institutions worldwide.",
     metric: "40+ institutions",
-    href: "/projects/fabrio-v2",
+    href: "/projects/fabrio",
   },
   {
     name: "Unheard",
@@ -266,11 +266,11 @@ export default function Home() {
                   k: "NOW",
                   body: (
                     <>
-                      Building AI agents for corporate law at{" "}
+                      Building{" "}
                       <strong className="font-semibold text-[#0e0f11] dark:text-[#f2efe7]">
-                        Finiti Legal
-                      </strong>
-                      .
+                        Finiti
+                      </strong>{" "}
+                      — the AI compliance layer for capital markets.
                     </>
                   ),
                 },
@@ -294,15 +294,19 @@ export default function Home() {
                   k: "SCALE",
                   body: (
                     <>
-                      Rebuilt{" "}
+                      Founded{" "}
                       <strong className="font-semibold text-[#0e0f11] dark:text-[#f2efe7]">
                         Fabrio
-                      </strong>{" "}
-                      for{" "}
+                      </strong>
+                      . Saved professors thousands of hours at{" "}
                       <strong className="font-semibold text-[#0e0f11] dark:text-[#f2efe7]">
-                        40+
+                        Imperial
                       </strong>{" "}
-                      universities. Led the v2 cut.
+                      and{" "}
+                      <strong className="font-semibold text-[#0e0f11] dark:text-[#f2efe7]">
+                        UCL
+                      </strong>
+                      .
                     </>
                   ),
                 },

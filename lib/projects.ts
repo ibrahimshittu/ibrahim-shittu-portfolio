@@ -17,54 +17,56 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    slug: "agent-runway",
-    title: "Agent Runway - AI Agents for Corporate Law",
+    slug: "finiti",
+    title: "Finiti — The AI Compliance Layer for Capital Markets",
     excerpt:
-      "Multi-agent system that drafts, reviews, and files corporate-law documents directly inside Word and Outlook.",
-    description: `Agent Runway is the product I build and ship day-to-day at Finiti Legal. It's a multi-tenant, SOC 2 Type II platform that drops AI agents into the tools lawyers already use — Microsoft Word and Outlook — to automate the most repetitive parts of corporate law work.
+      "Gusto-for-compliance: an AI compliance layer that sits between regulated companies and their regulators — validating filings, benchmarking disclosures against peers, and running end-to-end filing prep with humans in the loop.",
+    description: `Finiti is the AI compliance layer between regulated companies and their regulators. Gusto gave small companies the payroll infrastructure only enterprises could afford — Finiti is doing the same for compliance. Lean teams get Fortune-500 compliance infrastructure at a fraction of the cost: we validate filings, benchmark disclosures against peer practice, and handle end-to-end filing prep with humans in the loop.
 
-The core pattern is a graph of typed agents coordinated through a narrow tool layer. Planning, retrieval, drafting, and review each run as their own step, grounded in the firm's precedent library and matter graph rather than open-web knowledge. Every factual claim the agent makes is traceable to a specific section of a specific document, surfaced as inline citations the attorney can verify in one click.
+We start with micro-to-mid-cap public companies, dual-listed companies, and the capital-markets law firms that advise them — filers across Nasdaq, HKEX, ASX, and LSE. The product drafts and reviews 10-K, 10-Q, 8-K, 20-F, and DEF 14A filings (plus international equivalents), checks them against Reg S-K and recurring SEC staff comment themes, and surfaces gaps against peer disclosures as actionable edits rather than generic advice.
 
-Beyond the agent system, the platform ships as a Word add-in and Outlook plugin so the document stays the source of truth. Proposed edits appear as tracked changes the attorney can accept, reject, or modify — meeting lawyers in the surface they already live in. Evals driven by real redacted matters gate every prompt and retrieval change, so regressions are caught before release.
+Under the hood, Finiti is a multi-agent orchestration — LangGraph coordinating specialised agents (planning, retrieval, drafting, benchmarking, review, self-healing), with Pydantic AI enforcing typed tool contracts so every step is structured, auditable, and evaluable. Retrieval is grounded in millions of SEC filings plus the company's own history and peer set, so every claim is traceable to a specific paragraph of a specific document — surfaced as inline citations the reviewer can verify in one click.
 
-Built with Python, LangGraph, and TypeScript on Azure, with a tool layer designed around idempotent, typed contracts and full audit logging.`,
+The system ships where the work already happens: a Word add-in and Outlook plugin let attorneys accept, reject, or modify proposed edits as tracked changes. SOC 2 Type II, full audit logging, per-tenant isolation, and eval suites driven by real redacted matters gate every prompt and retrieval change before release.`,
     technologies: [
       "Python",
       "LangGraph",
+      "Pydantic AI",
       "TypeScript",
       "Azure",
+      "SEC Corpus",
       "Microsoft Graph",
       "SOC 2",
     ],
     link: "https://finiti.legal",
     date: "2025-04-01",
     impact:
-      "Live with paying law firms; cut corporate-law drafting from days to minutes per matter, with full provenance on every agent output.",
+      "Live with paying customers across Nasdaq, HKEX, ASX, and LSE filers; lean teams file with Fortune-500-grade rigor in a fraction of the time.",
   },
   {
-    slug: "fabrio-v2",
-    title: "Fabrio Platform v2 - CAD Education at Scale",
+    slug: "fabrio",
+    title: "Fabrio — AI Grading for Engineering CAD at Scale",
     excerpt:
-      "Ground-up rebuild of a CAD-education platform used by universities worldwide. Real-time, collaborative, and four times faster.",
-    description: `Fabrio v2 was a ground-up rebuild of a CAD-education platform I led as the first engineering hire and eventual tech lead. The v1 had grown organically and stopped scaling — auth, content pipelines, and the grading engine were all bottlenecks. v2 reset the architecture.
+      "Founded Fabrio to revolutionise grading for engineering CAD work — saving professors thousands of hours at universities like Imperial College London and UCL.",
+    description: `Previously, I founded Fabrio, a platform that revolutionised grading for engineering CAD work. Professors at engineering schools were marking thousands of individual Fusion files by hand every term; Fabrio turned that into instant, automated assessment with live progress dashboards, saving them thousands of hours a year.
 
-On the frontend, we moved to TypeScript and Next.js with GraphQL, introducing SSR caching that took p95 page load from 3.1s to 680ms. The grading engine was rebuilt as a queue-backed worker pool that could process submissions for hundreds of students in parallel without the instructor dashboard ever seeing a stall.
+We raised venture money, grew to a 6-figure ARR, built a team of six, and secured customers like Imperial College London and University College London, with the platform ultimately reaching 40+ institutions worldwide — from Surrey and Birmingham in the UK to universities across the US, Italy, and Hong Kong, plus programmes like F1 in Schools and Co-op Academies Trust.
 
-Beyond performance, v2 made the platform collaborative — live CAD sessions, shared assignments, and a tighter feedback loop between students and instructors. It also made the product trustworthy for institutional buyers, with auth, logging, and access controls that actually held up under a university IT review.
+As the first engineering hire, I led the ground-up rebuild of the platform on AWS serverless (Cognito, AppSync, Lambda, DynamoDB, S3) with a TypeScript and Next.js frontend over GraphQL. SSR caching took p95 page load from 3.1s to 680ms; the grading engine was rebuilt as a queue-backed worker pool that processed thousands of submissions during deadline peaks without the instructor dashboard ever stalling.
 
-The rebuild shipped to paying institutions while v1 continued to serve legacy customers, with a gradual migration path. By the time I left, Fabrio had been adopted by 40+ universities worldwide.`,
+Beyond performance, we made the platform collaborative — live CAD sessions, shared assignments, tight feedback loops — and trustworthy to institutional buyers, with auth, logging, and access controls that held up under university IT review. We also established a pioneering partnership with Autodesk, validating the approach to transforming CAD education.`,
     technologies: [
       "TypeScript",
       "Next.js",
       "GraphQL",
       "AWS",
-      "Postgres",
-      "Redis",
+      "DynamoDB",
+      "AppSync",
     ],
     link: "https://fabrio.com",
     date: "2024-06-01",
     impact:
-      "Adopted by 40+ institutions; p95 page load 3.1s → 680ms; grading engine scales to hundreds of concurrent submissions.",
+      "Saved professors thousands of hours across Imperial College London, UCL, and 40+ institutions; 6-figure ARR with a team of six.",
   },
   {
     slug: "crust-mobile-bank",

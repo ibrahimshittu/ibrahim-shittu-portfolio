@@ -1,5 +1,21 @@
 import { siteConfig } from "@/lib/seo";
 
+const socialLinkLabel = (url: string): string =>
+  url.replace(/^https?:\/\//, "").replace(/\/$/, "");
+
+const socials: { url: string; label: string }[] = [
+  { url: siteConfig.author.github, label: socialLinkLabel(siteConfig.author.github) },
+  { url: siteConfig.author.linkedin, label: socialLinkLabel(siteConfig.author.linkedin) },
+  { url: siteConfig.author.twitter, label: socialLinkLabel(siteConfig.author.twitter) },
+];
+
+const SHIPPING_SINCE = 2018;
+
+const lastUpdated = new Date().toLocaleDateString("en-US", {
+  month: "short",
+  year: "numeric",
+});
+
 export function ContactFooter() {
   return (
     <>
@@ -24,44 +40,25 @@ export function ContactFooter() {
             >
               {siteConfig.author.email} ↗
             </a>
-            <a
-              href={siteConfig.author.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#0e0f11] dark:hover:text-[#f2efe7]"
-            >
-              github.com/ibrahimshittu
-            </a>
-            <a
-              href={siteConfig.author.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#0e0f11] dark:hover:text-[#f2efe7]"
-            >
-              linkedin.com/in/ibrahimshittu
-            </a>
-            <a
-              href={siteConfig.author.twitter}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#0e0f11] dark:hover:text-[#f2efe7]"
-            >
-              x.com/ibrahimshittu01
-            </a>
+            {socials.map(({ url, label }) => (
+              <a
+                key={url}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#0e0f11] dark:hover:text-[#f2efe7]"
+              >
+                {label}
+              </a>
+            ))}
           </div>
         </div>
       </section>
 
       <div className="mx-auto flex max-w-[1280px] flex-wrap justify-between gap-3 px-6 py-5 font-mono text-[11px] text-[#7a7f86] md:px-12 dark:text-[#74706a]">
         <span>© {new Date().getFullYear()} ibrahim shittu</span>
-        <span>shipping since 2018</span>
-        <span>
-          last updated{" "}
-          {new Date().toLocaleDateString("en-US", {
-            month: "short",
-            year: "numeric",
-          })}
-        </span>
+        <span>shipping since {SHIPPING_SINCE}</span>
+        <span>last updated {lastUpdated}</span>
       </div>
     </>
   );

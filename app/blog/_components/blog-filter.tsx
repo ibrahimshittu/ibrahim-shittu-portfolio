@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { formatMonthYear } from "@/lib/date";
+import { FilterButton } from "@/components/ui/filter-button";
 
 export interface BlogRow {
   slug: string;
@@ -50,23 +51,14 @@ export function BlogFilter({ posts }: Props) {
           <span className="mr-1 font-mono text-[11px] text-[#7a7f86] dark:text-[#74706a]">
             filter:
           </span>
-          {tags.map((t) => {
-            const active = tag === t;
-            return (
-              <button
-                key={t}
-                type="button"
-                onClick={() => setTag(t)}
-                className={
-                  active
-                    ? "rounded-full border border-[#0e0f11] bg-[#0e0f11] px-2.5 py-1 font-mono text-[11px] text-[#fafaf7] dark:border-[#f2efe7] dark:bg-[#f2efe7] dark:text-[#0f0f0d]"
-                    : "rounded-full border border-[#e7e5de] bg-transparent px-2.5 py-1 font-mono text-[11px] text-[#3d4147] transition-colors hover:border-[#7a7f86] dark:border-[#26251f] dark:text-[#b9b5aa] dark:hover:border-[#74706a]"
-                }
-              >
-                {t}
-              </button>
-            );
-          })}
+          {tags.map((t) => (
+            <FilterButton
+              key={t}
+              label={t}
+              active={tag === t}
+              onClick={() => setTag(t)}
+            />
+          ))}
         </div>
         <input
           type="search"

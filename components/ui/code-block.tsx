@@ -71,4 +71,3 @@ export function CodeBlock({ language, code }: CodeBlockProps) {
   );
 }
 
-export default CodeBlock;

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Project } from "../_data/projects";
+import { projectHref, type Project } from "@/lib/projects";
 
 interface Props {
   project: Project;
@@ -11,7 +11,7 @@ function CardBody({ project }: Props) {
       <div className="flex justify-between font-mono text-[10px] uppercase tracking-[0.12em]">
         <span className="text-[#1f5d3b] dark:text-[#6fb292]">{project.tag}</span>
         <span className="text-[#7a7f86] dark:text-[#74706a]">
-          {project.year}
+          {new Date(project.date).getFullYear()}
         </span>
       </div>
       <div className="font-sans text-[22px] font-semibold tracking-[-0.025em] text-[#0e0f11] dark:text-[#f2efe7]">
@@ -24,37 +24,16 @@ function CardBody({ project }: Props) {
         <span className="text-[#1f5d3b] dark:text-[#6fb292]">
           → {project.metric}
         </span>
-        {project.href && (
-          <span className="text-[#7a7f86] dark:text-[#74706a]">read ↗</span>
-        )}
+        <span className="text-[#7a7f86] dark:text-[#74706a]">read ↗</span>
       </div>
     </div>
   );
 }
 
 export function ProjectCard({ project }: Props) {
-  const body = <CardBody project={project} />;
-
-  if (!project.href) {
-    return <div className="block h-full">{body}</div>;
-  }
-
-  if (project.href.startsWith("http")) {
-    return (
-      <a
-        href={project.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block h-full"
-      >
-        {body}
-      </a>
-    );
-  }
-
   return (
-    <Link href={project.href} className="block h-full">
-      {body}
+    <Link href={projectHref(project)} className="block h-full">
+      <CardBody project={project} />
     </Link>
   );
 }

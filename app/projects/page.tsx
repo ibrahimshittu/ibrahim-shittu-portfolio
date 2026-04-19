@@ -1,8 +1,9 @@
 import { Metadata } from "next";
 import { siteConfig } from "@/lib/seo";
+import { getAllProjects } from "@/lib/projects";
 import { SubHero, GoldMarker } from "@/components/ui/sub-hero";
 import { ContactFooter } from "@/components/ui/contact-footer";
-import { ProjectsFilter, type ProjectRow } from "./_components/projects-filter";
+import { ProjectsFilter } from "./_components/projects-filter";
 
 export const metadata: Metadata = {
   title: "Projects — Ibrahim Shittu",
@@ -49,144 +50,6 @@ export const metadata: Metadata = {
   category: "technology",
 };
 
-const projects: ProjectRow[] = [
-  {
-    slug: "tunnel-ai",
-    name: "Tunnel AI",
-    year: "2025",
-    tag: "Dev Tools",
-    status: "Active",
-    role: "Author · Side project",
-    blurb:
-      "Multi-agent system that turns plain-English instructions into self-healing Playwright tests, executed at scale on cloud browsers.",
-    detail:
-      "Planning, generation, execution, validation, and self-healing run as a LangGraph multi-agent loop over Browserbase and Stagehand. Tests survive selector drift without manual edits.",
-    stack: ["Python", "LangGraph", "Playwright", "Browserbase", "Stagehand"],
-    metric: "90%+ less authoring",
-    href: "/projects/tunnel-ai",
-  },
-  {
-    slug: "finiti",
-    name: "Finiti AI",
-    year: "2025",
-    tag: "Capital Markets AI",
-    status: "Live",
-    role: "Founding Software Engineer · Finiti",
-    blurb:
-      "AI compliance layer between regulated companies and their regulators — validates filings, benchmarks disclosures against peers, and runs end-to-end filing prep with humans in the loop.",
-    detail:
-      "Multi-agent orchestration with LangGraph and Pydantic AI, grounded in millions of SEC filings. Ships as a Word add-in and Outlook plugin, SOC 2 Type II.",
-    stack: ["Python", "LangGraph", "Pydantic AI", "TypeScript", "Azure"],
-    metric: "Days → minutes",
-    href: "/projects/finiti",
-  },
-  {
-    slug: "fabrio",
-    name: "Fabrio",
-    year: "2024",
-    tag: "EdTech",
-    status: "Live",
-    role: "Lead Software Engineer · Fabrio",
-    blurb:
-      "Revolutionised grading for engineering CAD work — saving professors thousands of hours at Imperial College London, UCL, and 40+ institutions worldwide.",
-    detail:
-      "First engineering hire at a VC-backed startup. Led the ground-up rebuild on AWS serverless with TypeScript and Next.js. p95 3.1s → 680ms; grading engine scales to thousands of concurrent submissions.",
-    stack: ["TypeScript", "Next.js", "GraphQL", "AWS"],
-    metric: "40+ institutions",
-    href: "/projects/fabrio",
-  },
-  {
-    slug: "unheard-mental-health",
-    name: "Unheard",
-    year: "2023",
-    tag: "HealthTech",
-    status: "Beta",
-    role: "Engineer · Co-builder",
-    blurb:
-      "Mental-health platform pairing licensed therapists with anonymous audio rooms — confidential by default, personalised by design.",
-    detail:
-      "Audio rooms via Stream/WebRTC, session matching, and mood tracking on a Supabase + OpenAI stack. Launched with licensed therapists across multiple time zones.",
-    stack: ["TypeScript", "React Native", "Supabase", "OpenAI", "Stream"],
-    metric: "500+ beta users",
-    href: "/projects/unheard-mental-health",
-  },
-  {
-    slug: "rio-metaverse-marketplace",
-    name: "RIO Marketplace",
-    year: "2023",
-    tag: "Web3",
-    status: "Shipped",
-    role: "Engineer",
-    blurb:
-      "NFT marketplace for creators to mint, buy, and sell digital collectibles, with wallet auth and on-chain transactions.",
-    detail:
-      "React + thirdweb SDK on the frontend, Sanity CMS for metadata and collections. Supported multiple wallets and on-chain minting flows.",
-    stack: ["React", "thirdweb", "Sanity", "TypeScript", "Ethereum"],
-    metric: "500+ transactions",
-    href: "/projects/rio-metaverse-marketplace",
-  },
-  {
-    slug: "crust-mobile-bank",
-    name: "Crust Mobile Bank",
-    year: "2022",
-    tag: "Fintech",
-    status: "Shipped",
-    role: "Lead Software Engineer · Thrive Agric",
-    blurb:
-      "Bank for the underbanked. iOS, Android, and an admin console, shipped as a lean team of four.",
-    detail:
-      "One React Native codebase served iOS and Android; the admin tool ran the same design system on web. Reached 73k customers inside a year.",
-    stack: ["React Native", "TypeScript", "Node"],
-    metric: "$1M+ volume",
-    href: "/projects/crust-mobile-bank",
-  },
-  {
-    slug: "liveclasses",
-    name: "LiveClasses",
-    year: "2021",
-    tag: "EdTech",
-    status: "Exited",
-    role: "Founding Engineer",
-    blurb:
-      "Online learning for Nigerian universities. Grew from MVP to funded startup with an active user base.",
-    detail:
-      "Built the full product from scratch — live sessions, assignments, payments, admin. Accepted into top incubators; grew MAU 3× in six months.",
-    stack: ["React", "Node", "Postgres"],
-    metric: "+300% MAU",
-    href: "/projects/liveclasses",
-  },
-  {
-    slug: "face-mask-detector",
-    name: "Face Mask Detection",
-    year: "2021",
-    tag: "Computer Vision",
-    status: "Shipped",
-    role: "Engineer",
-    blurb:
-      "Real-time face mask detection for safety compliance, tuned for low-power edge deployment.",
-    detail:
-      "Custom CNN on MobileNetV2, optimised with TensorFlow Lite for Raspberry Pi. 30+ FPS on modest hardware with 95%+ accuracy.",
-    stack: ["Python", "TensorFlow", "OpenCV", "MobileNetV2"],
-    metric: "95%+ accuracy",
-    href: "/projects/face-mask-detector",
-  },
-  {
-    slug: "revit-virtual-assistant",
-    name: "Revit Virtual Assistant",
-    year: "2020",
-    tag: "AEC",
-    status: "Shipped",
-    role: "Engineer · Final-year project",
-    blurb:
-      "Natural-language query layer over Revit BIM models, letting engineers pull structural and material data without touching the UI.",
-    detail:
-      "Python + Revit API + ODBC, with an NLP front door so engineers could ask questions and get reports without navigating complex Revit screens.",
-    stack: ["Python", "Revit API", "ODBC", "C#"],
-    metric: "−70% analysis time",
-    href: "/projects/revit-virtual-assistant",
-  },
-];
-
 export default function Projects() {
   return (
     <main className="bg-[#fafaf7] text-[#0e0f11] dark:bg-[#0f0f0d] dark:text-[#f2efe7]">
@@ -202,7 +65,7 @@ export default function Projects() {
         lede="Not demos. Each of these went to real users, held up under real traffic, and taught me something I still use. Filter by kind or scan the full set below."
       />
 
-      <ProjectsFilter projects={projects} />
+      <ProjectsFilter projects={getAllProjects()} />
 
       <ContactFooter />
     </main>

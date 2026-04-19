@@ -1,13 +1,13 @@
 import { Metadata } from "next";
 import { siteConfig, generatePersonSchema } from "@/lib/seo";
 import { getAllBlogPosts } from "@/lib/markdown";
+import { getFeaturedProjects } from "@/lib/projects";
 import { ContactFooter } from "@/components/ui/contact-footer";
 import { Hero } from "./_components/hero";
 import { ProjectsSection } from "./_components/projects-section";
 import { WorkSection } from "./_components/work-section";
 import { WritingList } from "./_components/writing-list";
 import { experience } from "./_data/experience";
-import { projects } from "./_data/projects";
 
 const heroDescription =
   "Senior software engineer with eight years shipping web, mobile, and AI agents. Three-time founding engineer, currently building Finiti Legal — the AI compliance layer for capital markets.";
@@ -75,7 +75,7 @@ export default function Home() {
 
       <Hero />
       <WorkSection experience={experience} />
-      <ProjectsSection projects={projects} />
+      <ProjectsSection projects={getFeaturedProjects()} />
       <WritingList posts={writing} />
       <ContactFooter />
     </main>

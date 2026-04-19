@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Project } from "../_data/projects";
+import type { Project } from "@/lib/projects";
 import { ProjectCard } from "./project-card";
 
 interface Props {
@@ -32,7 +32,7 @@ export function ProjectsSection({ projects }: Props) {
 
         <div className="grid grid-cols-1 gap-px border border-[#e7e5de] bg-[#e7e5de] sm:grid-cols-2 md:grid-cols-3 dark:border-[#26251f] dark:bg-[#26251f]">
           {projects.map((project) => (
-            <ProjectCard key={project.name} project={project} />
+            <ProjectCard key={project.slug} project={project} />
           ))}
         </div>
       </div>

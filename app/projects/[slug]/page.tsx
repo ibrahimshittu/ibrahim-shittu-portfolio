@@ -2,7 +2,12 @@ import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { getProjectBySlug, getAllProjects } from "@/lib/projects";
+import {
+  getProjectBySlug,
+  getAllProjects,
+  projectYear,
+  splitMetric,
+} from "@/lib/projects";
 import { siteConfig, generateMetaDescription, toISO } from "@/lib/seo";
 import { StructuredData } from "@/components/StructuredData";
 import {
@@ -13,48 +18,6 @@ import {
 import { ContactFooter } from "@/components/ui/contact-footer";
 import { PrevNext } from "@/components/ui/prev-next";
 import { RelatedStrip, type RelatedItem } from "@/components/ui/related-strip";
-
-const SLUG_TAGS: Record<string, string> = {
-  "tunnel-ai": "Dev Tools",
-  finiti: "Capital Markets AI",
-  fabrio: "EdTech",
-  "crust-mobile-bank": "Fintech",
-  liveclasses: "EdTech",
-  "revit-virtual-assistant": "AEC",
-  "unheard-mental-health": "HealthTech",
-  "rio-metaverse-marketplace": "Web3",
-  "face-mask-detector": "Computer Vision",
-};
-
-const SLUG_ROLES: Record<string, string> = {
-  "tunnel-ai": "Author · Side project",
-  finiti: "Founding Software Engineer · Finiti",
-  fabrio: "Lead Software Engineer · Fabrio",
-  "crust-mobile-bank": "Lead Software Engineer · Thrive Agric",
-  liveclasses: "Founding Engineer · LiveClasses",
-  "revit-virtual-assistant": "Engineer · Final-year project",
-  "unheard-mental-health": "Engineer · Co-builder",
-  "rio-metaverse-marketplace": "Engineer",
-  "face-mask-detector": "Engineer",
-};
-
-function projectTag(slug: string): string {
-  return SLUG_TAGS[slug] ?? "Project";
-}
-
-function projectRole(slug: string): string {
-  return SLUG_ROLES[slug] ?? "Engineer";
-}
-
-function projectYear(date: string): string {
-  return new Date(date).getFullYear().toString();
-}
-
-function splitMetric(m: string): { head: string; tail: string } {
-  const parts = m.trim().split(/\s+/);
-  if (parts.length === 1) return { head: parts[0], tail: "impact" };
-  return { head: parts[0], tail: parts.slice(1).join(" ") };
-}
 
 export async function generateStaticParams() {
   return getAllProjects().map((project) => ({ slug: project.slug }));
@@ -141,22 +104,20 @@ export default function ProjectPage({
   const prev = idx > 0 ? all[idx - 1] : null;
   const next = idx >= 0 && idx < all.length - 1 ? all[idx + 1] : null;
 
-  const tag = projectTag(project.slug);
-  const role = projectRole(project.slug);
-  const year = projectYear(project.date);
+  const { tag, role } = project;
+  const year = projectYear(project);
 
   const related: RelatedItem[] = all
-    .filter((p) => p.slug !== project.slug && projectTag(p.slug) === tag)
+    .filter((p) => p.slug !== project.slug && p.tag === tag)
     .slice(0, 3)
     .map((p) => ({
       href: `/projects/${p.slug}`,
-      tag: projectTag(p.slug),
-      date: projectYear(p.date),
-      title: p.title.split(" - ")[0],
+      tag: p.tag,
+      date: projectYear(p),
+      title: p.name,
       blurb: p.excerpt,
     }));
 
-  // Split description into paragraphs; use first as problem, rest as approach steps.
   const paragraphs = project.description
     .split(/\n\n+/)
     .map((s) => s.trim())
@@ -245,12 +206,14 @@ export default function ProjectPage({
             </Link>
             <span className="text-[#1f5d3b] dark:text-[#6fb292]">{tag}</span>
             <span className="text-[#7a7f86] dark:text-[#74706a]">{year}</span>
-            <span className="text-[#7a7f86] dark:text-[#74706a]">Shipped</span>
+            <span className="text-[#7a7f86] dark:text-[#74706a]">
+              {project.status}
+            </span>
           </div>
           <div className="grid grid-cols-1 items-start gap-12 md:grid-cols-[1.4fr_1fr]">
             <div>
               <h1 className="m-0 font-sans text-[44px] font-semibold leading-[1.02] tracking-[-0.04em] text-[#0e0f11] sm:text-[60px] md:text-[72px] dark:text-[#f2efe7]">
-                {project.title.split(" - ")[0]}
+                {project.name}
               </h1>
               <p className="mt-5 max-w-[640px] font-sans text-[17px] leading-[1.55] text-[#3d4147] md:text-[20px] dark:text-[#b9b5aa]">
                 {project.excerpt}
@@ -429,20 +392,10 @@ export default function ProjectPage({
 
       <PrevNext
         prev={
-          prev
-            ? {
-                href: `/projects/${prev.slug}`,
-                title: prev.title.split(" - ")[0],
-              }
-            : null
+          prev ? { href: `/projects/${prev.slug}`, title: prev.name } : null
         }
         next={
-          next
-            ? {
-                href: `/projects/${next.slug}`,
-                title: next.title.split(" - ")[0],
-              }
-            : null
+          next ? { href: `/projects/${next.slug}`, title: next.name } : null
         }
       />
 

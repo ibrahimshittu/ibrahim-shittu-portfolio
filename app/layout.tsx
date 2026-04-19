@@ -4,7 +4,7 @@ import { Inter, IBM_Plex_Mono } from "next/font/google";
 import { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { SiteNav } from "@/components/ui/site-nav";
+import { PortfolioNav } from "@/components/ui/portfolio-nav";
 import {
   siteConfig,
   generatePersonSchema,
@@ -161,19 +161,8 @@ export default function RootLayout({
               }),
             }}
           />
-          <SiteNav />
+          <PortfolioNav />
           {children}
-          <footer className="text-center mt-8 mb-4">
-            <a
-              className="text-muted-foreground font-mono text-sm"
-              href="mailto:ibshittu01@gmail.com"
-            >
-              Made with 💻 by{" "}
-              <span className="text-foreground underline underline-offset-2">
-                Ibrahim Shittu
-              </span>
-            </a>
-          </footer>
           <Analytics />
           <SpeedInsights />
         </ThemeProvider>

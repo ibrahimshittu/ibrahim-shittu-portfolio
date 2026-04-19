@@ -148,7 +148,7 @@ export const formatContent = (content: string): React.ReactNode[] => {
       nodes.push(
         <p
           key={`i-${nodes.length}`}
-          className="text-sm font-mono text-muted-foreground italic mt-8 mb-6 leading-relaxed border-l-2 border-border pl-4"
+          className="text-sm font-mono text-muted-foreground italic mt-8 mb-6 leading-relaxed border-l-[3px] border-solid border-[#1f5d3b] pl-4 dark:border-[#6fb292]"
         >
           {formatInlineText(text.slice(1, -1))}
         </p>,
@@ -206,7 +206,7 @@ export const formatContent = (content: string): React.ReactNode[] => {
     nodes.push(
       <blockquote
         key={`q-${nodes.length}`}
-        className="border-l-2 border-border pl-4 italic text-muted-foreground mt-8 mb-6"
+        className="border-l-[3px] border-solid border-[#1f5d3b] pl-4 italic text-muted-foreground mt-8 mb-6 dark:border-[#6fb292]"
       >
         {lines.map((l, i) => (
           <p key={i} className="text-sm font-mono leading-relaxed">

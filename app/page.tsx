@@ -196,16 +196,17 @@ export default function Home() {
             <div className="mb-6 font-mono text-[11px] tracking-[0.08em] text-[#7a7f86] dark:text-[#74706a]">
               {"// senior software engineer · 8y shipping"}
             </div>
-            <h1 className="m-0 font-sans text-[44px] font-semibold leading-[1.02] tracking-[-0.035em] text-[#0e0f11] sm:text-[54px] md:text-[64px] dark:text-[#f2efe7]">
+            <h1 className="m-0 font-sans text-[48px] font-semibold leading-[1.02] tracking-[-0.035em] text-[#0e0f11] sm:text-[60px] md:text-[72px] dark:text-[#f2efe7]">
               I build systems
               <br />
-              that hold up under{" "}
+              that hold up under
+              <br />
               <span className="gold-marker">real traffic.</span>
             </h1>
             <p className="mt-7 max-w-[560px] font-sans text-[16px] leading-[1.6] text-[#3d4147] md:text-[17px] dark:text-[#b9b5aa]">
-              Eight years shipping web, mobile, and AI agents — from zero-to-one
-              prototypes to platforms adopted by universities, banks, and law
-              firms.
+              Eight years shipping web, mobile, infrastructure, and AI agents —
+              from zero-to-one prototypes to platforms adopted by universities,
+              banks, and law firms.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-2.5">
               <a
@@ -213,14 +214,6 @@ export default function Home() {
                 className="rounded-[4px] bg-[#0e0f11] px-4 py-2.5 font-mono text-[12px] tracking-wide text-[#fafaf7] transition-opacity hover:opacity-90 dark:bg-[#f2efe7] dark:text-[#0f0f0d]"
               >
                 get in touch ↗
-              </a>
-              <a
-                href="https://drive.google.com/file/d/1QHgz0bOiAq4x1XqztYN39f0WPQD00Kvx/view"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-[4px] border border-[#e7e5de] bg-white px-4 py-2.5 font-mono text-[12px] tracking-wide text-[#0e0f11] transition-colors hover:border-[#7a7f86] dark:border-[#26251f] dark:bg-[#1a1a17] dark:text-[#f2efe7] dark:hover:border-[#74706a]"
-              >
-                resume.pdf
               </a>
               <div className="flex gap-4 px-2 font-mono text-[12px] tracking-wide text-[#3d4147] dark:text-[#b9b5aa]">
                 <a
@@ -270,22 +263,6 @@ export default function Home() {
                   ),
                 },
                 {
-                  k: "PAST",
-                  body: (
-                    <>
-                      Shipped{" "}
-                      <strong className="font-semibold text-[#0e0f11] dark:text-[#f2efe7]">
-                        Crust
-                      </strong>{" "}
-                      — mobile bank that moved{" "}
-                      <strong className="font-semibold text-[#0e0f11] dark:text-[#f2efe7]">
-                        $1M+
-                      </strong>{" "}
-                      with a team of four.
-                    </>
-                  ),
-                },
-                {
                   k: "SCALE",
                   body: (
                     <>
@@ -302,6 +279,22 @@ export default function Home() {
                         UCL
                       </strong>
                       .
+                    </>
+                  ),
+                },
+                {
+                  k: "PAST",
+                  body: (
+                    <>
+                      Shipped{" "}
+                      <strong className="font-semibold text-[#0e0f11] dark:text-[#f2efe7]">
+                        Crust
+                      </strong>{" "}
+                      — mobile bank that moved{" "}
+                      <strong className="font-semibold text-[#0e0f11] dark:text-[#f2efe7]">
+                        $1M+
+                      </strong>{" "}
+                      with a team of four.
                     </>
                   ),
                 },
@@ -365,10 +358,10 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 gap-px border border-[#e7e5de] bg-[#e7e5de] md:grid-cols-2 lg:grid-cols-3 dark:border-[#26251f] dark:bg-[#26251f]">
+          <div className="grid grid-cols-1 gap-px border border-[#e7e5de] bg-[#e7e5de] sm:grid-cols-2 md:grid-cols-3 dark:border-[#26251f] dark:bg-[#26251f]">
             {projects.map((p) => {
               const content = (
-                <div className="flex min-h-[220px] flex-col gap-3 bg-[#fafaf7] p-6 transition-colors hover:bg-white dark:bg-[#0f0f0d] dark:hover:bg-[#1a1a17]">
+                <div className="flex h-full min-h-[220px] flex-col gap-3 bg-[#fafaf7] p-6 transition-colors hover:bg-white dark:bg-[#0f0f0d] dark:hover:bg-[#1a1a17]">
                   <div className="flex justify-between font-mono text-[10px] uppercase tracking-[0.12em]">
                     <span className="text-[#1f5d3b] dark:text-[#6fb292]">
                       {p.tag}
@@ -397,7 +390,7 @@ export default function Home() {
               );
               if (!p.href) {
                 return (
-                  <div key={p.name} className="block">
+                  <div key={p.name} className="block h-full">
                     {content}
                   </div>
                 );
@@ -409,12 +402,12 @@ export default function Home() {
                   href={p.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block"
+                  className="block h-full"
                 >
                   {content}
                 </a>
               ) : (
-                <Link key={p.name} href={p.href} className="block">
+                <Link key={p.name} href={p.href} className="block h-full">
                   {content}
                 </Link>
               );

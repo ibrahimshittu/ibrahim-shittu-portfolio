@@ -38,8 +38,8 @@ export function PortfolioNav() {
   const meta: Array<[string, string]> = [
     ["NAME", "ibrahim shittu"],
     ["ROLE", "senior software engineer"],
-    ["FOCUS", "ai agents · web · mobile"],
-    ["BASED", "lagos · works globally"],
+    ["FOCUS", "ai agents · web · mobile · infrastructure"],
+    ["SINCE", "2018 · 8y shipping"],
   ];
 
   return (

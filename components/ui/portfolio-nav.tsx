@@ -111,7 +111,6 @@ export function PortfolioNav() {
                 );
               })}
             </div>
-            {/* compact mobile — just a small active indicator, links are in meta bar on small screens */}
             <div className="md:hidden font-mono text-[11px] text-[#7a7f86] dark:text-[#74706a]">
               {items.find((it) => it.key === current)?.label}
             </div>

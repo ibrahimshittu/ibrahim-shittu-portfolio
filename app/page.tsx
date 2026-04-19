@@ -148,20 +148,6 @@ const projects = [
   },
 ];
 
-const currently = [
-  { label: "Building", value: "AI agents for corporate-law workflows" },
-  { label: "Based in", value: "Lagos, Nigeria" },
-  { label: "Writing", value: "Notes on agent architecture" },
-  { label: "Reading", value: "Eval design, distributed systems" },
-];
-
-const skills: Record<string, string[]> = {
-  "AI & ML": ["AI Agents", "LangGraph", "LangChain", "RAG", "Evals"],
-  Languages: ["TypeScript", "Python", "Go"],
-  Frameworks: ["Next.js", "React", "React Native", "FastAPI", "Node"],
-  Platform: ["AWS", "Azure", "Docker", "GraphQL", "Postgres"],
-};
-
 function formatWritingDate(iso: string): string {
   const d = new Date(iso);
   return d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
@@ -200,100 +186,120 @@ export default function Home() {
 
       {/* Hero */}
       <section className="border-b border-[#d4d1c7] dark:border-[#35332c]">
-        <div className="mx-auto grid max-w-[1280px] grid-cols-1 md:grid-cols-[1.3fr_1fr]">
-          <div className="border-b border-[#e7e5de] px-6 py-14 md:border-b-0 md:border-r md:px-12 md:py-[72px] dark:border-[#26251f]">
-            <div className="mb-6 font-mono text-[11px] tracking-[0.08em] text-[#7a7f86] dark:text-[#74706a]">
-              {"// senior software engineer · 8y shipping"}
-            </div>
-            <h1 className="m-0 font-sans text-[44px] font-semibold leading-[1.02] tracking-[-0.035em] text-[#0e0f11] sm:text-[54px] md:text-[64px] dark:text-[#f2efe7]">
-              I build systems
-              <br />
-              that hold up under{" "}
-              <span
-                className="px-[2px]"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(180deg, transparent 60%, rgba(201,162,39,0.33) 60%)",
-                }}
-              >
-                real traffic.
-              </span>
-            </h1>
-            <p className="mt-7 max-w-[560px] font-sans text-[16px] leading-[1.6] text-[#3d4147] md:text-[17px] dark:text-[#b9b5aa]">
-              Eight years shipping web, mobile, and AI agents — from
-              zero-to-one prototypes to platforms adopted by universities,
-              banks, and law firms. Three-time founding engineer; currently
-              building agentic systems for corporate law.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-2.5">
+        <div className="mx-auto max-w-[1280px] px-6 py-14 md:px-12 md:py-[72px]">
+          <div className="mb-6 font-mono text-[11px] tracking-[0.08em] text-[#7a7f86] dark:text-[#74706a]">
+            {"// senior software engineer · 8y shipping"}
+          </div>
+          <h1 className="m-0 max-w-[920px] font-sans text-[44px] font-semibold leading-[1.02] tracking-[-0.035em] text-[#0e0f11] sm:text-[60px] md:text-[76px] dark:text-[#f2efe7]">
+            I build systems that hold up under{" "}
+            <span className="gold-marker">real traffic.</span>
+          </h1>
+          <p className="mt-7 max-w-[680px] font-sans text-[16px] leading-[1.6] text-[#3d4147] md:text-[18px] dark:text-[#b9b5aa]">
+            Eight years shipping web, mobile, and AI agents — from zero-to-one
+            prototypes to platforms adopted by universities, banks, and law
+            firms. Three-time founding engineer; currently building agentic
+            systems for corporate law at{" "}
+            <span className="font-medium text-[#0e0f11] dark:text-[#f2efe7]">
+              Finiti Legal
+            </span>
+            .
+          </p>
+          <div className="mt-8 flex flex-wrap items-center gap-2.5">
+            <a
+              href={`mailto:${siteConfig.author.email}`}
+              className="rounded-[4px] bg-[#0e0f11] px-4 py-2.5 font-mono text-[12px] tracking-wide text-[#fafaf7] transition-opacity hover:opacity-90 dark:bg-[#f2efe7] dark:text-[#0f0f0d]"
+            >
+              get in touch ↗
+            </a>
+            <a
+              href="https://drive.google.com/file/d/1QHgz0bOiAq4x1XqztYN39f0WPQD00Kvx/view"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-[4px] border border-[#e7e5de] bg-white px-4 py-2.5 font-mono text-[12px] tracking-wide text-[#0e0f11] transition-colors hover:border-[#7a7f86] dark:border-[#26251f] dark:bg-[#1a1a17] dark:text-[#f2efe7] dark:hover:border-[#74706a]"
+            >
+              resume.pdf
+            </a>
+            <div className="flex gap-4 px-2 font-mono text-[12px] tracking-wide text-[#3d4147] dark:text-[#b9b5aa]">
               <a
-                href={`mailto:${siteConfig.author.email}`}
-                className="rounded-[4px] bg-[#0e0f11] px-4 py-2.5 font-mono text-[12px] tracking-wide text-[#fafaf7] transition-opacity hover:opacity-90 dark:bg-[#f2efe7] dark:text-[#0f0f0d]"
-              >
-                get in touch ↗
-              </a>
-              <a
-                href="https://drive.google.com/file/d/1QHgz0bOiAq4x1XqztYN39f0WPQD00Kvx/view"
+                href={siteConfig.author.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-[4px] border border-[#e7e5de] bg-white px-4 py-2.5 font-mono text-[12px] tracking-wide text-[#0e0f11] transition-colors hover:border-[#7a7f86] dark:border-[#26251f] dark:bg-[#1a1a17] dark:text-[#f2efe7] dark:hover:border-[#74706a]"
+                className="hover:text-[#0e0f11] dark:hover:text-[#f2efe7]"
               >
-                resume.pdf
+                github
               </a>
-              <div className="flex gap-4 px-2 font-mono text-[12px] tracking-wide text-[#3d4147] dark:text-[#b9b5aa]">
-                <a
-                  href={siteConfig.author.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-[#0e0f11] dark:hover:text-[#f2efe7]"
-                >
-                  github
-                </a>
-                <a
-                  href={siteConfig.author.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-[#0e0f11] dark:hover:text-[#f2efe7]"
-                >
-                  linkedin
-                </a>
-                <a
-                  href={siteConfig.author.twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-[#0e0f11] dark:hover:text-[#f2efe7]"
-                >
-                  x
-                </a>
-              </div>
+              <a
+                href={siteConfig.author.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#0e0f11] dark:hover:text-[#f2efe7]"
+              >
+                linkedin
+              </a>
+              <a
+                href={siteConfig.author.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#0e0f11] dark:hover:text-[#f2efe7]"
+              >
+                x
+              </a>
             </div>
-          </div>
-
-          <div className="bg-white px-6 py-14 md:px-12 md:py-[72px] dark:bg-[#1a1a17]/40">
-            <div className="mb-6 font-mono text-[11px] tracking-[0.08em] text-[#7a7f86] dark:text-[#74706a]">
-              {"// snapshot"}
-            </div>
-            <div className="grid grid-cols-2 gap-x-5 gap-y-7 rounded-md border border-[#e7e5de] bg-white p-6 dark:border-[#26251f] dark:bg-[#1a1a17]">
-              <Stat k="Years shipping" v="8" />
-              <Stat k="Founding-eng stints" v="3" />
-              <Stat k="Products shipped" v="12+" />
-              <Stat k="Largest user base" v="73k" />
-              <Stat k="Current focus" v="AI agents" />
-              <Stat k="Works across" v="Global TZs" />
-            </div>
-            <p className="mt-5 font-mono text-[12px] leading-[1.65] text-[#7a7f86] dark:text-[#74706a]">
-              Currently at{" "}
-              <span className="font-semibold text-[#0e0f11] dark:text-[#f2efe7]">
-                Finiti Legal
-              </span>
-              , shipping AI agents for corporate law. Selective about new
-              conversations.
-            </p>
           </div>
         </div>
       </section>
 
       <WorkSection experience={experience} />
+
+      {/* Writing */}
+      <section
+        id="writing"
+        className="border-b border-[#d4d1c7] dark:border-[#35332c]"
+      >
+        <div className="mx-auto max-w-[1280px] px-6 py-14 md:px-12 md:py-20">
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <div className="font-mono text-[11px] tracking-[0.1em] text-[#7a7f86] dark:text-[#74706a]">
+                02 ——
+              </div>
+              <h2 className="mt-1 font-sans text-3xl font-semibold tracking-[-0.02em] text-[#0e0f11] md:text-[32px] dark:text-[#f2efe7]">
+                Writing
+              </h2>
+            </div>
+            <Link
+              href="/blog"
+              className="font-mono text-[12px] text-[#0e0f11] underline-offset-4 hover:underline dark:text-[#f2efe7]"
+            >
+              all writing ↗
+            </Link>
+          </div>
+
+          <div className="border-t border-[#d4d1c7] dark:border-[#35332c]">
+            {writing.map((w) => (
+              <Link
+                href={`/blog/${w.slug}`}
+                key={w.slug}
+                className="grid grid-cols-[90px_1fr_60px] items-baseline gap-3 border-b border-[#e7e5de] py-5 transition-colors hover:bg-white md:grid-cols-[120px_1fr_80px] md:gap-6 dark:border-[#26251f] dark:hover:bg-[#1a1a17]/60"
+              >
+                <div className="font-mono text-[11px] text-[#7a7f86] dark:text-[#74706a]">
+                  {formatWritingDate(w.date)}
+                </div>
+                <div>
+                  <div className="mb-1 font-sans text-[16px] font-semibold tracking-[-0.01em] text-[#0e0f11] md:text-[17px] dark:text-[#f2efe7]">
+                    {w.title}
+                  </div>
+                  <div className="max-w-[640px] font-sans text-[13px] leading-[1.55] text-[#3d4147] md:text-[13.5px] dark:text-[#b9b5aa]">
+                    {w.excerpt}
+                  </div>
+                </div>
+                <div className="text-right font-mono text-[11px] text-[#7a7f86] dark:text-[#74706a]">
+                  {w.readTime}
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Projects */}
       <section
@@ -304,7 +310,7 @@ export default function Home() {
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
             <div>
               <div className="font-mono text-[11px] tracking-[0.1em] text-[#7a7f86] dark:text-[#74706a]">
-                02 ——
+                03 ——
               </div>
               <h2 className="mt-1 font-sans text-3xl font-semibold tracking-[-0.02em] text-[#0e0f11] md:text-[32px] dark:text-[#f2efe7]">
                 Selected projects
@@ -376,118 +382,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Writing + Now */}
-      <section className="border-b border-[#d4d1c7] dark:border-[#35332c]">
-        <div className="mx-auto grid max-w-[1280px] grid-cols-1 md:grid-cols-[1.2fr_1fr]">
-          <div
-            id="writing"
-            className="border-b border-[#e7e5de] px-6 py-14 md:border-b-0 md:border-r md:px-12 md:py-20 dark:border-[#26251f]"
-          >
-            <div className="font-mono text-[11px] tracking-[0.1em] text-[#7a7f86] dark:text-[#74706a]">
-              03 ——
-            </div>
-            <h2 className="mb-5 mt-1 font-sans text-[28px] font-semibold tracking-[-0.015em] text-[#0e0f11] dark:text-[#f2efe7]">
-              Writing
-            </h2>
-            {writing.map((w) => (
-              <Link
-                href={`/blog/${w.slug}`}
-                key={w.slug}
-                className="grid grid-cols-[80px_1fr_60px] items-baseline gap-3 border-t border-[#e7e5de] py-4 transition-colors hover:bg-white md:grid-cols-[96px_1fr_64px] md:gap-4 dark:border-[#26251f] dark:hover:bg-[#1a1a17]/60"
-              >
-                <div className="font-mono text-[11px] text-[#7a7f86] dark:text-[#74706a]">
-                  {formatWritingDate(w.date)}
-                </div>
-                <div>
-                  <div className="mb-1 font-sans text-[15px] font-semibold text-[#0e0f11] dark:text-[#f2efe7]">
-                    {w.title}
-                  </div>
-                  <div className="font-sans text-[13px] leading-[1.5] text-[#3d4147] dark:text-[#b9b5aa]">
-                    {w.excerpt}
-                  </div>
-                </div>
-                <div className="text-right font-mono text-[10px] text-[#7a7f86] dark:text-[#74706a]">
-                  {w.readTime}
-                </div>
-              </Link>
-            ))}
-            <div className="mt-5 border-t border-[#e7e5de] pt-5 dark:border-[#26251f]">
-              <Link
-                href="/blog"
-                className="font-mono text-[12px] text-[#0e0f11] underline-offset-4 hover:underline dark:text-[#f2efe7]"
-              >
-                all writing ↗
-              </Link>
-            </div>
-          </div>
-
-          <div
-            id="now"
-            className="bg-white px-6 py-14 md:px-12 md:py-20 dark:bg-[#1a1a17]/40"
-          >
-            <div className="font-mono text-[11px] tracking-[0.1em] text-[#7a7f86] dark:text-[#74706a]">
-              04 ——
-            </div>
-            <h2 className="mb-5 mt-1 font-sans text-[28px] font-semibold tracking-[-0.015em] text-[#0e0f11] dark:text-[#f2efe7]">
-              Now
-            </h2>
-            <div className="mb-8 grid grid-cols-2 gap-px border border-[#e7e5de] bg-[#e7e5de] dark:border-[#26251f] dark:bg-[#26251f]">
-              {currently.map((c) => (
-                <div
-                  key={c.label}
-                  className="bg-white p-4 dark:bg-[#1a1a17]"
-                >
-                  <div className="mb-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#7a7f86] dark:text-[#74706a]">
-                    {c.label}
-                  </div>
-                  <div className="font-sans text-[14px] font-medium text-[#0e0f11] dark:text-[#f2efe7]">
-                    {c.value}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="mb-2.5 font-mono text-[11px] tracking-[0.1em] text-[#7a7f86] dark:text-[#74706a]">
-              {"// skills"}
-            </div>
-            {Object.entries(skills).map(([k, arr]) => (
-              <div
-                key={k}
-                className="grid grid-cols-[96px_1fr] items-baseline gap-2 border-t border-[#e7e5de] py-2.5 dark:border-[#26251f]"
-              >
-                <span className="font-mono text-[11px] text-[#7a7f86] dark:text-[#74706a]">
-                  {k}
-                </span>
-                <div className="flex flex-wrap gap-1">
-                  {arr.map((s) => (
-                    <span
-                      key={s}
-                      className="inline-block rounded-[3px] border border-[#e7e5de] bg-[#fafaf7] px-2 py-[3px] font-mono text-[10.5px] text-[#3d4147] dark:border-[#26251f] dark:bg-[#0f0f0d] dark:text-[#b9b5aa]"
-                    >
-                      {s}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <ContactFooter />
     </main>
-  );
-}
-
-function Stat({ k, v }: { k: string; v: string }) {
-  return (
-    <div>
-      <div className="mb-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#7a7f86] dark:text-[#74706a]">
-        {k}
-      </div>
-      <div className="font-sans text-[22px] font-semibold tracking-[-0.02em] text-[#0e0f11] dark:text-[#f2efe7]">
-        {v}
-      </div>
-    </div>
   );
 }

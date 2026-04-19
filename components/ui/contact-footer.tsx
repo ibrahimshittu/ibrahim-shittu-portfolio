@@ -9,7 +9,7 @@ export function ContactFooter() {
       >
         <div className="mx-auto max-w-[1280px] px-6 py-20 md:px-12 md:py-24">
           <div className="font-mono text-[11px] tracking-[0.1em] text-[#7a7f86] dark:text-[#74706a]">
-            05 ——
+            04 ——
           </div>
           <h2 className="m-0 mt-2 max-w-[720px] font-sans text-[36px] font-semibold leading-[1.05] tracking-[-0.03em] text-[#0e0f11] sm:text-[44px] md:text-[48px] dark:text-[#f2efe7]">
             Have a problem worth solving?{" "}

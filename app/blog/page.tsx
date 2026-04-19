@@ -88,19 +88,6 @@ export default function Blog() {
     tag: classifyTag(p.tags),
   }));
 
-  const counts = {
-    total: rows.length,
-    ai: rows.filter((r) => r.tag === "AI").length,
-    career: rows.filter((r) => r.tag === "Career").length,
-    updated:
-      rows.length > 0
-        ? new Date(rows[0].date).toLocaleDateString("en-US", {
-            month: "short",
-            year: "numeric",
-          })
-        : "—",
-  };
-
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Home", url: siteConfig.url },
     { name: "Writing", url: generateCanonicalUrl("/blog") },
@@ -142,7 +129,7 @@ export default function Blog() {
       />
 
       <SubHero
-        kicker="// 03 — writing · notes from the field"
+        kicker="// 02 — writing · notes from the field"
         title={
           <>
             Thinking out loud,
@@ -151,12 +138,6 @@ export default function Blog() {
           </>
         }
         lede="Notes on agent architecture, founding-engineer tradeoffs, and the boring infrastructure decisions that quietly decide whether a product survives contact with real users."
-        counts={[
-          { k: "Essays", v: String(counts.total) },
-          { k: "On AI", v: String(counts.ai) },
-          { k: "On career", v: String(counts.career) },
-          { k: "Updated", v: counts.updated },
-        ]}
       />
 
       <BlogFilter posts={rows} />

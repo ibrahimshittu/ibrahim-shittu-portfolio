@@ -2,10 +2,7 @@ import { Metadata } from "next";
 import { siteConfig } from "@/lib/seo";
 import { SubHero, GoldMarker } from "@/components/ui/sub-hero";
 import { ContactFooter } from "@/components/ui/contact-footer";
-import {
-  ProjectsFilter,
-  type ProjectRow,
-} from "./_components/projects-filter";
+import { ProjectsFilter, type ProjectRow } from "./_components/projects-filter";
 
 export const metadata: Metadata = {
   title: "Projects — Ibrahim Shittu",
@@ -191,35 +188,18 @@ const projects: ProjectRow[] = [
 ];
 
 export default function Projects() {
-  const liveCount = projects.filter((p) =>
-    ["Live", "Active"].includes(p.status),
-  ).length;
-  const categoryCount = new Set(projects.map((p) => p.tag)).size;
-  const years = projects
-    .map((p) => Number(p.year))
-    .filter((n) => !Number.isNaN(n));
-  const yearSpan =
-    years.length > 0
-      ? `${Math.min(...years)} — ${Math.max(...years) === new Date().getFullYear() ? "now" : Math.max(...years)}`
-      : "—";
-
   return (
     <main className="bg-[#fafaf7] text-[#0e0f11] dark:bg-[#0f0f0d] dark:text-[#f2efe7]">
       <SubHero
-        kicker="// 02 — projects · selected work"
+        kicker="// 03 — projects · selected work"
         title={
           <>
-            Projects I&apos;ve{" "}
-            <GoldMarker>actually shipped.</GoldMarker>
+            Projects I&apos;ve <GoldMarker>actually</GoldMarker>
+            <br className="hidden md:block" />
+            <GoldMarker>shipped.</GoldMarker>
           </>
         }
         lede="Not demos. Each of these went to real users, held up under real traffic, and taught me something I still use. Filter by kind or scan the full set below."
-        counts={[
-          { k: "Total projects", v: String(projects.length) },
-          { k: "Currently live", v: String(liveCount) },
-          { k: "Categories", v: String(categoryCount) },
-          { k: "Years spanned", v: yearSpan },
-        ]}
       />
 
       <ProjectsFilter projects={projects} />

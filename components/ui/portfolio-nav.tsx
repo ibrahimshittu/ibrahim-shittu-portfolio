@@ -1,10 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { siteConfig } from "@/lib/seo";
 
-type NavKey = "work" | "projects" | "writing" | "now" | "contact";
+type NavKey = "work" | "writing" | "projects" | "contact";
 
 interface NavItem {
   key: NavKey;
@@ -29,12 +31,11 @@ export function PortfolioNav() {
 
   const items: NavItem[] = [
     { key: "work", label: "01 work", href: onIndex ? "#work" : "/#work" },
-    { key: "projects", label: "02 projects", href: "/projects" },
-    { key: "writing", label: "03 writing", href: "/blog" },
-    { key: "now", label: "04 now", href: onIndex ? "#now" : "/#now" },
+    { key: "writing", label: "02 writing", href: "/blog" },
+    { key: "projects", label: "03 projects", href: "/projects" },
     {
       key: "contact",
-      label: "05 contact",
+      label: "04 contact",
       href: onIndex ? "#contact" : "/#contact",
     },
   ];
@@ -84,9 +85,14 @@ export function PortfolioNav() {
             href="/"
             className="flex items-center gap-2.5 font-mono text-[13px]"
           >
-            <span className="flex h-[22px] w-[22px] items-center justify-center rounded-[3px] bg-[#0e0f11] font-mono text-[11px] font-bold text-[#fafaf7] dark:bg-[#f2efe7] dark:text-[#0f0f0d]">
-              is
-            </span>
+            <Image
+              src={siteConfig.author.image}
+              alt="Ibrahim Shittu"
+              width={24}
+              height={24}
+              className="h-6 w-6 shrink-0 rounded-full object-cover"
+              priority
+            />
             <span className="font-semibold text-[#0e0f11] dark:text-[#f2efe7]">
               ibrahim.shittu
             </span>

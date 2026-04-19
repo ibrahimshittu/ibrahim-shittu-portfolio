@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { Metadata } from "next";
 import { getBlogPost, getAllBlogPosts } from "@/lib/markdown";
 import {
@@ -183,9 +184,13 @@ export default function BlogPost({ params }: PageProps) {
             {post.excerpt}
           </p>
           <div className="mt-7 flex flex-wrap items-center gap-3 font-mono text-[12px] text-[#7a7f86] dark:text-[#74706a]">
-            <span className="flex h-7 w-7 items-center justify-center rounded-[3px] bg-[#0e0f11] font-mono text-[11px] font-bold text-[#fafaf7] dark:bg-[#f2efe7] dark:text-[#0f0f0d]">
-              is
-            </span>
+            <Image
+              src={siteConfig.author.image}
+              alt="Ibrahim Shittu"
+              width={32}
+              height={32}
+              className="h-8 w-8 shrink-0 rounded-full object-cover"
+            />
             <span className="font-medium text-[#0e0f11] dark:text-[#f2efe7]">
               Ibrahim Shittu
             </span>

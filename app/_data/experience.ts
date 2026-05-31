@@ -29,7 +29,7 @@ export const experience: WorkEntry[] = [
     period: "2022",
     location: "Abuja, Nigeria",
     summary:
-      "Led frontend for Crust Microfinance Bank — the mobile apps and admin tools behind a financial product that reached 73,000 customers.",
+      "Led frontend for Crust Microfinance Bank. Shipped the mobile apps and admin tools behind a financial product that reached 73,000 customers and moved over $1M in its first year.",
   },
   {
     company: "LiveClasses",

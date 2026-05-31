@@ -28,6 +28,7 @@
     "@types/react-syntax-highlighter": "^15.5.13",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
+    "geist": "^1.7.1",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.294.0",
     "next": "14.0.0",

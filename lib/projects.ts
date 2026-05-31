@@ -141,6 +141,12 @@ Beyond performance, we made the platform collaborative — live CAD sessions, sh
     impact:
       "Saved professors thousands of hours across Imperial College London, UCL, and 40+ institutions; 6-figure ARR with a team of six.",
     link: "https://fabrio.com",
+    gallery: [
+      {
+        url: "https://www.youtube.com/watch?v=Gi4NNXdmBe0",
+        caption: "Fabrio — product walkthrough",
+      },
+    ],
     featured: true,
   },
   {

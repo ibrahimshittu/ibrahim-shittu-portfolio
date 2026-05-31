@@ -9,6 +9,9 @@ import { StructuredData } from "@/components/StructuredData";
 import {
   generateVideoObjectSchema,
   parseCloudinaryVideoUrl,
+  extractYouTubeVideoId,
+  getYouTubeThumbnail,
+  getYouTubeEmbedUrl,
   type VideoMetadata,
 } from "@/lib/video-seo";
 
@@ -148,7 +151,18 @@ export default function ProjectPage({
   }
   if (project.gallery) {
     project.gallery.forEach((media, index) => {
-      if (media.url.match(/\.(mp4|webm|ogg|mov)$/i)) {
+      const youTubeId = extractYouTubeVideoId(media.url);
+      if (youTubeId) {
+        const videoMetadata: VideoMetadata = {
+          title: media.caption || `${project.title} - Video ${index + 1}`,
+          description: media.caption || `Video for ${project.title}`,
+          thumbnailUrl: getYouTubeThumbnail(youTubeId),
+          uploadDate: project.date,
+          embedUrl: getYouTubeEmbedUrl(youTubeId),
+          videoId: youTubeId,
+        };
+        videoSchemas.push(generateVideoObjectSchema(videoMetadata, pageUrl));
+      } else if (media.url.match(/\.(mp4|webm|ogg|mov)$/i)) {
         const { title: videoTitle } = parseCloudinaryVideoUrl(media.url);
         const videoMetadata: VideoMetadata = {
           title: videoTitle || `${project.title} - Gallery Video ${index + 1}`,
@@ -266,9 +280,20 @@ export default function ProjectPage({
               {project.gallery.map((media, i) => {
                 const isVideo = /\.(mp4|webm|ogg|mov)$/i.test(media.url);
                 const isCanva = media.url.includes("canva.com");
+                const youTubeId = extractYouTubeVideoId(media.url);
                 return (
                   <figure key={i}>
-                    {isCanva ? (
+                    {youTubeId ? (
+                      <iframe
+                        src={`https://www.youtube.com/embed/${youTubeId}`}
+                        title={media.caption}
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerPolicy="strict-origin-when-cross-origin"
+                        allowFullScreen
+                        className="aspect-video w-full rounded-lg border border-border"
+                      />
+                    ) : isCanva ? (
                       <iframe
                         src={media.url}
                         title={media.caption}

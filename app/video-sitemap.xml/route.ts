@@ -26,6 +26,7 @@ export async function GET() {
   const projects = getAllProjects();
   const videoEntries: VideoEntry[] = [];
 
+  // Process blog posts with YouTube videos
   blogPosts.forEach((post) => {
     const youtubeVideoIds = extractYouTubeVideos(post.content);
 
@@ -52,9 +53,11 @@ export async function GET() {
     });
   });
 
+  // Process project videos
   projects.forEach((project) => {
     const pageUrl = `${siteConfig.url}/projects/${project.slug}`;
 
+    // Check main project video
     if (project.image && project.image.match(/\.(mp4|webm|ogg|mov)$/i)) {
       const { title: videoTitle } = parseCloudinaryVideoUrl(project.image);
 
@@ -75,6 +78,7 @@ export async function GET() {
       });
     }
 
+    // Check gallery videos
     if (project.gallery) {
       project.gallery.forEach((media, index) => {
         const isVideo = media.url.match(/\.(mp4|webm|ogg|mov)$/i);
@@ -103,6 +107,7 @@ export async function GET() {
     }
   });
 
+  // Generate XML sitemap
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">

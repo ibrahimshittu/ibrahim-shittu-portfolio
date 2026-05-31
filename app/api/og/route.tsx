@@ -8,77 +8,72 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const title = searchParams.get("title") || siteConfig.title;
-    const subtitle = searchParams.get("subtitle") || "Senior Software Engineer";
+    const subtitle = searchParams.get("subtitle") || "Software engineer";
 
     return new ImageResponse(
       (
         <div
           style={{
-            background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
             width: "100%",
             height: "100%",
             display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
             flexDirection: "column",
-            fontFamily: "Inter",
-            color: "white",
-            padding: "60px",
+            justifyContent: "space-between",
+            backgroundColor: "#0a0a0b",
+            color: "#ededec",
+            padding: "90px",
           }}
         >
           <div
             style={{
-              background: "rgba(255, 255, 255, 0.1)",
-              backdropFilter: "blur(10px)",
-              borderRadius: "20px",
-              padding: "40px",
-              width: "100%",
-              textAlign: "center",
-              border: "1px solid rgba(255, 255, 255, 0.2)",
+              display: "flex",
+              alignItems: "center",
+              gap: "16px",
+              fontSize: "24px",
+              color: "#8c8b86",
+              letterSpacing: "0.04em",
             }}
           >
-            <h1
+            <div
+              style={{ width: "36px", height: "2px", backgroundColor: "#8c8b86" }}
+            />
+            {siteConfig.author.name}
+          </div>
+
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div
               style={{
-                fontSize: title.length > 50 ? "48px" : "64px",
-                fontWeight: "bold",
-                margin: "0 0 20px 0",
-                lineHeight: "1.1",
-                textAlign: "center",
+                fontSize: title.length > 48 ? "62px" : "78px",
+                fontWeight: 600,
+                lineHeight: 1.04,
+                letterSpacing: "-0.035em",
+                color: "#ededec",
               }}
             >
               {title}
-            </h1>
-            <p
+            </div>
+            <div
               style={{
+                marginTop: "28px",
                 fontSize: "32px",
-                margin: "0 0 30px 0",
-                opacity: 0.9,
-                textAlign: "center",
+                lineHeight: 1.3,
+                color: "#8c8b86",
+                maxWidth: "900px",
               }}
             >
               {subtitle}
-            </p>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "20px",
-                fontSize: "24px",
-                opacity: 0.8,
-              }}
-            >
-              <span>{siteConfig.author.name}</span>
-              <span>•</span>
-              <span>{siteConfig.url.replace("https://", "")}</span>
             </div>
+          </div>
+
+          <div style={{ fontSize: "22px", color: "#5c5b56" }}>
+            ibrahimshittu.com
           </div>
         </div>
       ),
       {
         width: 1200,
         height: 630,
-      }
+      },
     );
   } catch (e) {
     console.log(e instanceof Error ? e.message : String(e));

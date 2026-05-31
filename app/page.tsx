@@ -240,13 +240,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Selected work */}
+      {/* Products */}
       <section className="mt-20 border-t border-border pt-12 md:mt-28">
-        <SectionHead
-          label="Selected work"
-          href="/projects"
-          cta="All projects"
-        />
+        <SectionHead label="Products" href="/projects" cta="All products" />
         <div>
           {projects.map((project) => (
             <RowLink
@@ -290,7 +286,7 @@ export default function Home() {
           </div>
           <div>
             <Label>Skills</Label>
-            <div className="mt-5 flex flex-wrap gap-x-2 gap-y-2">
+            <div className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-2">
               {skills.map((skill) => (
                 <span
                   key={skill}
@@ -299,6 +295,12 @@ export default function Home() {
                   {skill}
                 </span>
               ))}
+              <span
+                title="and much more"
+                className="px-1 font-mono text-[15px] text-faint"
+              >
+                &infin;
+              </span>
             </div>
           </div>
         </div>

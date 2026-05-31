@@ -4,13 +4,13 @@ import { getAllProjects, projectHref } from "@/lib/projects";
 import { siteConfig } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Projects - Ibrahim Shittu",
+  title: "Products - Ibrahim Shittu",
   description:
-    "Selected work — not demos. Each project went to real users, held up under real traffic, and taught me something I still use.",
+    "Products I've built and shipped — used by real people, at real scale, across legal tech, education, fintech, and AI.",
   keywords: [
-    "Ibrahim Shittu projects",
+    "Ibrahim Shittu products",
     "software engineer portfolio",
-    "AI projects",
+    "AI products",
     "agent systems",
     "legal tech",
     "edtech",
@@ -19,9 +19,9 @@ export const metadata: Metadata = {
   authors: [{ name: siteConfig.author.name, url: siteConfig.url }],
   creator: siteConfig.author.name,
   openGraph: {
-    title: "Projects - Ibrahim Shittu",
+    title: "Products - Ibrahim Shittu",
     description:
-      "Selected work — not demos. Real users, real traffic, real lessons.",
+      "Products I've built and shipped — used by real people, at real scale.",
     url: `${siteConfig.url}/projects`,
     type: "website",
     siteName: siteConfig.name,
@@ -31,14 +31,15 @@ export const metadata: Metadata = {
         url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: "Projects - Ibrahim Shittu",
+        alt: "Products - Ibrahim Shittu",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Projects - Ibrahim Shittu",
-    description: "Selected work — not demos. Real users, real traffic.",
+    title: "Products - Ibrahim Shittu",
+    description:
+      "Products I've built and shipped — used by real people, at real scale.",
     creator: siteConfig.twitterHandle,
     images: [siteConfig.ogImage],
   },
@@ -56,14 +57,15 @@ export default function ProjectsPage() {
     <main className="mx-auto w-full max-w-reading px-5 md:px-6">
       <header className="pt-16 md:pt-24">
         <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-faint">
-          Projects
+          Products
         </div>
         <h1 className="mt-4 text-[2.25rem] font-semibold leading-[1.05] tracking-[-0.03em] text-foreground sm:text-[2.75rem]">
-          Things I&rsquo;ve shipped.
+          Products I&rsquo;ve built.
         </h1>
         <p className="mt-5 max-w-[40rem] text-[1.0625rem] leading-[1.65] text-muted-foreground sm:text-[1.125rem]">
-          Not demos. Each of these went to real users, held up under real
-          traffic, and taught me something I still use.
+          Some of the products I&rsquo;ve built and shipped. Not demos. Each one
+          went to real people, ran at real scale, and taught me something I
+          still use.
         </p>
       </header>
 

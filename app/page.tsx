@@ -140,13 +140,13 @@ export default function Home() {
 
       {/* Hero */}
       <header className="pt-20 md:pt-28">
-        <div className="flex items-start justify-between gap-6">
-          <div>
-            <h1 className="text-[2.75rem] font-semibold leading-[0.98] tracking-[-0.045em] text-foreground sm:text-[3.5rem]">
-              Hi, I&rsquo;m Ibrahim.
+        <div className="flex items-start justify-between gap-8">
+          <div className="max-w-[34rem]">
+            <h1 className="text-[2.75rem] font-semibold leading-[1.0] tracking-[-0.045em] text-foreground sm:text-[3.5rem]">
+              Engineer, builder, occasional writer.
             </h1>
-            <p className="mt-4 text-[15px] text-faint">
-              Software engineer &middot; Lagos, Nigeria
+            <p className="mt-5 text-[15px] text-faint">
+              Senior Software Engineer &middot; Lagos, Nigeria
             </p>
           </div>
           <Image
@@ -155,23 +155,23 @@ export default function Home() {
             width={64}
             height={64}
             priority
-            className="hidden shrink-0 rounded-full object-cover ring-1 ring-line2 sm:block"
+            className="mt-2 hidden shrink-0 rounded-full object-cover ring-1 ring-line2 sm:block"
             style={{ height: 64, width: 64 }}
           />
         </div>
 
         <div className="mt-8 max-w-[40rem] space-y-4 text-[1.0625rem] leading-[1.65] text-muted-foreground sm:text-[1.125rem]">
           <p>
-            For eight years I&rsquo;ve been building web, mobile, and AI systems
-            &mdash; from zero-to-one prototypes to platforms now used by
+            For eight years I&rsquo;ve built web, mobile, and AI systems. They
+            started as zero-to-one prototypes and grew into platforms now used by
             universities, banks, and law firms.
           </p>
           <p>
-            Right now I&rsquo;m a founding engineer at{" "}
+            Today I&rsquo;m a founding engineer at{" "}
             <span className="font-medium text-foreground">Finiti Legal</span>,
-            building the AI compliance layer for capital markets. I like work
-            that holds up when real people use it &mdash; and I write, now and
-            then, about what that takes.
+            building the AI compliance layer for capital markets. I care about
+            work that survives real users, and I write, now and then, about what
+            that takes.
           </p>
         </div>
 

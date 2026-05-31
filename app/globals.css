@@ -37,6 +37,10 @@
 
   html {
     -webkit-text-size-adjust: 100%;
+    /* Always reserve the vertical scrollbar gutter so centered content
+       never shifts horizontally when page height crosses the viewport. */
+    scrollbar-gutter: stable;
+    overflow-y: scroll;
   }
 
   body {

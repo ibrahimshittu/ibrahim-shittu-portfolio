@@ -145,8 +145,8 @@ export default function Home() {
             <h1 className="text-[2.75rem] font-semibold leading-[1.0] tracking-[-0.045em] text-foreground sm:text-[3.5rem]">
               Engineer, builder, occasional writer.
             </h1>
-            <p className="mt-5 text-[15px] text-faint">
-              Senior Software Engineer &middot; Lagos, Nigeria
+            <p className="mt-5 max-w-[30rem] text-[15px] text-faint">
+              I build products that hold up when real people use them.
             </p>
           </div>
           <Image
@@ -163,8 +163,8 @@ export default function Home() {
         <div className="mt-8 max-w-[40rem] space-y-4 text-[1.0625rem] leading-[1.65] text-muted-foreground sm:text-[1.125rem]">
           <p>
             For eight years I&rsquo;ve built web, mobile, and AI systems. They
-            started as zero-to-one prototypes and grew into platforms now used by
-            universities, banks, and law firms.
+            started as zero-to-one prototypes and grew into platforms now used
+            by universities, banks, and law firms.
           </p>
           <p>
             Today I&rsquo;m a founding engineer at{" "}
@@ -242,7 +242,11 @@ export default function Home() {
 
       {/* Selected work */}
       <section className="mt-20 border-t border-border pt-12 md:mt-28">
-        <SectionHead label="Selected work" href="/projects" cta="All projects" />
+        <SectionHead
+          label="Selected work"
+          href="/projects"
+          cta="All projects"
+        />
         <div>
           {projects.map((project) => (
             <RowLink

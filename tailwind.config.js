@@ -11,61 +11,45 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: [
-          "var(--font-inter)",
-          "Inter",
+          "var(--font-geist-sans)",
           "ui-sans-serif",
           "system-ui",
           "sans-serif",
         ],
         mono: [
-          "var(--font-plex-mono)",
-          "IBM Plex Mono",
-          "JetBrains Mono",
+          "var(--font-geist-mono)",
           "ui-monospace",
+          "SFMono-Regular",
           "monospace",
         ],
       },
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
+        raised: "hsl(var(--raised))",
+        faint: "hsl(var(--faint))",
+        line2: "hsl(var(--line2))",
+        border: "hsl(var(--border))",
+        input: "hsl(var(--border))",
+        ring: "hsl(var(--ring))",
         muted: {
           DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
         },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--foreground))",
+          foreground: "hsl(var(--background))",
         },
       },
+      maxWidth: {
+        reading: "48rem",
+      },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        lg: "0.5rem",
+        md: "0.375rem",
+        sm: "0.25rem",
       },
     },
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [require("@tailwindcss/typography")],
 };

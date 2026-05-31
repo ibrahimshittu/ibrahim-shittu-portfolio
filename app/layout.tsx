@@ -1,10 +1,12 @@
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import "./globals.css";
-import { Inter, IBM_Plex_Mono } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { PortfolioNav } from "@/components/ui/portfolio-nav";
+import { SiteNav } from "@/components/ui/site-nav";
+import { SiteFooter } from "@/components/ui/site-footer";
 import {
   siteConfig,
   generatePersonSchema,
@@ -12,23 +14,10 @@ import {
   generateOrganizationSchema,
 } from "@/lib/seo";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const plexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-plex-mono",
-  display: "swap",
-});
-
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fafaf7" },
-    { media: "(prefers-color-scheme: dark)", color: "#0f0f0d" },
+    { media: "(prefers-color-scheme: light)", color: "#faf9f7" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0b" },
   ],
 };
 
@@ -119,10 +108,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${plexMono.variable}`}
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
       suppressHydrationWarning
     >
-      <body className={inter.className}>
+      <body>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -131,15 +120,11 @@ export default function RootLayout({
         >
           <script
             type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify(personSchema),
-            }}
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
           />
           <script
             type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify(websiteSchema),
-            }}
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
           />
           <script
             type="application/ld+json"
@@ -147,21 +132,11 @@ export default function RootLayout({
               __html: JSON.stringify(organizationSchema),
             }}
           />
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "ContactPoint",
-                telephone: "",
-                contactType: "technical support",
-                areaServed: "Worldwide",
-                availableLanguage: "English",
-              }),
-            }}
-          />
-          <PortfolioNav />
-          {children}
+          <div className="flex min-h-screen flex-col">
+            <SiteNav />
+            <div className="flex-1">{children}</div>
+            <SiteFooter />
+          </div>
           <Analytics />
           <SpeedInsights />
         </ThemeProvider>

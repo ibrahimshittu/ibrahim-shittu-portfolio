@@ -6,6 +6,16 @@ import {
 } from "./video-seo";
 import { CodeBlock } from "@/components/ui/code-block";
 
+// Long form, e.g. "January 15, 2025"
+export function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
 export function extractYouTubeVideos(content: string): string[] {
   const matches = content.match(/\{\{youtube:([^}]+)\}\}/g);
   if (!matches) return [];
@@ -52,7 +62,6 @@ export const formatInlineText = (text: string): React.ReactNode => {
           href={parts[i + 2]}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-muted-foreground underline underline-offset-2 hover:text-foreground transition-colors"
         >
           {parts[i + 1]}
         </a>,
@@ -67,23 +76,12 @@ export const formatInlineText = (text: string): React.ReactNode => {
     ) {
       const isDouble = part.startsWith("``");
       const content = isDouble ? part.slice(2, -2) : part.slice(1, -1);
-      nodes.push(
-        <code
-          key={`code-${i}`}
-          className="px-1 py-0.5 rounded bg-muted text-foreground font-mono text-[0.8em]"
-        >
-          {content}
-        </code>,
-      );
+      nodes.push(<code key={`code-${i}`}>{content}</code>);
       continue;
     }
 
     if (part.startsWith("**") && part.endsWith("**")) {
-      nodes.push(
-        <span key={`bold-${i}`} className="font-semibold text-muted-foreground">
-          {part.slice(2, -2)}
-        </span>,
-      );
+      nodes.push(<strong key={`bold-${i}`}>{part.slice(2, -2)}</strong>);
       continue;
     }
 
@@ -99,25 +97,9 @@ interface HeadingTagProps {
 }
 
 function HeadingTag({ level, children }: HeadingTagProps) {
-  if (level === 2) {
-    return (
-      <h2 className="text-lg font-bold text-muted-foreground mt-10 mb-6 leading-tight">
-        {children}
-      </h2>
-    );
-  }
-  if (level === 3) {
-    return (
-      <h3 className="text-base font-semibold text-muted-foreground mt-8 mb-4 leading-tight">
-        {children}
-      </h3>
-    );
-  }
-  return (
-    <h4 className="text-sm font-semibold text-muted-foreground mt-6 mb-3 leading-tight">
-      {children}
-    </h4>
-  );
+  if (level === 2) return <h2>{children}</h2>;
+  if (level === 3) return <h3>{children}</h3>;
+  return <h4>{children}</h4>;
 }
 
 const isItalicOnly = (text: string): boolean =>
@@ -161,22 +143,14 @@ export const formatContent = (content: string): React.ReactNode[] => {
     }
     if (isItalicOnly(text)) {
       nodes.push(
-        <p
-          key={`i-${nodes.length}`}
-          className="text-sm font-mono text-muted-foreground italic mt-8 mb-6 leading-relaxed border-l-[3px] border-solid border-[#1f5d3b] pl-4 dark:border-[#6fb292]"
-        >
+        <p key={`i-${nodes.length}`} className="italic">
           {formatInlineText(text.slice(1, -1))}
         </p>,
       );
     } else {
       text.split("\n").forEach((line) => {
         nodes.push(
-          <p
-            key={`p-${nodes.length}`}
-            className="text-sm text-muted-foreground font-mono leading-relaxed mt-4 mb-6"
-          >
-            {formatInlineText(line.trim())}
-          </p>,
+          <p key={`p-${nodes.length}`}>{formatInlineText(line.trim())}</p>,
         );
       });
     }
@@ -186,15 +160,9 @@ export const formatContent = (content: string): React.ReactNode[] => {
   const flushList = () => {
     if (!listItems || listItems.length === 0) return;
     nodes.push(
-      <ul key={`ul-${nodes.length}`} className="space-y-2 mt-4 mb-6 ml-4 pl-2">
+      <ul key={`ul-${nodes.length}`}>
         {listItems.map((item, idx) => (
-          <li
-            key={idx}
-            className="text-sm text-muted-foreground font-mono leading-relaxed flex items-start gap-3"
-          >
-            <span className="text-muted-foreground">•</span>
-            <span>{formatInlineText(item)}</span>
-          </li>
+          <li key={idx}>{formatInlineText(item)}</li>
         ))}
       </ul>,
     );
@@ -204,7 +172,7 @@ export const formatContent = (content: string): React.ReactNode[] => {
   const flushCode = () => {
     if (!inCode) return;
     nodes.push(
-      <div key={`code-${nodes.length}`} className="mt-4 mb-6">
+      <div key={`code-${nodes.length}`} className="my-6">
         <CodeBlock language={codeLang} code={codeLines.join("\n")} />
       </div>,
     );
@@ -220,14 +188,9 @@ export const formatContent = (content: string): React.ReactNode[] => {
       .split("\n")
       .map((l) => l.replace(/^>\s?/, ""));
     nodes.push(
-      <blockquote
-        key={`q-${nodes.length}`}
-        className="border-l-[3px] border-solid border-[#1f5d3b] pl-4 italic text-muted-foreground mt-8 mb-6 dark:border-[#6fb292]"
-      >
+      <blockquote key={`q-${nodes.length}`}>
         {quoteLines.map((l, i) => (
-          <p key={i} className="text-sm font-mono leading-relaxed">
-            {formatInlineText(l)}
-          </p>
+          <p key={i}>{formatInlineText(l)}</p>
         ))}
       </blockquote>,
     );
@@ -237,33 +200,20 @@ export const formatContent = (content: string): React.ReactNode[] => {
   const flushTable = () => {
     if (!tableHeader || !tableRows || tableRows.length === 0) return;
     nodes.push(
-      <div
-        key={`table-${nodes.length}`}
-        className="mt-4 mb-6 -mx-4 sm:mx-0 overflow-x-auto"
-      >
-        <table className="w-full min-w-[520px] text-xs sm:text-sm font-mono border-collapse">
+      <div key={`table-${nodes.length}`} className="-mx-5 overflow-x-auto sm:mx-0">
+        <table>
           <thead>
-            <tr className="border-b border-border">
+            <tr>
               {tableHeader.map((cell, i) => (
-                <th
-                  key={i}
-                  className="text-left py-2 px-2 sm:px-3 text-muted-foreground font-semibold"
-                >
-                  {formatInlineText(cell)}
-                </th>
+                <th key={i}>{formatInlineText(cell)}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {tableRows.map((row, rowIdx) => (
-              <tr key={rowIdx} className="border-b border-border/50">
+              <tr key={rowIdx}>
                 {row.map((cell, cellIdx) => (
-                  <td
-                    key={cellIdx}
-                    className="py-2 px-2 sm:px-3 text-muted-foreground leading-relaxed"
-                  >
-                    {formatInlineText(cell)}
-                  </td>
+                  <td key={cellIdx}>{formatInlineText(cell)}</td>
                 ))}
               </tr>
             ))}
@@ -313,13 +263,13 @@ export const formatContent = (content: string): React.ReactNode[] => {
       nodes.push(
         <div
           key={`yt-${nodes.length}`}
-          className="relative w-full mt-6 mb-8"
+          className="relative my-8 w-full"
           style={{ paddingBottom: "56.25%" }}
           data-video-id={videoId}
           data-video-metadata={JSON.stringify(videoMetadata)}
         >
           <iframe
-            className="absolute top-0 left-0 w-full h-full rounded-lg border-0"
+            className="absolute left-0 top-0 h-full w-full rounded-lg border-0"
             src={`https://www.youtube.com/embed/${videoId}`}
             title="YouTube video"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -365,17 +315,10 @@ export const formatContent = (content: string): React.ReactNode[] => {
       const alt = imageMatch[1];
       const src = imageMatch[2];
       nodes.push(
-        <figure key={`img-${nodes.length}`} className="mt-6 mb-8">
-          <img
-            src={src}
-            alt={alt}
-            className="w-full rounded-lg border border-border"
-          />
-          {alt && (
-            <figcaption className="mt-2 text-center text-xs text-muted-foreground font-mono">
-              {alt}
-            </figcaption>
-          )}
+        <figure key={`img-${nodes.length}`}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={src} alt={alt} />
+          {alt && <figcaption>{alt}</figcaption>}
         </figure>,
       );
       continue;

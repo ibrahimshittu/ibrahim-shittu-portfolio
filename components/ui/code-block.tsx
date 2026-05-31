@@ -2,34 +2,11 @@
 
 import React, { useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-
-import { darkTheme, lightTheme } from "./code-block-themes";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 interface CodeBlockProps {
   language: string;
   code: string;
-}
-
-const HIGHLIGHTER_RESET = { background: "transparent", padding: 0, margin: 0 };
-
-interface HighlightedProps {
-  language: string;
-  code: string;
-  style: { [key: string]: React.CSSProperties };
-}
-
-function Highlighted({ language, code, style }: HighlightedProps) {
-  return (
-    <SyntaxHighlighter
-      language={language}
-      style={style}
-      PreTag="div"
-      CodeTag="code"
-      customStyle={HIGHLIGHTER_RESET}
-    >
-      {code}
-    </SyntaxHighlighter>
-  );
 }
 
 export function CodeBlock({ language, code }: CodeBlockProps) {
@@ -46,26 +23,42 @@ export function CodeBlock({ language, code }: CodeBlockProps) {
   };
 
   return (
-    <div className="not-prose group relative my-6 overflow-hidden rounded-md border border-[#e7e5de] bg-[#f5f3ec] dark:border-[#26251f] dark:bg-[#15140f]">
-      <div className="flex items-center justify-between border-b border-[#e7e5de] px-4 py-2 dark:border-[#26251f]">
-        <span className="!font-mono text-[10.5px] tracking-[0.04em] text-[#7a7f86] dark:text-[#74706a]">
+    <div className="group my-6 overflow-hidden rounded-lg border border-border">
+      <div className="flex items-center justify-between border-b border-border bg-raised px-4 py-2">
+        <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">
           {language}
         </span>
         <button
           type="button"
           onClick={handleCopy}
-          className="!font-mono text-[10.5px] text-[#7a7f86] opacity-0 transition-opacity hover:text-[#0e0f11] group-hover:opacity-100 dark:text-[#74706a] dark:hover:text-[#f2efe7]"
+          className="font-mono text-[11px] text-faint opacity-0 transition-opacity hover:text-foreground group-hover:opacity-100"
         >
-          {copied ? "copied" : "copy"}
+          {copied ? "Copied" : "Copy"}
         </button>
       </div>
-      <div className="overflow-x-auto px-4 py-4">
-        <span className="hidden dark:block">
-          <Highlighted language={language} code={code} style={darkTheme} />
-        </span>
-        <span className="block dark:hidden">
-          <Highlighted language={language} code={code} style={lightTheme} />
-        </span>
+      <div className="syntax-highlighter-container relative">
+        <SyntaxHighlighter
+          language={language}
+          style={vscDarkPlus}
+          customStyle={{
+            margin: 0,
+            borderRadius: 0,
+            border: 0,
+            fontSize: "0.8rem",
+            lineHeight: "1.5rem",
+            backgroundColor: "hsl(var(--raised))",
+            color: "hsl(var(--foreground))",
+          }}
+          codeTagProps={{
+            style: {
+              fontFamily: "var(--font-geist-mono), ui-monospace, monospace",
+            },
+          }}
+          wrapLines={true}
+          wrapLongLines={true}
+        >
+          {code}
+        </SyntaxHighlighter>
       </div>
     </div>
   );

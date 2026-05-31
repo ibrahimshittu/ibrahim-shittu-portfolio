@@ -61,9 +61,9 @@ export function generateVideoSitemapEntry(
       duration: video.duration,
       publication_date: video.uploadDate,
       family_friendly: "yes",
-      view_count: undefined,
-      rating: undefined,
-      tag: [],
+      view_count: undefined, // Can be added if available
+      rating: undefined, // Can be added if available
+      tag: [], // Can be populated with relevant tags
     },
   };
 }
@@ -95,17 +95,21 @@ export function parseCloudinaryVideoUrl(url: string): {
   title?: string;
   publicId?: string;
 } {
+  // Extract public ID from Cloudinary URL for metadata
   const match = url.match(/\/v\d+\/(.+)\.(mp4|webm|mov|avi)$/);
-  if (!match) return {};
-
-  const publicId = match[1];
-  const title = publicId
-    .split(/[-_]/)
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-  return { title, publicId };
+  if (match) {
+    const publicId = match[1];
+    // Convert public ID to a readable title
+    const title = publicId
+      .split(/[-_]/)
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+    return { title, publicId };
+  }
+  return {};
 }
 
+// Helper function to convert seconds to ISO 8601 duration
 export function secondsToISO8601Duration(seconds: number): string {
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = seconds % 60;

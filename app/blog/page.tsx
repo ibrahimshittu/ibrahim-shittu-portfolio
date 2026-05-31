@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Metadata } from "next";
 import { getAllBlogPosts } from "@/lib/markdown";
 import {
@@ -5,30 +6,26 @@ import {
   generateCanonicalUrl,
   generateBreadcrumbSchema,
 } from "@/lib/seo";
-import { SubHero, GoldMarker } from "@/components/ui/sub-hero";
-import { ContactFooter } from "@/components/ui/contact-footer";
-import { BlogFilter, type BlogRow } from "./_components/blog-filter";
 
 export const metadata: Metadata = {
-  title: "Writing — Ibrahim Shittu",
+  title: "Writing - Ibrahim Shittu",
   description:
-    "Notes on agent architecture, founding-engineer tradeoffs, and the boring infrastructure decisions that quietly decide whether a product survives contact with real users.",
+    "Notes on agent architecture, founding-engineer tradeoffs, and the infrastructure decisions that quietly decide whether a product survives contact with real users.",
   keywords: [
     "software engineering blog",
     "AI insights",
     "agent architecture",
     "startup development",
     "legal tech",
-    "education technology",
     "Ibrahim Shittu blog",
   ],
   authors: [{ name: siteConfig.author.name, url: siteConfig.url }],
   creator: siteConfig.author.name,
   openGraph: {
     type: "website",
-    title: "Writing — Ibrahim Shittu",
+    title: "Writing - Ibrahim Shittu",
     description:
-      "Notes on agent architecture, founding-engineer tradeoffs, and infrastructure decisions that decide whether a product survives contact with real users.",
+      "Notes on agent architecture, founding-engineer tradeoffs, and the infrastructure decisions that matter.",
     url: `${siteConfig.url}/blog`,
     siteName: siteConfig.name,
     locale: "en_US",
@@ -37,13 +34,13 @@ export const metadata: Metadata = {
         url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: "Writing — Ibrahim Shittu",
+        alt: "Writing - Ibrahim Shittu",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Writing — Ibrahim Shittu",
+    title: "Writing - Ibrahim Shittu",
     description:
       "Notes on agent architecture, founding-engineer tradeoffs, and the infrastructure decisions that matter.",
     creator: siteConfig.twitterHandle,
@@ -57,37 +54,10 @@ export const metadata: Metadata = {
   category: "technology",
 };
 
-function classifyTag(tags: string[]): string {
-  const lower = tags.map((t) => t.toLowerCase());
-  if (
-    lower.some(
-      (t) =>
-        t.includes("ai") ||
-        t.includes("ml") ||
-        t.includes("llm") ||
-        t.includes("agent"),
-    )
-  ) {
-    return "AI";
-  }
-  if (lower.some((t) => t.includes("career") || t.includes("journey"))) {
-    return "Career";
-  }
-  return "Eng";
-}
+const year = (date: string) => new Date(date).getFullYear();
 
 export default function Blog() {
   const blogPosts = getAllBlogPosts();
-  const rows: BlogRow[] = blogPosts.map((p) => ({
-    slug: p.slug,
-    title: p.title,
-    date: p.date,
-    readTime: p.readTime,
-    excerpt: p.excerpt,
-    body: p.excerpt,
-    tag: classifyTag(p.tags),
-    tags: p.tags,
-  }));
 
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Home", url: siteConfig.url },
@@ -95,7 +65,7 @@ export default function Blog() {
   ]);
 
   return (
-    <main className="bg-[#fafaf7] text-[#0e0f11] dark:bg-[#0f0f0d] dark:text-[#f2efe7]">
+    <main className="mx-auto w-full max-w-reading px-5 md:px-6">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -120,30 +90,53 @@ export default function Blog() {
               headline: post.title,
               url: generateCanonicalUrl(`/blog/${post.slug}`),
               datePublished: post.date,
-              author: {
-                "@type": "Person",
-                name: siteConfig.author.name,
-              },
+              author: { "@type": "Person", name: siteConfig.author.name },
             })),
           }),
         }}
       />
 
-      <SubHero
-        kicker="// 03 — writing · notes from the field"
-        title={
-          <>
-            Thinking out loud,
-            <br />
-            in <GoldMarker>public.</GoldMarker>
-          </>
-        }
-        lede="Notes on agent architecture, founding-engineer tradeoffs, and the boring infrastructure decisions that quietly decide whether a product survives contact with real users."
-      />
+      <header className="pt-16 md:pt-24">
+        <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-faint">
+          Writing
+        </div>
+        <h1 className="mt-4 text-[2.25rem] font-semibold leading-[1.05] tracking-[-0.03em] text-foreground sm:text-[2.75rem]">
+          Thinking out loud.
+        </h1>
+        <p className="mt-5 max-w-[40rem] text-[1.0625rem] leading-[1.65] text-muted-foreground sm:text-[1.125rem]">
+          Notes on agent architecture, founding-engineer tradeoffs, and the
+          boring infrastructure decisions that quietly decide whether a product
+          survives contact with real users.
+        </p>
+      </header>
 
-      <BlogFilter posts={rows} />
-
-      <ContactFooter />
+      <div className="mt-12">
+        {blogPosts.map((post) => (
+          <Link
+            key={post.slug}
+            href={`/blog/${post.slug}`}
+            className="group block border-t border-border py-6 first:border-t-0"
+          >
+            <div className="flex items-baseline justify-between gap-4">
+              <h2 className="flex items-center gap-1.5 text-[1.15rem] font-medium tracking-[-0.01em] text-foreground">
+                {post.title}
+                <span className="text-faint opacity-0 -translate-x-1 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100">
+                  &rarr;
+                </span>
+              </h2>
+              <span className="shrink-0 font-mono text-[13px] tabular-nums text-faint">
+                {year(post.date)}
+              </span>
+            </div>
+            <p className="mt-2 text-[15px] leading-[1.6] text-muted-foreground">
+              {post.excerpt}
+            </p>
+            <div className="mt-2.5 font-mono text-[12px] text-faint">
+              {post.readTime}
+            </div>
+          </Link>
+        ))}
+      </div>
     </main>
   );
 }

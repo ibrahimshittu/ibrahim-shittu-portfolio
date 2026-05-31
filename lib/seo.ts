@@ -54,7 +54,7 @@ export function generatePersonSchema() {
     jobTitle: "Senior Software Engineer",
     worksFor: {
       "@type": "Organization",
-      name: "Finiti",
+      name: "Finiti Legal",
     },
     alumniOf: {
       "@type": "EducationalOrganization",
@@ -124,7 +124,7 @@ export function generateArticleSchema(
   datePublished: string,
   dateModified: string,
   tags: string[],
-  readTime: string,
+  readTime: string
 ) {
   return {
     "@context": "https://schema.org",
@@ -160,7 +160,7 @@ export function generateArticleSchema(
 }
 
 export function generateBreadcrumbSchema(
-  breadcrumbs: Array<{ name: string; url: string }>,
+  breadcrumbs: Array<{ name: string; url: string }>
 ) {
   return {
     "@context": "https://schema.org",

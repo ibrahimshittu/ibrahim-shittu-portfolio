@@ -7,7 +7,13 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/_next/", "/private/", "/*.json$", "/*?ref=*"],
+        disallow: [
+          "/api/",
+          "/_next/",
+          "/private/",
+          "/*.json$",
+          "/*?ref=*", // Disallow URLs with ref parameters
+        ],
       },
       {
         userAgent: "Googlebot",

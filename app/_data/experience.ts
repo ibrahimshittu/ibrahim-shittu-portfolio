@@ -11,7 +11,7 @@ export const experience: WorkEntry[] = [
     company: "Finiti Legal",
     title: "Founding Software Engineer",
     period: "2025 — Now",
-    location: "San Francisco (remote)",
+    location: "San Francisco",
     summary:
       "Building the AI compliance layer for capital markets — multi-agent systems over millions of SEC filings that validate filings, benchmark disclosures, and run filing prep with humans in the loop.",
   },

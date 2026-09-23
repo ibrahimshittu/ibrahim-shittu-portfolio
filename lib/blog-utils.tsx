@@ -1,10 +1,15 @@
 import React from "react";
+import dynamic from "next/dynamic";
 import {
   getYouTubeThumbnail,
   getYouTubeEmbedUrl,
   type VideoMetadata,
 } from "./video-seo";
 import { CodeBlock } from "@/components/ui/code-block";
+
+import { RouterArchitecture } from "@/components/blog/jev-router-explorer";
+
+const JevRouterExplorer = dynamic(() => import("@/components/blog/jev-router-explorer"));
 
 // Long form, e.g. "January 15, 2025"
 export function formatDate(dateString: string): string {
@@ -245,6 +250,18 @@ export const formatContent = (content: string): React.ReactNode[] => {
       } else {
         codeLines.push(raw);
       }
+      continue;
+    }
+
+    if (line.trim() === "{{jev-router-architecture}}") {
+      flushBlocks();
+      nodes.push(<RouterArchitecture key={`jev-architecture-${nodes.length}`} />);
+      continue;
+    }
+
+    if (line.trim() === "{{jev-router-demo}}") {
+      flushBlocks();
+      nodes.push(<JevRouterExplorer key={`jev-${nodes.length}`} />);
       continue;
     }
 

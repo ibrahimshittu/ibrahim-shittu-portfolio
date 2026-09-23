@@ -1,0 +1,746 @@
+[
+  {
+    "id": "dev-01",
+    "split": "dev",
+    "request": "Find where we trim agent conversation history.",
+    "context": "Repository access is available; no relevant path is known.",
+    "accepted": [
+      "search_code"
+    ],
+    "rationale": "Repository access is available; no relevant path is known. Next action: search_code."
+  },
+  {
+    "id": "dev-02",
+    "split": "dev",
+    "request": "Where is the vector client created?",
+    "context": "The codebase is available, but its structure is unfamiliar.",
+    "accepted": [
+      "search_code"
+    ],
+    "rationale": "The codebase is available, but its structure is unfamiliar. Next action: search_code."
+  },
+  {
+    "id": "dev-03",
+    "split": "dev",
+    "request": "Understand why the router uses this threshold.",
+    "context": "The threshold is defined in router/policy.py; contents have not been inspected.",
+    "accepted": [
+      "read_file"
+    ],
+    "rationale": "The threshold is defined in router/policy.py; contents have not been inspected. Next action: read_file."
+  },
+  {
+    "id": "dev-04",
+    "split": "dev",
+    "request": "Check the timeout configured for the client.",
+    "context": "The relevant configuration is settings/model.py; it is available but unread.",
+    "accepted": [
+      "read_file"
+    ],
+    "rationale": "The relevant configuration is settings/model.py; it is available but unread. Next action: read_file."
+  },
+  {
+    "id": "dev-05",
+    "split": "dev",
+    "request": "Does this SDK support streaming structured output?",
+    "context": "The installed package and version are known; this is an API capability question.",
+    "accepted": [
+      "search_docs"
+    ],
+    "rationale": "The installed package and version are known; this is an API capability question. Next action: search_docs."
+  },
+  {
+    "id": "dev-06",
+    "split": "dev",
+    "request": "What does the library mean by recursion_limit?",
+    "context": "We know the library and version, but need its documented semantics.",
+    "accepted": [
+      "search_docs"
+    ],
+    "rationale": "We know the library and version, but need its documented semantics. Next action: search_docs."
+  },
+  {
+    "id": "dev-07",
+    "split": "dev",
+    "request": "The worker sometimes stalls after the second tool call.",
+    "context": "A failing request ID and corresponding trace are available; no trace has been inspected.",
+    "accepted": [
+      "inspect_logs"
+    ],
+    "rationale": "A failing request ID and corresponding trace are available; no trace has been inspected. Next action: inspect_logs."
+  },
+  {
+    "id": "dev-08",
+    "split": "dev",
+    "request": "Why did the provider reject this request?",
+    "context": "The provider response is captured in a known log stream, not yet read.",
+    "accepted": [
+      "inspect_logs"
+    ],
+    "rationale": "The provider response is captured in a known log stream, not yet read. Next action: inspect_logs."
+  },
+  {
+    "id": "dev-09",
+    "split": "dev",
+    "request": "Verify that the retry fix prevents duplicate tool calls.",
+    "context": "The patch is reviewed and an existing targeted regression test is available.",
+    "accepted": [
+      "run_tests"
+    ],
+    "rationale": "The patch is reviewed and an existing targeted regression test is available. Next action: run_tests."
+  },
+  {
+    "id": "dev-10",
+    "split": "dev",
+    "request": "Reproduce the bad history truncation locally.",
+    "context": "The existing history regression test is known and dependencies are installed.",
+    "accepted": [
+      "run_tests"
+    ],
+    "rationale": "The existing history regression test is known and dependencies are installed. Next action: run_tests."
+  },
+  {
+    "id": "dev-11",
+    "split": "dev",
+    "request": "Make the agent better.",
+    "context": "No goal, failure, project, or expected behaviour has been supplied.",
+    "accepted": [
+      "ask_clarification"
+    ],
+    "rationale": "No goal, failure, project, or expected behaviour has been supplied. Next action: ask_clarification."
+  },
+  {
+    "id": "dev-12",
+    "split": "dev",
+    "request": "Investigate that failure from yesterday.",
+    "context": "Several projects and runs failed; there is no identifier or distinguishing symptom.",
+    "accepted": [
+      "ask_clarification"
+    ],
+    "rationale": "Several projects and runs failed; there is no identifier or distinguishing symptom. Next action: ask_clarification."
+  },
+  {
+    "id": "search_code-01",
+    "split": "eval",
+    "request": "Our agent keeps the oldest messages when it truncates a conversation. Find the implementation responsible.",
+    "context": "Repository available. No traceback, known file, or failing test yet.",
+    "accepted": [
+      "search_code"
+    ],
+    "rationale": "Repository available. No traceback, known file, or failing test yet. Next action: search_code."
+  },
+  {
+    "id": "search_code-02",
+    "split": "eval",
+    "request": "We need to understand where tool retries are scheduled.",
+    "context": "We have the repository; the retry module has not been located.",
+    "accepted": [
+      "search_code"
+    ],
+    "rationale": "We have the repository; the retry module has not been located. Next action: search_code."
+  },
+  {
+    "id": "search_code-03",
+    "split": "eval",
+    "request": "Find the code that converts provider responses into our internal message format.",
+    "context": "There are multiple provider adapters and no known entry point.",
+    "accepted": [
+      "search_code"
+    ],
+    "rationale": "There are multiple provider adapters and no known entry point. Next action: search_code."
+  },
+  {
+    "id": "search_code-04",
+    "split": "eval",
+    "request": "Which part of this service writes the checkpoint after a tool finishes?",
+    "context": "Source access is available. No function or path is known.",
+    "accepted": [
+      "search_code"
+    ],
+    "rationale": "Source access is available. No function or path is known. Next action: search_code."
+  },
+  {
+    "id": "search_code-05",
+    "split": "eval",
+    "request": "Locate the logic that strips citations from streamed output.",
+    "context": "This is application behaviour; no relevant source file has been identified.",
+    "accepted": [
+      "search_code"
+    ],
+    "rationale": "This is application behaviour; no relevant source file has been identified. Next action: search_code."
+  },
+  {
+    "id": "search_code-06",
+    "split": "eval",
+    "request": "I need to trace how a model name reaches the client factory.",
+    "context": "The repository is available. We have no file locations or logs relevant to construction.",
+    "accepted": [
+      "search_code"
+    ],
+    "rationale": "The repository is available. We have no file locations or logs relevant to construction. Next action: search_code."
+  },
+  {
+    "id": "read_file-01",
+    "split": "eval",
+    "request": "Why do retries continue after cancellation?",
+    "context": "The traceback and earlier search identify agent/retry_policy.py as the relevant file. It has not been opened.",
+    "accepted": [
+      "read_file"
+    ],
+    "rationale": "The traceback and earlier search identify agent/retry_policy.py as the relevant file. It has not been opened. Next action: read_file."
+  },
+  {
+    "id": "read_file-02",
+    "split": "eval",
+    "request": "Check whether we pass the timeout in seconds or milliseconds.",
+    "context": "The call site is in integrations/client.py. That file is available and unread.",
+    "accepted": [
+      "read_file"
+    ],
+    "rationale": "The call site is in integrations/client.py. That file is available and unread. Next action: read_file."
+  },
+  {
+    "id": "read_file-03",
+    "split": "eval",
+    "request": "The router always chooses web search. Understand its selection rules.",
+    "context": "An earlier search located routing/select.py. Its contents are not in context.",
+    "accepted": [
+      "read_file"
+    ],
+    "rationale": "An earlier search located routing/select.py. Its contents are not in context. Next action: read_file."
+  },
+  {
+    "id": "read_file-04",
+    "split": "eval",
+    "request": "Does our local cache include the model version in its key?",
+    "context": "The implementation is known to be cache/keys.py. It has not been inspected.",
+    "accepted": [
+      "read_file"
+    ],
+    "rationale": "The implementation is known to be cache/keys.py. It has not been inspected. Next action: read_file."
+  },
+  {
+    "id": "read_file-05",
+    "split": "eval",
+    "request": "Explain why the current prompt tells the agent to stop after one tool.",
+    "context": "The prompt template is prompts/agent.md and is available to read.",
+    "accepted": [
+      "read_file"
+    ],
+    "rationale": "The prompt template is prompts/agent.md and is available to read. Next action: read_file."
+  },
+  {
+    "id": "read_file-06",
+    "split": "eval",
+    "request": "Check how the checkpoint connection is configured.",
+    "context": "Configuration is in config/checkpoints.toml. We have the exact path but not its contents.",
+    "accepted": [
+      "read_file"
+    ],
+    "rationale": "Configuration is in config/checkpoints.toml. We have the exact path but not its contents. Next action: read_file."
+  },
+  {
+    "id": "search_docs-01",
+    "split": "eval",
+    "request": "What is the documented difference between interrupting and cancelling this graph?",
+    "context": "The installed orchestration library and version are known. The question is about library semantics, not our wrapper.",
+    "accepted": [
+      "search_docs"
+    ],
+    "rationale": "The installed orchestration library and version are known. The question is about library semantics, not our wrapper. Next action: search_docs."
+  },
+  {
+    "id": "search_docs-02",
+    "split": "eval",
+    "request": "Can the provider accept nullable enum fields in a strict response schema?",
+    "context": "Provider and API version are known. We need the supported schema rules before implementing.",
+    "accepted": [
+      "search_docs"
+    ],
+    "rationale": "Provider and API version are known. We need the supported schema rules before implementing. Next action: search_docs."
+  },
+  {
+    "id": "search_docs-03",
+    "split": "eval",
+    "request": "Should I await the asynchronous client close method?",
+    "context": "The exact client package and version are known. The public lifecycle API is unfamiliar.",
+    "accepted": [
+      "search_docs"
+    ],
+    "rationale": "The exact client package and version are known. The public lifecycle API is unfamiliar. Next action: search_docs."
+  },
+  {
+    "id": "search_docs-04",
+    "split": "eval",
+    "request": "What does this SDK return when a tool call is streamed in fragments?",
+    "context": "We need the documented event format for a known SDK release. No application fault is being diagnosed.",
+    "accepted": [
+      "search_docs"
+    ],
+    "rationale": "We need the documented event format for a known SDK release. No application fault is being diagnosed. Next action: search_docs."
+  },
+  {
+    "id": "search_docs-05",
+    "split": "eval",
+    "request": "Does the checkpoint library promise transactional writes across nodes?",
+    "context": "Library version is available. We need its published guarantees, not assumptions from application code.",
+    "accepted": [
+      "search_docs"
+    ],
+    "rationale": "Library version is available. We need its published guarantees, not assumptions from application code. Next action: search_docs."
+  },
+  {
+    "id": "search_docs-06",
+    "split": "eval",
+    "request": "Which timeout controls the initial connection rather than the full response?",
+    "context": "This is a question about a known HTTP library version and its public timeout parameters.",
+    "accepted": [
+      "search_docs"
+    ],
+    "rationale": "This is a question about a known HTTP library version and its public timeout parameters. Next action: search_docs."
+  },
+  {
+    "id": "inspect_logs-01",
+    "split": "eval",
+    "request": "Agent requests slowed down after lunch; where is the time going?",
+    "context": "A sample slow request ID and full span trace are available. They have not been read.",
+    "accepted": [
+      "inspect_logs"
+    ],
+    "rationale": "A sample slow request ID and full span trace are available. They have not been read. Next action: inspect_logs."
+  },
+  {
+    "id": "inspect_logs-02",
+    "split": "eval",
+    "request": "Why did this run stop before the final answer?",
+    "context": "The run ID and retained execution events are available; the final event has not been inspected.",
+    "accepted": [
+      "inspect_logs"
+    ],
+    "rationale": "The run ID and retained execution events are available; the final event has not been inspected. Next action: inspect_logs."
+  },
+  {
+    "id": "inspect_logs-03",
+    "split": "eval",
+    "request": "We saw a burst of model-provider errors. What kind?",
+    "context": "A bounded incident window and structured provider logs are available. Error codes are not yet known.",
+    "accepted": [
+      "inspect_logs"
+    ],
+    "rationale": "A bounded incident window and structured provider logs are available. Error codes are not yet known. Next action: inspect_logs."
+  },
+  {
+    "id": "inspect_logs-04",
+    "split": "eval",
+    "request": "Find which tool call produced the oversized response in this run.",
+    "context": "The run trace contains tool response sizes. No relevant event has been inspected.",
+    "accepted": [
+      "inspect_logs"
+    ],
+    "rationale": "The run trace contains tool response sizes. No relevant event has been inspected. Next action: inspect_logs."
+  },
+  {
+    "id": "inspect_logs-05",
+    "split": "eval",
+    "request": "Did the retry actually happen during this failed request?",
+    "context": "A request ID and correlated attempt logs are available. The code is already understood.",
+    "accepted": [
+      "inspect_logs"
+    ],
+    "rationale": "A request ID and correlated attempt logs are available. The code is already understood. Next action: inspect_logs."
+  },
+  {
+    "id": "inspect_logs-06",
+    "split": "eval",
+    "request": "The deployed worker disappeared without a response.",
+    "context": "Container logs for the exact worker and time are accessible. No stack trace or exit reason is known.",
+    "accepted": [
+      "inspect_logs"
+    ],
+    "rationale": "Container logs for the exact worker and time are accessible. No stack trace or exit reason is known. Next action: inspect_logs."
+  },
+  {
+    "id": "run_tests-01",
+    "split": "eval",
+    "request": "Check whether this patch fixes duplicate execution.",
+    "context": "The patch has been inspected. A targeted existing test exercises this exact bug; the environment is ready.",
+    "accepted": [
+      "run_tests"
+    ],
+    "rationale": "The patch has been inspected. A targeted existing test exercises this exact bug; the environment is ready. Next action: run_tests."
+  },
+  {
+    "id": "run_tests-02",
+    "split": "eval",
+    "request": "Can we reproduce the tool-result ordering bug locally?",
+    "context": "An existing deterministic regression test and its command are supplied. Dependencies are installed.",
+    "accepted": [
+      "run_tests"
+    ],
+    "rationale": "An existing deterministic regression test and its command are supplied. Dependencies are installed. Next action: run_tests."
+  },
+  {
+    "id": "run_tests-03",
+    "split": "eval",
+    "request": "Verify that empty search results still produce a valid answer.",
+    "context": "The relevant implementation was read. An existing empty-results test is available and runnable.",
+    "accepted": [
+      "run_tests"
+    ],
+    "rationale": "The relevant implementation was read. An existing empty-results test is available and runnable. Next action: run_tests."
+  },
+  {
+    "id": "run_tests-04",
+    "split": "eval",
+    "request": "Confirm our timeout change does not break cancellation.",
+    "context": "The code change is understood. A focused cancellation test suite is ready to run.",
+    "accepted": [
+      "run_tests"
+    ],
+    "rationale": "The code change is understood. A focused cancellation test suite is ready to run. Next action: run_tests."
+  },
+  {
+    "id": "run_tests-05",
+    "split": "eval",
+    "request": "Check the regression after upgrading the provider adapter.",
+    "context": "The upgrade is applied, the code reviewed, and existing adapter contract tests cover the affected behaviour.",
+    "accepted": [
+      "run_tests"
+    ],
+    "rationale": "The upgrade is applied, the code reviewed, and existing adapter contract tests cover the affected behaviour. Next action: run_tests."
+  },
+  {
+    "id": "run_tests-06",
+    "split": "eval",
+    "request": "Validate that a resumed graph does not repeat a completed tool.",
+    "context": "An existing local resume test covers this behaviour. The patch is complete and no execution evidence exists yet.",
+    "accepted": [
+      "run_tests"
+    ],
+    "rationale": "An existing local resume test covers this behaviour. The patch is complete and no execution evidence exists yet. Next action: run_tests."
+  },
+  {
+    "id": "ask_clarification-01",
+    "split": "eval",
+    "request": "Fix the agent.",
+    "context": "No project, symptom, expected outcome, or accessible artifact is identified.",
+    "accepted": [
+      "ask_clarification"
+    ],
+    "rationale": "No project, symptom, expected outcome, or accessible artifact is identified. Next action: ask_clarification."
+  },
+  {
+    "id": "ask_clarification-02",
+    "split": "eval",
+    "request": "Make this faster.",
+    "context": "No system, request, workload, or performance target is supplied. There are several unrelated projects.",
+    "accepted": [
+      "ask_clarification"
+    ],
+    "rationale": "No system, request, workload, or performance target is supplied. There are several unrelated projects. Next action: ask_clarification."
+  },
+  {
+    "id": "ask_clarification-03",
+    "split": "eval",
+    "request": "Check the broken run.",
+    "context": "No run ID, environment, time window, or distinguishing symptom is available.",
+    "accepted": [
+      "ask_clarification"
+    ],
+    "rationale": "No run ID, environment, time window, or distinguishing symptom is available. Next action: ask_clarification."
+  },
+  {
+    "id": "ask_clarification-04",
+    "split": "eval",
+    "request": "Use the other model instead.",
+    "context": "No current model, desired model, or project is identified.",
+    "accepted": [
+      "ask_clarification"
+    ],
+    "rationale": "No current model, desired model, or project is identified. Next action: ask_clarification."
+  },
+  {
+    "id": "ask_clarification-05",
+    "split": "eval",
+    "request": "Investigate the customer complaint.",
+    "context": "The complaint text and affected project have not been provided; there is no accessible complaint inbox.",
+    "accepted": [
+      "ask_clarification"
+    ],
+    "rationale": "The complaint text and affected project have not been provided; there is no accessible complaint inbox. Next action: ask_clarification."
+  },
+  {
+    "id": "ask_clarification-06",
+    "split": "eval",
+    "request": "Which of those failures should we fix first?",
+    "context": "Neither the referenced failures nor their impact is available in the conversation or connected artifacts.",
+    "accepted": [
+      "ask_clarification"
+    ],
+    "rationale": "Neither the referenced failures nor their impact is available in the conversation or connected artifacts. Next action: ask_clarification."
+  },
+  {
+    "id": "pair-01-a",
+    "pair": "pair-01",
+    "split": "eval",
+    "request": "Why does the tool retry after cancellation?",
+    "context": "Repository available; cancellation logic has not been located.",
+    "accepted": [
+      "search_code"
+    ],
+    "rationale": "Repository available; cancellation logic has not been located. Next action: search_code."
+  },
+  {
+    "id": "pair-01-b",
+    "pair": "pair-01",
+    "split": "eval",
+    "request": "Why does the tool retry after cancellation?",
+    "context": "Earlier search found agent/cancellation.py; the file remains unread.",
+    "accepted": [
+      "read_file"
+    ],
+    "rationale": "Earlier search found agent/cancellation.py; the file remains unread. Next action: read_file."
+  },
+  {
+    "id": "pair-02-a",
+    "pair": "pair-02",
+    "split": "eval",
+    "request": "Why did the tool execute twice?",
+    "context": "A failing run ID and correlated trace are available but unread; no cause is known.",
+    "accepted": [
+      "inspect_logs"
+    ],
+    "rationale": "A failing run ID and correlated trace are available but unread; no cause is known. Next action: inspect_logs."
+  },
+  {
+    "id": "pair-02-b",
+    "pair": "pair-02",
+    "split": "eval",
+    "request": "Why did the tool execute twice?",
+    "context": "Trace analysis identified retries/dispatch.py as the source of duplicate dispatch; the file is unread.",
+    "accepted": [
+      "read_file"
+    ],
+    "rationale": "Trace analysis identified retries/dispatch.py as the source of duplicate dispatch; the file is unread. Next action: read_file."
+  },
+  {
+    "id": "pair-03-a",
+    "pair": "pair-03",
+    "split": "eval",
+    "request": "Can we reproduce the checkpoint failure?",
+    "context": "The report only says \"checkpoint failure\"; no project, symptom, environment, or artifact is identified.",
+    "accepted": [
+      "ask_clarification"
+    ],
+    "rationale": "The report only says \"checkpoint failure\"; no project, symptom, environment, or artifact is identified. Next action: ask_clarification."
+  },
+  {
+    "id": "pair-03-b",
+    "pair": "pair-03",
+    "split": "eval",
+    "request": "Can we reproduce the checkpoint failure?",
+    "context": "A local test named test_checkpoint_reconnect reproduces this exact failure; environment and command are ready.",
+    "accepted": [
+      "run_tests"
+    ],
+    "rationale": "A local test named test_checkpoint_reconnect reproduces this exact failure; environment and command are ready. Next action: run_tests."
+  },
+  {
+    "id": "pair-04-a",
+    "pair": "pair-04",
+    "split": "eval",
+    "request": "Is our timeout configuration correct?",
+    "context": "The configuration path is integrations/provider.py; no contents are available yet.",
+    "accepted": [
+      "read_file"
+    ],
+    "rationale": "The configuration path is integrations/provider.py; no contents are available yet. Next action: read_file."
+  },
+  {
+    "id": "pair-04-b",
+    "pair": "pair-04",
+    "split": "eval",
+    "request": "Is our timeout configuration correct?",
+    "context": "The code was read and passes connect=5 to a known HTTP library version. Only the documented units of connect remain uncertain.",
+    "accepted": [
+      "search_docs"
+    ],
+    "rationale": "The code was read and passes connect=5 to a known HTTP library version. Only the documented units of connect remain uncertain. Next action: search_docs."
+  },
+  {
+    "id": "pair-05-a",
+    "pair": "pair-05",
+    "split": "eval",
+    "request": "What caused this run to stop?",
+    "context": "We have its run ID and events, but have not looked at the final event.",
+    "accepted": [
+      "inspect_logs"
+    ],
+    "rationale": "We have its run ID and events, but have not looked at the final event. Next action: inspect_logs."
+  },
+  {
+    "id": "pair-05-b",
+    "pair": "pair-05",
+    "split": "eval",
+    "request": "What caused this run to stop?",
+    "context": "There is no run ID, time, environment, symptom, or attached artifact to identify the run.",
+    "accepted": [
+      "ask_clarification"
+    ],
+    "rationale": "There is no run ID, time, environment, symptom, or attached artifact to identify the run. Next action: ask_clarification."
+  },
+  {
+    "id": "pair-06-a",
+    "pair": "pair-06",
+    "split": "eval",
+    "request": "Check the history truncation fix.",
+    "context": "The patch is in agent/history.py, but no one has read the changed function yet.",
+    "accepted": [
+      "read_file"
+    ],
+    "rationale": "The patch is in agent/history.py, but no one has read the changed function yet. Next action: read_file."
+  },
+  {
+    "id": "pair-06-b",
+    "pair": "pair-06",
+    "split": "eval",
+    "request": "Check the history truncation fix.",
+    "context": "The patch was reviewed; an existing targeted regression test is available and ready to execute.",
+    "accepted": [
+      "run_tests"
+    ],
+    "rationale": "The patch was reviewed; an existing targeted regression test is available and ready to execute. Next action: run_tests."
+  },
+  {
+    "id": "pair-07-a",
+    "pair": "pair-07",
+    "split": "eval",
+    "request": "How is the provider client closed?",
+    "context": "We want our application lifecycle code. The repository is available but its cleanup path is unknown.",
+    "accepted": [
+      "search_code"
+    ],
+    "rationale": "We want our application lifecycle code. The repository is available but its cleanup path is unknown. Next action: search_code."
+  },
+  {
+    "id": "pair-07-b",
+    "pair": "pair-07",
+    "split": "eval",
+    "request": "How is the provider client closed?",
+    "context": "We already understand our wrapper; the remaining question is the documented close contract for the identified SDK version.",
+    "accepted": [
+      "search_docs"
+    ],
+    "rationale": "We already understand our wrapper; the remaining question is the documented close contract for the identified SDK version. Next action: search_docs."
+  },
+  {
+    "id": "pair-08-a",
+    "pair": "pair-08",
+    "split": "eval",
+    "request": "Why are model requests slow?",
+    "context": "A representative slow request trace is available and unread.",
+    "accepted": [
+      "inspect_logs"
+    ],
+    "rationale": "A representative slow request trace is available and unread. Next action: inspect_logs."
+  },
+  {
+    "id": "pair-08-b",
+    "pair": "pair-08",
+    "split": "eval",
+    "request": "Why are model requests slow?",
+    "context": "We have only this sentence, with no application, environment, trace access, or reproducible workload identified.",
+    "accepted": [
+      "ask_clarification"
+    ],
+    "rationale": "We have only this sentence, with no application, environment, trace access, or reproducible workload identified. Next action: ask_clarification."
+  },
+  {
+    "id": "pair-09-a",
+    "pair": "pair-09",
+    "split": "eval",
+    "request": "Verify empty tool responses are handled.",
+    "context": "The relevant code was reviewed and the focused existing regression suite is available.",
+    "accepted": [
+      "run_tests"
+    ],
+    "rationale": "The relevant code was reviewed and the focused existing regression suite is available. Next action: run_tests."
+  },
+  {
+    "id": "pair-09-b",
+    "pair": "pair-09",
+    "split": "eval",
+    "request": "Verify empty tool responses are handled.",
+    "context": "We do not know where our repository handles empty responses; code search is available, but no relevant test has been found.",
+    "accepted": [
+      "search_code"
+    ],
+    "rationale": "We do not know where our repository handles empty responses; code search is available, but no relevant test has been found. Next action: search_code."
+  },
+  {
+    "id": "pair-10-a",
+    "pair": "pair-10",
+    "split": "eval",
+    "request": "Does streaming preserve tool-call order?",
+    "context": "We need the documented ordering guarantees for the identified SDK version.",
+    "accepted": [
+      "search_docs"
+    ],
+    "rationale": "We need the documented ordering guarantees for the identified SDK version. Next action: search_docs."
+  },
+  {
+    "id": "pair-10-b",
+    "pair": "pair-10",
+    "split": "eval",
+    "request": "Does streaming preserve tool-call order?",
+    "context": "We need to verify our completed adapter patch against the existing deterministic streaming-order test; the environment is ready.",
+    "accepted": [
+      "run_tests"
+    ],
+    "rationale": "We need to verify our completed adapter patch against the existing deterministic streaming-order test; the environment is ready. Next action: run_tests."
+  },
+  {
+    "id": "pair-11-a",
+    "pair": "pair-11",
+    "split": "eval",
+    "request": "Find the source of the malformed tool result.",
+    "context": "The runtime trace points to tools/normalize.py. That source file is available but not yet read.",
+    "accepted": [
+      "read_file"
+    ],
+    "rationale": "The runtime trace points to tools/normalize.py. That source file is available but not yet read. Next action: read_file."
+  },
+  {
+    "id": "pair-11-b",
+    "pair": "pair-11",
+    "split": "eval",
+    "request": "Find the source of the malformed tool result.",
+    "context": "The request ID and raw tool events are available, but neither the malformed response nor the responsible tool is known.",
+    "accepted": [
+      "inspect_logs"
+    ],
+    "rationale": "The request ID and raw tool events are available, but neither the malformed response nor the responsible tool is known. Next action: inspect_logs."
+  },
+  {
+    "id": "pair-12-a",
+    "pair": "pair-12",
+    "split": "eval",
+    "request": "Check how state is restored after restart.",
+    "context": "The repository is available but the state-restoration implementation is unknown.",
+    "accepted": [
+      "search_code"
+    ],
+    "rationale": "The repository is available but the state-restoration implementation is unknown. Next action: search_code."
+  },
+  {
+    "id": "pair-12-b",
+    "pair": "pair-12",
+    "split": "eval",
+    "request": "Check how state is restored after restart.",
+    "context": "An earlier search located persistence/restore.py. Its contents are not yet available in context.",
+    "accepted": [
+      "read_file"
+    ],
+    "rationale": "An earlier search located persistence/restore.py. Its contents are not yet available in context. Next action: read_file."
+  }
+]

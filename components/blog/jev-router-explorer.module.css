@@ -1,0 +1,413 @@
+.explorer {
+  margin: 2.5rem 0;
+  padding: 1.5rem 0;
+  border-block: 1px solid hsl(var(--border));
+  font-size: 14px;
+  line-height: 1.55;
+}
+.heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 1.4rem;
+}
+.eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: hsl(var(--foreground));
+}
+.recorded {
+  font-size: 11px;
+  color: hsl(var(--muted-foreground));
+}
+.label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: hsl(var(--foreground));
+}
+.select {
+  width: 100%;
+  max-width: 100%;
+  min-height: 44px;
+  border: 1px solid hsl(var(--border));
+  border-radius: 4px;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font: inherit;
+  padding: 0.7rem;
+}
+.select:focus-visible,
+.details summary:focus-visible {
+  outline: 2px solid #466f9a;
+  outline-offset: 3px;
+}
+.scenario {
+  padding: 1rem 0;
+}
+.scenario p,
+.explanation {
+  margin: 0.6rem 0 !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+}
+.request {
+  font-weight: 600;
+  color: hsl(var(--foreground));
+}
+.reference {
+  color: hsl(var(--muted-foreground));
+  font-size: 12px !important;
+}
+.models {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.6rem 1.2rem;
+  margin-top: 1.4rem;
+}
+.model {
+  border-top: 3px solid var(--model-color);
+  padding-top: 0.9rem;
+  min-width: 0;
+}
+.jev {
+  --model-color: #b45532;
+}
+.gpt {
+  --model-color: #267568;
+}
+.claude {
+  --model-color: #947334;
+}
+.gemini {
+  --model-color: #466f9a;
+}
+.model h3 {
+  font-size: 14px !important;
+  margin: 0 0 0.9rem !important;
+  line-height: 1.4 !important;
+  letter-spacing: 0 !important;
+}
+.route {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 12px !important;
+  overflow-wrap: anywhere;
+  margin: 0.5rem 0 1rem !important;
+}
+.metrics {
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+.metrics div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+.metrics dt {
+  font-size: 11px;
+  color: hsl(var(--muted-foreground));
+}
+.metrics dd {
+  margin: 0;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: hsl(var(--foreground));
+}
+.metrics small {
+  display: block;
+  font-size: 10px;
+  color: hsl(var(--muted-foreground));
+  font-weight: 400;
+}
+.tail,
+.footnote {
+  font-size: 11px !important;
+  color: hsl(var(--muted-foreground));
+  line-height: 1.6 !important;
+}
+.tail {
+  margin: 1rem 0 0 !important;
+}
+.footnote {
+  margin: 1.4rem 0 0 !important;
+}
+.details {
+  margin-top: 1rem;
+  font-size: 11px;
+}
+.details summary {
+  cursor: pointer;
+  min-height: 32px;
+  color: hsl(var(--foreground));
+}
+.details p {
+  font-size: 11px !important;
+  line-height: 1.7 !important;
+  margin: 0.6rem 0 !important;
+}
+@media (max-width: 460px) {
+  .models {
+    grid-template-columns: 1fr;
+  }
+  .metrics div {
+    max-width: 340px;
+  }
+  .explorer {
+    padding-block: 1.2rem;
+  }
+}
+
+.deepseek {
+  --model-color: #8270a4;
+}
+.chart {
+  margin: 1.8rem 0 2rem;
+  padding: 1.2rem 0;
+  border-block: 1px solid hsl(var(--border));
+}
+.chartControls {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}
+.chartControls button {
+  padding: 0.55rem 1rem;
+  min-height: 44px;
+  border-radius: 4px;
+  color: hsl(var(--muted-foreground));
+  font: inherit;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+}
+.chartControls button[aria-pressed="true"] {
+  color: hsl(var(--foreground));
+  background: hsl(var(--raised));
+  border-color: hsl(var(--line2));
+}
+.chartControls button:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 3px;
+}
+.chartCaption {
+  font-size: 12px !important;
+  margin: 0.8rem 0 1.4rem !important;
+  color: hsl(var(--muted-foreground));
+}
+.chartRow {
+  margin: 1rem 0;
+}
+.chartLabel {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 12px;
+  color: hsl(var(--foreground));
+  margin-bottom: 0.4rem;
+}
+.chartLabel strong {
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.track {
+  height: 9px;
+  background: hsl(var(--muted));
+  overflow: hidden;
+  border-radius: 2px;
+}
+.bar {
+  height: 100%;
+  width: 100%;
+  background: var(--model-color);
+  transform-origin: left;
+  transition: transform 180ms ease-out;
+}
+:global(.dark) .jev {
+  --model-color: #e69776;
+}
+:global(.dark) .gpt {
+  --model-color: #73b7a8;
+}
+:global(.dark) .claude {
+  --model-color: #d7b673;
+}
+:global(.dark) .gemini {
+  --model-color: #85afd5;
+}
+:global(.dark) .deepseek {
+  --model-color: #b8a6d5;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bar {
+    transition: none;
+  }
+}
+
+.method {
+  border-top: 1px solid hsl(var(--line2));
+  padding: 1.1rem 0;
+  margin-top: 1.2rem;
+}
+.method > summary {
+  min-height: 32px;
+  cursor: pointer;
+  font-weight: 500;
+  color: hsl(var(--foreground));
+  font-size: 14px;
+}
+.flow {
+  margin: 1.2rem 0;
+  text-align: center;
+}
+.flow > div {
+  padding: 1rem;
+  background: hsl(var(--raised));
+  border: 1px solid hsl(var(--line2));
+  border-radius: 4px;
+}
+.flow strong,
+.flow small {
+  display: block;
+}
+.flow strong {
+  font-weight: 500;
+  color: hsl(var(--foreground));
+}
+.flow small {
+  font-size: 12px;
+  margin-top: 0.5rem;
+  color: hsl(var(--muted-foreground));
+}
+.step {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.09em;
+  color: hsl(var(--muted-foreground));
+  margin-bottom: 0.6rem;
+}
+.arrow {
+  display: block;
+  font-size: 22px;
+  padding: 0.5rem;
+  color: hsl(var(--muted-foreground));
+}
+.routerButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+}
+.routerButtons button {
+  border: 1px solid hsl(var(--line2));
+  border-radius: 4px;
+  min-height: 44px;
+  padding: 0.5rem 0.8rem;
+  font-size: 12px;
+  background: hsl(var(--background));
+  color: hsl(var(--muted-foreground));
+  cursor: pointer;
+}
+.routerButtons button[aria-pressed="true"] {
+  border-color: hsl(var(--foreground));
+  color: hsl(var(--foreground));
+}
+.routerButtons button:focus-visible,
+.method summary:focus-visible,
+.slider:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 3px;
+}
+.slider {
+  width: 100%;
+  min-height: 44px;
+  accent-color: #b45532;
+}
+.retention p {
+  font-size: 13px !important;
+  margin: 0.5rem 0 !important;
+}
+.retention strong {
+  color: hsl(var(--foreground));
+  font-variant-numeric: tabular-nums;
+}
+
+.curve {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 1rem;
+  overflow: visible;
+}
+.curve text {
+  fill: hsl(var(--muted-foreground));
+  font-size: 11px;
+}
+.gridLine {
+  stroke: hsl(var(--line2));
+  stroke-width: 1;
+}
+
+.pairButton {
+  padding: 0.65rem 0;
+  min-height: 44px;
+  font: inherit;
+  font-size: 12px;
+  background: transparent;
+  border: 0;
+  color: hsl(var(--foreground));
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.pairButton:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 3px;
+}
+
+.picker {
+  padding: 1rem;
+  background: hsl(var(--raised));
+  border: 1px solid hsl(var(--line2));
+  border-radius: 6px;
+}
+.picker input {
+  margin-bottom: 1rem;
+}
+.pickerHint {
+  font-size: 11px !important;
+  line-height: 1.5 !important;
+  color: hsl(var(--muted-foreground));
+  margin: 0.6rem 0 0 !important;
+}
+.method h3 {
+  font-size: 16px !important;
+  color: hsl(var(--foreground));
+  margin: 0.3rem 0 1rem !important;
+}
+.tableScroll {
+  overflow-x: auto;
+}
+.reliabilityTable {
+  font-size: 12px !important;
+}
+.reliabilityTable th,
+.reliabilityTable td {
+  padding: 0.7rem 0.45rem !important;
+}
+.reliabilityTable td {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: hsl(var(--foreground));
+}
+.reliabilityTable tbody th {
+  font-weight: 400;
+  font-size: 12px;
+  min-width: 90px;
+}

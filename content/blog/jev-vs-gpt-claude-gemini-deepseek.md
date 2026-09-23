@@ -11,17 +11,15 @@ An agent keeps retrying a tool after cancellation. What should happen next: sear
 
 It depends on what has already happened. If the retry implementation has not been located, searching is useful. If a trace points to `retries/dispatch.py`, reading that file is more useful. If a patch and regression test are ready, the next step may be to run the test.
 
-This representative debugging situation led to the question I wanted to test: **how much model do I need to choose the next tool?** I built a small router and compared Jev 1.13 with GPT-6 Luna, Claude Haiku 4.5, Gemini 3.8 Flash, and DeepSeek V4.1 Flash.
+This representative debugging situation raises a practical question: **how much model does it take to choose the next tool?** To find out, I built a small router and compared Jev 1.13 with GPT-6 Luna, Claude Haiku 4.5, Gemini 3.8 Flash, and DeepSeek V4.1 Flash.
 
 Across 900 evaluation attempts, Jev had the lowest median latency and cost. It agreed with the reference labels 94.4% of the time. Gemini matched every label; DeepSeek did too whenever it returned a route. But the more useful finding was in the disagreements: Jev sometimes chose an action that the supplied context had already made unnecessary.
-
-Here is what I built, how I tested it, and what those decisions taught me.
 
 ## One request, six possible actions
 
 The router accepts an engineering request and a short description of the current task context. Its only job is to select the next action. It does not generate tool arguments, execute the tool, or continue a debugging session.
 
-I used six routes, each with a description shared by every model:
+Every model receives the same six routes and descriptions:
 
 ```python
 TOOLS = {
@@ -38,17 +36,17 @@ The distinction between `search_code` and `read_file` is especially useful. Both
 
 The instructions ask for the single most useful next step, prohibit inventing resources, and treat quoted code, logs, and documents as data. Every request contains the same two fields, `request` and `context`; the reference answer never goes to the router.
 
-This makes the comparison small enough to inspect. A response passes validation when it returns one of the six permitted route names in the expected format. I score it as correct when that route matches the case's reference label. Those are different properties: `search_docs` can be perfectly valid JSON and still send the agent in the wrong direction.
+This makes the comparison small enough to inspect. A response passes validation when it returns one of the six permitted route names in the expected format. The scorer marks it correct when that route matches the case's reference label. Those are different properties: `search_docs` can be perfectly valid JSON and still send the agent in the wrong direction.
 
-There is also a practical reason to isolate this decision. A full agent run introduces other variables: search quality, argument construction, tool failures, and the ability to use returned information. I wanted to see what the routing step contributed before involving those later stages.
+There is also a practical reason to isolate this decision. A full agent run introduces other variables: search quality, argument construction, tool failures, and the ability to use returned information. Measuring routing separately makes its contribution easier to inspect before involving those later stages.
 
 ## Two ways to return one route
 
-[TypeSafe introduced Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev) as a model for structured decisions. Instead of requesting a text completion, an application supplies state and typed questions. For this experiment I used a Choice question: select one of the six route names. The response includes the choice, a probability distribution, and confidence. [TypeSafe's documentation](https://docs.typesafe.ai/introduction) explains the available question types.
+[TypeSafe introduced Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev) as a model for structured decisions. Instead of requesting a text completion, an application supplies state and typed questions. The Jev request in this experiment contains one Choice question: select one of the six route names. The response includes the choice, a probability distribution, and confidence. [TypeSafe's documentation](https://docs.typesafe.ai/introduction) explains the available question types.
 
-That interface fits the output I need. The application already knows the alternatives; it needs a judgment about which one applies to the current state.
+The application already knows the alternatives; it needs a judgment about which one applies to the current state.
 
-For the four LLMs, I requested a strict JSON object containing one `route` property. Its enum contains the same six names. I did not request explanations or self-reported confidence scores.
+The four LLMs receive a request for a strict JSON object containing one `route` property. Its enum contains the same six names. The requests ask only for a route, with no explanations or self-reported confidence scores.
 
 The diagram shows where the interfaces differ and where they return to the same application code:
 
@@ -86,11 +84,11 @@ return "/chat/completions", {
 
 These are excerpts from the working request builder. `SCHEMA` defines the single required route enum and rejects extra properties; `SETTINGS` contains the settings for each model. GPT uses low reasoning, Gemini uses minimal reasoning, and Claude and DeepSeek use disabled thinking. The requests also disable automatic model fallbacks.
 
-Both interfaces feed the same local validator. In this run, all successful responses had the expected shape. That let me concentrate on the selected action rather than cleaning up generated prose. It did not eliminate semantic mistakes, as the examples below show.
+Both interfaces feed the same local validator. In this run, all successful responses had the expected shape. The disagreements concerned the selected action, as the examples below show; format validation alone could not catch them.
 
-## How I tested the routers
+## Evaluation design
 
-The main evaluation contains **60 cases**, and each model received every case three times: 60 × 3 × 5 = **900 attempts**. Before that, I made one integration call and 12 development calls per model to check request formats, settings, and response handling. Those preliminary calls are excluded from the comparison below.
+The main evaluation contains **60 cases**, and each model received every case three times: 60 × 3 × 5 = **900 attempts**. Before evaluation, one integration call and 12 development calls per model checked request formats, settings, and response handling. Those preliminary calls are excluded from the comparison below.
 
 The evaluation has two parts. Thirty-six cases cover ordinary decisions, with six cases per route. The remaining 24 form 12 context pairs. Each pair keeps the request unchanged and alters what the agent knows.
 
@@ -171,7 +169,7 @@ In `pair-02-b`, the request was “Why did the tool execute twice?” The contex
 
 The reference was `read_file`. Jev chose `inspect_logs` in all three runs; the other four models chose `read_file`.
 
-I cannot infer Jev's internal reasoning from a route name. What I can observe is that its choice did not reflect the completed trace analysis. This is the distinction I would test carefully before putting it into a debugging workflow: a relevant tool is not always the next useful tool.
+A route name does not reveal Jev's internal reasoning. The observable issue is that its choice repeated an investigation step the context described as complete. That distinction matters in a debugging workflow: a relevant tool is not always the next useful tool.
 
 ### Claude searched when the test was ready
 
@@ -187,11 +185,11 @@ GPT requested clarification on several cases labeled `search_docs`. In two of th
 
 The context said the package and version were known, but did not name them. I intended the router to treat that metadata as available elsewhere. An assistant asked to continue the work might reasonably want it in the prompt.
 
-I kept the frozen labels rather than changing them after seeing the answers. But I would include actual package names and versions in a follow-up evaluation. A disagreement can reveal a model limitation, an unclear case, or both; a percentage alone cannot distinguish them.
+I kept the frozen labels rather than changing them after seeing the answers. A follow-up evaluation should include actual package names and versions. A disagreement can reveal a model limitation, an unclear case, or both; a percentage alone cannot distinguish them.
 
 ## What accuracy leaves out
 
-Jev and GPT both scored 94.4%, yet they behaved differently across the context pairs. I counted a pair as successful only when both variants received an acceptable route in the same repetition.
+Jev and GPT both scored 94.4%, yet they behaved differently across the context pairs. A pair counts as successful only when both variants receive an acceptable route in the same repetition.
 
 Jev passed 27 of 36 pair-repetitions. GPT and Claude passed 33 each, Gemini passed 36, and DeepSeek passed 34. These are repeated observations of 12 pairs. Jev's lower paired score directs attention toward context changes, even though its overall score is identical to GPT's.
 
@@ -199,11 +197,11 @@ Repeatability adds another distinction. Jev returned the same permitted route ac
 
 Claude is a useful reminder that consistency is not correctness: it repeated its wrong answer as reliably as its correct ones. For Jev, the 59-of-60 figure similarly does not erase the failures around changed context.
 
-I would keep all three views when assessing a router: whether it returns a permitted route, whether that decision matches the intended next step, and whether it responds appropriately when the available information changes. They answer different questions about the same saved attempts.
+These views answer three different questions about the same saved attempts: whether the router returns a permitted route, whether that decision matches the intended next step, and whether it responds appropriately when the available information changes.
 
-## What Jev's confidence told me
+## What Jev's confidence showed
 
-Jev offers a signal the other routers do not provide in this experiment: confidence alongside its choice. I used it to ask how the results change if the application defers uncertain decisions.
+Jev offers a signal the other routers do not provide in this experiment: confidence alongside its choice. Filtering the saved decisions by that score shows how the results change when uncertain choices are deferred.
 
 At a confidence threshold of 0.65, **151 of 180 decisions** remain, covering 52 distinct cases. All retained decisions match the reference labels. That leaves 83.9% of attempts covered, while discarding 29 decisions—including 19 correct ones.
 
@@ -211,14 +209,14 @@ The highest-confidence wrong answer scored 0.62. It was the duplicate-dispatch c
 
 This suggests a possible use for the score: deciding which choices deserve another check. It does not establish 0.65 as a production threshold. I selected that value while inspecting this evaluation, and the repeated cases are correlated. A separate evaluation would be needed to test whether it holds up.
 
-A real deferral policy would need more measurements too. If uncertain decisions go to another model, its calls add cost and latency, and it may still choose the wrong route. I did not run that cascade. The curve shows the tradeoff between coverage and reference agreement in the existing sample, not the performance of a finished fallback system.
+A real deferral policy would need more measurements too. If uncertain decisions go to another model, its calls add cost and latency, and it may still choose the wrong route. This experiment did not test that cascade. The curve shows the tradeoff between coverage and reference agreement in the existing sample, not the performance of a finished fallback system.
 
-## What I would use after this experiment
+## Where Jev fits in this workload
 
-I would consider Jev for short decisions over a known set of actions where routing overhead matters. The API matched that job neatly, and the measured speed and cost make it worth further testing. Before using it for this debugging workflow, I would focus on cases where an investigation has already progressed: logs inspected, a file located, or a patch ready to verify.
+I would consider Jev for short decisions over a known set of actions where routing overhead matters. The API matched that job neatly, and the measured speed and cost make it worth further testing. For this debugging workflow, the next evaluation should focus on cases where an investigation has already progressed: logs inspected, a file located, or a patch ready to verify.
 
 Gemini is the strongest reference-matching baseline in this run. DeepSeek combines fast typical responses with reference agreement on every returned route, while its failures and slower tail deserve separate attention. GPT and Claude provide useful comparison points, but no model's result here is a verdict on its broader capabilities.
 
 The next useful evaluation would include actual task context, independently reviewed labels, and the consequences of the chosen route. An unnecessary code search and an unnecessary test run may have very different costs to the user; this experiment counts both simply as incorrect.
 
-What I learned about Jev is specific: it can make this small decision quickly, its structured response is straightforward to integrate, and its confidence gives me something useful to investigate. Whether it earns a place in an agent depends on how those decisions help the larger task succeed.
+In this workload, Jev made the routing decision quickly, its structured response was straightforward to integrate, and its confidence exposed a useful tradeoff between coverage and reference agreement. Whether it earns a place in an agent depends on how those decisions help the larger task succeed.

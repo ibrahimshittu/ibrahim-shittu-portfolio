@@ -34,11 +34,31 @@
   max-width: 100%;
   min-height: 44px;
   border: 2px solid hsl(var(--muted-foreground) / 0.65);
-  border-radius: 4px;
+  border-radius: 8px;
   background: hsl(var(--background));
   color: hsl(var(--foreground));
   font: inherit;
   padding: 0.7rem;
+}
+.selectControl {
+  position: relative;
+  color: hsl(var(--foreground));
+}
+.selectControl select {
+  appearance: none;
+  padding-right: 3rem;
+}
+.selectControl::after {
+  content: "";
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-70%) rotate(45deg);
+  pointer-events: none;
 }
 .select:focus-visible,
 .details summary:focus-visible {
@@ -179,7 +199,7 @@
 .chartControls button {
   padding: 0.55rem 1rem;
   min-height: 44px;
-  border-radius: 4px;
+  border-radius: 8px;
   color: hsl(var(--muted-foreground));
   font: inherit;
   border: 2px solid hsl(var(--muted-foreground) / 0.65);
@@ -315,7 +335,7 @@
 }
 .routerButtons button {
   border: 2px solid hsl(var(--muted-foreground) / 0.65);
-  border-radius: 4px;
+  border-radius: 8px;
   min-height: 44px;
   padding: 0.5rem 0.8rem;
   font-size: 12px;

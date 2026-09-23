@@ -48,8 +48,6 @@ There is also a practical reason to isolate this decision. A full agent run intr
 
 That interface fits the output I need. The application already knows the alternatives; it needs a judgment about which one applies to the current state.
 
-Other experiments help put that use case in perspective. [Parallel tested Jev on search-related tasks](https://x.com/everythingmeta/status/2101058921989390395), including reranking and classification, and reported different results across those tasks. The [treg experiment](https://x.com/stoneonex/status/2102396927379980619) used Jev to judge whether candidate tools matched a search request. Neither answers the question here: whether Jev can choose the next action from a small, known catalogue as debugging context changes.
-
 For the four LLMs, I requested a strict JSON object containing one `route` property. Its enum contains the same six names. I did not request explanations or self-reported confidence scores.
 
 The diagram shows where the interfaces differ and where they return to the same application code:

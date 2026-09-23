@@ -127,39 +127,41 @@ export default function JevRouterExplorer() {
         <label className={styles.label} htmlFor="jev-scenario">
           Choose a debugging scenario
         </label>
-        <select
-          id="jev-scenario"
-          className={styles.select}
-          value={selectedId}
-          onChange={(event) => {
-            setSelectedId(event.target.value);
-            if (event.target.value && metric === "p95") setMetric("latency");
-          }}
-        >
-          <option value="">
-            All {data.cases.length} cases · overall comparison
-          </option>
-          {["Ordinary cases", "Context changes"].map((group) => (
-            <optgroup key={group} label={group}>
-              {data.cases
-                .filter(
-                  (item) =>
-                    Boolean(item.pair) === (group === "Context changes") &&
-                    `${item.request} ${item.context}`
-                      .toLowerCase()
-                      .includes(query.toLowerCase()),
-                )
-                .map((item) => (
-                  <option key={item.id} value={item.id}>
-                    {item.request}
-                    {item.pair
-                      ? ` · context ${item.id.endsWith("a") ? "A" : "B"}`
-                      : ""}
-                  </option>
-                ))}
-            </optgroup>
-          ))}
-        </select>
+        <div className={styles.selectControl}>
+          <select
+            id="jev-scenario"
+            className={styles.select}
+            value={selectedId}
+            onChange={(event) => {
+              setSelectedId(event.target.value);
+              if (event.target.value && metric === "p95") setMetric("latency");
+            }}
+          >
+            <option value="">
+              All {data.cases.length} cases · overall comparison
+            </option>
+            {["Ordinary cases", "Context changes"].map((group) => (
+              <optgroup key={group} label={group}>
+                {data.cases
+                  .filter(
+                    (item) =>
+                      Boolean(item.pair) === (group === "Context changes") &&
+                      `${item.request} ${item.context}`
+                        .toLowerCase()
+                        .includes(query.toLowerCase()),
+                  )
+                  .map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.request}
+                      {item.pair
+                        ? ` · context ${item.id.endsWith("a") ? "A" : "B"}`
+                        : ""}
+                    </option>
+                  ))}
+              </optgroup>
+            ))}
+          </select>
+        </div>
         <p className={styles.pickerHint}>
           {
             data.cases.filter((item) =>
@@ -460,25 +462,27 @@ export default function JevRouterExplorer() {
         <label className={styles.label} htmlFor="jev-reference-route">
           Reference next action
         </label>
-        <select
-          className={styles.select}
-          id="jev-reference-route"
-          value={referenceRoute}
-          onChange={(event) => setReferenceRoute(event.target.value)}
-        >
-          {[
-            "search_code",
-            "read_file",
-            "search_docs",
-            "inspect_logs",
-            "run_tests",
-            "ask_clarification",
-          ].map((route) => (
-            <option key={route} value={route}>
-              {route.replace(/_/g, " ")}
-            </option>
-          ))}
-        </select>
+        <div className={styles.selectControl}>
+          <select
+            className={styles.select}
+            id="jev-reference-route"
+            value={referenceRoute}
+            onChange={(event) => setReferenceRoute(event.target.value)}
+          >
+            {[
+              "search_code",
+              "read_file",
+              "search_docs",
+              "inspect_logs",
+              "run_tests",
+              "ask_clarification",
+            ].map((route) => (
+              <option key={route} value={route}>
+                {route.replace(/_/g, " ")}
+              </option>
+            ))}
+          </select>
+        </div>
         {data.summary.map((item) => {
           const caseIds = new Set(
             data.cases

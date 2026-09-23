@@ -3,7 +3,7 @@ title: "Which Tool Should Run Next? Jev vs. GPT, Claude, Gemini, and DeepSeek"
 excerpt: "A practical comparison of five models choosing the next tool: accuracy, speed, cost, reliability, and when confidence helps."
 date: "2026-09-23"
 readTime: "13 min read"
-image: "/blog/jev-tool-router/cover.png"
+image: "https://res.cloudinary.com/ibrahimshittu/image/upload/v1790171390/ibrahim-shittu-portfolio/blog/jev-vs-gpt-claude-gemini-deepseek_axlhmb.png"
 tags: ["ai-agents", "jev", "python", "tool-routing", "evaluation"]
 ---
 

@@ -13,7 +13,7 @@ It depends on what has already happened. If the retry implementation has not bee
 
 This representative debugging situation led to the question I wanted to test: **how much model do I need to choose the next tool?** I built a small router and compared Jev 1.13 with GPT-6 Luna, Claude Haiku 4.5, Gemini 3.8 Flash, and DeepSeek V4.1 Flash.
 
-Across 900 evaluation attempts, Jev had the lowest median latency and cost. It agreed with the reference labels 94.4% of the time. Gemini matched every label; DeepSeek did too whenever it returned a valid response. But the more useful finding was in the mistakes: Jev sometimes chose an action that the supplied context had already made unnecessary.
+Across 900 evaluation attempts, Jev had the lowest median latency and cost. It agreed with the reference labels 94.4% of the time. Gemini matched every label; DeepSeek did too whenever it returned a route. But the more useful finding was in the disagreements: Jev sometimes chose an action that the supplied context had already made unnecessary.
 
 Here is what I built, how I tested it, and what those decisions taught me.
 
@@ -38,7 +38,7 @@ The distinction between `search_code` and `read_file` is especially useful. Both
 
 The instructions ask for the single most useful next step, prohibit inventing resources, and treat quoted code, logs, and documents as data. Every request contains the same two fields, `request` and `context`; the reference answer never goes to the router.
 
-This makes the comparison small enough to inspect. A valid output is one route name. A correct output is a route accepted by the case's reference label. Those are different properties: `search_docs` can be perfectly valid JSON and still send the agent in the wrong direction.
+This makes the comparison small enough to inspect. A response passes validation when it returns one of the six permitted route names in the expected format. I score it as correct when that route matches the case's reference label. Those are different properties: `search_docs` can be perfectly valid JSON and still send the agent in the wrong direction.
 
 There is also a practical reason to isolate this decision. A full agent run introduces other variables: search quality, argument construction, tool failures, and the ability to use returned information. I wanted to see what the routing step contributed before involving those later stages.
 
@@ -135,7 +135,7 @@ def score(result, case):
     return result["status"] == "ok" and result["route"] in case["accepted"]
 ```
 
-The headline accuracy is correct decisions divided by **all attempts**, including failures. The explorer also shows correctness among valid responses. Median and p95 latency use valid responses; p95 describes the slower end of the observed distribution. Repeating each case checks whether a router changes its answer, but does not turn 60 problems into 180 independent examples.
+The headline accuracy is correct decisions divided by **all attempts**, including failures. Response success measures whether an attempt returned a permitted route, regardless of whether it matched the reference. The explorer also shows reference agreement among returned routes. Median and p95 latency use these completed responses; p95 describes the slower end of the observed distribution. Repeating each case checks whether a router changes its answer, but does not turn 60 problems into 180 independent examples.
 
 Jev's confidence analysis uses these same saved responses. It required no additional inference calls.
 
@@ -153,19 +153,19 @@ The final evaluation ran on 23 September 2026. Each router made 180 attempts:
 
 Jev returned a decision in a median of 439 ms, with a p95 of 573 ms. Its measured cost was about 2.2 cents per 1,000 attempts. For this short routing task, those were its clearest strengths.
 
-The tradeoff was reference agreement. Jev and GPT each matched 170 of 180 labels, Claude matched 177, and Gemini matched all 180. DeepSeek matched all 176 valid responses, but four HTTP 429 failures reduced its successful-routing rate across all attempts to 97.8%. None of the models returned an invalid route format.
+The tradeoff was reference agreement. Jev and GPT each matched 170 of 180 labels, Claude matched 177, and Gemini matched all 180. DeepSeek matched the reference in all 176 returned routes, but four HTTP 429 failures reduced its successful-routing rate across all attempts to 97.8%. None of the models returned an invalid route format.
 
 DeepSeek also shows why median latency alone is insufficient. Its median was close to Jev's, at 465 ms, but its p95 was 2,152 ms. Those observations describe this run; they do not establish a permanent latency or availability difference between the services.
 
 The 900 attempts cost $0.17525 in total. During the separate development stage, Gemini had four HTTP 429 failures, followed by none during evaluation. All five integration calls succeeded. Failed requests were retained, not retried, and billing checks confirmed they incurred no charge.
 
-Use the explorer to move from these aggregates to the individual decisions. Accuracy, latency, cost, and valid-response rate follow the selected scenario. The reliability table, per-route errors, and confidence curve always cover the full evaluation. The page reads saved results and makes no model calls.
+Use the explorer to move from these aggregates to the individual decisions. Accuracy, median latency, cost, and response success follow the selected scenario. The p95 comparison uses the full evaluation; three repeats of one case are too few to describe the slower tail. The reliability table, route disagreements, and confidence curve also cover the full evaluation. API failures are shown separately from decisions that differ from the reference. The page reads saved results and makes no model calls.
 
 {{jev-router-demo}}
 
 ## Where the routers disagreed
 
-The wrong answers were more informative than the straightforward cases. Three examples show why.
+The disagreements were more informative than the straightforward cases. Three examples show why.
 
 ### Jev kept investigating the trace after it had identified the file
 
@@ -197,11 +197,11 @@ Jev and GPT both scored 94.4%, yet they behaved differently across the context p
 
 Jev passed 27 of 36 pair-repetitions. GPT and Claude passed 33 each, Gemini passed 36, and DeepSeek passed 34. These are repeated observations of 12 pairs. Jev's lower paired score directs attention toward context changes, even though its overall score is identical to GPT's.
 
-Repeatability adds another distinction. Jev returned the same valid route across all three attempts on 59 of 60 cases; GPT did so on 58, Claude and Gemini on 60, and DeepSeek on 56. DeepSeek's remaining four cases each contained an API failure.
+Repeatability adds another distinction. Jev returned the same permitted route across all three attempts on 59 of 60 cases; GPT did so on 58, Claude and Gemini on 60, and DeepSeek on 56. DeepSeek's remaining four cases each contained an API failure.
 
 Claude is a useful reminder that consistency is not correctness: it repeated its wrong answer as reliably as its correct ones. For Jev, the 59-of-60 figure similarly does not erase the failures around changed context.
 
-I would keep all three views when assessing a router: whether it returns a valid decision, whether that decision matches the intended next step, and whether it responds appropriately when the available information changes. They answer different questions about the same saved attempts.
+I would keep all three views when assessing a router: whether it returns a permitted route, whether that decision matches the intended next step, and whether it responds appropriately when the available information changes. They answer different questions about the same saved attempts.
 
 ## What Jev's confidence told me
 
@@ -219,7 +219,7 @@ A real deferral policy would need more measurements too. If uncertain decisions 
 
 I would consider Jev for short decisions over a known set of actions where routing overhead matters. The API matched that job neatly, and the measured speed and cost make it worth further testing. Before using it for this debugging workflow, I would focus on cases where an investigation has already progressed: logs inspected, a file located, or a patch ready to verify.
 
-Gemini is the strongest reference-matching baseline in this run. DeepSeek combines fast typical responses with correct valid decisions, while its failures and slower tail deserve separate attention. GPT and Claude provide useful comparison points, but no model's result here is a verdict on its broader capabilities.
+Gemini is the strongest reference-matching baseline in this run. DeepSeek combines fast typical responses with reference agreement on every returned route, while its failures and slower tail deserve separate attention. GPT and Claude provide useful comparison points, but no model's result here is a verdict on its broader capabilities.
 
 The next useful evaluation would include actual task context, independently reviewed labels, and the consequences of the chosen route. An unnecessary code search and an unnecessary test run may have very different costs to the user; this experiment counts both simply as incorrect.
 

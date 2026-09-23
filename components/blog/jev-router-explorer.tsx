@@ -63,9 +63,9 @@ export default function JevRouterExplorer() {
   const [selectedId, setSelectedId] = useState("");
   const [threshold, setThreshold] = useState(0);
   const [query, setQuery] = useState("");
-  const [errorRoute, setErrorRoute] = useState("read_file");
+  const [referenceRoute, setReferenceRoute] = useState("read_file");
   const [metric, setMetric] = useState<
-    "accuracy" | "latency" | "cost" | "valid"
+    "accuracy" | "latency" | "p95" | "cost" | "completion"
   >("accuracy");
 
   useEffect(() => {
@@ -131,7 +131,10 @@ export default function JevRouterExplorer() {
           id="jev-scenario"
           className={styles.select}
           value={selectedId}
-          onChange={(event) => setSelectedId(event.target.value)}
+          onChange={(event) => {
+            setSelectedId(event.target.value);
+            if (event.target.value && metric === "p95") setMetric("latency");
+          }}
         >
           <option value="">
             All {data.cases.length} cases · overall comparison
@@ -200,20 +203,23 @@ export default function JevRouterExplorer() {
           role="group"
           aria-label="Chart measurement"
         >
-          {(["accuracy", "latency", "cost", "valid"] as const).map((item) => (
+          {(["accuracy", "latency", "p95", "cost", "completion"] as const).map((item) => (
             <button
               key={item}
               type="button"
               aria-pressed={metric === item}
+              disabled={item === "p95" && Boolean(selected)}
               onClick={() => setMetric(item)}
             >
               {item === "accuracy"
                 ? "Accuracy"
                 : item === "latency"
-                  ? "Latency"
-                  : item === "cost"
-                    ? "Cost"
-                    : "Valid responses"}
+                  ? "Median latency"
+                  : item === "p95"
+                    ? "p95 latency"
+                    : item === "cost"
+                      ? "Cost"
+                      : "Response success"}
             </button>
           ))}
         </div>
@@ -221,10 +227,19 @@ export default function JevRouterExplorer() {
           {metric === "accuracy"
             ? "Reference agreement · higher is better"
             : metric === "latency"
-              ? "Median response time · lower is faster"
-              : metric === "cost"
-                ? "Measured cost per 1,000 attempts · lower is cheaper"
-                : "Valid route returned / all attempts · higher is better; not a correctness score"}
+              ? "Median response time for returned routes · lower is faster"
+              : metric === "p95"
+                ? "95% of returned routes arrived within this time · lower is faster; failed requests excluded"
+                : metric === "cost"
+                  ? "Measured cost per 1,000 attempts · lower is cheaper"
+                  : "Returned one of the six permitted routes / all attempts · does not measure reference agreement"}
+          {selected ? (
+            <>
+              <br />
+              Select all cases for p95 latency; three repeats are too few to
+              describe the slower tail.
+            </>
+          ) : null}
         </p>
         {(() => {
           const values = data.summary.map((item) => {
@@ -234,7 +249,7 @@ export default function JevRouterExplorer() {
                 )
               : [];
             const value =
-              metric === "valid"
+              metric === "completion"
                 ? (selected
                     ? runs.filter((r) => r.status === "ok").length / runs.length
                     : item.valid / item.attempts) * 100
@@ -250,17 +265,19 @@ export default function JevRouterExplorer() {
                             .map((r) => r.latency_ms),
                         )
                       : item.median_ms
-                    : selected
-                      ? runs.length && runs.every((r) => r.cost_usd !== null)
-                        ? (runs.reduce((sum, r) => sum + (r.cost_usd ?? 0), 0) /
-                            runs.length) *
-                          1000
-                        : null
-                      : item.cost_per_1000;
+                    : metric === "p95"
+                      ? item.p95_ms
+                      : selected
+                        ? runs.length && runs.every((r) => r.cost_usd !== null)
+                          ? (runs.reduce((sum, r) => sum + (r.cost_usd ?? 0), 0) /
+                              runs.length) *
+                            1000
+                          : null
+                        : item.cost_per_1000;
             return { ...item, value };
           });
           const maximum =
-            metric === "accuracy" || metric === "valid"
+            metric === "accuracy" || metric === "completion"
               ? 100
               : Math.max(...values.map((item) => item.value ?? 0), 0.000001);
           return values.map((item) => (
@@ -273,9 +290,9 @@ export default function JevRouterExplorer() {
                 <strong>
                   {item.value === null
                     ? "Unavailable"
-                    : metric === "accuracy" || metric === "valid"
+                    : metric === "accuracy" || metric === "completion"
                       ? `${item.value.toFixed(1)}%`
-                      : metric === "latency"
+                      : metric === "latency" || metric === "p95"
                         ? milliseconds(item.value)
                         : dollars(item.value, 4)}
                 </strong>
@@ -337,7 +354,7 @@ export default function JevRouterExplorer() {
                       ? `${((correct / attempts) * 100).toFixed(1)}%`
                       : "Not scored"}
                     <small>
-                      {correct} / {attempts} correct
+                      {correct} / {attempts} match the reference
                     </small>
                   </dd>
                 </div>
@@ -353,9 +370,9 @@ export default function JevRouterExplorer() {
                 </div>
               </dl>
               <p className={styles.tail}>
-                {valid} / {attempts} valid responses ·{" "}
+                {valid} / {attempts} returned a route ·{" "}
                 {valid ? `${((correct / valid) * 100).toFixed(1)}%` : "N/A"}{" "}
-                correct among valid
+                match the reference among returned routes
               </p>
               {selected ? (
                 <details className={styles.details}>
@@ -367,10 +384,12 @@ export default function JevRouterExplorer() {
                         <strong>
                           Run {run.repeat + 1}:{" "}
                           {run.correct
-                            ? "Correct"
+                            ? "Matches reference"
                             : run.status === "ok"
                               ? "Different from reference"
-                              : "Failed"}
+                              : run.status === "api_error"
+                                ? "API request failed"
+                                : "Response rejected"}
                         </strong>
                         <br />
                         <code>{run.route ?? run.status}</code>
@@ -398,7 +417,7 @@ export default function JevRouterExplorer() {
       <section className={styles.method} aria-label="Routing reliability">
         <h3>Reliability across the full evaluation</h3>
         <p className={styles.explanation}>
-          Consistency means all three runs returned the same valid route.
+          Consistency means all three runs returned the same permitted route.
           Context sensitivity requires both variants of a pair to be correct in
           the same repetition. Consistency alone does not mean correctness.
         </p>
@@ -409,7 +428,7 @@ export default function JevRouterExplorer() {
                 <th>Model</th>
                 <th>Consistent cases</th>
                 <th>Both contexts correct</th>
-                <th>Valid responses</th>
+                <th>Routes returned</th>
               </tr>
             </thead>
             <tbody>
@@ -431,16 +450,21 @@ export default function JevRouterExplorer() {
           </table>
         </div>
       </section>
-      <section className={styles.method} aria-label="Errors by expected tool">
-        <h3>Errors across the full evaluation</h3>
-        <label className={styles.label} htmlFor="jev-error-route">
-          Expected next action
+      <section className={styles.method} aria-label="Reference disagreements by tool">
+        <h3>Where decisions differ from the reference</h3>
+        <p className={styles.explanation}>
+          Full evaluation · counts compare returned routes with the reference
+          labels. A different route may reflect a model mistake or an ambiguous
+          case. API failures and rejected responses are listed separately.
+        </p>
+        <label className={styles.label} htmlFor="jev-reference-route">
+          Reference next action
         </label>
         <select
           className={styles.select}
-          id="jev-error-route"
-          value={errorRoute}
-          onChange={(event) => setErrorRoute(event.target.value)}
+          id="jev-reference-route"
+          value={referenceRoute}
+          onChange={(event) => setReferenceRoute(event.target.value)}
         >
           {[
             "search_code",
@@ -458,15 +482,20 @@ export default function JevRouterExplorer() {
         {data.summary.map((item) => {
           const caseIds = new Set(
             data.cases
-              .filter((c) => c.accepted.includes(errorRoute))
+              .filter((c) => c.accepted.includes(referenceRoute))
               .map((c) => c.id),
           );
           const attempts = data.results.filter(
             (r) => r.model === item.model && caseIds.has(r.case_id),
           );
-          const errors = attempts.filter((r) => !r.correct);
+          const returned = attempts.filter((r) => r.status === "ok");
+          const disagreements = returned.filter((r) => !r.correct);
+          const apiFailures = attempts.filter(
+            (r) => r.status === "api_error",
+          ).length;
+          const rejected = attempts.length - returned.length - apiFailures;
           const predictions = Array.from(
-            new Set(errors.map((r) => r.route ?? r.status)),
+            new Set(disagreements.map((r) => r.route)),
           );
           return (
             <div
@@ -476,20 +505,30 @@ export default function JevRouterExplorer() {
               <div className={styles.chartLabel}>
                 <span>{item.label}</span>
                 <strong>
-                  {errors.length} / {attempts.length} errors
+                  {disagreements.length} / {returned.length} differ
                 </strong>
               </div>
               <div className={styles.track}>
                 <div
                   className={styles.bar}
                   style={{
-                    transform: `scaleX(${attempts.length ? errors.length / attempts.length : 0})`,
+                    transform: `scaleX(${returned.length ? disagreements.length / returned.length : 0})`,
                   }}
                 />
               </div>
               {predictions.length ? (
                 <p className={styles.pickerHint}>
-                  Returned: {predictions.join(", ")}
+                  Selected instead: {predictions.join(", ")}
+                </p>
+              ) : null}
+              {apiFailures > 0 ? (
+                <p className={styles.pickerHint}>
+                  {apiFailures} / {attempts.length} attempts failed at the API.
+                </p>
+              ) : null}
+              {rejected > 0 ? (
+                <p className={styles.pickerHint}>
+                  {rejected} / {attempts.length} responses rejected: no permitted route returned.
                 </p>
               ) : null}
             </div>

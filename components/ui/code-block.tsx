@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 interface CodeBlockProps {
   language: string;
@@ -25,13 +24,14 @@ export function CodeBlock({ language, code }: CodeBlockProps) {
   return (
     <div className="group my-6 overflow-hidden rounded-lg border border-border">
       <div className="flex items-center justify-between border-b border-border bg-raised px-4 py-2">
-        <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">
+        <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
           {language}
         </span>
         <button
           type="button"
           onClick={handleCopy}
-          className="font-mono text-[11px] text-faint opacity-0 transition-opacity hover:text-foreground group-hover:opacity-100"
+          aria-label={copied ? "Code copied" : "Copy code"}
+          className="font-mono text-[11px] text-muted-foreground transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2"
         >
           {copied ? "Copied" : "Copy"}
         </button>
@@ -39,7 +39,7 @@ export function CodeBlock({ language, code }: CodeBlockProps) {
       <div className="syntax-highlighter-container relative">
         <SyntaxHighlighter
           language={language}
-          style={vscDarkPlus}
+          useInlineStyles={false}
           customStyle={{
             margin: 0,
             borderRadius: 0,
@@ -48,14 +48,15 @@ export function CodeBlock({ language, code }: CodeBlockProps) {
             lineHeight: "1.5rem",
             backgroundColor: "hsl(var(--raised))",
             color: "hsl(var(--foreground))",
+            padding: "1rem",
+            overflowX: "auto",
           }}
           codeTagProps={{
             style: {
               fontFamily: "var(--font-geist-mono), ui-monospace, monospace",
             },
           }}
-          wrapLines={true}
-          wrapLongLines={true}
+          wrapLongLines={false}
         >
           {code}
         </SyntaxHighlighter>

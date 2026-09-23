@@ -14,6 +14,9 @@
     --border: 40 16% 90%;
     --line2: 42 16% 84%;
     --ring: 40 8% 10%;
+    --syntax-string: 155 42% 27%;
+    --syntax-keyword: 213 57% 35%;
+    --syntax-value: 24 65% 34%;
   }
 
   /* Dark theme — default, the star */
@@ -27,6 +30,9 @@
     --border: 240 4% 11%;
     --line2: 240 4% 17%;
     --ring: 45 7% 92%;
+    --syntax-string: 150 30% 66%;
+    --syntax-keyword: 210 50% 73%;
+    --syntax-value: 28 60% 70%;
   }
 }
 
@@ -184,7 +190,7 @@
     color: hsl(var(--faint));
   }
 
-  .article code {
+  .article :not(pre) > code {
     font-family: var(--font-geist-mono), ui-monospace, monospace;
     font-size: 0.85em;
     background-color: hsl(var(--raised));
@@ -218,19 +224,23 @@
 @layer components {
   .syntax-highlighter-container pre {
     background-color: hsl(var(--raised)) !important;
-    border: 1px solid hsl(var(--border)) !important;
+    border: 0 !important;
   }
 
   .syntax-highlighter-container code {
     color: hsl(var(--foreground)) !important;
     background-color: transparent !important;
+    border: 0;
+    padding: 0;
+    font-size: inherit;
+    white-space: pre;
   }
 
   .syntax-highlighter-container .token.comment,
   .syntax-highlighter-container .token.prolog,
   .syntax-highlighter-container .token.doctype,
   .syntax-highlighter-container .token.cdata {
-    color: hsl(var(--faint)) !important;
+    color: hsl(var(--muted-foreground)) !important;
     font-style: italic;
   }
 
@@ -245,7 +255,7 @@
   .syntax-highlighter-container .token.constant,
   .syntax-highlighter-container .token.symbol,
   .syntax-highlighter-container .token.deleted {
-    color: hsl(28 50% 58%) !important;
+    color: hsl(var(--syntax-value)) !important;
   }
 
   .syntax-highlighter-container .token.selector,
@@ -254,7 +264,7 @@
   .syntax-highlighter-container .token.char,
   .syntax-highlighter-container .token.builtin,
   .syntax-highlighter-container .token.inserted {
-    color: hsl(150 22% 50%) !important;
+    color: hsl(var(--syntax-string)) !important;
   }
 
   .syntax-highlighter-container .token.operator,
@@ -268,7 +278,7 @@
   .syntax-highlighter-container .token.atrule,
   .syntax-highlighter-container .token.attr-value,
   .syntax-highlighter-container .token.keyword {
-    color: hsl(210 35% 62%) !important;
+    color: hsl(var(--syntax-keyword)) !important;
   }
 
   .syntax-highlighter-container .token.function,
@@ -280,6 +290,6 @@
   .syntax-highlighter-container .token.regex,
   .syntax-highlighter-container .token.important,
   .syntax-highlighter-container .token.variable {
-    color: hsl(28 50% 58%) !important;
+    color: hsl(var(--syntax-value)) !important;
   }
 }

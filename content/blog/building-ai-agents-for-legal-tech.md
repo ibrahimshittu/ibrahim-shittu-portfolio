@@ -1,7 +1,7 @@
 ---
 title: "Building AI Agents for Legal Tech: Harness Design, Evidence, and Evaluation"
-excerpt: "A technical walkthrough of a legal-agent harness: scoped retrieval, verifiable citations, typed proposals, evaluation datasets, durable execution, and human approval."
-date: "2025-06-15"
+excerpt: "How context, tools, memory, and feedback help legal AI agents finish useful work, with Python examples for evidence checks and evaluation."
+date: "2026-08-23"
 readTime: "15 min read"
 image: "https://res.cloudinary.com/ibrahimshittu/image/upload/v1761403648/ibrahim-shittu-portfolio/blog/building-ai-agents-for-legal-tech.png"
 tags: ["AI Agents", "Legal Tech", "System Design", "Evaluation"]
@@ -13,7 +13,7 @@ The citation resolves. The quotation exists. The answer is still wrong: an expec
 
 Building AI for legal work has made this distinction hard to ignore. Generating a paragraph is one problem; giving a lawyer enough evidence to defend it is another. The engineering work sits between those two: retrieving the right material, preserving what it says, checking the output, and keeping document changes under the reviewer's control.
 
-This article works through a disclosure-comparison task to show how to build that surrounding system—the **agent harness**. The architecture is illustrative, and the Python examples are small enough to run offline. They demonstrate source checks and scoring, not a production benchmark or our internal implementation.
+This article works through a disclosure-comparison task to show how to build that surrounding system: the [agent harness](https://www.anthropic.com/engineering/managed-agents). Anthropic describes the harness as the loop that calls the model and routes its tool calls. Here, that loop connects the model to documents, search, saved progress, and feedback so it can carry a task through several steps.
 
 ## Start with a specific task
 
@@ -21,7 +21,7 @@ Consider this request:
 
 > Compare the selected risk-factor section with two peer filings. Preserve exact peer wording in the comparison, identify missing information, and propose a revision for review.
 
-The application supplies the target document version, section, company, reporting period, and selected peers. The server determines which documents that user may access. The model must not invent those permissions or expand them through a tool argument.
+The model starts with the selected document, its version, the company, the reporting period, and the peers to compare. Some of this context comes from the user's selections; the rest can come from document metadata. When a detail is missing, the agent can inspect the available documents or ask a focused question. It should not have to rediscover information the interface already collected.
 
 The response needs four parts:
 
@@ -34,50 +34,50 @@ The response needs four parts:
 
 This separation prevents a common failure: copying another company's disclosure into a target-company draft as though the underlying facts were interchangeable. A peer passage establishes what the peer disclosed. It does not establish that the target company has the same exposure, controls, or financial position.
 
-A fixed pipeline is sufficient when the request always follows the same steps. An agent loop becomes useful when retrieved evidence determines whether to read more, ask a question, or propose a revision. Keep the permissions and output contract fixed even when the model chooses the route through them.
+A fixed pipeline is sufficient when the request always follows the same steps. An agent loop becomes useful when retrieved evidence determines whether to read more, ask a question, or propose a revision. Give the agent tools for those decisions—search, reading, comparison, and editing—and define what each tool returns. The sequence can change with the evidence while the result remains understandable: a comparison, proposed wording, and any unresolved questions.
 
 ## What the harness needs to do
 
-![Illustrative legal-agent harness with task scope, context assembly, bounded model and tool execution, validation, human review, and version-checked writes.](/blog/legal-agent-harness/harness.svg)
+![The model chooses its next action using tools, context, saved progress, and feedback.](/blog/legal-agent-harness/harness.svg)
 
-*The harness owns authorization, execution limits, durable state, and approval. The model operates within those boundaries.*
+The harness makes the model's decisions executable. When the model requests a search, it runs the search and returns the passages. When the model drafts a section, it saves that draft. When a check finds a problem, it returns enough detail for the model to correct it.
 
-The harness is the application code around the model. It assembles context, executes tools, saves progress, checks results, and presents work for review. For this task, the model needs to find passages, read them, ask for missing information, and propose a change. It does not need unrestricted document access or permission to edit the original.
+For this task, the agent can move between reading, searching, comparing, drafting, and asking questions as needed. The harness supports that autonomy by preserving context and making the results of each action available to the next decision.
 
 Give each tool a clear input, result, and effect:
 
 | Tool | Input | Result | Effect |
 | --- | --- | --- | --- |
-| `search_passages` | Query, approved company and period filters | Ranked passage handles | Read |
+| `search_passages` | Query, company and period filters | Ranked passage handles | Read |
 | `read_passage` | Handle returned by retrieval | Text and source metadata | Read |
 | `ask_clarification` | Missing fact and focused question | Suspended task awaiting input | State change |
 | `propose_revision` | Base version, text, evidence handles | Reviewable proposal | Creates artifact |
 
-Applying the revision is a separate action controlled by the application after approval. The model can propose a change without gaining permission to apply it.
+The request in this example asks for a revision **for review**, so the useful output is a proposed diff. A task that asks the agent to edit a working draft could instead expose an editing tool. Tool design should reflect the job: searching for precedent, preparing a proposal, and editing a document are different operations, not reasons to require confirmation at every step.
 
 A minimal control loop can be expressed as pseudocode:
 
 ```text
-load task checkpoint
-while task is runnable:
-    enforce remaining step, time and cost budgets
-    assemble scoped context and available tool schemas
-    request one next action from the model
-    validate its schema, tool permission and arguments
-    execute the action under authenticated scope
-    persist its result and the next checkpoint
-    if clarification or review is required: suspend
+restore the task's context and saved progress
+repeat:
+    give the model the task, tools and latest results
+    let it choose the next action
+    execute the tool call and return its result
+    save new evidence, decisions and draft changes
+    if a check finds a problem: return specific feedback
+    if the task is complete: return the artifact
+    if user input is needed: save the question and wait
 ```
 
-This is control flow, not a complete durable runner. In particular, a tool effect and its checkpoint are not automatically atomic. Writes need the separate recovery protocol discussed below.
+The feedback should be actionable. Instead of “citation invalid,” return “reference 12 points to a passage that was not retrieved,” together with the available references. The agent can then read the correct source or revise the claim. If two attempts produce the same failure without new evidence, repeating the same call is unlikely to help; the next useful move may be another search or a question for the user.
 
-Bound repairs as well as ordinary tool calls. An invalid citation should produce a specific validation result that the model can address. After the repair allowance is exhausted, retain the partial artifact and surface the unresolved failure. An unlimited “critic fixes generator” loop creates unpredictable latency and cost without establishing correctness.
+Track time, cost, and progress so a stalled run is visible. Choose stopping rules for the task rather than imposing a tiny tool-call limit on work that genuinely requires investigation. The aim is to keep useful work moving and preserve the result when it cannot continue.
 
-### Skills supply procedure; code enforces boundaries
+### Give the agent reusable procedures
 
 A skill can specify that comparison output must quote peer passages exactly, distinguish precedent from target-company evidence, and ask for material facts absent from the supplied documents. It should describe a reusable procedure rather than enumerate answers to individual evaluation cases.
 
-The harness enforces properties the model cannot waive: document authorization, valid tool names, execution budgets, and the requirement for human approval before a write. Retrieved document text is evidence, not an instruction channel. A sentence in a filing cannot grant a new tool or alter the task's permissions.
+Skills explain how to do the work; tool implementations perform it. A comparison skill can describe how to choose useful peer passages, while a retrieval tool returns the passage text and source location. Access checks still belong in the document service, as in any multi-user product. They are separate from the model's freedom to decide which relevant source to read next.
 
 I have found it easy to fix a failing example by adding an instruction, only to break a similar request. Before adding another exception, investigate where the failure occurred. Missing source text is an extraction problem. Wrong company scope is a retrieval or context problem. Unsupported interpretation needs semantic evaluation. They should not all become instructions appended to the same system prompt.
 
@@ -87,7 +87,7 @@ Extraction should produce a stored text representation with a stable document id
 
 Search operates over these records. Lexical retrieval can help with exact phrases and identifiers; semantic retrieval can help when wording varies. A hybrid implementation can merge candidates before reranking. Evaluate those choices on evidence needed for the task rather than assuming a more elaborate retriever is better.
 
-Filter retrieval by permissions and the selected task, then keep a registry of the passages returned. Each passage gets a handle: an identifier the model can use in subsequent tool calls. Resolve those handles on the server. Accepting an arbitrary document ID from model output would allow it to reference material the run never retrieved.
+Search within the selected companies and periods, then keep a registry of the passages returned. Each passage gets a handle: an identifier the model can use to read or cite it later. Resolve that handle against the retrieved text so a reference leads back to the actual passage, even after the agent has performed several other steps.
 
 A reference can carry the source version, the quoted text, and its position:
 
@@ -123,7 +123,7 @@ def verify_evidence(ref: Evidence, sources: dict[str, str]) -> bool:
     return text[ref.start:ref.end] == ref.quote
 ```
 
-The `sources` mapping must come from the server's authorized run registry. A caller-controlled mapping would defeat that boundary. Python dataclasses also do not validate incoming JSON types; parse and validate untrusted input before constructing these internal objects. This distinction follows the [Python dataclass contract](https://docs.python.org/3/library/dataclasses.html).
+The `sources` mapping contains the source texts retrieved during this run. Build it from tool results, rather than asking the model to recreate the documents it read. Python dataclasses also do not validate incoming JSON types; parse and validate untrusted input before constructing these internal objects. This distinction follows the [Python dataclass contract](https://docs.python.org/3/library/dataclasses.html).
 
 The opening example would pass this check if it attached the source quotation correctly. The check verifies the quotation, while the error is in the generated claim. Assessing support requires comparing the claim with the passage: did the draft preserve the time period, uncertainty, entity, and meaning? That is the job of a semantic grader, discussed below.
 
@@ -153,15 +153,13 @@ def ready_for_review(proposal: Proposal, current_version: str,
 
 `ready_for_review` checks only that the proposal is nonempty, uses the current document version, and has verifiable references. It does not establish that every sentence is supported, that the revision is legally sufficient, or that the user has approved it. A larger proposal can associate references with individual claims, making sentence-level support assessment possible.
 
-Approval should bind to the exact proposal content and its base version. Store the reviewer identity and decision separately from model output. Before applying the change, compare the current version again. If someone edited the document during review, the earlier check is stale: regenerate or rebase the proposal and obtain review of the changed result.
+For a review task, associate the reviewer's decision with the exact proposal and document version they saw. If someone edits the document in the meantime, the agent needs to read the new version and update its proposal. Otherwise, an apparently correct replacement could overwrite newer work. The same version check is useful when the agent edits a working draft directly.
 
 The interface should show the proposed diff, its evidence, and unresolved questions together. A benchmarking form can collect company, section, and peers; the agent then asks only about uncertainty remaining after inspecting that context. “What period?” is unnecessary if the selected filing already supplies it.
 
 ## Evaluate what the agent was supposed to do
 
-![Evaluation pipeline from frozen task cases through repeated trials, separate integrity and semantic graders, and paired comparison of candidate and baseline.](/blog/legal-agent-harness/evaluation.svg)
-
-*Save both the artifact and the execution trace. Grade evidence support, useful completeness, and task behavior separately.*
+![Run the same cases against each configuration, grade the outputs, and compare the failures.](/blog/legal-agent-harness/evaluation.svg)
 
 A legal-agent evaluation case needs more than a prompt and an example answer. It needs input documents, authorized scope, expected content, acceptable clarification behavior, and forbidden actions. Record the relevant source spans so a grader can distinguish a missing fact from failed retrieval.
 
@@ -185,11 +183,11 @@ Keep related variants together when splitting development and held-out cases. Ot
 
 ### Separate three kinds of grader
 
-**Integrity graders** check schema validity, resolvable references, exact quotations, document versions, and forbidden tool effects. These are deterministic checks against recorded state.
+**Integrity graders** check schema validity, resolvable references, exact quotations, document versions, and whether tool calls used the operations listed in the test case. These are deterministic checks against recorded state.
 
 **Semantic graders** assess whether evidence supports a claim, whether source meaning was preserved, and whether important facts were omitted. Human review defines the standard. A model judge can assist, but disagreement with expert annotations should be measured on a reviewed subset. Treat source text and candidate output as data inside the grader, not instructions it should follow.
 
-**Task graders** inspect the artifact and behavior together: did the agent complete what was answerable, ask for what was missing, and stop at the review boundary? A fluent artifact does not compensate for reading outside its scope or applying an unapproved edit.
+**Task graders** inspect the artifact and behavior together: did the agent complete what was answerable, ask for what was missing, and stop at the review boundary? For the comparison request above, success means a usable comparison and proposed revision. For a direct-editing task, success would also include the expected document changes.
 
 This separation is consistent with the distinction between tasks, trials, graders, and outcomes in [Anthropic's agent-evaluation guide](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents). The legal-specific obligations still need to be defined for the workload being evaluated.
 
@@ -256,20 +254,19 @@ For long-running work, persist the run ID, status, completed steps, source handl
 
 ### Recover writes without blindly repeating them
 
-The difficult recovery window is after a document edit succeeds but before the runner saves confirmation. A retry can duplicate the operation.
+Suppose the agent inserts a revised paragraph into a document, then the connection drops before it receives confirmation. Retrying the insertion could create a duplicate paragraph. Restarting the entire run would repeat work that already succeeded.
 
-A write protocol should assign a stable action ID to the approved proposal and check the base version at the destination. If the destination supports idempotency, reuse that action ID on retry. Otherwise reconcile the destination's current state before deciding whether an uncertain operation can be attempted again.
+Give the edit a stable action ID and save it with the document version and proposed change. An editing service that supports idempotency can recognize the same action ID and return the earlier result instead of applying the edit again. If it cannot do that, read the document after reconnecting and determine whether the change already happened.
 
 ```text
-proposal + base version → reviewer approval
-approval + stable action ID → write intent
-conditional write → destination receipt → completed checkpoint
-missing receipt → reconcile destination → resume or require review
+prepare edit → save action ID and document version
+apply edit → save confirmation → continue
+connection lost → inspect document → recover the result
 ```
 
-An action ledger alone does not guarantee exactly-once effects in an external document system. Version checks also need to be atomic with the write where supported; checking first and writing later leaves a race. If the integration cannot enforce that condition, surface the limitation and stop for reconciliation rather than claim safe automatic replay.
+The version check and edit should happen together where the document API supports it. Otherwise another edit could arrive between those operations. That case needs reconciliation against the latest document, not a blind retry.
 
-This is why “durable task” is more specific than “background task.” The system must preserve enough information to resume safely, not merely keep a process running after the browser closes.
+This recovery support lets an agent keep working through interruptions. Save drafts and progress outside the running process so the user can close the browser, return later, and find the work intact. A completion notification can bring them back when there is something to review.
 
 ## Trace failures back to the step that caused them
 

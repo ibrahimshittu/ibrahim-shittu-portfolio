@@ -1,37 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="640" height="1080" viewBox="0 0 640 1080" role="img" aria-labelledby="title desc"><style>@media (prefers-color-scheme:dark){rect[fill="#f5f6f3"]{fill:#111817}rect[fill="white"]{fill:#192320;stroke:#47685f}text[fill="#192f3a"]{fill:#e7eeeb}text[fill="#4d5c63"]{fill:#b1c3ba}text[fill="#1e5553"]{fill:#8fd2b7}path{stroke:#8fb7a8}}</style>
-<title id="title">Evaluate outcomes and the path taken</title><desc id="desc">Illustrative evaluation pipeline · no benchmark results are implied</desc>
-<rect width="640" height="1080" rx="18" fill="#f5f6f3"/>
-<g font-family="Arial, sans-serif">
-<text x="28" y="40" font-size="28" fill="#192f3a" font-weight="700">Evaluate outcomes and the path taken</text>
-<text x="28" y="112" font-size="19" fill="#4d5c63" font-weight="400">Illustrative evaluation pipeline · no benchmark results</text>
-<text x="28" y="138" font-size="19" fill="#4d5c63" font-weight="400">are implied</text>
-<rect x="24" y="175" width="592" height="180" rx="12" fill="white" stroke="#9bb9b4"/>
-<text x="44" y="206" font-size="21" fill="#1e5553" font-weight="700">01 / FROZEN CASE</text>
-<text x="44" y="241" font-size="24" fill="#192f3a" font-weight="400">Authorized documents + request + expected</text>
-<text x="44" y="272" font-size="24" fill="#192f3a" font-weight="400">obligations</text>
-<text x="44" y="303" font-size="20" fill="#4d5c63" font-weight="400">Required facts, acceptable clarification,</text>
-<text x="44" y="330" font-size="20" fill="#4d5c63" font-weight="400">forbidden actions and source locations</text>
-<path d="M320,358 v16 m-5,-5 l5,5 l5,-5" fill="none" stroke="#527778" stroke-width="2"/>
-<rect x="24" y="380" width="592" height="180" rx="12" fill="white" stroke="#9bb9b4"/>
-<text x="44" y="411" font-size="21" fill="#1e5553" font-weight="700">02 / REPEATED TRIALS</text>
-<text x="44" y="446" font-size="24" fill="#192f3a" font-weight="400">Candidate configuration → saved artifact +</text>
-<text x="44" y="477" font-size="24" fill="#192f3a" font-weight="400">complete trace</text>
-<text x="44" y="508" font-size="20" fill="#4d5c63" font-weight="400">Record model, prompt, skill and dataset versions;</text>
-<text x="44" y="535" font-size="20" fill="#4d5c63" font-weight="400">include failed attempts</text>
-<path d="M320,563 v16 m-5,-5 l5,5 l5,-5" fill="none" stroke="#527778" stroke-width="2"/>
-<rect x="24" y="585" width="592" height="180" rx="12" fill="white" stroke="#9bb9b4"/>
-<text x="44" y="616" font-size="21" fill="#1e5553" font-weight="700">03 / SEPARATE GRADERS</text>
-<text x="44" y="651" font-size="24" fill="#192f3a" font-weight="400">Integrity checks + evidence-support review</text>
-<text x="44" y="682" font-size="24" fill="#192f3a" font-weight="400">+ completeness</text>
-<text x="44" y="713" font-size="20" fill="#4d5c63" font-weight="400">Deterministic checks for references; expert labels</text>
-<text x="44" y="740" font-size="20" fill="#4d5c63" font-weight="400">or reviewed model judgments for meaning</text>
-<path d="M320,768 v16 m-5,-5 l5,5 l5,-5" fill="none" stroke="#527778" stroke-width="2"/>
-<rect x="24" y="790" width="592" height="180" rx="12" fill="white" stroke="#9bb9b4"/>
-<text x="44" y="821" font-size="21" fill="#1e5553" font-weight="700">04 / PAIRED COMPARISON</text>
-<text x="44" y="856" font-size="24" fill="#192f3a" font-weight="400">Baseline vs candidate on the same held-out</text>
-<text x="44" y="887" font-size="24" fill="#192f3a" font-weight="400">cases</text>
-<text x="44" y="918" font-size="20" fill="#4d5c63" font-weight="400">Support / coverage / task success / latency / cost</text>
-<text x="44" y="945" font-size="20" fill="#4d5c63" font-weight="400">/ reviewer corrections</text>
-<text x="28" y="1010" font-size="19" fill="#4d5c63" font-weight="400">Repeat trials measure stability. Keep task variants</text>
-<text x="28" y="1036" font-size="19" fill="#4d5c63" font-weight="400">grouped when splitting development and held-out cases.</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 326" width="640" height="326" role="img" aria-label="From test cases to useful feedback">
+<title>From test cases to useful feedback</title>
+<style>.bg{fill:#f6f7f5}.box{fill:#fff;stroke:#bdccc5}.accent{fill:#e4f0ea;stroke:#84aa97}.ink{fill:#203a30}.muted{fill:#475e53}.line{stroke:#668878;fill:none;stroke-width:2}@media(prefers-color-scheme:dark){.bg{fill:#101715}.box{fill:#18221e;stroke:#3a5145}.accent{fill:#203d30;stroke:#6a9c80}.ink{fill:#e8f2ec}.muted{fill:#bed0c4}.line{stroke:#8fb5a0}}</style>
+<rect class="bg" width="640" height="326" rx="14"/>
+<g font-family="Arial,sans-serif">
+<text class="ink" x="24" y="37" font-size="24" font-weight="600">From test cases to useful feedback</text>
+<rect class="box" x="24" y="67" width="180" height="105" rx="10"/>
+<text class="ink" x="114.0" y="97" font-size="23" text-anchor="middle" font-weight="600">Cases</text>
+<text class="muted" x="114.0" y="125" font-size="20" text-anchor="middle">Documents +</text>
+<text class="muted" x="114.0" y="150" font-size="20" text-anchor="middle">expected result</text>
+<rect class="box" x="230" y="67" width="180" height="105" rx="10"/>
+<text class="ink" x="320.0" y="97" font-size="23" text-anchor="middle" font-weight="600">Runs</text>
+<text class="muted" x="320.0" y="125" font-size="20" text-anchor="middle">Baseline +</text>
+<text class="muted" x="320.0" y="150" font-size="20" text-anchor="middle">candidate</text>
+<rect class="box" x="436" y="67" width="180" height="105" rx="10"/>
+<text class="ink" x="526.0" y="97" font-size="23" text-anchor="middle" font-weight="600">Graders</text>
+<text class="muted" x="526.0" y="125" font-size="20" text-anchor="middle">Support +</text>
+<text class="muted" x="526.0" y="150" font-size="20" text-anchor="middle">completeness</text>
+<path class="line" d="M205 120 H228 M222 115 L228 120 L222 125 M411 120 H434 M428 115 L434 120 L428 125 M526 174 V197 H320 V217 M315 212 L320 217 L325 212"/>
+<rect class="accent" x="24" y="220" width="592" height="80" rx="10"/>
+<text class="ink" x="320.0" y="250" font-size="23" text-anchor="middle" font-weight="600">Compare outcomes</text>
+<text class="muted" x="320.0" y="278" font-size="20" text-anchor="middle">Failures · consistency · time · cost</text>
 </g></svg>

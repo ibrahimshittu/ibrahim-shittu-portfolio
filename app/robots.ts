@@ -6,10 +6,9 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: "/",
+        allow: ["/", "/blog/jev-tool-router/"],
         disallow: [
           "/api/",
-          "/_next/",
           "/private/",
           "/*.json$",
           "/*?ref=*", // Disallow URLs with ref parameters
@@ -17,8 +16,8 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: "Googlebot",
-        allow: "/",
-        disallow: ["/api/", "/_next/", "/private/", "/*.json$", "/*?ref=*"],
+        allow: ["/", "/blog/jev-tool-router/"],
+        disallow: ["/api/", "/private/", "/*.json$", "/*?ref=*"],
       },
     ],
     sitemap: [

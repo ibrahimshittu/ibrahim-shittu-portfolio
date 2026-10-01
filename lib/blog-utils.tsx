@@ -10,6 +10,7 @@ import { CodeBlock } from "@/components/ui/code-block";
 import { RouterArchitecture } from "@/components/blog/jev-router-explorer";
 
 const JevRouterExplorer = dynamic(() => import("@/components/blog/jev-router-explorer"));
+const DurableAgentExplorer = dynamic(() => import("@/components/blog/durable-agent-explorer"));
 
 // Long form, e.g. "January 15, 2025"
 export function formatDate(dateString: string): string {
@@ -250,6 +251,12 @@ export const formatContent = (content: string): React.ReactNode[] => {
       } else {
         codeLines.push(raw);
       }
+      continue;
+    }
+
+    if (["{{durable-agent-boundary}}", "{{durable-agent-traces}}"].includes(line.trim())) {
+      flushBlocks();
+      nodes.push(<DurableAgentExplorer key={`durable-${nodes.length}`} mode={line.trim() === "{{durable-agent-traces}}" ? "traces" : "boundary"} />);
       continue;
     }
 

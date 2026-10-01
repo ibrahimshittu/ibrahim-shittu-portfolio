@@ -1,0 +1,182 @@
+{
+  "runDate": "2026-10-01T07:15:12.255093+00:00",
+  "method": "Python subprocesses and SQLite; deterministic fixtures; no model or network calls",
+  "scenarios": [
+    {
+      "id": "baseline",
+      "label": "Uninterrupted run",
+      "attempts": 1,
+      "sourceCalls": 1,
+      "before": {
+        "evidence": 1,
+        "findings": 1,
+        "status": "complete"
+      },
+      "after": {
+        "evidence": 1,
+        "findings": 1,
+        "status": "complete"
+      },
+      "events": [
+        "Worker opened saved state",
+        "Fixture source returned a passage",
+        "Evidence committed",
+        "Finding committed",
+        "Completion committed"
+      ]
+    },
+    {
+      "id": "after_fetch",
+      "label": "Stop after the source returns",
+      "attempts": 2,
+      "sourceCalls": 2,
+      "before": {
+        "evidence": 0,
+        "findings": 0,
+        "status": "running"
+      },
+      "after": {
+        "evidence": 1,
+        "findings": 1,
+        "status": "complete"
+      },
+      "events": [
+        "Worker opened saved state",
+        "Fixture source returned a passage",
+        "Worker opened saved state",
+        "Fixture source returned a passage",
+        "Evidence committed",
+        "Finding committed",
+        "Completion committed"
+      ]
+    },
+    {
+      "id": "after_save",
+      "label": "Stop after saving evidence",
+      "attempts": 2,
+      "sourceCalls": 1,
+      "before": {
+        "evidence": 1,
+        "findings": 0,
+        "status": "running"
+      },
+      "after": {
+        "evidence": 1,
+        "findings": 1,
+        "status": "complete"
+      },
+      "events": [
+        "Worker opened saved state",
+        "Fixture source returned a passage",
+        "Evidence committed",
+        "Worker opened saved state",
+        "Saved evidence reused",
+        "Finding committed",
+        "Completion committed"
+      ]
+    },
+    {
+      "id": "after_finding",
+      "label": "Stop after saving a finding",
+      "attempts": 2,
+      "sourceCalls": 1,
+      "before": {
+        "evidence": 1,
+        "findings": 1,
+        "status": "running"
+      },
+      "after": {
+        "evidence": 1,
+        "findings": 1,
+        "status": "complete"
+      },
+      "events": [
+        "Worker opened saved state",
+        "Fixture source returned a passage",
+        "Evidence committed",
+        "Finding committed",
+        "Worker opened saved state",
+        "Saved evidence reused",
+        "Saved finding reused",
+        "Completion committed"
+      ]
+    },
+    {
+      "id": "duplicate",
+      "label": "Deliver completed work again",
+      "attempts": 2,
+      "sourceCalls": 1,
+      "before": {
+        "evidence": 1,
+        "findings": 1,
+        "status": "complete"
+      },
+      "after": {
+        "evidence": 1,
+        "findings": 1,
+        "status": "complete"
+      },
+      "events": [
+        "Worker opened saved state",
+        "Fixture source returned a passage",
+        "Evidence committed",
+        "Finding committed",
+        "Completion committed",
+        "Worker opened saved state",
+        "Completed work skipped"
+      ]
+    },
+    {
+      "id": "provider",
+      "label": "Provider unavailable, then resume",
+      "attempts": 2,
+      "sourceCalls": 1,
+      "before": {
+        "evidence": 0,
+        "findings": 0,
+        "status": "paused"
+      },
+      "after": {
+        "evidence": 1,
+        "findings": 1,
+        "status": "complete"
+      },
+      "events": [
+        "Worker opened saved state",
+        "Saved paused state",
+        "Worker opened saved state",
+        "Fixture source returned a passage",
+        "Evidence committed",
+        "Finding committed",
+        "Completion committed"
+      ]
+    },
+    {
+      "id": "clarification",
+      "label": "Ask for input, then resume",
+      "attempts": 2,
+      "sourceCalls": 1,
+      "before": {
+        "evidence": 0,
+        "findings": 0,
+        "status": "waiting"
+      },
+      "after": {
+        "evidence": 1,
+        "findings": 1,
+        "status": "complete"
+      },
+      "events": [
+        "Worker opened saved state",
+        "Saved waiting state",
+        "User answer committed: 2025",
+        "Worker opened saved state",
+        "Restored clarification: 2025",
+        "Fixture source returned a passage",
+        "Evidence committed",
+        "Finding committed",
+        "Completion committed"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="350" viewBox="0 0 480 350" role="img" aria-labelledby="title desc">
+<title id="title">Research state survives the worker</title><desc id="desc">The scheduler starts a worker, which saves research state and restores it on restart. The interface reads saved progress independently.</desc>
+<style>svg{background:#f8f7f3;color:#222624}text{font-family:Arial,sans-serif;fill:currentColor}.box{fill:#fffefa;stroke:#c5cbc6}.accent{fill:#edf3ee;stroke:#668a75}.arrow{fill:none;stroke:#668a75;stroke-width:2}.muted{fill:#58615c}@media(prefers-color-scheme:dark){svg{background:#111413;color:#eeefec}.box{fill:#191f1c;stroke:#45564b}.accent{fill:#1b2b23;stroke:#80b397}.muted{fill:#b0bdb4}.arrow{stroke:#80b397}}</style>
+<defs><marker id="head" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7" fill="#668a75"/></marker></defs>
+<text x="24" y="35" font-size="20" font-weight="600">Research state survives the worker</text>
+<rect class="box" x="24" y="60" width="160" height="65" rx="10"/><text x="104" y="87" text-anchor="middle" font-size="19">Scheduler</text><text class="muted" x="104" y="111" text-anchor="middle" font-size="16">Run + segment</text>
+<rect class="box" x="260" y="60" width="196" height="65" rx="10"/><text x="358" y="87" text-anchor="middle" font-size="19">Worker attempt</text><text class="muted" x="358" y="111" text-anchor="middle" font-size="16">Model + tools</text>
+<path class="arrow" d="M185 92H250" marker-end="url(#head)"/>
+<path class="arrow" d="M310 126V181" marker-end="url(#head)"/><text class="muted" x="296" y="157" text-anchor="end" font-size="16">Save</text>
+<path class="arrow" d="M407 189V134" marker-end="url(#head)"/><text class="muted" x="394" y="157" text-anchor="end" font-size="16">Restore</text>
+<rect class="accent" x="24" y="190" width="432" height="65" rx="10"/><text x="240" y="217" text-anchor="middle" font-size="19">Saved research state</text><text class="muted" x="240" y="241" text-anchor="middle" font-size="16">Evidence · findings · gaps · pending input</text>
+<path class="arrow" d="M240 256V283" marker-end="url(#head)"/>
+<text x="240" y="309" text-anchor="middle" font-size="19">Interface reads saved progress</text><text class="muted" x="240" y="334" text-anchor="middle" font-size="16">Reconnect without restarting the task</text>
+</svg>

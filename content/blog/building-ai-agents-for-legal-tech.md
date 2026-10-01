@@ -38,7 +38,7 @@ A fixed pipeline is sufficient when the request always follows the same steps. A
 
 ## What the harness needs to do
 
-![The model chooses its next action using tools, context, saved progress, and feedback.](/blog/legal-agent-harness/harness.svg)
+![The model chooses its next action using tools, context, saved progress, and feedback.](/blog/legal-agent-harness/harness.png)
 
 The harness makes the model's decisions executable. When the model requests a search, it runs the search and returns the passages. When the model drafts a section, it saves that draft. When a check finds a problem, it returns enough detail for the model to correct it.
 
@@ -159,7 +159,7 @@ The interface should show the proposed diff, its evidence, and unresolved questi
 
 ## Evaluate what the agent was supposed to do
 
-![Run the same cases against each configuration, grade the outputs, and compare the failures.](/blog/legal-agent-harness/evaluation.svg)
+![Run the same cases against each configuration, grade the outputs, and compare the failures.](/blog/legal-agent-harness/evaluation.png)
 
 A legal-agent evaluation case needs more than a prompt and an example answer. It needs input documents, authorized scope, expected content, acceptable clarification behavior, and forbidden actions. Record the relevant source spans so a grader can distinguish a missing fact from failed retrieval.
 

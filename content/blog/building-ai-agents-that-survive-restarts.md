@@ -1,7 +1,7 @@
 ---
 title: "Building AI Agents That Survive Restarts: Durable Execution in Practice"
 excerpt: "What survives when an agent worker dies? Checkpoint boundaries, repeated tool calls, context reconstruction, and seven executable recovery scenarios."
-date: "2026-10-01"
+date: "2026-08-23"
 readTime: "16 min read"
 tags: ["AI Agents", "Durable Execution", "Python", "System Design"]
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Building AI Agents for Legal Tech: Harness Design, Evidence, and Evaluation"
 excerpt: "How context, tools, memory, and feedback help legal AI agents finish useful work, with Python examples for evidence checks and evaluation."
-date: "2026-08-23"
+date: "2026-05-24"
 readTime: "15 min read"
 image: "https://res.cloudinary.com/ibrahimshittu/image/upload/v1761403648/ibrahim-shittu-portfolio/blog/building-ai-agents-for-legal-tech.png"
 tags: ["AI Agents", "Legal Tech", "System Design", "Evaluation"]

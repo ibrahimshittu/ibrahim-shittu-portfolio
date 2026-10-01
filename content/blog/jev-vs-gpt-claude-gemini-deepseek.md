@@ -9,11 +9,11 @@ tags: ["ai-agents", "jev", "python", "tool-routing", "evaluation"]
 
 An agent keeps retrying a tool after cancellation. What should happen next: search the code, read a file, inspect the trace, or run a test?
 
-It depends on what has already happened. If the retry implementation has not been located, searching is useful. If a trace points to `retries/dispatch.py`, reading that file is more useful. If a patch and regression test are ready, the next step may be to run the test.
+It depends on what has already happened. If the retry implementation has not been located, search for it. If a trace points to `retries/dispatch.py`, read that file. If a patch and regression test are ready, the next step may be to run the test.
 
 This representative debugging situation raises a practical question: **how much model does it take to choose the next tool?** To find out, I built a small router and compared Jev 1.13 with GPT-6 Luna, Claude Haiku 4.5, Gemini 3.8 Flash, and DeepSeek V4.1 Flash.
 
-Across 900 evaluation attempts, Jev had the lowest median latency and cost. It agreed with the reference labels 94.4% of the time. Gemini matched every label; DeepSeek did too whenever it returned a route. But the more useful finding was in the disagreements: Jev sometimes chose an action that the supplied context had already made unnecessary.
+Across 900 evaluation attempts, Jev had the lowest median latency and cost. It agreed with the reference labels 94.4% of the time. Gemini matched every label; DeepSeek did too whenever it returned a route. The disagreements exposed a specific weakness: Jev sometimes chose an action that the supplied context had already made unnecessary.
 
 ## One request, six possible actions
 
@@ -32,11 +32,11 @@ TOOLS = {
 }
 ```
 
-The distinction between `search_code` and `read_file` is especially useful. Both concern implementation, but only one assumes the relevant file is already known. Likewise, `inspect_logs` and `run_tests` can both investigate a bug, yet they require different resources and different stages of work.
+`search_code` and `read_file` encode different states of the investigation. Both concern implementation, but only one assumes the relevant file is already known. Likewise, `inspect_logs` and `run_tests` can both investigate a bug, yet they require different resources and different stages of work.
 
 The instructions ask for the single most useful next step, prohibit inventing resources, and treat quoted code, logs, and documents as data. Every request contains the same two fields, `request` and `context`; the reference answer never goes to the router.
 
-This makes the comparison small enough to inspect. A response passes validation when it returns one of the six permitted route names in the expected format. The scorer marks it correct when that route matches the case's reference label. Those are different properties: `search_docs` can be perfectly valid JSON and still send the agent in the wrong direction.
+A response passes validation when it returns one of the six permitted route names in the expected format. The scorer marks it correct when that route matches the case's reference label. Those are different properties: `search_docs` can be perfectly valid JSON and still send the agent in the wrong direction.
 
 There is also a practical reason to isolate this decision. A full agent run introduces other variables: search quality, argument construction, tool failures, and the ability to use returned information. Measuring routing separately makes its contribution easier to inspect before involving those later stages.
 
@@ -96,7 +96,7 @@ For example, both variants of one pair ask, â€œWhy did the tool execute twice?â€
 
 The cases and reference labels were generated with AI assistance and written before the initial evaluation. They are synthetic examples, not production tickets or independently human-annotated data. Each case has a reference route and a rationale. The scorer supports multiple acceptable routes, although this collection uses one per case. That choice makes the scores easy to calculate, but some labels remain debatable.
 
-I reused the same cases when updating the model lineup, without changing prompts, descriptions, or labels to suit the new predictions. This is a fixed evaluation whose cases had already been inspected, rather than a fresh unseen test set. The [dataset and reference labels](/blog/jev-tool-router/dataset.json) let you inspect that boundary yourself.
+I reused the same cases when updating the model lineup, without changing prompts, descriptions, or labels to suit the new predictions. This is a fixed evaluation whose cases had already been inspected, rather than a fresh unseen test set. The [dataset](/blog/jev-tool-router/dataset.json) contains the cases, reference labels, and rationales.
 
 ### Keeping the comparison consistent
 
@@ -161,7 +161,7 @@ Use the explorer to move from these aggregates to the individual decisions. Accu
 
 ## Where the routers disagreed
 
-The disagreements were more informative than the straightforward cases. Three examples show why.
+Three disagreements show where task context and reference labels affected the result.
 
 ### Jev kept investigating the trace after it had identified the file
 
@@ -177,7 +177,7 @@ In `pair-10-b`, the request asked whether streaming preserves tool-call order. T
 
 Claude chose `search_code` three times. Every other router chose the reference action, `run_tests`.
 
-Again, the state of the work matters. Code search could be useful at an earlier stage, but the stated task here was verification. The repeated answer establishes a consistent disagreement on one case, not three independent findings about Claude.
+Code search would fit an earlier stage of the investigation. Here, the context already supplied a patch and a test for verification. The repeated answer establishes a consistent disagreement on one case, not three independent findings about Claude.
 
 ### Some clarification requests exposed a weakness in the dataset
 
@@ -195,7 +195,7 @@ Jev passed 27 of 36 pair-repetitions. GPT and Claude passed 33 each, Gemini pass
 
 Repeatability adds another distinction. Jev returned the same permitted route across all three attempts on 59 of 60 cases; GPT did so on 58, Claude and Gemini on 60, and DeepSeek on 56. DeepSeek's remaining four cases each contained an API failure.
 
-Claude is a useful reminder that consistency is not correctness: it repeated its wrong answer as reliably as its correct ones. For Jev, the 59-of-60 figure similarly does not erase the failures around changed context.
+Claude repeated its wrong answer as consistently as its correct ones. For Jev, the 59-of-60 figure similarly does not erase the failures around changed context.
 
 These views answer three different questions about the same saved attempts: whether the router returns a permitted route, whether that decision matches the intended next step, and whether it responds appropriately when the available information changes.
 
@@ -213,10 +213,10 @@ A real deferral policy would need more measurements too. If uncertain decisions 
 
 ## Where Jev fits in this workload
 
-I would consider Jev for short decisions over a known set of actions where routing overhead matters. The API matched that job neatly, and the measured speed and cost make it worth further testing. For this debugging workflow, the next evaluation should focus on cases where an investigation has already progressed: logs inspected, a file located, or a patch ready to verify.
+I would consider Jev for short decisions over a known set of actions where routing overhead matters. The typed Choice response fits that interface, and this run showed low routing latency and cost. For this debugging workflow, the next evaluation should focus on cases where an investigation has already progressed: logs inspected, a file located, or a patch ready to verify.
 
 Gemini is the strongest reference-matching baseline in this run. DeepSeek combines fast typical responses with reference agreement on every returned route, while its failures and slower tail deserve separate attention. GPT and Claude provide useful comparison points, but no model's result here is a verdict on its broader capabilities.
 
 The next useful evaluation would include actual task context, independently reviewed labels, and the consequences of the chosen route. An unnecessary code search and an unnecessary test run may have very different costs to the user; this experiment counts both simply as incorrect.
 
-In this workload, Jev made the routing decision quickly, its structured response was straightforward to integrate, and its confidence exposed a useful tradeoff between coverage and reference agreement. Whether it earns a place in an agent depends on how those decisions help the larger task succeed.
+The next test for Jev is whether those fast, inexpensive decisions improve a complete debugging workflow. Measure unnecessary tool calls and task completion alongside routing agreement; the next-action score alone cannot show their effect on the work.

@@ -13,7 +13,7 @@ The citation resolves. The quotation exists. The answer is still wrong: an expec
 
 Building AI for legal work has made this distinction hard to ignore. Generating a paragraph is one problem; giving a lawyer enough evidence to defend it is another. The engineering work sits between those two: retrieving the right material, preserving what it says, checking the output, and keeping document changes under the reviewer's control.
 
-This article works through a disclosure-comparison task to show how to build that surrounding system: the [agent harness](https://www.anthropic.com/engineering/managed-agents). Anthropic describes the harness as the loop that calls the model and routes its tool calls. Here, that loop connects the model to documents, search, saved progress, and feedback so it can carry a task through several steps.
+Comparing disclosures provides a concrete example of that surrounding system: the [agent harness](https://www.anthropic.com/engineering/managed-agents). Anthropic describes the harness as the loop that calls the model and routes its tool calls. Here, that loop connects the model to documents, search, saved progress, and feedback so it can carry a task through several steps.
 
 ## Start with a specific task
 
@@ -53,7 +53,7 @@ Give each tool a clear input, result, and effect:
 | `ask_clarification` | Missing fact and focused question | Suspended task awaiting input | State change |
 | `propose_revision` | Base version, text, evidence handles | Reviewable proposal | Creates artifact |
 
-The request in this example asks for a revision **for review**, so the useful output is a proposed diff. A task that asks the agent to edit a working draft could instead expose an editing tool. Tool design should reflect the job: searching for precedent, preparing a proposal, and editing a document are different operations, not reasons to require confirmation at every step.
+The request in this example asks for a revision **for review**, so the output is a proposed diff. A task that asks the agent to edit a working draft could instead expose an editing tool. Expose the operations the task requires, and specify whether each one reads a source, creates a proposal, or changes a document.
 
 A minimal control loop can be expressed as pseudocode:
 
@@ -71,7 +71,7 @@ repeat:
 
 The feedback should be actionable. Instead of “citation invalid,” return “reference 12 points to a passage that was not retrieved,” together with the available references. The agent can then read the correct source or revise the claim. If two attempts produce the same failure without new evidence, repeating the same call is unlikely to help; the next useful move may be another search or a question for the user.
 
-Track time, cost, and progress so a stalled run is visible. Choose stopping rules for the task rather than imposing a tiny tool-call limit on work that genuinely requires investigation. The aim is to keep useful work moving and preserve the result when it cannot continue.
+Track time, cost, and progress so a stalled run is visible. Choose stopping rules for the task rather than imposing a tiny tool-call limit on work that genuinely requires investigation. If a run stalls, retain its draft and evidence so it can resume with new information.
 
 ### Give the agent reusable procedures
 
@@ -79,7 +79,7 @@ A skill can specify that comparison output must quote peer passages exactly, dis
 
 Skills explain how to do the work; tool implementations perform it. A comparison skill can describe how to choose useful peer passages, while a retrieval tool returns the passage text and source location. Access checks still belong in the document service, as in any multi-user product. They are separate from the model's freedom to decide which relevant source to read next.
 
-I have found it easy to fix a failing example by adding an instruction, only to break a similar request. Before adding another exception, investigate where the failure occurred. Missing source text is an extraction problem. Wrong company scope is a retrieval or context problem. Unsupported interpretation needs semantic evaluation. They should not all become instructions appended to the same system prompt.
+An instruction added to fix one example can break a similar request. Locate the failure before changing the prompt. Missing source text is an extraction problem. Wrong company scope is a retrieval or context problem. Unsupported interpretation needs semantic evaluation. Fix extraction and retrieval in their respective components; use reviewed examples to improve interpretation.
 
 ## Keep the source attached to the claim
 
@@ -193,7 +193,7 @@ This separation is consistent with the distinction between tasks, trials, grader
 
 ### Score support and completeness independently
 
-Two useful measures are supported factual claims divided by assessed factual claims, and required facts correctly covered divided by required answerable facts. Neither should be collapsed into a single “accuracy” number without explaining what it measures.
+Measure support as supported factual claims divided by assessed factual claims. Measure completeness as required facts correctly covered divided by required answerable facts. Neither should be collapsed into a single “accuracy” number without explaining what it measures.
 
 ```python
 def score(assessed_claims: list[bool], covered: set[str],
@@ -284,9 +284,9 @@ run: comparison-example
   artifact.create        status=awaiting_review
 ```
 
-This is a trace shape, not a captured execution. Record actual durations, token usage, charges where available, and failures at each stage. Source handles and hashes can support debugging without copying every document into general-purpose telemetry; access to any retained sensitive payloads needs its own controls.
+This example shows the span structure. In a captured run, each span should record its duration, token usage, reported charge, and failures. Source handles and hashes can support debugging without copying every document into general-purpose telemetry; access to any retained sensitive payloads needs its own controls.
 
-The trace should let an engineer locate the failing boundary. If retrieval returned the right source but the proposal ignored it, changing the search index may not help. If validation passed but the citation disappeared in the rendered artifact, the failure is downstream of generation. Observable execution data makes those distinctions possible without claiming access to hidden model reasoning.
+The trace should identify the step that failed. If retrieval returned the right source but the proposal ignored it, changing the search index may not help. If validation passed but the citation disappeared in the rendered artifact, the failure is downstream of generation. The spans distinguish retrieval, generation, validation, and rendering failures.
 
 ## Re-evaluate the workflow when the model changes
 
@@ -294,4 +294,4 @@ A new model can change tool selection, clarification frequency, response structu
 
 Start with one changed variable where practical: model, retrieval strategy, skill, or tool interface. Compare held-out outcomes, then inspect the traces behind regressions. Remove instructions that no longer serve a demonstrated purpose instead of accumulating compatibility prompts around every model generation.
 
-Return to the sentence about operating costs. A better model may avoid that mistake more often. The application still needs to show the source, expose the difference between an expectation and a result, and give the reviewer control over the proposed edit. That is the standard the harness and its evaluations should make visible.
+Return to the sentence about operating costs. A better model may avoid that mistake more often. The application still needs to show the source, expose the difference between an expectation and a result, and give the reviewer control over the proposed edit. Test those properties whenever the model, prompt, or retrieval system changes.

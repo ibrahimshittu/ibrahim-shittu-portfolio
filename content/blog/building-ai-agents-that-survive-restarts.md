@@ -8,13 +8,13 @@ tags: ["AI Agents", "Durable Execution", "Python", "System Design"]
 
 An agent has searched three filings, found relevant passages, and started comparing them. The worker process stops before the answer is ready. A replacement worker receives the task.
 
-Should it search everything again? Trust the conversation history? Continue from the last tool call? Each answer depends on what was actually saved before the interruption.
+The replacement needs to know which passages were saved, which findings were completed, and what remains unresolved. Conversation history alone cannot tell it whether a tool result reached the database.
 
-This is the part of long-running agents that interests me most: useful work accumulates over time, but the process doing that work is temporary. A request can outlive a browser tab, a provider connection, or a deployment. The system needs a way to preserve progress and make the next decision from it.
+A research task can outlive a browser tab, a provider connection, or a deployment. Saving its progress lets another worker continue without repeating every search.
 
 In my research implementation, durable scheduling starts a saved research segment. The worker restores evidence and builds the model's next input from retained findings, unresolved questions, and user input. Those are two distinct responsibilities: getting work executed, and making the resumed work useful.
 
-This article follows a representative filing-comparison task through those boundaries. To make the failure behaviour inspectable, I also built a small offline experiment: Python child processes, SQLite checkpoints, and a fixture source. It deliberately terminates workers between operations. The results below come from those runs; they measure recovery mechanics rather than model quality.
+The example is a comparison of public-company filings. I tested the recovery paths with Python child processes, SQLite checkpoints, and a fixed source response, terminating workers between operations. The saved results show which work survives and which calls repeat.
 
 ## The task outlives the worker
 
@@ -38,9 +38,9 @@ The browser should therefore read persisted run status and artifacts. A dropped 
 
 {{durable-architecture-diagram}}
 
-The important arrow is the one from saved state back to the worker. Without it, a queue makes the task asynchronous but does not tell a replacement worker what the earlier attempt accomplished.
+The restore path connects saved state to the replacement worker. Without it, a queue makes the task asynchronous but does not tell a replacement worker what the earlier attempt accomplished.
 
-## What durable execution actually restores
+## What durable execution restores
 
 A durable workflow engine records execution history so orchestration can recover after a process stops. In Microsoft's Durable Task model, an orchestrator replays its code and consults that history to recover recorded activity results. The orchestration must be deterministic; external work belongs in activities. See the [Durable Task orchestration documentation](https://learn.microsoft.com/en-us/azure/durable-task/common/durable-task-orchestrations).
 
@@ -50,7 +50,7 @@ That is why the research implementation has an application checkpoint as well as
 
 These are different guarantees. Recorded activity results can be replayed by the engine. An unfinished activity may execute again. Within that activity, only the work explicitly persisted by the research code is available for application-level recovery.
 
-A saved checkpoint also does not preserve the model's unfinished response or hidden reasoning. If generation stopped halfway through a finding, that finding may need to be generated again. The useful promise is specific: committed evidence and accepted findings remain available to the next attempt.
+A saved checkpoint also does not preserve the model's unfinished response or hidden reasoning. If generation stopped halfway through a finding, that finding may need to be generated again. Committed evidence and accepted findings remain available to the next attempt.
 
 ## Save artifacts the next attempt can use
 
@@ -86,7 +86,7 @@ CREATE TABLE findings (
 """
 ```
 
-These small tables expose the persistence boundary. They are not a complete research schema. In particular, the experiment assumes one immutable fixture passage and sequential worker invocations; document changes and simultaneous writers require additional handling.
+The experiment uses one immutable passage and sequential worker invocations. A document store would also need source versions and concurrency handling.
 
 An activity log serves a different purpose. “Search completed” helps diagnose a run. It cannot replace the returned passage if that passage was never stored. Conversely, stored evidence can support recovery even when an event stream disconnects.
 
@@ -127,13 +127,13 @@ The saved status can still say `running` after a process exits: the worker stopp
 
 Stopping after the source returns causes another source call on restart because the database contains no evidence to reuse. Stopping after the evidence commit preserves the passage; the new process reads it and continues to the finding.
 
-A smaller checkpoint interval can reduce repeated work, but each extra checkpoint introduces storage operations and more intermediate states to handle. A checkpoint after every token is rarely a useful research abstraction. A checkpoint after an entire hour of research may discard too much progress. Retrieved passages and accepted findings are useful boundaries because they are independently meaningful artifacts.
+Frequent checkpoints reduce repeated work but add storage operations and intermediate states. Saving retrieved passages and accepted findings gives the next attempt reusable artifacts without persisting every generated token.
 
 The choice should follow the cost of repetition. An inexpensive classification can often be recomputed. A slow document extraction or an expensive batch of searches deserves an earlier durable result. An external write needs a stronger duplicate-handling strategy than either read operation.
 
-## A repeated attempt must not create a repeated effect
+## Handle retries without duplicating writes
 
-There are several different duplicate problems, and a single “idempotent” label can hide them.
+Duplicate scheduling, duplicate records, and repeated external calls need different handling.
 
 A deterministic scheduling ID, combined with the scheduler's duplicate-instance policy, can stop repeated requests from creating separate scheduled instances for the same segment. A segment check can reject work that was superseded before it started. A unique finding ID can prevent duplicate stored rows. None of those proves that an external tool ran only once.
 
@@ -157,13 +157,13 @@ The uniqueness constraint protects the stored result. It does not refund a repea
 
 External writes introduce a more consequential version of the same gap. Suppose a document service applies a revision, then the worker loses the response. Retrying with a fresh operation ID could apply the revision again. If the service supports idempotency keys, reuse a stable key for that logical edit. Otherwise, reconcile against an operation receipt or the expected document version before deciding what to do next.
 
-The engineering question is: **what observable effect could happen twice, and which system can identify that repeat?** The answer may belong in the scheduler, a database constraint, or the destination API.
+For each operation, identify the effect that could repeat and the system that can detect it: the scheduler, the database, or the destination API.
 
 Concurrency is another boundary. Reading “this is the current segment” at startup does not stop two workers from reading the same state simultaneously. A production implementation that permits overlapping attempts needs a claim, lease, or conditional write at the shared store. A process-local lock only orders writes inside that process. The sequential experiment below does not test distributed exclusion.
 
 ## Reconstruct context, then let the agent continue
 
-Recovering rows is only useful if the next model call receives them in a form it can use.
+The next model call needs the recovered evidence and findings in its input, or a tool that can retrieve them.
 
 The research runner restores saved evidence into its source-reference registry, then builds the next episode's input from the original request, source scope, retained findings, gaps, planned searches, and user input. It does not depend on recovering an unfinished provider response.
 
@@ -245,7 +245,7 @@ assert after == {
 }, after
 ```
 
-Those checks establish a narrow, useful property: the demonstrated recovery paths preserve the expected stored artifact without pretending every underlying operation executes once. They do not establish performance under load, recovery from database failure, or correctness of an LLM's interpretation.
+Across these seven paths, the checks confirm that recovery preserves the expected records and exposes repeated source calls. Load, database failure, and model interpretation need separate tests.
 
 For a live-model extension, measure repeated external calls and additional charged usage alongside completion. Separate time spent waiting for a user or provider from time spent executing. A run that completes after an hour-long clarification wait should not be presented as an hour of model latency.
 
@@ -253,7 +253,7 @@ For a live-model extension, measure repeated external calls and additional charg
 
 An agent can reliably preserve a wrong finding. Durable execution gives that mistake a longer life unless answer quality is evaluated separately.
 
-For the filing-comparison task, the semantic evaluation should ask whether each claim is supported by its quoted evidence, whether the company and reporting period are correct, and whether the answer covers the requested comparisons. Reference existence is a deterministic check. Whether a passage supports the whole claim requires examining meaning.
+When comparing filings, evaluate whether the quoted evidence supports each claim, whether the company and reporting period are correct, and whether the answer covers the requested comparisons. Reference existence is a deterministic check. Whether a passage supports the whole claim requires examining meaning.
 
 For example, “Company A identifies supplier concentration as a risk” does not establish that Company A suffered a supply interruption. A valid source ID and a successful restart do not make that stronger claim true.
 
@@ -269,6 +269,6 @@ Keep two evaluation tracks:
 
 Deterministic fixtures make the first track easier to diagnose. Curated research cases with inspectable passages make the second track meaningful. A model judge can assist review, but it should not replace checking the source passages when assessing a disputed claim.
 
-The boundary to design first is the smallest piece of useful work worth preserving. For this research task, that means passages and supported findings. Save them with identities the next attempt can resolve, make repeated operations visible, and reconstruct enough context for the agent to decide what to do next.
+For this research task, passages and supported findings are the records worth preserving. Give them stable identities, record repeated calls, and restore the evidence behind each finding before asking the model to continue.
 
-Then interrupt the worker. The saved state should explain the recovery more clearly than any promise that the agent can run forever.
+Test recovery by stopping the worker between the source response, evidence commit, and finding commit. Inspect both the final records and the calls made along the way: a correct final count can still hide repeated work.

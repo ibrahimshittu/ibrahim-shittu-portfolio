@@ -7,10 +7,18 @@ import {
 } from "./video-seo";
 import { CodeBlock } from "@/components/ui/code-block";
 
+import { AgentHarnessDiagram, AgentEvaluationDiagram, DurableArchitectureDiagram } from "@/components/blog/article-diagrams";
+
 import { RouterArchitecture } from "@/components/blog/jev-router-explorer";
 
 const JevRouterExplorer = dynamic(() => import("@/components/blog/jev-router-explorer"));
 const DurableAgentExplorer = dynamic(() => import("@/components/blog/durable-agent-explorer"));
+
+const articleDiagrams: Record<string, React.ComponentType> = {
+  "{{agent-harness-diagram}}": AgentHarnessDiagram,
+  "{{agent-evaluation-diagram}}": AgentEvaluationDiagram,
+  "{{durable-architecture-diagram}}": DurableArchitectureDiagram,
+};
 
 // Long form, e.g. "January 15, 2025"
 export function formatDate(dateString: string): string {
@@ -251,6 +259,13 @@ export const formatContent = (content: string): React.ReactNode[] => {
       } else {
         codeLines.push(raw);
       }
+      continue;
+    }
+
+    const ArticleDiagram = articleDiagrams[line.trim()];
+    if (ArticleDiagram) {
+      flushBlocks();
+      nodes.push(<ArticleDiagram key={`diagram-${nodes.length}`} />);
       continue;
     }
 

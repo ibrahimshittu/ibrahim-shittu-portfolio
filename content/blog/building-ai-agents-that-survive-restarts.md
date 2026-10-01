@@ -36,7 +36,7 @@ An attempt can disappear without ending the run. A segment can pause while its f
 
 The browser should therefore read persisted run status and artifacts. A dropped connection means the browser needs to reconnect; it does not establish that the research failed. Equally, a connected progress stream does not establish that every displayed result has been committed.
 
-![A scheduler starts an execution attempt; the worker reads and writes saved research state, which also supplies progress to the interface.](/blog/durable-agent/architecture.svg)
+{{durable-architecture-diagram}}
 
 The important arrow is the one from saved state back to the worker. Without it, a queue makes the task asynchronous but does not tell a replacement worker what the earlier attempt accomplished.
 

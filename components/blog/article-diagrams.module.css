@@ -1,0 +1,47 @@
+.figure { color: hsl(var(--foreground)); }
+.canvas { padding: clamp(1.1rem, 3vw, 2rem); border: 1px solid hsl(var(--line2)); border-radius: 14px; background: hsl(var(--background)); }
+.title { font-size: 1rem; font-weight: 600; letter-spacing: -.015em; margin-bottom: 1.75rem; }
+.node { padding: 1.1rem; border: 1px solid hsl(var(--line2)); border-radius: 9px; min-width: 0; background: hsl(var(--raised)); }
+.node strong, .context strong, .support strong, .output strong { display: block; font-size: 1rem; font-weight: 550; line-height: 1.4; }
+.node > span, .context > span:last-child, .support div > span:last-child, .output > span:last-child { display: block; margin-top: .4rem; font-size: .85rem; color: hsl(var(--muted-foreground)); line-height: 1.65; }
+.accent { border-color: hsl(var(--muted-foreground)); }
+.context { text-align: center; }
+.kicker, .step { display: block; color: hsl(var(--muted-foreground)); font-size: .7rem; font-weight: 500; letter-spacing: .075em; text-transform: uppercase; line-height: 1.5; }
+.kicker { margin-bottom: .45rem; }
+.down { text-align: center; color: hsl(var(--muted-foreground)); font-size: 1.5rem; line-height: 1; padding: .8rem 0; }
+.loop, .flow { display: grid; grid-template-columns: minmax(0, 1fr) 5.5rem minmax(0, 1fr); align-items: stretch; }
+.exchange, .connector { display: flex; align-items: center; justify-content: center; flex-direction: column; gap: .45rem; color: hsl(var(--muted-foreground)); font-size: .7rem; }
+.exchange > span { display: flex; gap: .35rem; align-items: center; }
+.exchange > span > span, .arrow { font-size: 1.35rem; line-height: 1; }
+.support { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; padding: 1.25rem 0; margin-top: 1.25rem; border-top: 1px dashed hsl(var(--line2)); }
+.output { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 1rem; padding-top: 1.25rem; border-top: 1px solid hsl(var(--line2)); }
+.output .kicker { flex-basis: 100%; }
+.pipeline { display: grid; grid-template-columns: minmax(0, 1fr) 2.8rem minmax(0, 1fr) 2.8rem minmax(0, 1fr); align-items: stretch; }
+.pipeline > div:not(.connector) { display: flex; flex-direction: column; }
+.pipeline .node { flex: 1; padding: .9rem .75rem; }
+.pipeline .step { margin-bottom: .75rem; }
+.pipeline .connector { padding-top: 1.7rem; font-size: .65rem; }
+.pipeline .node strong { font-size: .9rem; }
+.comparison { border-top: 2px solid hsl(var(--muted-foreground)); padding-top: 1.2rem; }
+.comparison > strong { display: block; font-size: 1rem; font-weight: 550; }
+.comparison > div { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; margin-top: 1rem; font-size: .8rem; color: hsl(var(--muted-foreground)); }
+.comparison > div > span + span { border-left: 1px solid hsl(var(--line2)); padding-left: .75rem; }
+.persistence { display: flex; justify-content: center; gap: 2rem; margin-left: calc(50% + 2.75rem); padding: .85rem 0; font-size: .75rem; color: hsl(var(--muted-foreground)); }
+.persistence span { white-space: nowrap; }
+.persistence span span { font-size: 1.3rem; }
+.figure figcaption { color: hsl(var(--muted-foreground)); line-height: 1.65; }
+@media (max-width: 560px) {
+  .loop, .flow, .pipeline { grid-template-columns: 1fr; }
+  .exchange { flex-direction: row; gap: 2rem; padding: .8rem 0; }
+  .exchange > span > span { transform: rotate(90deg); }
+  .connector { padding: .7rem 0; flex-direction: row; gap: .5rem; }
+  .arrow { transform: rotate(90deg); }
+  .pipeline .connector { padding: .75rem 0; }
+  .pipeline .step { margin: 0 0 .5rem; }
+  .pipeline .node strong { font-size: 1rem; }
+  .persistence { margin-left: 0; }
+  .support { gap: 1rem; }
+  .support .kicker { font-size: .65rem; }
+  .comparison > div { grid-template-columns: repeat(2, 1fr); row-gap: 1rem; }
+  .comparison > div > span:nth-child(3) { border: 0; padding-left: 0; }
+}

@@ -1,8 +1,8 @@
 ---
 title: "Building AI Agents for Legal Tech: Harness Design, Evidence, and Evaluation"
-excerpt: "How context, tools, memory, and feedback help legal AI agents finish useful work, with Python examples for evidence checks and evaluation."
+excerpt: "A valid citation can still support a wrong claim. How to build legal AI agents with inspectable evidence, reviewable edits, and evaluations that catch the difference."
 date: "2026-05-24"
-readTime: "15 min read"
+readTime: "17 min read"
 image: "https://res.cloudinary.com/ibrahimshittu/image/upload/v1761403648/ibrahim-shittu-portfolio/blog/building-ai-agents-for-legal-tech.png"
 tags: ["AI Agents", "Legal Tech", "System Design", "Evaluation"]
 ---
@@ -14,6 +14,8 @@ The citation resolves. The quotation exists. The answer is still wrong: an expec
 Building AI for legal work has made this distinction hard to ignore. Generating a paragraph is one problem; giving a lawyer enough evidence to defend it is another. The engineering work sits between those two: retrieving the right material, preserving what it says, checking the output, and keeping document changes under the reviewer's control.
 
 Comparing disclosures provides a concrete example of that surrounding system: the [agent harness](https://www.anthropic.com/engineering/managed-agents). Anthropic describes the harness as the loop that calls the model and routes its tool calls. Here, that loop connects the model to documents, search, saved progress, and feedback so it can carry a task through several steps.
+
+The central engineering lesson is that reference integrity, claim support, and task completion need separate checks. The examples below use synthetic disclosures to show those checks without relying on client documents. They illustrate a design, not a production benchmark.
 
 ## Start with a specific task
 
@@ -127,6 +129,8 @@ The `sources` mapping contains the source texts retrieved during this run. Build
 
 The opening example would pass this check if it attached the source quotation correctly. The check verifies the quotation, while the error is in the generated claim. Assessing support requires comparing the claim with the passage: did the draft preserve the time period, uncertainty, entity, and meaning? That is the job of a semantic grader, discussed below.
 
+{{claim-support-diagram}}
+
 Preserve this distinction in the interface too: source text, interpretation, and proposed wording should remain separately inspectable. An unresolved reference should render a visible failure rather than silently disappear.
 
 ## Tie each proposed edit to a document version
@@ -179,6 +183,10 @@ Here is the metadata for an illustrative test case. The source document would be
 
 Create a paired case that removes the amount from all available documents. Its expected behavior becomes a partial draft and a focused request for the amount. This tests whether the system responds to evidence availability, rather than always drafting or always asking questions.
 
+{{evidence-availability-diagram}}
+
+An absent fact and a missed fact should receive different diagnoses. If the amount exists in the input documents but never reaches the model, inspect retrieval. If the model receives it and still asks for it, inspect how the agent uses context. If no available source supplies it, a focused question is the correct outcome. Required-fact coverage counts answerable facts; the task grader separately checks whether the agent handles the remaining gap.
+
 Keep related variants together when splitting development and held-out cases. Otherwise a near-copy of a development example can make the evaluation look more general than it is. Freeze labels before viewing predictions; when reviewing ambiguous labels, document the change and rescore all compared configurations.
 
 ### Separate three kinds of grader
@@ -190,6 +198,21 @@ Keep related variants together when splitting development and held-out cases. Ot
 **Task graders** inspect the artifact and behavior together: did the agent complete what was answerable, ask for what was missing, and stop at the review boundary? For the comparison request above, success means a usable comparison and proposed revision. For a direct-editing task, success would also include the expected document changes.
 
 This separation is consistent with the distinction between tasks, trials, graders, and outcomes in [Anthropic's agent-evaluation guide](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents). The legal-specific obligations still need to be defined for the workload being evaluated.
+
+### Make the semantic rubric explicit
+
+For the opening claim, give the reviewer or model judge the exact claim, its cited passage, and enough surrounding text to interpret it. Ask for a support label and the specific mismatch:
+
+| Dimension | Source | Generated claim | Verdict |
+| --- | --- | --- | --- |
+| Entity | Management's programme | The same programme | Preserved |
+| Time | Next year | This year | Changed |
+| Certainty | Expected reduction | Completed reduction | Changed |
+| Meaning | Forecast of a benefit | Assertion of a result | Unsupported |
+
+The corrected claim is: “Management expects the programme to reduce operating costs next year.” A valid reference cannot rescue the original wording. If the passage is ambiguous or missing necessary context, record an unresolved judgment for expert review rather than force a supported label.
+
+Calibrate a model judge against expert-reviewed examples, including unsupported claims. Agreement on easy, supported examples alone can hide a judge that rarely catches errors. Keep the rubric fixed while comparing configurations, and inspect disagreements before treating automated scores as reliable.
 
 ### Score support and completeness independently
 
@@ -213,6 +236,8 @@ These inputs are grader labels, not assertions supplied by the generating model.
 
 For example, give the function three claim labels—two supported and one unsupported—and one correctly covered fact out of two required facts. It returns 66.7% support and 50% coverage. These numbers illustrate the calculation; they are not model results. An empty response covers neither fact, even though it makes no unsupported claims.
 
+{{support-coverage-diagram}}
+
 A fuller report should retain distinct denominators:
 
 | Metric | Denominator or comparison | Failure it exposes |
@@ -234,7 +259,15 @@ Run a baseline and candidate on the same held-out cases, repeating trials to exp
 
 For a model or harness change, report per-case differences alongside aggregate metrics. Repeated trials of one case measure stability; they are not new independent tasks. If estimating uncertainty across tasks, group trials by case rather than treating each call as an independent sample.
 
-The accompanying offline checks cover two paths: accepting an intact proposal with known scoring inputs, and rejecting stale or unresolvable evidence. They make no model calls. They validate those small contracts, not retrieval quality, semantic support, or production durability.
+The [accompanying offline checks](https://github.com/ibrahimshittu/ibrahim-shittu-portfolio/blob/main/examples/legal-agent-harness/contracts.py) cover two paths: accepting an intact proposal with known scoring inputs, and rejecting stale or unresolvable evidence. Run them with `python3 examples/legal-agent-harness/contracts.py`. They make no model calls. They validate those small contracts, not retrieval quality, semantic support, or production durability.
+
+### Decide what blocks a release
+
+Set acceptance rules before looking at candidate results. For this review workflow, applying an edit without approval or exposing another workspace's document is a blocking failure in the evaluated suite. A faster average response does not compensate for either. Test whether instructions embedded in a retrieved document can redirect tool use or override the review boundary; source content must remain evidence, not authority.
+
+Then compare task success, support, coverage, and reviewer corrections within each case type. Check amount-present and amount-absent cases separately so a better average cannot hide worse clarification behavior. Choose quality thresholds and acceptable cost or latency for the actual workload; there is no universal percentage that makes legal AI ready to ship.
+
+Passing a held-out suite supports a release decision within its tested scope. Follow it with review of real artifacts and turn observed failures into new development cases, while keeping a separate held-out set for the next comparison.
 
 ## Save enough state to continue the work
 

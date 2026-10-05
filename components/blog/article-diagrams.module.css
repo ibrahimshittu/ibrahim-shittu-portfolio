@@ -30,7 +30,30 @@
 .persistence span { white-space: nowrap; }
 .persistence span span { font-size: 1.3rem; }
 .figure figcaption { color: hsl(var(--muted-foreground)); line-height: 1.65; }
+.evidencePair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+.evidencePair > div + div { border-left: 1px solid hsl(var(--line2)); padding-left: 1.5rem; }
+.figure .evidencePair p, .figure .matrix p { margin: .6rem 0 0; font-size: .9rem; line-height: 1.7; color: hsl(var(--muted-foreground)); }
+.evidencePair p strong { color: hsl(var(--foreground)); text-decoration: underline; text-underline-offset: .2em; }
+.verdicts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid hsl(var(--line2)); }
+.verdicts strong, .caseOutcome strong, .matrix strong { display: block; font-size: 1rem; font-weight: 550; line-height: 1.4; }
+.verdicts div > span:last-child, .caseOutcome span { display: block; margin-top: .5rem; font-size: .85rem; line-height: 1.65; color: hsl(var(--muted-foreground)); }
+.caseOutcome { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px dashed hsl(var(--line2)); }
+.diagramNote { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid hsl(var(--line2)); font-size: .8rem; line-height: 1.65; color: hsl(var(--muted-foreground)); }
+.matrixAxis { text-align: center; margin-bottom: .8rem; font-size: .8rem; color: hsl(var(--muted-foreground)); }
+.matrixLayout { display: grid; grid-template-columns: 1.5rem minmax(0, 1fr); gap: .8rem; }
+.matrixVertical { writing-mode: vertical-rl; transform: rotate(180deg); text-align: center; font-size: .8rem; color: hsl(var(--muted-foreground)); }
+.matrix { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: 1px solid hsl(var(--line2)); }
+.matrix > div { padding: 1.1rem; }
+.matrix > div:nth-child(even) { border-left: 1px solid hsl(var(--line2)); }
+.matrix > div:nth-child(n + 3) { border-top: 1px solid hsl(var(--line2)); }
+.matrix > div:nth-child(2) { background: hsl(var(--raised)); }
 @media (max-width: 560px) {
+  .evidencePair, .verdicts { grid-template-columns: 1fr; }
+  .evidencePair > div + div { border-left: 0; padding-left: 0; border-top: 1px solid hsl(var(--line2)); padding-top: 1.25rem; }
+  .matrixLayout { gap: .4rem; }
+  .matrix > div { padding: .75rem; }
+  .matrix strong { font-size: .85rem; }
+  .figure .matrix p { font-size: .8rem; }
   .loop, .flow, .pipeline { grid-template-columns: 1fr; }
   .exchange { flex-direction: row; gap: 2rem; padding: .8rem 0; }
   .exchange > span > span { transform: rotate(90deg); }

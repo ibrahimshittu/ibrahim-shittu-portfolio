@@ -7,7 +7,7 @@ import {
 } from "./video-seo";
 import { CodeBlock } from "@/components/ui/code-block";
 
-import { AgentHarnessDiagram, AgentEvaluationDiagram, DurableArchitectureDiagram } from "@/components/blog/article-diagrams";
+import { AgentHarnessDiagram, AgentEvaluationDiagram, ClaimSupportDiagram, EvidenceAvailabilityDiagram, SupportCoverageDiagram, DurableArchitectureDiagram } from "@/components/blog/article-diagrams";
 
 import { RouterArchitecture } from "@/components/blog/jev-router-explorer";
 
@@ -17,6 +17,9 @@ const DurableAgentExplorer = dynamic(() => import("@/components/blog/durable-age
 const articleDiagrams: Record<string, React.ComponentType> = {
   "{{agent-harness-diagram}}": AgentHarnessDiagram,
   "{{agent-evaluation-diagram}}": AgentEvaluationDiagram,
+  "{{claim-support-diagram}}": ClaimSupportDiagram,
+  "{{evidence-availability-diagram}}": EvidenceAvailabilityDiagram,
+  "{{support-coverage-diagram}}": SupportCoverageDiagram,
   "{{durable-architecture-diagram}}": DurableArchitectureDiagram,
 };
 

@@ -15,7 +15,7 @@ Building AI for legal work has made this distinction hard to ignore. Generating 
 
 Comparing disclosures provides a concrete example of that surrounding system: the [agent harness](https://www.anthropic.com/engineering/managed-agents). Anthropic describes the harness as the loop that calls the model and routes its tool calls. Here, that loop connects the model to documents, search, saved progress, and feedback so it can carry a task through several steps.
 
-The central engineering lesson is that reference integrity, claim support, and task completion need separate checks. The examples below use synthetic disclosures to show those checks without relying on client documents. They illustrate a design, not a production benchmark.
+The central engineering lesson is that reference integrity, claim support, and task completion need separate checks.
 
 ## Start with a specific task
 
